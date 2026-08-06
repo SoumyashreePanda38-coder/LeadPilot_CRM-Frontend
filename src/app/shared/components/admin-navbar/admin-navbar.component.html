@@ -1,0 +1,89 @@
+<nav class="admin-navbar">
+
+    <!-- Left Section -->
+
+    <div class="navbar-left">
+
+        <!-- Sidebar Toggle -->
+
+        <button
+            class="menu-btn"
+            (click)="toggleSidebar()">
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <i class="bi bi-graph-up-arrow"></i>
+
+        </div>
+
+        <!-- Brand -->
+
+        <div class="brand">
+
+            <h3>LeadPilot CRM</h3>
+
+            <span>Customer Lead Management System</span>
+
+        </div>
+
+    </div>
+
+    <!-- Center Section -->
+
+    <div class="navbar-center">
+
+        <div class="search-box">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                placeholder="Search leads, users, reports...">
+
+        </div>
+
+    </div>
+
+    <!-- Right Section -->
+
+    <div class="navbar-right">
+
+        <!-- Theme Toggle -->
+
+        <button
+            class="theme-btn"
+            (click)="toggleTheme()"
+            title="Change Theme">
+
+            <i
+                class="bi"
+                [ngClass]="isDarkTheme ? 'bi-sun-fill' : 'bi-moon-stars-fill'">
+            </i>
+
+        </button>
+
+        <!-- Logout -->
+
+        <button
+            class="logout-btn"
+            (click)="logout()">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            <span>
+
+                Logout
+
+            </span>
+
+        </button>
+
+    </div>
+
+</nav>

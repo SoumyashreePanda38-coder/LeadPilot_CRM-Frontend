@@ -1,0 +1,402 @@
+/*=========================================================
+                    LEADPILOT CRM
+                ADMIN LAYOUT
+==========================================================*/
+
+:host{
+
+    display:block;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/*=========================================================
+                    ROOT LAYOUT
+==========================================================*/
+
+.admin-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:#F4F8FC;
+
+    overflow:hidden;
+
+}
+
+/*=========================================================
+                    SIDEBAR
+==========================================================*/
+
+.sidebar-container{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    bottom:0;
+
+    width:280px;
+
+    z-index:1200;
+
+    background:#071C36;
+
+    transition:all .35s ease;
+
+    box-shadow:
+
+        12px 0 35px rgba(0,0,0,.30);
+
+}
+
+/* Collapsed Sidebar */
+
+.sidebar-container.collapsed{
+
+    width:90px;
+
+}
+
+/*=========================================================
+                    MAIN SECTION
+==========================================================*/
+
+.main-section{
+
+    margin-left:280px;
+
+    width:calc(100% - 280px);
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:all .35s ease;
+
+}
+
+/* Expanded Content */
+
+.main-section.expanded{
+
+    margin-left:90px;
+
+    width:calc(100% - 90px);
+
+}
+
+/*=========================================================
+                    NAVBAR
+==========================================================*/
+
+.navbar-container{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1100;
+
+}
+
+/*=========================================================
+                    BREADCRUMB
+==========================================================*/
+
+.breadcrumb-container{
+
+    padding:18px 28px 0;
+
+    background:#F4F8FC;
+
+}
+
+/*=========================================================
+                    CONTENT
+==========================================================*/
+
+.content-container{
+
+    flex:1;
+
+    padding:28px;
+
+    overflow:auto;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #F7FAFD,
+
+            #EEF5FC
+
+        );
+
+}
+
+/*=========================================================
+                    FOOTER
+==========================================================*/
+
+.footer-container{
+
+    background:white;
+
+    border-top:1px solid #E4ECF3;
+
+}
+
+/*=========================================================
+                    SCROLLBAR
+==========================================================*/
+
+.content-container::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+.content-container::-webkit-scrollbar-thumb{
+
+    background:#00D4FF;
+
+    border-radius:20px;
+
+}
+
+.content-container::-webkit-scrollbar-track{
+
+    background:#EAF4FC;
+
+}
+
+/*=========================================================
+                    ANIMATION
+==========================================================*/
+
+.sidebar-container,
+.main-section,
+.content-container{
+
+    transition:
+
+        all .35s ease;
+
+}
+
+/*=========================================================
+                    TABLET
+==========================================================*/
+
+@media(max-width:992px){
+
+.sidebar-container{
+
+    width:90px;
+
+}
+
+.main-section{
+
+    margin-left:90px;
+
+    width:calc(100% - 90px);
+
+}
+
+.breadcrumb-container{
+
+    padding:15px 20px 0;
+
+}
+
+.content-container{
+
+    padding:20px;
+
+}
+
+}
+
+/*=========================================================
+                    MOBILE
+==========================================================*/
+
+@media(max-width:768px){
+
+.admin-layout{
+
+    overflow-x:hidden;
+
+}
+
+.sidebar-container{
+
+    left:-280px;
+
+    width:280px;
+
+}
+
+.sidebar-container.show{
+
+    left:0;
+
+}
+
+.main-section{
+
+    margin-left:0;
+
+    width:100%;
+
+}
+
+.breadcrumb-container{
+
+    padding:14px 16px 0;
+
+}
+
+.content-container{
+
+    padding:18px;
+
+}
+
+}
+
+/*=========================================================
+                SMALL MOBILE
+==========================================================*/
+
+@media(max-width:576px){
+
+.content-container{
+
+    padding:15px;
+
+}
+
+.breadcrumb-container{
+
+    padding:12px;
+
+}
+
+}
+
+/*=========================================================
+                LARGE SCREENS
+==========================================================*/
+
+@media(min-width:1600px){
+
+.content-container{
+
+    padding:40px;
+
+}
+
+}
+
+/*=========================================================
+                PAGE FADE ANIMATION
+==========================================================*/
+
+.content-container{
+
+    animation:fadeIn .45s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================================================
+                SOFT GLOW
+==========================================================*/
+
+.main-section{
+
+    position:relative;
+
+}
+
+.main-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #00D4FF,
+
+            transparent
+
+        );
+
+    opacity:.6;
+
+}
+
+/*=========================================================
+                PREMIUM SHADOW
+==========================================================*/
+
+.content-container{
+
+    box-shadow:
+
+        inset 0 1px rgba(255,255,255,.35);
+
+}
+
+/*=========================================================
+                    END
+==========================================================*/

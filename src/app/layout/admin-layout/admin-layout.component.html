@@ -1,0 +1,73 @@
+<div class="admin-layout">
+
+    <!-- ===========================
+         Admin Sidebar
+    ============================ -->
+
+    <aside
+        class="sidebar-container"
+        [class.collapsed]="sidebarCollapsed">
+
+        <app-admin-sidebar></app-admin-sidebar>
+
+    </aside>
+
+    <!-- ===========================
+         Main Section
+    ============================ -->
+
+    <div
+        class="main-section"
+        [class.expanded]="sidebarCollapsed">
+
+        <!-- ===========================
+             Admin Navbar
+        ============================ -->
+
+        <header class="navbar-container">
+
+            <app-admin-navbar
+                (sidebarToggle)="toggleSidebar()">
+            </app-admin-navbar>
+
+        </header>
+
+        <!-- ===========================
+             Breadcrumb
+        ============================ -->
+
+        <section class="breadcrumb-container">
+
+            <app-breadcrumb></app-breadcrumb>
+
+        </section>
+
+        <!-- ===========================
+             Dynamic Page Content
+        ============================ -->
+
+        <main class="content-container">
+
+            <router-outlet></router-outlet>
+
+        </main>
+
+        <!-- ===========================
+             Footer
+        ============================ -->
+
+        <footer class="footer-container">
+
+            <app-footer></app-footer>
+
+        </footer>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     Global Loader
+=========================== -->
+
+<app-loader></app-loader>

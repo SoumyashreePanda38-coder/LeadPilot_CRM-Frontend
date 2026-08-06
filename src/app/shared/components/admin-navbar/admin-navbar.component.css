@@ -1,0 +1,579 @@
+/*=========================================================
+                    LEADPILOT CRM
+                ADMIN NAVBAR
+==========================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:host{
+
+    display:block;
+
+    width:100%;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+/*=========================================================
+                    NAVBAR
+==========================================================*/
+
+.admin-navbar{
+
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    background:linear-gradient(
+        135deg,
+        #071C36,
+        #0B2C52
+    );
+
+    border-bottom:1px solid rgba(0,212,255,.18);
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.18);
+
+    color:#FFFFFF;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* Animated Shine */
+
+.admin-navbar::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-60%;
+
+    width:40%;
+
+    height:320%;
+
+    background:rgba(255,255,255,.08);
+
+    transform:rotate(25deg);
+
+    animation:shine 8s linear infinite;
+
+}
+
+@keyframes shine{
+
+    from{
+
+        left:-60%;
+
+    }
+
+    to{
+
+        left:170%;
+
+    }
+
+}
+
+/*=========================================================
+                    LEFT
+==========================================================*/
+
+.navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+/*=========================================================
+                    MENU BUTTON
+==========================================================*/
+
+.menu-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.08);
+
+    color:#FFFFFF;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.menu-btn i{
+
+    font-size:22px;
+
+}
+
+.menu-btn:hover{
+
+    background:#00D4FF;
+
+    color:#071C36;
+
+    transform:rotate(180deg);
+
+    box-shadow:0 0 18px rgba(0,212,255,.5);
+
+}
+
+/*=========================================================
+                    LOGO
+==========================================================*/
+
+.logo{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(
+        135deg,
+        #00D4FF,
+        #009BFF
+    );
+
+    color:#FFFFFF;
+
+    font-size:24px;
+
+    box-shadow:0 0 18px rgba(0,212,255,.45);
+
+    animation:logoGlow 3s infinite;
+
+}
+
+@keyframes logoGlow{
+
+    0%{
+
+        box-shadow:0 0 10px rgba(0,212,255,.35);
+
+    }
+
+    50%{
+
+        box-shadow:0 0 24px rgba(0,212,255,.7);
+
+    }
+
+    100%{
+
+        box-shadow:0 0 10px rgba(0,212,255,.35);
+
+    }
+
+}
+
+/*=========================================================
+                    BRAND
+==========================================================*/
+
+.brand{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.brand h3{
+
+    margin:0;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    color:#FFFFFF;
+
+}
+
+.brand span{
+
+    font-size:12px;
+
+    color:#C6D9EA;
+
+}
+
+/*=========================================================
+                    CENTER
+==========================================================*/
+
+.navbar-center{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:0 35px;
+
+}
+
+/*=========================================================
+                    SEARCH
+==========================================================*/
+
+.search-box{
+
+    width:430px;
+
+    max-width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:40px;
+
+    padding:0 18px;
+
+    transition:.35s;
+
+}
+
+.search-box:hover{
+
+    border-color:#00D4FF;
+
+    box-shadow:0 0 18px rgba(0,212,255,.25);
+
+}
+
+.search-box i{
+
+    color:#00D4FF;
+
+    font-size:18px;
+
+    margin-right:12px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    height:46px;
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+    color:#FFFFFF;
+
+    font-size:15px;
+
+}
+
+.search-box input::placeholder{
+
+    color:#C7D4E2;
+
+}
+
+/*=========================================================
+                    RIGHT
+==========================================================*/
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+/*=========================================================
+                THEME BUTTON
+==========================================================*/
+
+.theme-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,.08);
+
+    color:#FFFFFF;
+
+    transition:.35s;
+
+}
+
+.theme-btn i{
+
+    font-size:18px;
+
+}
+
+.theme-btn:hover{
+
+    background:#00D4FF;
+
+    color:#071C36;
+
+    transform:rotate(180deg);
+
+    box-shadow:0 0 18px rgba(0,212,255,.5);
+
+}
+
+/*=========================================================
+                    LOGOUT
+==========================================================*/
+
+.logout-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:none;
+
+    border-radius:40px;
+
+    cursor:pointer;
+
+    padding:11px 22px;
+
+    background:linear-gradient(
+        135deg,
+        #00D4FF,
+        #008FFF
+    );
+
+    color:#FFFFFF;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.logout-btn i{
+
+    font-size:18px;
+
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 0 22px rgba(0,212,255,.45);
+
+}
+
+/*=========================================================
+                BUTTON SHINE
+==========================================================*/
+
+.logout-btn,
+.logo{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.logout-btn::after,
+.logo::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-80%;
+
+    width:40%;
+
+    height:300%;
+
+    background:rgba(255,255,255,.30);
+
+    transform:rotate(25deg);
+
+    animation:buttonShine 5s linear infinite;
+
+}
+
+@keyframes buttonShine{
+
+    from{
+
+        left:-80%;
+
+    }
+
+    to{
+
+        left:180%;
+
+    }
+
+}
+
+/*=========================================================
+                RESPONSIVE
+==========================================================*/
+
+@media(max-width:992px){
+
+.search-box{
+
+    width:280px;
+
+}
+
+.brand span{
+
+    display:none;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.admin-navbar{
+
+    padding:0 15px;
+
+}
+
+.brand{
+
+    display:none;
+
+}
+
+.search-box{
+
+    width:180px;
+
+}
+
+.logout-btn span{
+
+    display:none;
+
+}
+
+.logout-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    justify-content:center;
+
+    padding:0;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.search-box{
+
+    display:none;
+
+}
+
+.logo{
+
+    width:42px;
+
+    height:42px;
+
+}
+
+.menu-btn{
+
+    width:42px;
+
+    height:42px;
+
+}
+
+.theme-btn{
+
+    width:42px;
+
+    height:42px;
+
+}
+
+.logout-btn{
+
+    width:42px;
+
+    height:42px;
+
+}
+
+}

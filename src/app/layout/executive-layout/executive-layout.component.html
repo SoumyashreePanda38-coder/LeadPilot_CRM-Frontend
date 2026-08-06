@@ -1,0 +1,25 @@
+<div class="executive-layout">
+  <aside class="sidebar-container" [class.collapsed]="sidebarCollapsed">
+    <app-executive-sidebar></app-executive-sidebar>
+  </aside>
+
+  <div class="main-section" [class.expanded]="sidebarCollapsed">
+    <header class="navbar-container">
+      <app-executive-navbar (sidebarToggle)="toggleSidebar()"></app-executive-navbar>
+    </header>
+
+    <section class="breadcrumb-container">
+      <app-breadcrumb></app-breadcrumb>
+    </section>
+
+    <main class="content-container">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="footer-container">
+      <app-footer></app-footer>
+    </footer>
+  </div>
+</div>
+
+<app-loader></app-loader>

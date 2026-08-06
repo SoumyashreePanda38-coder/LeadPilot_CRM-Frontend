@@ -1,0 +1,249 @@
+<div class="login-container">
+
+    <!-- ================= Left Panel ================= -->
+
+    <div class="left-panel">
+
+        <div class="overlay"></div>
+
+        <div class="left-content">
+
+            <div class="brand">
+
+                <div class="logo">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+
+                <h1>LeadPilot CRM</h1>
+
+                <p>
+                    Smart Customer Lead Management System
+                </p>
+
+            </div>
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <i class="bi bi-person-check-fill"></i>
+
+                    <div>
+
+                        <h4>Lead Management</h4>
+
+                        <p>
+                            Organize and manage customer leads efficiently.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <i class="bi bi-calendar2-check-fill"></i>
+
+                    <div>
+
+                        <h4>Follow-Ups</h4>
+
+                        <p>
+                            Schedule reminders and never miss a follow-up.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <i class="bi bi-bar-chart-fill"></i>
+
+                    <div>
+
+                        <h4>Sales Analytics</h4>
+
+                        <p>
+                            Monitor sales performance through real-time reports.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="copyright">
+
+                © 2026 LeadPilot CRM
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= Right Panel ================= -->
+
+    <div class="right-panel">
+
+        <form
+            class="login-card"
+            [formGroup]="loginForm"
+            (ngSubmit)="login()">
+
+            <div class="welcome">
+
+                <h2>Welcome Back 👋</h2>
+
+                <p>
+                    Login to continue to your CRM Dashboard
+                </p>
+
+            </div>
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <div class="input-box">
+
+                    <i class="bi bi-person"></i>
+
+                    <input
+                        type="text"
+                        formControlName="username"
+                        placeholder="Enter Username">
+
+                </div>
+
+                <small
+                    class="text-danger"
+                    *ngIf="submitted && f['username'].errors">
+
+                    Username is required.
+
+                </small>
+
+            </div>
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="bi bi-lock"></i>
+
+                    <input
+                        [type]="hidePassword ? 'password' : 'text'"
+                        formControlName="password"
+                        placeholder="Enter Password">
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        (click)="togglePassword()">
+
+                        <i
+                            class="bi"
+                            [ngClass]="hidePassword ? 'bi-eye-fill' : 'bi-eye-slash-fill'">
+                        </i>
+
+                    </button>
+
+                </div>
+
+                <small
+                    class="text-danger"
+                    *ngIf="submitted && f['password'].errors">
+
+                    Password is required.
+
+                </small>
+
+            </div>
+
+            <!-- Error Message -->
+
+            <div
+                class="alert alert-danger"
+                *ngIf="errorMessage">
+
+                {{ errorMessage }}
+
+            </div>
+
+            <!-- Remember Me -->
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input type="checkbox">
+
+                    Remember Me
+
+                </label>
+
+                <a routerLink="/auth/forgot-password">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+            <!-- Login Button -->
+
+            <button
+                class="login-btn"
+                type="submit"
+                [disabled]="loading">
+
+                <span *ngIf="!loading">
+
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                    Login
+
+                </span>
+
+                <span *ngIf="loading">
+
+                    <span
+                        class="spinner-border spinner-border-sm me-2">
+                    </span>
+
+                    Signing In...
+
+                </span>
+
+            </button>
+
+            <div class="divider">
+
+                <span>LeadPilot CRM</span>
+
+            </div>
+
+            <div class="footer-links">
+
+                <a href="#">Privacy Policy</a>
+
+                <span>|</span>
+
+                <a href="#">Terms of Service</a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
