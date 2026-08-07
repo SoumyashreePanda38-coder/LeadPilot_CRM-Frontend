@@ -1,0 +1,150 @@
+:host{
+    display:block;
+    width:100%;
+}
+
+/* ==========================================
+   Breadcrumb Container
+========================================== */
+
+.breadcrumb-wrapper{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 22px;
+
+    background:#ffffff;
+
+    border-radius:14px;
+
+    border:1px solid #d8e8f5;
+
+    box-shadow:
+        0 6px 20px rgba(7,27,59,.08);
+
+}
+
+/* ==========================================
+   Left Side
+========================================== */
+
+.breadcrumb-left{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    color:#071B3B;
+
+}
+
+.home-icon{
+
+    color:#00C8FF;
+
+    font-size:18px;
+
+}
+
+/* Breadcrumb Links */
+
+.breadcrumb-left a{
+
+    color:#4B5563;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.breadcrumb-left a:hover{
+
+    color:#00C8FF;
+
+}
+
+/* Current Page */
+
+.active{
+
+    color:#071B3B;
+
+    font-weight:700;
+
+}
+
+/* Slash */
+
+.separator{
+
+    color:#9CA3AF;
+
+}
+
+/* ==========================================
+   Date Section
+========================================== */
+
+.breadcrumb-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#F5FAFF;
+
+    padding:8px 14px;
+
+    border-radius:10px;
+
+    border:1px solid #D9ECFA;
+
+}
+
+.breadcrumb-right i{
+
+    color:#00C8FF;
+
+    font-size:15px;
+
+}
+
+.breadcrumb-right span{
+
+    color:#374151;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:.3px;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:768px){
+
+    .breadcrumb-wrapper{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+
+    }
+
+}

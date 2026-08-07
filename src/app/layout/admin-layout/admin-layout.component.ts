@@ -1,5 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  HostListener,
+  OnInit
+} from '@angular/core';
+
+import {
+  NavigationEnd,
+  Router
+} from '@angular/router';
+
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-admin-layout',
@@ -9,12 +19,19 @@ import { Router } from '@angular/router';
 export class AdminLayoutComponent implements OnInit {
 
   /**
-   * Sidebar Collapse State
+   * ============================================
+   * Drawer Sidebar State
+   * --------------------------------------------
+   * false -> Sidebar Hidden
+   * true  -> Sidebar Visible
+   * ============================================
    */
-  sidebarCollapsed: boolean = false;
+  sidebarOpened: boolean = false;
 
   /**
+   * ============================================
    * Current Page Title
+   * ============================================
    */
   pageTitle: string = 'Dashboard';
 
@@ -22,47 +39,102 @@ export class AdminLayoutComponent implements OnInit {
     private router: Router
   ) { }
 
+  // =========================================================
+  // Angular Lifecycle
+  // =========================================================
+
   ngOnInit(): void {
 
-    // Future Enhancements:
-    // ----------------------------
-    // Load Logged-in User
-    // Load Notifications
-    // Update Breadcrumb
-    // Load Theme Preference
-    // ----------------------------
+    /**
+     * Automatically close the sidebar whenever
+     * the route changes.
+     */
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+
+        this.closeSidebar();
+
+      });
 
   }
 
+  // =========================================================
+  // Sidebar Methods
+  // =========================================================
+
   /**
-   * Toggle Sidebar
+   * Toggle Drawer Sidebar
    */
   toggleSidebar(): void {
 
-    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.sidebarOpened = !this.sidebarOpened;
 
   }
 
   /**
-   * Expand Sidebar
+   * Open Drawer Sidebar
    */
   openSidebar(): void {
 
-    this.sidebarCollapsed = false;
+    this.sidebarOpened = true;
 
   }
 
   /**
-   * Collapse Sidebar
+   * Close Drawer Sidebar
    */
   closeSidebar(): void {
 
-    this.sidebarCollapsed = true;
+    this.sidebarOpened = false;
 
   }
 
   /**
-   * Change Page Title
+   * Close Sidebar when Overlay is clicked
+   */
+  closeSidebarOutside(): void {
+
+    this.closeSidebar();
+
+  }
+
+  // =========================================================
+  // Keyboard Events
+  // =========================================================
+
+  /**
+   * Close Sidebar using ESC key
+   */
+  @HostListener('document:keydown.escape')
+  onEscapePressed(): void {
+
+    this.closeSidebar();
+
+  }
+
+  // =========================================================
+  // Window Events
+  // =========================================================
+
+  /**
+   * Close Sidebar whenever browser window is resized
+   */
+  @HostListener('window:resize')
+  onWindowResize(): void {
+
+    this.closeSidebar();
+
+  }
+
+  // =========================================================
+  // Page Methods
+  // =========================================================
+
+  /**
+   * Update Page Title
    */
   setPageTitle(title: string): void {
 
@@ -75,7 +147,11 @@ export class AdminLayoutComponent implements OnInit {
    */
   goToDashboard(): void {
 
-    this.router.navigate(['/admin/dashboard']);
+    this.router.navigate([
+      '/admin/dashboard'
+    ]);
+
+    this.closeSidebar();
 
   }
 

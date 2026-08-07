@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
+
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
@@ -10,45 +16,58 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class AdminNavbarComponent implements OnInit {
 
+  // =========================================================
+  // Output Events
+  // =========================================================
+
   /**
-   * Sidebar Toggle Event
+   * Toggle Drawer Sidebar
    */
   @Output()
   sidebarToggle = new EventEmitter<void>();
 
-  /**
-   * Theme
-   */
-  isDarkTheme = true;
+  // =========================================================
+  // Theme
+  // =========================================================
 
-  /**
-   * Logged-in User
-   */
-  userName = '';
+  isDarkTheme: boolean = true;
 
-  role = '';
+  // =========================================================
+  // Logged-in User
+  // =========================================================
 
-  profileImage = '';
+  userName: string = '';
 
-  /**
-   * Greeting
-   */
-  greeting = '';
+  role: string = '';
 
-  /**
-   * Search
-   */
-  searchText = '';
+  profileImage: string = '';
 
-  /**
-   * Notification Count
-   */
-  notificationCount = 3;
+  // =========================================================
+  // Greeting
+  // =========================================================
+
+  greeting: string = '';
+
+  // =========================================================
+  // Search
+  // =========================================================
+
+  searchText: string = '';
+
+  // =========================================================
+  // Notifications
+  // =========================================================
+
+  notificationCount: number = 3;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
+
+  // =========================================================
+  // Angular Lifecycle
+  // =========================================================
 
   ngOnInit(): void {
 
@@ -59,6 +78,10 @@ export class AdminNavbarComponent implements OnInit {
     this.setGreeting();
 
   }
+
+  // =========================================================
+  // Theme
+  // =========================================================
 
   /**
    * Load Saved Theme
@@ -86,6 +109,35 @@ export class AdminNavbarComponent implements OnInit {
   }
 
   /**
+   * Toggle Theme
+   */
+  toggleTheme(): void {
+
+    this.isDarkTheme = !this.isDarkTheme;
+
+    if (this.isDarkTheme) {
+
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+
+      localStorage.setItem('theme', 'dark');
+
+    } else {
+
+      document.body.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
+
+      localStorage.setItem('theme', 'light');
+
+    }
+
+  }
+
+  // =========================================================
+  // User
+  // =========================================================
+
+  /**
    * Load Logged-in User
    */
   loadUser(): void {
@@ -96,18 +148,18 @@ export class AdminNavbarComponent implements OnInit {
 
       const data = JSON.parse(user);
 
-      this.userName = data.fullName;
+      this.userName = data.fullName ?? '';
 
-      this.role = data.role;
+      this.role = data.role ?? '';
 
-      this.profileImage = data.profileImage;
+      this.profileImage = data.profileImage ?? '';
 
     }
 
   }
 
   /**
-   * Greeting
+   * Greeting Message
    */
   setGreeting(): void {
 
@@ -117,15 +169,11 @@ export class AdminNavbarComponent implements OnInit {
 
       this.greeting = 'Good Morning';
 
-    }
-
-    else if (hour < 17) {
+    } else if (hour < 17) {
 
       this.greeting = 'Good Afternoon';
 
-    }
-
-    else {
+    } else {
 
       this.greeting = 'Good Evening';
 
@@ -133,8 +181,12 @@ export class AdminNavbarComponent implements OnInit {
 
   }
 
+  // =========================================================
+  // Drawer Sidebar
+  // =========================================================
+
   /**
-   * Sidebar Toggle
+   * Open / Close Drawer Sidebar
    */
   toggleSidebar(): void {
 
@@ -142,49 +194,28 @@ export class AdminNavbarComponent implements OnInit {
 
   }
 
-  /**
-   * Theme Toggle
-   */
-  toggleTheme(): void {
-
-    this.isDarkTheme = !this.isDarkTheme;
-
-    if (this.isDarkTheme) {
-
-      document.body.classList.add('dark-theme');
-
-      document.body.classList.remove('light-theme');
-
-      localStorage.setItem('theme', 'dark');
-
-    }
-
-    else {
-
-      document.body.classList.add('light-theme');
-
-      document.body.classList.remove('dark-theme');
-
-      localStorage.setItem('theme', 'light');
-
-    }
-
-  }
+  // =========================================================
+  // Search
+  // =========================================================
 
   /**
-   * Search
+   * Global Search
    */
   search(): void {
 
     console.log('Searching:', this.searchText);
 
     // Future:
-    // Connect to Lead Search API
+    // Connect Global Search API
 
   }
 
+  // =========================================================
+  // Notifications
+  // =========================================================
+
   /**
-   * Notifications
+   * Open Notification Panel
    */
   openNotifications(): void {
 
@@ -192,17 +223,27 @@ export class AdminNavbarComponent implements OnInit {
 
   }
 
+  // =========================================================
+  // Profile
+  // =========================================================
+
   /**
-   * Profile
+   * Navigate to Profile
    */
   openProfile(): void {
 
-    this.router.navigate(['/admin/profile']);
+    this.router.navigate([
+      '/admin/profile'
+    ]);
 
   }
 
+  // =========================================================
+  // Logout
+  // =========================================================
+
   /**
-   * Logout
+   * Logout User
    */
   logout(): void {
 
@@ -212,7 +253,9 @@ export class AdminNavbarComponent implements OnInit {
 
         localStorage.removeItem('user');
 
-        this.router.navigate(['/auth/login']);
+        this.router.navigate([
+          '/auth/login'
+        ]);
 
       },
 
@@ -220,7 +263,9 @@ export class AdminNavbarComponent implements OnInit {
 
         localStorage.removeItem('user');
 
-        this.router.navigate(['/auth/login']);
+        this.router.navigate([
+          '/auth/login'
+        ]);
 
       }
 

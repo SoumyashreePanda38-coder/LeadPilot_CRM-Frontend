@@ -5,9 +5,17 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ExecutiveDashboardComponent } from './executive-dashboard/executive-dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: AdminDashboardComponent },
-  { path: 'executive-dashboard', component: ExecutiveDashboardComponent }
+
+  {
+    path: '',
+    component: AdminDashboardComponent
+  },
+
+  {
+    path: 'executive',
+    component: ExecutiveDashboardComponent
+  }
+
 ];
 
 @NgModule({

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, HostListener } from '@angular/core';import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
@@ -13,24 +12,30 @@ import { LoginResponse } from '../../../core/models/login-response';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  hidePassword: boolean = true;
+  hidePassword = true;
 
-  loading: boolean = false;
+  loading = false;
 
-  submitted: boolean = false;
+  submitted = false;
 
-  errorMessage: string = '';
+  errorMessage = '';
+
+  /**
+ * Mouse Shine Effect
+ */
+mouseX = '50%';
+mouseY = '50%';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -51,7 +56,6 @@ export class LoginComponent {
   login(): void {
 
     this.submitted = true;
-
     this.errorMessage = '';
 
     if (this.loginForm.invalid) {
@@ -64,37 +68,55 @@ export class LoginComponent {
 
     this.authService.login(request).subscribe({
 
-      next: (response: LoginResponse) => {
+       next: (response: LoginResponse) => {
 
-        const normalizedRole = this.getNormalizedRole(response);
+  console.log('========== LOGIN SUCCESS ==========');
+  console.log(response);
 
-        // Save JWT
-        this.tokenService.saveToken(response.token);
+  // Save JWT
+  this.tokenService.saveToken(response.token);
 
-        // Save User Details
-        localStorage.setItem('user', JSON.stringify(response));
-        localStorage.setItem('userRole', normalizedRole || 'ADMIN');
+  // Save logged-in user
+  localStorage.setItem('user', JSON.stringify(response));
 
-        this.loading = false;
+  // Determine role
+  const role = this.getUserRole(response);
 
-        const targetRoute = normalizedRole === 'EXECUTIVE'
-          ? '/executive/dashboard'
-          : '/admin/dashboard';
+  localStorage.setItem('userRole', role);
 
-        setTimeout(() => {
-          this.router.navigateByUrl(targetRoute);
-        }, 0);
+  this.loading = false;
 
-      },
+  console.log('Detected Role:', role);
+
+  // Navigate according to role
+  if (role === 'EXECUTIVE') {
+
+    this.router.navigate(['/executive/dashboard/executive'])
+      .then(success => console.log('Executive Navigation:', success));
+
+  } else {
+
+    this.router.navigate(['/admin/dashboard'])
+      .then(success => console.log('Admin Navigation:', success));
+
+  }
+
+},
 
       error: (error) => {
 
         this.loading = false;
 
+        console.error(error);
+
         if (error.error?.message) {
+
           this.errorMessage = error.error.message;
+
         } else {
+
           this.errorMessage = 'Invalid username or password.';
+
         }
 
       }
@@ -108,55 +130,58 @@ export class LoginComponent {
     this.hidePassword = !this.hidePassword;
 
   }
+  /**
+ * Mouse Tracking Animation
+ */
 
-  private getNormalizedRole(response: LoginResponse): string | null {
+  /**
+   * Extract role from backend response
+   */
+  private getUserRole(response: any): string {
 
-    const candidates = [
-      response?.role,
-      (response as any)?.userRole,
-      (response as any)?.roles,
-      (response as any)?.authorities,
-      (response as any)?.roleName,
-      (response as any)?.authority,
-      (response as any)?.isAdmin,
-      (response as any)?.admin
-    ];
-
-    for (const candidate of candidates) {
-      if (typeof candidate === 'string') {
-        const normalized = candidate.trim().toUpperCase().replace(/^ROLE_/, '');
-
-        if (normalized === 'ADMIN' || normalized === 'EXECUTIVE') {
-          return normalized;
-        }
-      }
-
-      if (Array.isArray(candidate)) {
-        for (const item of candidate) {
-          if (typeof item === 'string') {
-            const normalized = item.trim().toUpperCase().replace(/^ROLE_/, '');
-
-            if (normalized === 'ADMIN' || normalized === 'EXECUTIVE') {
-              return normalized;
-            }
-          }
-        }
-      }
-
-      if (candidate && typeof candidate === 'object') {
-        const nestedRole = (candidate as any).authority || (candidate as any).name || (candidate as any).role;
-
-        if (typeof nestedRole === 'string') {
-          const normalized = nestedRole.trim().toUpperCase().replace(/^ROLE_/, '');
-
-          if (normalized === 'ADMIN' || normalized === 'EXECUTIVE') {
-            return normalized;
-          }
-        }
-      }
+    if (!response) {
+      return 'ADMIN';
     }
 
-    return null;
+    if (response.role) {
+      return response.role.toUpperCase().replace('ROLE_', '');
+    }
+
+    if (response.userRole) {
+      return response.userRole.toUpperCase().replace('ROLE_', '');
+    }
+
+    if (response.authority) {
+      return response.authority.toUpperCase().replace('ROLE_', '');
+    }
+
+    if (response.roleName) {
+      return response.roleName.toUpperCase().replace('ROLE_', '');
+    }
+
+    if (response.roles && response.roles.length > 0) {
+
+      if (typeof response.roles[0] === 'string') {
+
+        return response.roles[0].toUpperCase().replace('ROLE_', '');
+
+      }
+
+      if (response.roles[0].name) {
+
+        return response.roles[0].name.toUpperCase().replace('ROLE_', '');
+
+      }
+
+      if (response.roles[0].authority) {
+
+        return response.roles[0].authority.toUpperCase().replace('ROLE_', '');
+
+      }
+
+    }
+
+    return 'ADMIN';
 
   }
 

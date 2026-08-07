@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.css']
 })
-export class AdminSidebarComponent implements OnInit {
+export class AdminSidebarComponent {
 
   /**
    * Sidebar Collapse State
@@ -15,60 +14,26 @@ export class AdminSidebarComponent implements OnInit {
   @Input()
   collapsed: boolean = false;
 
-  /**
-   * Lead Management Menu
-   */
-  leadMenuOpen: boolean = true;
-
-  /**
-   * Current Active Route
-   */
-  currentRoute: string = '';
-
   constructor(
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-
-    this.currentRoute = this.router.url;
-
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd)
-      )
-      .subscribe((event: any) => {
-
-        this.currentRoute = event.urlAfterRedirects;
-
-      });
-
-  }
-
   /**
-   * Toggle Lead Management Menu
-   */
-  toggleLeadMenu(): void {
-
-    this.leadMenuOpen = !this.leadMenuOpen;
-
-  }
-
-  /**
-   * Check Active Route
-   */
-  isActive(route: string): boolean {
-
-    return this.currentRoute.startsWith(route);
-
-  }
-
-  /**
-   * Navigate
+   * Navigate to Route
    */
   navigate(route: string): void {
 
     this.router.navigate([route]);
+
+  }
+
+  /**
+   * Check Current Route
+   * (Optional - useful if you want to manually highlight menus)
+   */
+  isCurrentRoute(route: string): boolean {
+
+    return this.router.url.startsWith(route);
 
   }
 

@@ -57,7 +57,7 @@ export class TokenService {
    * Logout User
    */
   logout(): void {
-    this.removeToken();
-  }
+  localStorage.clear();
+}
 
 }

@@ -1,395 +1,184 @@
 /*=========================================================
                     LEADPILOT CRM
-                ADMIN LAYOUT
-==========================================================*/
+                  ADMIN LAYOUT
+=========================================================*/
 
-:host{
+:host {
 
-    display:block;
-
-    width:100%;
-
-    min-height:100vh;
+    display: block;
+    width: 100%;
+    min-height: 100vh;
 
 }
 
 /*=========================================================
                     ROOT LAYOUT
-==========================================================*/
+=========================================================*/
 
-.admin-layout{
+.admin-layout {
 
-    display:flex;
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
 
-    min-height:100vh;
+    position: relative;
 
-    background:#F4F8FC;
+    overflow-x: hidden;
 
-    overflow:hidden;
+    background: #F4F8FC;
 
 }
 
 /*=========================================================
-                    SIDEBAR
-==========================================================*/
+                    SIDEBAR DRAWER
+=========================================================*/
 
-.sidebar-container{
+.sidebar-container {
 
-    position:fixed;
+    position: fixed;
 
-    top:0;
+    top: 0;
+    left: 0;
 
-    left:0;
+    width: 280px;
+    height: 100vh;
 
-    bottom:0;
+    background: #071C36;
 
-    width:280px;
+    z-index: 1400;
 
-    z-index:1200;
+    transform: translateX(-100%);
 
-    background:#071C36;
+    transition: transform .35s ease;
 
-    transition:all .35s ease;
+    box-shadow: 14px 0 35px rgba(0,0,0,.30);
 
-    box-shadow:
+    overflow-y: auto;
+    overflow-x: hidden;
 
-        12px 0 35px rgba(0,0,0,.30);
+    -webkit-overflow-scrolling: touch;
 
 }
 
-/* Collapsed Sidebar */
+/*=========================================================
+                    DRAWER OPEN
+=========================================================*/
 
-.sidebar-container.collapsed{
+.sidebar-container.open {
 
-    width:90px;
+    transform: translateX(0);
+
+}
+
+/*=========================================================
+                SIDEBAR SCROLLBAR
+=========================================================*/
+
+.sidebar-container::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+
+    background: #00D4FF;
+
+    border-radius: 30px;
+
+}
+
+/*=========================================================
+                    OVERLAY
+=========================================================*/
+
+.sidebar-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    backdrop-filter: blur(3px);
+
+    z-index: 1300;
+
+    animation: overlayFade .25s ease;
 
 }
 
 /*=========================================================
                     MAIN SECTION
-==========================================================*/
+=========================================================*/
 
-.main-section{
+.main-section {
 
-    margin-left:280px;
+    width: 100%;
 
-    width:calc(100% - 280px);
+    min-height: 100vh;
 
-    min-height:100vh;
+    display: flex;
 
-    display:flex;
+    flex-direction: column;
 
-    flex-direction:column;
-
-    transition:all .35s ease;
-
-}
-
-/* Expanded Content */
-
-.main-section.expanded{
-
-    margin-left:90px;
-
-    width:calc(100% - 90px);
+    position: relative;
 
 }
 
 /*=========================================================
                     NAVBAR
-==========================================================*/
+=========================================================*/
 
-.navbar-container{
+.navbar-container {
 
-    position:sticky;
+    position: sticky;
 
-    top:0;
+    top: 0;
 
-    z-index:1100;
+    z-index: 1200;
 
 }
 
 /*=========================================================
                     BREADCRUMB
-==========================================================*/
+=========================================================*/
 
-.breadcrumb-container{
+.breadcrumb-container {
 
-    padding:18px 28px 0;
+    padding: 18px 28px 0;
 
-    background:#F4F8FC;
+    background: #F4F8FC;
 
 }
 
 /*=========================================================
                     CONTENT
-==========================================================*/
+=========================================================*/
 
-.content-container{
+.content-container {
 
-    flex:1;
+    flex: 1;
 
-    padding:28px;
+    overflow-y: auto;
 
-    overflow:auto;
+    padding: 28px;
 
     background:
 
         linear-gradient(
-
             180deg,
-
-            #F7FAFD,
-
+            #F8FBFE,
             #EEF5FC
-
         );
 
-}
-
-/*=========================================================
-                    FOOTER
-==========================================================*/
-
-.footer-container{
-
-    background:white;
-
-    border-top:1px solid #E4ECF3;
-
-}
-
-/*=========================================================
-                    SCROLLBAR
-==========================================================*/
-
-.content-container::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-.content-container::-webkit-scrollbar-thumb{
-
-    background:#00D4FF;
-
-    border-radius:20px;
-
-}
-
-.content-container::-webkit-scrollbar-track{
-
-    background:#EAF4FC;
-
-}
-
-/*=========================================================
-                    ANIMATION
-==========================================================*/
-
-.sidebar-container,
-.main-section,
-.content-container{
-
-    transition:
-
-        all .35s ease;
-
-}
-
-/*=========================================================
-                    TABLET
-==========================================================*/
-
-@media(max-width:992px){
-
-.sidebar-container{
-
-    width:90px;
-
-}
-
-.main-section{
-
-    margin-left:90px;
-
-    width:calc(100% - 90px);
-
-}
-
-.breadcrumb-container{
-
-    padding:15px 20px 0;
-
-}
-
-.content-container{
-
-    padding:20px;
-
-}
-
-}
-
-/*=========================================================
-                    MOBILE
-==========================================================*/
-
-@media(max-width:768px){
-
-.admin-layout{
-
-    overflow-x:hidden;
-
-}
-
-.sidebar-container{
-
-    left:-280px;
-
-    width:280px;
-
-}
-
-.sidebar-container.show{
-
-    left:0;
-
-}
-
-.main-section{
-
-    margin-left:0;
-
-    width:100%;
-
-}
-
-.breadcrumb-container{
-
-    padding:14px 16px 0;
-
-}
-
-.content-container{
-
-    padding:18px;
-
-}
-
-}
-
-/*=========================================================
-                SMALL MOBILE
-==========================================================*/
-
-@media(max-width:576px){
-
-.content-container{
-
-    padding:15px;
-
-}
-
-.breadcrumb-container{
-
-    padding:12px;
-
-}
-
-}
-
-/*=========================================================
-                LARGE SCREENS
-==========================================================*/
-
-@media(min-width:1600px){
-
-.content-container{
-
-    padding:40px;
-
-}
-
-}
-
-/*=========================================================
-                PAGE FADE ANIMATION
-==========================================================*/
-
-.content-container{
-
-    animation:fadeIn .45s ease;
-
-}
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(12px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*=========================================================
-                SOFT GLOW
-==========================================================*/
-
-.main-section{
-
-    position:relative;
-
-}
-
-.main-section::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    right:0;
-
-    height:2px;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            #00D4FF,
-
-            transparent
-
-        );
-
-    opacity:.6;
-
-}
-
-/*=========================================================
-                PREMIUM SHADOW
-==========================================================*/
-
-.content-container{
+    animation: pageFade .35s ease;
 
     box-shadow:
 
@@ -398,5 +187,200 @@
 }
 
 /*=========================================================
-                    END
-==========================================================*/
+                    FOOTER
+=========================================================*/
+
+.footer-container {
+
+    background: #FFFFFF;
+
+    border-top: 1px solid #E4ECF3;
+
+}
+
+/*=========================================================
+                    GLOW TOP LINE
+=========================================================*/
+
+.main-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #00D4FF,
+            transparent
+        );
+
+    opacity: .65;
+
+}
+
+/*=========================================================
+                    CONTENT SCROLLBAR
+=========================================================*/
+
+.content-container::-webkit-scrollbar {
+
+    width: 10px;
+
+}
+
+.content-container::-webkit-scrollbar-track {
+
+    background: #EAF4FC;
+
+}
+
+.content-container::-webkit-scrollbar-thumb {
+
+    background: #00D4FF;
+
+    border-radius: 20px;
+
+}
+
+/*=========================================================
+                    PAGE ANIMATION
+=========================================================*/
+
+@keyframes pageFade {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+@keyframes overlayFade {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+/*=========================================================
+                    TABLET
+=========================================================*/
+
+@media (max-width:992px) {
+
+    .sidebar-container {
+
+        width: 280px;
+
+    }
+
+    .breadcrumb-container {
+
+        padding: 16px 20px 0;
+
+    }
+
+    .content-container {
+
+        padding: 22px;
+
+    }
+
+}
+
+/*=========================================================
+                    MOBILE
+=========================================================*/
+
+@media (max-width:768px) {
+
+    .sidebar-container {
+
+        width: 280px;
+
+    }
+
+    .breadcrumb-container {
+
+        padding: 14px 16px 0;
+
+    }
+
+    .content-container {
+
+        padding: 18px;
+
+    }
+
+}
+
+/*=========================================================
+                SMALL MOBILE
+=========================================================*/
+
+@media (max-width:576px) {
+
+    .sidebar-container {
+
+        width: 260px;
+
+    }
+
+    .breadcrumb-container {
+
+        padding: 12px;
+
+    }
+
+    .content-container {
+
+        padding: 15px;
+
+    }
+
+}
+
+/*=========================================================
+                LARGE SCREENS
+=========================================================*/
+
+@media (min-width:1600px) {
+
+    .content-container {
+
+        padding: 40px;
+
+    }
+
+}

@@ -1,1 +1,359 @@
-﻿:host{display:block;font-family:Poppins,sans-serif}.sidebar{width:280px;height:100vh;position:fixed;top:0;left:0;display:flex;flex-direction:column;overflow-y:auto;background:linear-gradient(180deg,#071c36 0%,#0a2745 45%,#071c36 100%);color:#fff;z-index:1050;box-shadow:10px 0 35px rgba(0,0,0,.35);border-right:1px solid rgba(0,212,255,.12)}.sidebar-header{display:flex;align-items:center;gap:.9rem;padding:1.05rem 1rem;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}.logo{width:3.2rem;height:3.2rem;border-radius:1rem;display:grid;place-items:center;background:linear-gradient(135deg,#00d4ff,#2563eb);font-weight:700;box-shadow:0 0 18px rgba(0,212,255,.3)}.brand h3{margin:0;font-size:1.05rem}.brand span{font-size:.78rem;color:#b7c4d3}.sidebar-menu{list-style:none;padding:.8rem 0;margin:0}.menu-title{font-size:.72rem;text-transform:uppercase;color:#86b6d6;padding:.7rem 1rem .35rem}.sidebar-menu a{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;margin:.2rem .7rem;border-radius:.9rem;text-decoration:none;color:#f4f8fb;transition:all .25s ease}.sidebar-menu a:hover,.sidebar-menu a.active,.sidebar-menu a.router-link-active{background:linear-gradient(90deg,rgba(0,212,255,.18),rgba(255,255,255,.05));box-shadow:0 8px 20px rgba(0,212,255,.12)}.sidebar-menu i{min-width:1rem;color:#00d4ff}.sidebar-menu li a.active i,.sidebar-menu li a.router-link-active i{color:#42e8ff;transform:scale(1.08)}.sidebar-menu li a:active{transform:scale(.98)}.sidebar.collapsed{width:90px}.sidebar.collapsed .brand,.sidebar.collapsed .menu-title{display:none}.sidebar.collapsed .sidebar-menu li a{justify-content:center;padding:14px}.sidebar.collapsed .sidebar-menu li a span{display:none}.sidebar.collapsed .sidebar-header{justify-content:center}.sidebar.collapsed .logo{margin:0}@media(max-width:992px){.sidebar{width:240px}.brand h3{font-size:20px}.brand span{font-size:12px}.sidebar-menu li a{padding:12px 16px;font-size:14px}.logo{width:52px;height:52px;font-size:22px}}@media(max-width:768px){.sidebar{position:fixed;left:-280px;top:0;width:280px;z-index:2000}.sidebar.show{left:0}}@media(max-width:576px){.sidebar{width:100%;left:-100%}.sidebar.show{left:0}.sidebar-header{padding:22px}.logo{width:50px;height:50px}.brand h3{font-size:19px}.brand span{font-size:12px}.sidebar-menu li a{font-size:15px;padding:14px 18px}}
+﻿/*=========================================================
+                    LEADPILOT CRM
+                  ADMIN SIDEBAR
+=========================================================*/
+
+:host {
+
+    display: block;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+/*=========================================================
+                        SIDEBAR
+=========================================================*/
+
+.sidebar {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071C36 0%,
+            #0B2C53 45%,
+            #071C36 100%
+        );
+
+    color: #FFFFFF;
+
+}
+
+/*=========================================================
+                    CUSTOM SCROLLBAR
+=========================================================*/
+
+.sidebar::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+
+    background: #00D4FF;
+    border-radius: 50px;
+
+}
+
+.sidebar::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+/*=========================================================
+                    HEADER
+=========================================================*/
+
+.sidebar-header {
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 22px;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+}
+
+.logo {
+
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00D4FF,
+            #2563EB
+        );
+
+    color: #FFFFFF;
+
+    font-size: 24px;
+
+    box-shadow:
+        0 10px 25px rgba(0,212,255,.30);
+
+}
+
+.brand {
+
+    flex: 1;
+
+}
+
+.brand h3 {
+
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 22px;
+    font-weight: 700;
+
+}
+
+.brand span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: #A9CDE8;
+
+}
+
+/*=========================================================
+                        MENU
+=========================================================*/
+
+.sidebar-menu {
+
+    flex: 1;
+
+    margin: 0;
+    padding: 18px 0;
+
+    list-style: none;
+
+}
+
+.sidebar-menu li {
+
+    list-style: none;
+
+}
+
+/*=========================================================
+                    SECTION TITLE
+=========================================================*/
+
+.menu-title {
+
+    padding: 18px 24px 8px;
+
+    color: #7FAFD3;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+/*=========================================================
+                    MENU LINKS
+=========================================================*/
+
+.sidebar-menu a {
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin: 6px 12px;
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: #EAF5FF;
+
+    transition: all .25s ease;
+
+}
+
+.sidebar-menu a i {
+
+    min-width: 24px;
+
+    font-size: 20px;
+
+    color: #00D4FF;
+
+    transition: .25s;
+
+}
+
+.sidebar-menu a span {
+
+    font-size: 15px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+}
+
+/*=========================================================
+                        HOVER
+=========================================================*/
+
+.sidebar-menu a:hover {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,212,255,.18),
+            rgba(255,255,255,.05)
+        );
+
+    transform: translateX(6px);
+
+}
+
+.sidebar-menu a:hover i {
+
+    color: #42E8FF;
+
+}
+
+/*=========================================================
+                        ACTIVE
+=========================================================*/
+
+.sidebar-menu a.active,
+.sidebar-menu a.router-link-active {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,212,255,.25),
+            rgba(255,255,255,.08)
+        );
+
+    box-shadow:
+        0 10px 25px rgba(0,212,255,.18);
+
+}
+
+.sidebar-menu a.active i,
+.sidebar-menu a.router-link-active i {
+
+    color: #42E8FF;
+
+}
+
+/*=========================================================
+                    TABLET
+=========================================================*/
+
+@media (max-width:768px) {
+
+    .sidebar-header {
+
+        padding: 20px;
+
+    }
+
+    .logo {
+
+        width: 52px;
+        height: 52px;
+
+        font-size: 22px;
+
+    }
+
+    .brand h3 {
+
+        font-size: 20px;
+
+    }
+
+    .brand span {
+
+        font-size: 12px;
+
+    }
+
+    .sidebar-menu a {
+
+        margin: 6px 10px;
+        padding: 15px 18px;
+
+    }
+
+}
+
+/*=========================================================
+                    MOBILE
+=========================================================*/
+
+@media (max-width:576px) {
+
+    .sidebar-header {
+
+        padding: 18px;
+
+    }
+
+    .logo {
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 20px;
+
+    }
+
+    .brand h3 {
+
+        font-size: 18px;
+
+    }
+
+    .brand span {
+
+        font-size: 11px;
+
+    }
+
+    .sidebar-menu a {
+
+        margin: 6px 8px;
+        padding: 14px 16px;
+
+    }
+
+    .sidebar-menu a span {
+
+        font-size: 14px;
+
+    }
+
+}

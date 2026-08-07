@@ -1,35 +1,33 @@
 /*=========================================================
                     LEADPILOT CRM
-                ADMIN NAVBAR
-==========================================================*/
+                  ADMIN NAVBAR
+=========================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :host{
-
     display:block;
-
     width:100%;
-
     font-family:'Poppins',sans-serif;
-
 }
 
 /*=========================================================
-                    NAVBAR
-==========================================================*/
+                        NAVBAR
+=========================================================*/
 
 .admin-navbar{
 
-    height:72px;
+    position:relative;
+    overflow:hidden;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
+    gap:20px;
 
-    padding:0 28px;
+    height:72px;
+
+    padding:0 24px;
 
     background:linear-gradient(
         135deg,
@@ -37,20 +35,18 @@
         #0B2C52
     );
 
+    color:#fff;
+
     border-bottom:1px solid rgba(0,212,255,.18);
 
     box-shadow:
         0 8px 24px rgba(0,0,0,.18);
 
-    color:#FFFFFF;
-
-    position:relative;
-
-    overflow:hidden;
-
 }
 
-/* Animated Shine */
+/*=========================================================
+                     NAVBAR SHINE
+=========================================================*/
 
 .admin-navbar::before{
 
@@ -59,11 +55,9 @@
     position:absolute;
 
     top:-120%;
-
     left:-60%;
 
     width:40%;
-
     height:320%;
 
     background:rgba(255,255,255,.08);
@@ -76,53 +70,43 @@
 
 @keyframes shine{
 
-    from{
+    from{ left:-60%; }
 
-        left:-60%;
-
-    }
-
-    to{
-
-        left:170%;
-
-    }
+    to{ left:170%; }
 
 }
 
 /*=========================================================
-                    LEFT
-==========================================================*/
+                      LEFT
+=========================================================*/
 
 .navbar-left{
 
     display:flex;
-
     align-items:center;
-
     gap:16px;
+
+    flex-shrink:0;
 
 }
 
 /*=========================================================
-                    MENU BUTTON
-==========================================================*/
+                     MENU BUTTON
+=========================================================*/
 
 .menu-btn{
 
     width:46px;
-
     height:46px;
 
     border:none;
-
     border-radius:12px;
+
+    cursor:pointer;
 
     background:rgba(255,255,255,.08);
 
-    color:#FFFFFF;
-
-    cursor:pointer;
+    color:#fff;
 
     transition:.35s;
 
@@ -147,22 +131,19 @@
 }
 
 /*=========================================================
-                    LOGO
-==========================================================*/
+                         LOGO
+=========================================================*/
 
 .logo{
 
     width:50px;
-
     height:50px;
 
-    border-radius:14px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
+
+    border-radius:14px;
 
     background:linear-gradient(
         135deg,
@@ -170,46 +151,52 @@
         #009BFF
     );
 
-    color:#FFFFFF;
+    color:#fff;
 
     font-size:24px;
 
-    box-shadow:0 0 18px rgba(0,212,255,.45);
+    position:relative;
+    overflow:hidden;
 
     animation:logoGlow 3s infinite;
 
 }
 
+.logo::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+    left:-80%;
+
+    width:40%;
+    height:300%;
+
+    background:rgba(255,255,255,.30);
+
+    transform:rotate(25deg);
+
+    animation:buttonShine 5s linear infinite;
+
+}
+
 @keyframes logoGlow{
 
-    0%{
-
-        box-shadow:0 0 10px rgba(0,212,255,.35);
-
-    }
-
-    50%{
-
-        box-shadow:0 0 24px rgba(0,212,255,.7);
-
-    }
-
-    100%{
-
-        box-shadow:0 0 10px rgba(0,212,255,.35);
-
-    }
+    0%{box-shadow:0 0 10px rgba(0,212,255,.35);}
+    50%{box-shadow:0 0 24px rgba(0,212,255,.70);}
+    100%{box-shadow:0 0 10px rgba(0,212,255,.35);}
 
 }
 
 /*=========================================================
-                    BRAND
-==========================================================*/
+                         BRAND
+=========================================================*/
 
 .brand{
 
     display:flex;
-
     flex-direction:column;
 
 }
@@ -218,11 +205,9 @@
 
     margin:0;
 
-    font-size:21px;
+    font-size:20px;
 
     font-weight:700;
-
-    color:#FFFFFF;
 
 }
 
@@ -235,42 +220,35 @@
 }
 
 /*=========================================================
-                    CENTER
-==========================================================*/
+                    SEARCH AREA
+=========================================================*/
 
-.navbar-center{
+.navbar-search{
 
     flex:1;
 
     display:flex;
-
     justify-content:center;
 
-    padding:0 35px;
+    min-width:120px;
 
 }
 
-/*=========================================================
-                    SEARCH
-==========================================================*/
-
 .search-box{
 
-    width:430px;
-
-    max-width:100%;
+    width:100%;
+    max-width:420px;
 
     display:flex;
-
     align-items:center;
+
+    padding:0 18px;
+
+    border-radius:40px;
 
     background:rgba(255,255,255,.08);
 
     border:1px solid rgba(255,255,255,.08);
-
-    border-radius:40px;
-
-    padding:0 18px;
 
     transition:.35s;
 
@@ -288,9 +266,7 @@
 
     color:#00D4FF;
 
-    font-size:18px;
-
-    margin-right:12px;
+    margin-right:10px;
 
 }
 
@@ -304,9 +280,9 @@
 
     outline:none;
 
-    background:none;
+    background:transparent;
 
-    color:#FFFFFF;
+    color:#fff;
 
     font-size:15px;
 
@@ -319,80 +295,71 @@
 }
 
 /*=========================================================
-                    RIGHT
-==========================================================*/
+                     RIGHT
+=========================================================*/
 
 .navbar-right{
 
     display:flex;
-
     align-items:center;
+    gap:10px;
 
-    gap:14px;
+    flex-shrink:0;
 
 }
 
 /*=========================================================
-                THEME BUTTON
-==========================================================*/
+                    ICON BUTTONS
+=========================================================*/
 
+.icon-btn,
 .theme-btn{
 
     width:46px;
-
     height:46px;
 
     border:none;
-
     border-radius:50%;
 
     cursor:pointer;
 
     background:rgba(255,255,255,.08);
 
-    color:#FFFFFF;
+    color:#fff;
 
     transition:.35s;
 
 }
 
-.theme-btn i{
-
-    font-size:18px;
-
-}
-
+.icon-btn:hover,
 .theme-btn:hover{
 
     background:#00D4FF;
 
     color:#071C36;
 
-    transform:rotate(180deg);
+    transform:translateY(-2px);
 
-    box-shadow:0 0 18px rgba(0,212,255,.5);
+    box-shadow:0 0 18px rgba(0,212,255,.45);
 
 }
 
 /*=========================================================
                     LOGOUT
-==========================================================*/
+=========================================================*/
 
 .logout-btn{
 
     display:flex;
-
     align-items:center;
-
     gap:10px;
 
-    border:none;
+    padding:10px 20px;
 
+    border:none;
     border-radius:40px;
 
     cursor:pointer;
-
-    padding:11px 22px;
 
     background:linear-gradient(
         135deg,
@@ -400,17 +367,34 @@
         #008FFF
     );
 
-    color:#FFFFFF;
+    color:#fff;
 
     font-weight:600;
 
     transition:.35s;
 
+    position:relative;
+    overflow:hidden;
+
 }
 
-.logout-btn i{
+.logout-btn::after{
 
-    font-size:18px;
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+    left:-80%;
+
+    width:40%;
+    height:300%;
+
+    background:rgba(255,255,255,.30);
+
+    transform:rotate(25deg);
+
+    animation:buttonShine 5s linear infinite;
 
 }
 
@@ -422,69 +406,19 @@
 
 }
 
-/*=========================================================
-                BUTTON SHINE
-==========================================================*/
-
-.logout-btn,
-.logo{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.logout-btn::after,
-.logo::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:-120%;
-
-    left:-80%;
-
-    width:40%;
-
-    height:300%;
-
-    background:rgba(255,255,255,.30);
-
-    transform:rotate(25deg);
-
-    animation:buttonShine 5s linear infinite;
-
-}
-
 @keyframes buttonShine{
 
-    from{
+    from{ left:-80%; }
 
-        left:-80%;
-
-    }
-
-    to{
-
-        left:180%;
-
-    }
+    to{ left:180%; }
 
 }
 
 /*=========================================================
-                RESPONSIVE
-==========================================================*/
+                    TABLET
+=========================================================*/
 
 @media(max-width:992px){
-
-.search-box{
-
-    width:280px;
-
-}
 
 .brand span{
 
@@ -492,13 +426,44 @@
 
 }
 
+.search-box{
+
+    max-width:260px;
+
 }
+
+.logout-text{
+
+    display:none;
+
+}
+
+.logout-btn{
+
+    width:46px;
+    height:46px;
+
+    padding:0;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+}
+
+}
+
+/*=========================================================
+                    MOBILE
+=========================================================*/
 
 @media(max-width:768px){
 
 .admin-navbar{
 
-    padding:0 15px;
+    padding:0 14px;
+
+    gap:10px;
 
 }
 
@@ -508,71 +473,108 @@
 
 }
 
-.search-box{
-
-    width:180px;
-
-}
-
-.logout-btn span{
-
-    display:none;
-
-}
-
-.logout-btn{
-
-    width:46px;
-
-    height:46px;
-
-    border-radius:50%;
-
-    justify-content:center;
-
-    padding:0;
-
-}
-
-}
-
-@media(max-width:576px){
-
-.search-box{
-
-    display:none;
-
-}
-
 .logo{
 
     width:42px;
-
     height:42px;
+    font-size:20px;
 
 }
 
 .menu-btn{
 
     width:42px;
-
     height:42px;
 
 }
 
-.theme-btn{
+.navbar-search{
+
+    flex:1;
+
+}
+
+.search-box{
+
+    max-width:none;
+
+    width:100%;
+
+}
+
+.search-box input{
+
+    font-size:14px;
+
+}
+
+.icon-btn,
+.theme-btn,
+.logout-btn{
 
     width:42px;
-
     height:42px;
+
+}
+
+.logout-text{
+
+    display:none;
 
 }
 
 .logout-btn{
 
-    width:42px;
+    padding:0;
 
-    height:42px;
+    justify-content:center;
+
+}
+
+}
+
+/*=========================================================
+                 EXTRA SMALL MOBILE
+=========================================================*/
+
+@media(max-width:480px){
+
+.admin-navbar{
+
+    flex-wrap:wrap;
+
+    height:auto;
+
+    padding:12px;
+
+}
+
+.navbar-left{
+
+    width:100%;
+
+    justify-content:space-between;
+
+}
+
+.navbar-search{
+
+    order:3;
+
+    width:100%;
+
+}
+
+.search-box{
+
+    width:100%;
+    margin-top:10px;
+
+}
+
+.navbar-right{
+
+    margin-left:auto;
 
 }
 

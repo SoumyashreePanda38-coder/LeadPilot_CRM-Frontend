@@ -1,34 +1,613 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-:host{display:block;min-height:100vh;font-family:Poppins,sans-serif}
-.login-container{min-height:100vh;display:flex;background:linear-gradient(135deg,#071b3b 0%,#103b73 45%,#155e9a 100%);position:relative;overflow:hidden}
-.login-container:before,.login-container:after{content:"";position:absolute;border-radius:50%;filter:blur(6px);animation:floaty 10s infinite alternate}
-.login-container:before{width:30rem;height:30rem;left:-9rem;top:-11rem;background:radial-gradient(circle,rgba(56,189,248,.28),transparent 70%)}
-.login-container:after{width:24rem;height:24rem;right:-8rem;bottom:-9rem;background:radial-gradient(circle,rgba(37,99,235,.2),transparent 70%)}
-.left-panel,.right-panel{flex:1;display:flex;align-items:center;justify-content:center;padding:2.2rem}
-.left-panel{color:#fff;position:relative}
-.left-content{max-width:32rem;z-index:1;animation:fade .7s ease}
-.brand .logo{width:4.5rem;height:4.5rem;border-radius:1.1rem;display:grid;place-items:center;background:linear-gradient(135deg,#06b6d4,#2563eb);font-size:1.6rem;font-weight:700;margin-bottom:1.2rem;box-shadow:0 15px 35px rgba(6,182,212,.35)}
-.brand h1{font-size:2.4rem;margin:0 0 .6rem}.brand p{margin:0;line-height:1.7;color:rgba(255,255,255,.82)}
-.features{display:grid;gap:.95rem;margin-top:1.4rem}.feature{display:flex;gap:.9rem;padding:1rem 1.1rem;border-radius:1rem;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08)}
-.feature i{width:2.8rem;height:2.8rem;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#06b6d4,#2563eb)}
-.feature h4{margin:0 0 .2rem;font-size:1rem}.feature p{margin:0;font-size:.95rem;color:rgba(255,255,255,.75)}
-.copyright{margin-top:1.3rem;font-size:.9rem;color:rgba(255,255,255,.7)}
-.login-card{width:min(26rem,100%);padding:2rem;border-radius:1.35rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 45px rgba(2,12,27,.3);backdrop-filter:blur(14px);animation:fade .8s ease}
-.welcome{text-align:center;margin-bottom:1.3rem}.welcome h2{margin:0 0 .4rem;font-size:1.65rem}.welcome p{margin:0;color:rgba(255,255,255,.75)}
-.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.4rem;font-size:.92rem;font-weight:600}
-.input-box{display:flex;align-items:center;height:3.1rem;padding:0 .9rem;border-radius:.95rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
-.input-box:focus-within{border-color:#38bdf8;box-shadow:0 0 0 2px rgba(56,189,248,.16)}
-.input-box input{flex:1;height:100%;margin-left:.7rem;border:0;background:transparent;color:#fff;outline:0}
-.input-box input::placeholder{color:rgba(255,255,255,.55)}
-.password-toggle{border:0;background:0;color:#8be9fd;cursor:pointer}.password-toggle:hover{color:#fff}
-.options{display:flex;justify-content:space-between;align-items:center;margin:1.05rem 0 1.15rem;font-size:.92rem}.remember{display:flex;align-items:center;gap:.35rem}.remember input{accent-color:#38bdf8}.options a{color:#7dd3fc;text-decoration:none}.options a:hover{color:#fff}
-.alert{margin-bottom:.9rem;padding:.75rem .85rem;border-radius:.8rem;font-size:.92rem}.alert-danger{background:rgba(239,68,68,.16);color:#fecaca;border:1px solid rgba(239,68,68,.25)}
-.login-btn{width:100%;height:3.1rem;border:0;border-radius:.95rem;background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;font-weight:600;cursor:pointer;box-shadow:0 10px 25px rgba(37,99,235,.35)}
-.login-btn:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(37,99,235,.5)}
-.divider{display:flex;align-items:center;justify-content:center;margin:1rem 0;color:rgba(255,255,255,.6)}
-.divider:before,.divider:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.16)}
-.divider span{padding:0 .6rem;font-size:.82rem}
-.footer-links{display:flex;gap:.55rem;justify-content:center;font-size:.86rem}.footer-links a{color:#b6e6ff;text-decoration:none}.footer-links span{color:rgba(255,255,255,.5)}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(28px)}}
-@media (max-width:900px){.left-panel{display:none}.right-panel{flex:1}}
+
+:host{
+    display:block;
+    min-height:100vh;
+    font-family:Poppins,sans-serif;
+}
+
+/* =======================================================
+   LOGIN BACKGROUND
+======================================================= */
+
+.login-container{
+    min-height:100vh;
+    display:flex;
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(56,189,248,.28),
+    transparent 180px),
+
+    linear-gradient(
+        135deg,
+        #071b3b 0%,
+        #103b73 45%,
+        #155e9a 100%
+    );
+}
+
+/* Mouse Shine */
+
+.login-container::before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+    background:
+    radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%),
+    rgba(255,255,255,.18),
+    transparent 120px);
+
+    transition:
+    background-position .08s linear;
+
+}
+
+/* Floating Background */
+
+.login-container::after{
+
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+
+    top:-180px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(56,189,248,.18),
+    transparent 70%);
+
+    animation:floaty 10s ease-in-out infinite alternate;
+
+}
+
+/* =======================================================
+   PANELS
+======================================================= */
+
+.left-panel,
+.right-panel{
+
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:2.2rem;
+    position:relative;
+    z-index:2;
+
+}
+
+.left-panel{
+
+    color:#fff;
+
+}
+
+.left-content{
+
+    max-width:32rem;
+    animation:fade .7s ease;
+
+}
+
+/* =======================================================
+   LOGO
+======================================================= */
+
+.brand .logo{
+
+    width:4.5rem;
+    height:4.5rem;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:1rem;
+
+    background:
+    linear-gradient(
+    135deg,
+    #06b6d4,
+    #2563eb);
+
+    font-size:1.6rem;
+    font-weight:700;
+
+    margin-bottom:1rem;
+
+    box-shadow:
+    0 15px 35px rgba(6,182,212,.35);
+
+}
+
+.brand h1{
+
+    margin:0 0 .6rem;
+    font-size:2.4rem;
+
+}
+
+.brand p{
+
+    margin:0;
+    line-height:1.7;
+    color:rgba(255,255,255,.82);
+
+}
+
+/* =======================================================
+   FEATURES
+======================================================= */
+
+.features{
+
+    display:grid;
+    gap:1rem;
+    margin-top:1.5rem;
+
+}
+
+.feature{
+
+    display:flex;
+    gap:1rem;
+
+    padding:1rem;
+
+    border-radius:1rem;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.3s;
+
+}
+
+.feature:hover{
+
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,.12);
+
+}
+
+.feature i{
+
+    width:2.8rem;
+    height:2.8rem;
+
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    #06b6d4,
+    #2563eb);
+
+}
+
+.feature h4{
+
+    margin:0 0 .25rem;
+
+}
+
+.feature p{
+
+    margin:0;
+    color:rgba(255,255,255,.75);
+
+}
+
+/* =======================================================
+   LOGIN CARD
+======================================================= */
+/* ======================================
+   PREMIUM GLASS SHINE EFFECT
+====================================== */
+
+.login-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:min(26rem,100%);
+
+    padding:2rem;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    backdrop-filter:blur(16px);
+
+    -webkit-backdrop-filter:blur(16px);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.12);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+
+}
+.login-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-140%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.75),
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    transition:left .8s ease;
+
+    pointer-events:none;
+
+}
+.login-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 28px 60px rgba(6,182,212,.25),
+        0 15px 35px rgba(37,99,235,.30);
+
+}
+.login-card:hover::before{
+
+    left:170%;
+
+}
+.login-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    pointer-events:none;
+
+}
+
+/* =======================================================
+   WELCOME
+======================================================= */
+
+.welcome{
+
+    text-align:center;
+    margin-bottom:1.5rem;
+
+}
+
+.welcome h2{
+
+    margin-bottom:.4rem;
+
+}
+
+.welcome p{
+
+    color:rgba(255,255,255,.75);
+
+}
+
+/* =======================================================
+   FORM
+======================================================= */
+
+.form-group{
+
+    margin-bottom:1rem;
+
+}
+
+.form-group label{
+
+    display:block;
+    margin-bottom:.45rem;
+    font-weight:600;
+
+}
+
+.input-box{
+
+    display:flex;
+    align-items:center;
+
+    height:52px;
+
+    border-radius:15px;
+
+    padding:0 .9rem;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    transition:.3s;
+
+}
+
+.input-box:focus-within{
+
+    border-color:#38bdf8;
+
+    box-shadow:
+    0 0 0 3px rgba(56,189,248,.15);
+
+}
+
+.input-box input{
+
+    flex:1;
+
+    height:100%;
+
+    margin-left:.7rem;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    color:#fff;
+
+}
+
+.input-box input::placeholder{
+
+    color:rgba(255,255,255,.55);
+
+}
+
+.password-toggle{
+
+    border:none;
+    background:none;
+    color:#8be9fd;
+    cursor:pointer;
+
+}
+
+.password-toggle:hover{
+
+    color:#fff;
+
+}
+
+.options{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin:1rem 0;
+
+}
+
+.options a{
+
+    color:#7dd3fc;
+    text-decoration:none;
+
+}
+
+.options a:hover{
+
+    color:#fff;
+
+}
+
+/* =======================================================
+   BUTTON
+======================================================= */
+
+.login-btn{
+
+    width:100%;
+    height:52px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-weight:600;
+
+    background:
+    linear-gradient(
+    135deg,
+    #38bdf8,
+    #2563eb);
+
+    transition:.3s;
+
+    box-shadow:
+    0 15px 30px rgba(37,99,235,.35);
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 20px 40px rgba(37,99,235,.45);
+
+}
+
+/* =======================================================
+   ALERT
+======================================================= */
+
+.alert{
+
+    margin-bottom:1rem;
+
+}
+
+.alert-danger{
+
+    background:rgba(239,68,68,.16);
+
+    color:#fecaca;
+
+    border:1px solid rgba(239,68,68,.25);
+
+}
+
+/* =======================================================
+   FOOTER
+======================================================= */
+
+.divider{
+
+    margin:1.3rem 0;
+
+    display:flex;
+    justify-content:center;
+
+    color:rgba(255,255,255,.65);
+
+}
+
+.footer-links{
+
+    display:flex;
+    justify-content:center;
+    gap:.7rem;
+
+}
+
+.footer-links a{
+
+    color:#b6e6ff;
+
+    text-decoration:none;
+
+}
+
+.footer-links span{
+
+    color:rgba(255,255,255,.5);
+
+}
+
+/* =======================================================
+   COPYRIGHT
+======================================================= */
+
+.copyright{
+
+    margin-top:1.5rem;
+
+    color:rgba(255,255,255,.7);
+
+}
+
+/* =======================================================
+   ANIMATIONS
+======================================================= */
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:none;
+
+    }
+
+}
+
+@keyframes floaty{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(35px);
+
+    }
+
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media(max-width:900px){
+
+    .left-panel{
+
+        display:none;
+
+    }
+
+    .right-panel{
+
+        flex:1;
+
+    }
+
+}

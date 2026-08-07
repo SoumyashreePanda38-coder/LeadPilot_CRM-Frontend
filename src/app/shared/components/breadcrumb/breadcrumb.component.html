@@ -1,1 +1,45 @@
-<p>breadcrumb works!</p>
+<div class="breadcrumb-wrapper">
+
+    <div class="breadcrumb-left">
+
+        <i class="bi bi-house-door-fill home-icon"></i>
+
+        <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
+
+            <span class="separator" *ngIf="!last">
+                /
+            </span>
+
+            <a
+                *ngIf="!last"
+                [routerLink]="breadcrumb.url">
+
+                {{ breadcrumb.label }}
+
+            </a>
+
+            <span
+                *ngIf="last"
+                class="active">
+
+                {{ breadcrumb.label }}
+
+            </span>
+
+        </ng-container>
+
+    </div>
+
+    <div class="breadcrumb-right">
+
+        <i class="bi bi-calendar3"></i>
+
+        <span>
+
+            {{ today | date:'EEEE, dd MMM yyyy' }}
+
+        </span>
+
+    </div>
+
+</div>
