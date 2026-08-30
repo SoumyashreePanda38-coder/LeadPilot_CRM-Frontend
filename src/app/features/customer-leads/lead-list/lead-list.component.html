@@ -1,1 +1,913 @@
-<p>lead-list works!</p>
+<div class="lead-page">
+
+  <!-- ====================================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="header-icon">
+        <i class="fas fa-users"></i>
+      </div>
+
+      <div class="header-text">
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          CUSTOMER LEAD MANAGEMENT
+        </div>
+
+        <h1>Customer Leads</h1>
+
+        <p>
+          Manage, track and organize your customer leads from one place.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-lead-btn"
+      (click)="addLead()">
+
+      <span class="btn-icon">
+        <i class="fas fa-plus"></i>
+      </span>
+
+      <span>Add New Lead</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- ALERTS -->
+  <!-- ====================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage">
+
+    <i class="fas fa-check-circle"></i>
+
+    <span>{{ successMessage }}</span>
+
+    <button
+      type="button"
+      (click)="successMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage">
+
+    <i class="fas fa-exclamation-triangle"></i>
+
+    <span>{{ errorMessage }}</span>
+
+    <button
+      type="button"
+      (click)="errorMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- STATISTICS -->
+  <!-- ====================================================== -->
+
+  <div class="statistics-grid">
+
+    <!-- TOTAL -->
+
+    <div class="stat-card total-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>Total Leads</span>
+
+        <strong>
+          {{ getTotalCount() }}
+        </strong>
+
+        <small>All customer leads</small>
+
+      </div>
+
+    </div>
+
+
+    <!-- NEW -->
+
+    <div class="stat-card new-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-sparkles"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>New Leads</span>
+
+        <strong>
+          {{ getNewCount() }}
+        </strong>
+
+        <small>Recently created</small>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOLLOW UP -->
+
+    <div class="stat-card follow-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-clock"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>Follow-ups</span>
+
+        <strong>
+          {{ getFollowUpCount() }}
+        </strong>
+
+        <small>Needs attention</small>
+
+      </div>
+
+    </div>
+
+
+    <!-- HOT -->
+
+    <div class="stat-card hot-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-fire"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>Hot Leads</span>
+
+        <strong>
+          {{ getHotCount() }}
+        </strong>
+
+        <small>High priority</small>
+
+      </div>
+
+    </div>
+
+
+    <!-- WON -->
+
+    <div class="stat-card won-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-trophy"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>Won</span>
+
+        <strong>
+          {{ getWonCount() }}
+        </strong>
+
+        <small>Closed successfully</small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- FILTER CARD -->
+  <!-- ====================================================== -->
+
+  <div class="filter-card">
+
+    <!-- FILTER HEADER -->
+
+    <div class="filter-header">
+
+      <div class="filter-title">
+
+        <div class="filter-icon">
+          <i class="fas fa-sliders-h"></i>
+        </div>
+
+        <div>
+
+          <h2>Search & Filter</h2>
+
+          <p>
+            Find leads quickly using the available filters.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="clear-filter-btn"
+        (click)="clearAllFilters()">
+
+        <i class="fas fa-undo"></i>
+        Clear Filters
+
+      </button>
+
+    </div>
+
+
+    <!-- FILTER BODY -->
+
+    <div class="filter-body">
+
+      <!-- SEARCH -->
+
+      <div class="search-group">
+
+        <label>
+          <i class="fas fa-search"></i>
+          Search Leads
+        </label>
+
+        <div class="search-box">
+
+          <i class="fas fa-search search-icon"></i>
+
+          <input
+            type="text"
+            [(ngModel)]="searchKeyword"
+            (input)="onSearch()"
+            placeholder="Search by name, phone, email, city..."
+          />
+
+          <button
+            *ngIf="searchKeyword"
+            type="button"
+            class="clear-search"
+            (click)="clearSearch()">
+
+            <i class="fas fa-times"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="filter-group">
+
+        <label for="lead-status-filter">
+          <i class="fas fa-circle-half-stroke"></i>
+          Status
+        </label>
+
+        <select
+          id="lead-status-filter"
+          [(ngModel)]="selectedStatus"
+          (change)="onFilterChange()">
+
+          <option value="ALL">All Statuses</option>
+
+          <option
+            *ngFor="let status of [
+              'NEW',
+              'CONTACTED',
+              'FOLLOW_UP',
+              'QUALIFIED',
+              'PROPOSAL_SENT',
+              'NEGOTIATION',
+              'WON',
+              'LOST',
+              'CLOSED'
+            ]"
+            [value]="status">
+
+            {{ status.replace('_', ' ') }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PRIORITY -->
+
+      <div class="filter-group">
+
+        <label for="lead-priority-filter">
+          <i class="fas fa-bolt"></i>
+          Priority
+        </label>
+
+        <select
+          id="lead-priority-filter"
+          [(ngModel)]="selectedPriority"
+          (change)="onFilterChange()">
+
+          <option value="ALL">
+            All Priorities
+          </option>
+
+          <option value="HOT">
+            HOT
+          </option>
+
+          <option value="WARM">
+            WARM
+          </option>
+
+          <option value="COLD">
+            COLD
+          </option>
+
+          <option value="NOT_A_CUSTOMER">
+            NOT A CUSTOMER
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- CATEGORY -->
+
+      <div class="filter-group">
+
+        <label for="lead-category-filter">
+          <i class="fas fa-folder"></i>
+          Category
+        </label>
+
+        <select
+          id="lead-category-filter"
+          [(ngModel)]="selectedCategory"
+          (change)="onFilterChange()">
+
+          <option value="ALL">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let category of getCategories()"
+            [value]="category">
+
+            {{ category }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- SOURCE -->
+
+      <div class="filter-group">
+
+        <label for="lead-source-filter">
+          <i class="fas fa-bullseye"></i>
+          Lead Source
+        </label>
+
+        <select
+          id="lead-source-filter"
+          [(ngModel)]="selectedSource"
+          (change)="onFilterChange()">
+
+          <option value="ALL">
+            All Sources
+          </option>
+
+          <option
+            *ngFor="let source of getSources()"
+            [value]="source">
+
+            {{ source }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- EXECUTIVE -->
+
+      <div class="filter-group">
+
+        <label for="lead-executive-filter">
+          <i class="fas fa-user-tie"></i>
+          Executive
+        </label>
+
+        <select
+          id="lead-executive-filter"
+          [(ngModel)]="selectedExecutive"
+          (change)="onFilterChange()">
+
+          <option value="ALL">
+            All Executives
+          </option>
+
+          <option
+            *ngFor="let executive of getExecutives()"
+            [value]="executive">
+
+            {{ executive }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- LOADING -->
+  <!-- ====================================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="prism-loader">
+
+      <div class="loader-ring"></div>
+
+      <div class="loader-core">
+        <i class="fas fa-users"></i>
+      </div>
+
+    </div>
+
+    <h3>Loading Customer Leads</h3>
+
+    <p>Please wait while we retrieve your lead data...</p>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- EMPTY STATE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="empty-state"
+    *ngIf="!isLoading && filteredLeads.length === 0">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-users-slash"></i>
+
+    </div>
+
+    <h2>No Customer Leads Found</h2>
+
+    <p *ngIf="
+      searchKeyword ||
+      selectedStatus !== 'ALL' ||
+      selectedPriority !== 'ALL' ||
+      selectedCategory !== 'ALL' ||
+      selectedSource !== 'ALL' ||
+      selectedExecutive !== 'ALL'
+    ">
+
+      No leads match your current search or filter criteria.
+
+    </p>
+
+    <p *ngIf="
+      !searchKeyword &&
+      selectedStatus === 'ALL' &&
+      selectedPriority === 'ALL' &&
+      selectedCategory === 'ALL' &&
+      selectedSource === 'ALL' &&
+      selectedExecutive === 'ALL'
+    ">
+
+      You haven't created any customer leads yet.
+
+    </p>
+
+
+    <button
+      type="button"
+      class="empty-add-btn"
+      (click)="addLead()">
+
+      <i class="fas fa-plus"></i>
+      Add Your First Lead
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- LEAD TABLE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="lead-table-card"
+    *ngIf="!isLoading && filteredLeads.length > 0">
+
+
+    <!-- TABLE HEADER -->
+
+    <div class="table-header">
+
+      <div class="table-heading">
+
+        <div class="table-title-icon">
+          <i class="fas fa-address-book"></i>
+        </div>
+
+        <div>
+
+          <h2>All Customer Leads</h2>
+
+          <p>
+            Showing
+            <strong>{{ filteredLeads.length }}</strong>
+            of
+            <strong>{{ leads.length }}</strong>
+            leads
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="loadLeads()">
+
+        <i class="fas fa-sync-alt"></i>
+        Refresh
+
+      </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>#</th>
+
+            <th>Customer</th>
+
+            <th>Contact</th>
+
+            <th>Category</th>
+
+            <th>Source</th>
+
+            <th>Status</th>
+
+            <th>Priority</th>
+
+            <th>Executive</th>
+
+            <th>Created</th>
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let lead of filteredLeads;
+              let i = index
+            "
+            class="lead-row">
+
+
+            <!-- NUMBER -->
+
+            <td>
+
+              <div class="row-number">
+
+                {{ i + 1 }}
+
+              </div>
+
+            </td>
+
+
+            <!-- CUSTOMER -->
+
+            <td>
+
+              <div class="customer-cell">
+
+                <div class="customer-avatar">
+
+                  <span>
+                    {{ lead.fullName?.charAt(0)?.toUpperCase() || '?' }}
+                  </span>
+
+                  <div class="avatar-glow"></div>
+
+                </div>
+
+
+                <div class="customer-details">
+
+                  <strong>
+                    {{ lead.fullName }}
+                  </strong>
+
+                  <small>
+                    Lead #{{ lead.leadId }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- CONTACT -->
+
+            <td>
+
+              <div class="contact-cell">
+
+                <span *ngIf="lead.phoneNumber">
+
+                  <i class="fas fa-phone"></i>
+
+                  {{ lead.phoneNumber }}
+
+                </span>
+
+                <span *ngIf="lead.email">
+
+                  <i class="fas fa-envelope"></i>
+
+                  {{ lead.email }}
+
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- CATEGORY -->
+
+            <td>
+
+              <div class="category-cell">
+
+                <span class="category-name">
+                  {{ lead.categoryName || '—' }}
+                </span>
+
+                <small
+                  *ngIf="lead.subCategoryName">
+
+                  {{ lead.subCategoryName }}
+
+                </small>
+
+              </div>
+
+            </td>
+
+
+            <!-- SOURCE -->
+
+            <td>
+
+              <span class="source-chip">
+
+                <i class="fas fa-bullseye"></i>
+
+                {{ lead.sourceName || '—' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'status-new': lead.leadStatus === 'NEW',
+                  'status-contacted': lead.leadStatus === 'CONTACTED',
+                  'status-follow': lead.leadStatus === 'FOLLOW_UP',
+                  'status-qualified': lead.leadStatus === 'QUALIFIED',
+                  'status-proposal': lead.leadStatus === 'PROPOSAL_SENT',
+                  'status-negotiation': lead.leadStatus === 'NEGOTIATION',
+                  'status-won': lead.leadStatus === 'WON',
+                  'status-lost': lead.leadStatus === 'LOST',
+                  'status-closed': lead.leadStatus === 'CLOSED'
+                }">
+
+                <span class="status-dot"></span>
+
+                {{ lead.leadStatus?.replace('_', ' ') }}
+
+              </span>
+
+            </td>
+
+
+            <!-- PRIORITY -->
+
+            <td>
+
+              <span
+                class="priority-badge"
+                [ngClass]="{
+                  'priority-hot': lead.leadPriority === 'HOT',
+                  'priority-warm': lead.leadPriority === 'WARM',
+                  'priority-cold': lead.leadPriority === 'COLD',
+                  'priority-not-customer':
+                    lead.leadPriority === 'NOT_A_CUSTOMER'
+                }">
+
+                <i
+                  class="fas"
+                  [ngClass]="{
+                    'fa-fire': lead.leadPriority === 'HOT',
+                    'fa-temperature-half': lead.leadPriority === 'WARM',
+                    'fa-snowflake': lead.leadPriority === 'COLD',
+                    'fa-user-slash':
+                      lead.leadPriority === 'NOT_A_CUSTOMER'
+                  }">
+                </i>
+
+                {{ lead.leadPriority?.replace('_', ' ') }}
+
+              </span>
+
+            </td>
+
+
+            <!-- EXECUTIVE -->
+
+            <td>
+
+              <div class="executive-cell">
+
+                <div class="executive-avatar">
+
+                  <i class="fas fa-user-tie"></i>
+
+                </div>
+
+                <span>
+                  {{ lead.assignedUserName || 'Unassigned' }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- CREATED -->
+
+            <td>
+
+              <span class="created-date">
+
+                {{ lead.createdAt
+                  ? (lead.createdAt | date:'dd MMM yyyy')
+                  : '—'
+                }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td class="actions-column">
+
+              <div class="action-buttons">
+
+
+                <!-- VIEW -->
+
+                <button
+                  type="button"
+                  class="action-btn view-btn"
+                  title="View Lead"
+                  (click)="viewLead(lead)">
+
+                  <i class="fas fa-eye"></i>
+
+                </button>
+
+
+                <!-- EDIT -->
+
+                <button
+                  type="button"
+                  class="action-btn edit-btn"
+                  title="Edit Lead"
+                  (click)="editLead(lead)">
+
+                  <i class="fas fa-pen"></i>
+
+                </button>
+
+
+                <!-- DELETE -->
+
+                <button
+                  type="button"
+                  class="action-btn delete-btn"
+                  title="Delete Lead"
+                  (click)="deleteLead(lead)">
+
+                  <i class="fas fa-trash-alt"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

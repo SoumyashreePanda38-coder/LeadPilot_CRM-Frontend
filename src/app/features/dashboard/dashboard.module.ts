@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
@@ -21,6 +22,7 @@ import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.co
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
     DashboardRoutingModule
   ]
 })

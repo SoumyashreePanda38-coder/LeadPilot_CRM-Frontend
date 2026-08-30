@@ -35,7 +35,7 @@ export class AuthService {
   /**
    * Backend Base URL
    */
- private apiUrl = 'http://localhost:8080/api/auth';
+ private apiUrl = `${environment.apiUrl}/auth`;
   constructor(
     private http: HttpClient,
     private tokenService: TokenService

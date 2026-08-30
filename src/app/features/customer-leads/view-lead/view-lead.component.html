@@ -1,1 +1,568 @@
-<p>view-lead works!</p>
+
+<div class="view-lead-page">
+
+
+  <!-- ==========================================================
+       PAGE HEADER
+       ========================================================== -->
+
+  <div class="page-header">
+
+
+    <!-- BACK BUTTON -->
+
+    <button
+      type="button"
+      class="back-button"
+      (click)="goBack()"
+      title="Back to Customer Leads">
+
+      <i class="fas fa-arrow-left"></i>
+
+    </button>
+
+
+    <!-- ========================================================
+         LEAD IDENTITY
+         ======================================================== -->
+
+    <div class="lead-identity">
+
+
+      <!-- AVATAR -->
+
+      <div class="lead-avatar">
+
+        <span>
+          {{ lead?.fullName?.charAt(0)?.toUpperCase() || '?' }}
+        </span>
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <div class="lead-title">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="breadcrumb">
+
+          <span>
+            Customer Leads
+          </span>
+
+          <i class="fas fa-chevron-right"></i>
+
+          <span>
+            View Lead
+          </span>
+
+        </div>
+
+
+        <!-- LEAD NAME -->
+
+        <h1>
+          {{ lead?.fullName || 'Customer Lead' }}
+        </h1>
+
+
+        <!-- CONTACT INFORMATION -->
+
+        <div class="lead-meta">
+
+
+          <!-- PHONE -->
+
+          <span *ngIf="lead?.phoneNumber">
+
+            <i class="fas fa-phone"></i>
+
+            {{ lead?.phoneNumber }}
+
+          </span>
+
+
+          <!-- EMAIL -->
+
+          <span *ngIf="lead?.email">
+
+            <i class="fas fa-envelope"></i>
+
+            {{ lead?.email }}
+
+          </span>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         HEADER ACTIONS
+         ======================================================== -->
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="header-action edit-action"
+        (click)="editLead()">
+
+        <i class="fas fa-pen"></i>
+
+        <span>
+          Edit Lead
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ==========================================================
+       LOADING STATE
+       ========================================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="loading-spinner"></div>
+
+    <h3>
+      Loading Lead Details
+    </h3>
+
+    <p>
+      Please wait while we retrieve the customer information...
+    </p>
+
+  </div>
+
+
+
+  <!-- ==========================================================
+       ERROR STATE
+       ========================================================== -->
+
+  <div
+    class="error-message"
+    *ngIf="!isLoading && errorMessage">
+
+    <div class="error-icon">
+
+      <i class="fas fa-circle-exclamation"></i>
+
+    </div>
+
+
+    <div class="error-content">
+
+      <h3>
+        Unable to Load Lead
+      </h3>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="retry-button"
+      (click)="retryLoad()">
+
+      <i class="fas fa-rotate-right"></i>
+
+      Retry
+
+    </button>
+
+  </div>
+
+
+
+  <!-- ==========================================================
+       MAIN LEAD CONTENT
+       ========================================================== -->
+
+  <div
+    class="lead-content"
+    *ngIf="!isLoading && lead as currentLead">
+
+
+    <!-- ========================================================
+         LEAD SUMMARY CARD
+         ======================================================== -->
+
+    <section class="lead-summary-card">
+
+
+      <!-- CUSTOMER -->
+
+      <div class="summary-main">
+
+        <div class="summary-avatar">
+
+          <span>
+            {{ currentLead.fullName?.charAt(0)?.toUpperCase() || '?' }}
+          </span>
+
+        </div>
+
+
+        <div class="summary-info">
+
+          <h2>
+            {{ currentLead.fullName }}
+          </h2>
+
+          <span class="lead-number">
+            Lead #{{ currentLead.leadId }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           STATUS
+           ====================================================== -->
+
+      <div class="summary-item">
+
+        <span class="summary-label">
+          Status
+        </span>
+
+
+        <span
+          class="status-badge"
+          [ngClass]="getStatusClass()">
+
+          <span class="status-dot"></span>
+
+          {{ getLeadStatus() }}
+
+        </span>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           PRIORITY
+           ====================================================== -->
+
+      <div class="summary-item">
+
+        <span class="summary-label">
+          Priority
+        </span>
+
+
+        <span
+          class="priority-badge"
+          [ngClass]="getPriorityClass()">
+
+
+          <i
+            class="fas"
+            [ngClass]="{
+
+              'fa-fire':
+                currentLead.leadPriority === 'HOT',
+
+              'fa-temperature-half':
+                currentLead.leadPriority === 'WARM',
+
+              'fa-snowflake':
+                currentLead.leadPriority === 'COLD',
+
+              'fa-user-slash':
+                currentLead.leadPriority === 'NOT_A_CUSTOMER'
+
+            }">
+
+          </i>
+
+
+          {{ getLeadPriority() }}
+
+        </span>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           ASSIGNED EXECUTIVE
+           ====================================================== -->
+
+      <div class="summary-item">
+
+        <span class="summary-label">
+          Assigned Executive
+        </span>
+
+
+        <div class="assigned-user">
+
+
+          <div class="user-avatar">
+
+            <i class="fas fa-user-tie"></i>
+
+          </div>
+
+
+          <span>
+            {{ currentLead.assignedUserName || 'Unassigned' }}
+          </span>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         LEAD TABS
+         ======================================================== -->
+
+    <div class="lead-tabs">
+
+
+      <!-- ======================================================
+           OVERVIEW
+           ====================================================== -->
+
+      <button
+        type="button"
+        class="lead-tab"
+        [class.active]="activeSection === 'overview'"
+        (click)="setActiveTab('overview')">
+
+
+        <span class="tab-icon">
+
+          <i class="fas fa-id-card"></i>
+
+        </span>
+
+
+        <span class="tab-content">
+
+          <strong>
+            Overview
+          </strong>
+
+          <small>
+            Lead information
+          </small>
+
+        </span>
+
+      </button>
+
+
+
+      <!-- ======================================================
+           ACTIVITY
+           ====================================================== -->
+
+      <button
+        type="button"
+        class="lead-tab"
+        [class.active]="activeSection === 'activity'"
+        (click)="setActiveTab('activity')">
+
+
+        <span class="tab-icon">
+
+          <i class="fas fa-clock-rotate-left"></i>
+
+        </span>
+
+
+        <span class="tab-content">
+
+          <strong>
+            Activity
+          </strong>
+
+          <small>
+            Lead timeline
+          </small>
+
+        </span>
+
+      </button>
+
+
+
+      <!-- ======================================================
+           FOLLOW-UPS
+           ====================================================== -->
+
+      <button
+        type="button"
+        class="lead-tab"
+        [class.active]="activeSection === 'followups'"
+        (click)="setActiveTab('followups')">
+
+
+        <span class="tab-icon">
+
+          <i class="fas fa-calendar-check"></i>
+
+        </span>
+
+
+        <span class="tab-content">
+
+          <strong>
+            Follow-ups
+          </strong>
+
+          <small>
+            Scheduled follow-ups
+          </small>
+
+        </span>
+
+      </button>
+
+
+
+      <!-- ======================================================
+           NOTES
+           ====================================================== -->
+
+      <button
+        type="button"
+        class="lead-tab"
+        [class.active]="activeSection === 'notes'"
+        (click)="setActiveTab('notes')">
+
+
+        <span class="tab-icon">
+
+          <i class="fas fa-note-sticky"></i>
+
+        </span>
+
+
+        <span class="tab-content">
+
+          <strong>
+            Notes
+          </strong>
+
+          <small>
+            Customer notes
+          </small>
+
+        </span>
+
+      </button>
+
+
+    </div>
+
+
+
+    <!-- ========================================================
+         TAB CONTENT
+         ======================================================== -->
+
+    <div class="tab-panel">
+
+
+      <!-- ======================================================
+           OVERVIEW
+           ====================================================== -->
+
+      <div
+        class="tab-content-container"
+        *ngIf="activeSection === 'overview'">
+
+        <app-lead-overview
+          [lead]="currentLead">
+        </app-lead-overview>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           ACTIVITY
+           ====================================================== -->
+
+      <div
+        class="tab-content-container"
+        *ngIf="activeSection === 'activity'">
+
+        <app-lead-activity
+          [leadId]="currentLead.leadId">
+        </app-lead-activity>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           FOLLOW-UPS
+           ====================================================== -->
+
+      <div
+        class="tab-content-container"
+        *ngIf="activeSection === 'followups'">
+
+        <app-lead-follow-ups
+          [leadId]="currentLead.leadId">
+        </app-lead-follow-ups>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           NOTES
+           ====================================================== -->
+
+      <div
+        class="tab-content-container"
+        *ngIf="activeSection === 'notes'">
+
+        <app-lead-notes
+          [leadId]="currentLead.leadId">
+        </app-lead-notes>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+

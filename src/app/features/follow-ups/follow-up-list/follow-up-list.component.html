@@ -1,1 +1,1216 @@
-<p>follow-up-list works!</p>
+<div class="followup-list-page">
+
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-btn"
+        (click)="goBack()"
+        title="Go Back">
+
+        <i class="fas fa-arrow-left"></i>
+
+      </button>
+
+      <div class="header-icon">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+
+      <div class="header-content">
+
+        <span class="eyebrow">
+          FOLLOW-UP MANAGEMENT
+        </span>
+
+        <h1>Follow-Ups</h1>
+
+        <p>
+          Manage and track follow-up activities across all customer leads.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-followup-btn"
+      (click)="addFollowUp()">
+
+      <i class="fas fa-plus"></i>
+
+      <span>Add Follow-Up</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       SUCCESS MESSAGE
+  ========================================================== -->
+
+  <div
+    class="alert-message success-message"
+    *ngIf="successMessage">
+
+    <i class="fas fa-circle-check"></i>
+
+    <span>
+      {{ successMessage }}
+    </span>
+
+  </div>
+
+
+  <!-- =========================================================
+       ERROR MESSAGE
+  ========================================================== -->
+
+  <div
+    class="alert-message error-message"
+    *ngIf="errorMessage">
+
+    <i class="fas fa-circle-exclamation"></i>
+
+    <span>
+      {{ errorMessage }}
+    </span>
+
+  </div>
+
+
+  <!-- =========================================================
+       STATISTICS
+  ========================================================== -->
+
+  <div class="stats-grid">
+
+    <!-- TOTAL -->
+
+    <div
+      class="stat-card total-card"
+      (click)="clearFilters()">
+
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Total Follow-Ups
+        </span>
+
+        <strong>
+          {{ getTotalCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- SCHEDULED -->
+
+    <div
+      class="stat-card scheduled-card"
+      (click)="selectedStatus = 'SCHEDULED'; onStatusChange()">
+
+      <div class="stat-icon">
+        <i class="fas fa-clock"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Scheduled
+        </span>
+
+        <strong>
+          {{ getScheduledCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- COMPLETED -->
+
+    <div
+      class="stat-card completed-card"
+      (click)="selectedStatus = 'COMPLETED'; onStatusChange()">
+
+      <div class="stat-icon">
+        <i class="fas fa-circle-check"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Completed
+        </span>
+
+        <strong>
+          {{ getCompletedCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- MISSED -->
+
+    <div
+      class="stat-card missed-card"
+      (click)="selectedStatus = 'MISSED'; onStatusChange()">
+
+      <div class="stat-icon">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Missed
+        </span>
+
+        <strong>
+          {{ getMissedCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- RESCHEDULED -->
+
+    <div
+      class="stat-card rescheduled-card"
+      (click)="selectedStatus = 'RESCHEDULED'; onStatusChange()">
+
+      <div class="stat-icon">
+        <i class="fas fa-calendar-days"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Rescheduled
+        </span>
+
+        <strong>
+          {{ getRescheduledCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- CANCELLED -->
+
+    <div
+      class="stat-card cancelled-card"
+      (click)="selectedStatus = 'CANCELLED'; onStatusChange()">
+
+      <div class="stat-icon">
+        <i class="fas fa-circle-xmark"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Cancelled
+        </span>
+
+        <strong>
+          {{ getCancelledCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       FILTER PANEL
+  ========================================================== -->
+
+  <div class="filter-glass-card">
+
+    <div class="filter-header">
+
+      <div>
+
+        <span class="filter-eyebrow">
+          FOLLOW-UP PIPELINE
+        </span>
+
+        <h2>
+          Search & Filter
+        </h2>
+
+      </div>
+
+      <button
+        type="button"
+        class="clear-filter-btn"
+        (click)="clearFilters()">
+
+        <i class="fas fa-rotate-left"></i>
+
+        Clear Filters
+
+      </button>
+
+    </div>
+
+
+    <div class="filter-grid">
+
+      <!-- SEARCH -->
+
+      <div class="search-group">
+
+        <label>
+          Search Follow-Ups
+        </label>
+
+        <div class="search-wrapper">
+
+          <i class="fas fa-magnifying-glass"></i>
+
+          <input
+            type="text"
+            [(ngModel)]="searchKeyword"
+            name="searchKeyword"
+            placeholder="Search lead, subject, executive, location..."
+            (input)="onSearch()">
+
+          <button
+            type="button"
+            *ngIf="searchKeyword"
+            (click)="clearSearch()"
+            title="Clear Search">
+
+            <i class="fas fa-xmark"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="filter-group">
+
+        <label>
+          Status
+        </label>
+
+        <div class="select-wrapper">
+
+          <i class="fas fa-circle-dot"></i>
+
+          <select
+            [(ngModel)]="selectedStatus"
+            name="selectedStatus"
+            aria-label="Follow-Up Status"
+            (change)="onStatusChange()">
+
+            <option
+              *ngFor="let status of statusOptions"
+              [value]="status">
+
+              {{ status === 'ALL'
+                ? 'All Statuses'
+                : formatStatus($any(status)) }}
+
+            </option>
+
+          </select>
+
+          <i class="fas fa-chevron-down"></i>
+
+        </div>
+
+      </div>
+
+
+      <!-- TYPE -->
+
+      <div class="filter-group">
+
+        <label>
+          Follow-Up Type
+        </label>
+
+        <div class="select-wrapper">
+
+          <i class="fas fa-shapes"></i>
+
+          <select
+            [(ngModel)]="selectedType"
+            name="selectedType"
+            aria-label="Follow-Up Type"
+            (change)="onTypeChange()">
+
+            <option
+              *ngFor="let type of typeOptions"
+              [value]="type">
+
+              {{ type === 'ALL'
+                ? 'All Types'
+                : formatType($any(type)) }}
+
+            </option>
+
+          </select>
+
+          <i class="fas fa-chevron-down"></i>
+
+        </div>
+
+      </div>
+
+
+      <!-- PAGE SIZE -->
+
+      <div class="filter-group">
+
+        <label>
+          Items Per Page
+        </label>
+
+        <div class="select-wrapper">
+
+          <i class="fas fa-list-ol"></i>
+
+          <select
+            [value]="pageSize"
+            aria-label="Items Per Page"
+            (change)="changePageSize(+$any($event.target).value)">
+
+            <option value="5">
+              5
+            </option>
+
+            <option value="10">
+              10
+            </option>
+
+            <option value="20">
+              20
+            </option>
+
+            <option value="50">
+              50
+            </option>
+
+          </select>
+
+          <i class="fas fa-chevron-down"></i>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVE FILTERS -->
+
+    <div
+      class="active-filters"
+      *ngIf="
+        searchKeyword ||
+        selectedStatus !== 'ALL' ||
+        selectedType !== 'ALL'
+      ">
+
+      <span class="active-filter-label">
+        Active Filters:
+      </span>
+
+
+      <!-- SEARCH CHIP -->
+
+      <span
+        class="filter-chip"
+        *ngIf="searchKeyword">
+
+        <i class="fas fa-magnifying-glass"></i>
+
+        {{ searchKeyword }}
+
+        <button
+          type="button"
+          (click)="clearSearch()">
+
+          <i class="fas fa-xmark"></i>
+
+        </button>
+
+      </span>
+
+
+      <!-- STATUS CHIP -->
+
+      <span
+        class="filter-chip"
+        *ngIf="selectedStatus !== 'ALL'">
+
+        <i class="fas fa-circle-dot"></i>
+
+        {{ formatStatus($any(selectedStatus)) }}
+
+      </span>
+
+
+      <!-- TYPE CHIP -->
+
+      <span
+        class="filter-chip"
+        *ngIf="selectedType !== 'ALL'">
+
+        <i class="fas fa-shapes"></i>
+
+        {{ formatType($any(selectedType)) }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       RESULT HEADER
+  ========================================================== -->
+
+  <div class="results-header">
+
+    <div class="results-title">
+
+      <div class="results-icon">
+        <i class="fas fa-list-check"></i>
+      </div>
+
+      <div>
+
+        <h2>
+          Follow-Up Records
+        </h2>
+
+        <p>
+
+          Showing
+
+          <strong>
+            {{ getStartResult() }}
+          </strong>
+
+          -
+
+          <strong>
+            {{ getEndResult() }}
+          </strong>
+
+          of
+
+          <strong>
+            {{ filteredFollowUps.length }}
+          </strong>
+
+          follow-ups
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- SORT -->
+
+    <div class="sort-controls">
+
+      <span>
+        Sort by
+      </span>
+
+
+      <!-- DATE -->
+
+      <button
+        type="button"
+        [class.active]="sortField === 'scheduledAt'"
+        (click)="changeSort('scheduledAt')">
+
+        <i class="fas fa-calendar"></i>
+
+        Date
+
+        <i
+          class="fas"
+          [ngClass]="
+            sortDirection === 'asc'
+              ? 'fa-arrow-up'
+              : 'fa-arrow-down'
+          "
+          *ngIf="sortField === 'scheduledAt'">
+        </i>
+
+      </button>
+
+
+      <!-- LEAD -->
+
+      <button
+        type="button"
+        [class.active]="sortField === 'leadName'"
+        (click)="changeSort('leadName')">
+
+        <i class="fas fa-user"></i>
+
+        Lead
+
+        <i
+          class="fas"
+          [ngClass]="
+            sortDirection === 'asc'
+              ? 'fa-arrow-up'
+              : 'fa-arrow-down'
+          "
+          *ngIf="sortField === 'leadName'">
+        </i>
+
+      </button>
+
+
+      <!-- STATUS -->
+
+      <button
+        type="button"
+        [class.active]="sortField === 'status'"
+        (click)="changeSort('status')">
+
+        <i class="fas fa-circle-dot"></i>
+
+        Status
+
+        <i
+          class="fas"
+          [ngClass]="
+            sortDirection === 'asc'
+              ? 'fa-arrow-up'
+              : 'fa-arrow-down'
+          "
+          *ngIf="sortField === 'status'">
+        </i>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       LOADING
+  ========================================================== -->
+
+  <div
+    class="loading-state"
+    *ngIf="isLoading">
+
+    <div class="loading-orbit">
+
+      <i class="fas fa-calendar-check"></i>
+
+    </div>
+
+    <h3>
+      Loading Follow-Ups...
+    </h3>
+
+    <p>
+      Fetching your follow-up pipeline.
+    </p>
+
+  </div>
+
+
+  <!-- =========================================================
+       EMPTY STATE
+  ========================================================== -->
+
+  <div
+    class="empty-state"
+    *ngIf="
+      !isLoading &&
+      filteredFollowUps.length === 0
+    ">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-calendar-xmark"></i>
+
+    </div>
+
+    <h3>
+      No Follow-Ups Found
+    </h3>
+
+
+    <p
+      *ngIf="
+        searchKeyword ||
+        selectedStatus !== 'ALL' ||
+        selectedType !== 'ALL'
+      ">
+
+      No follow-ups match your current search or filters.
+
+    </p>
+
+
+    <p
+      *ngIf="
+        !searchKeyword &&
+        selectedStatus === 'ALL' &&
+        selectedType === 'ALL'
+      ">
+
+      There are no follow-ups available yet.
+
+    </p>
+
+
+    <button
+      type="button"
+      class="empty-action"
+      *ngIf="
+        searchKeyword ||
+        selectedStatus !== 'ALL' ||
+        selectedType !== 'ALL'
+      "
+      (click)="clearFilters()">
+
+      <i class="fas fa-filter-circle-xmark"></i>
+
+      Clear Filters
+
+    </button>
+
+
+    <button
+      type="button"
+      class="empty-action"
+      *ngIf="
+        !searchKeyword &&
+        selectedStatus === 'ALL' &&
+        selectedType === 'ALL'
+      "
+      (click)="addFollowUp()">
+
+      <i class="fas fa-plus"></i>
+
+      Schedule First Follow-Up
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       FOLLOW-UP LIST
+  ========================================================== -->
+
+  <div
+    class="followup-list"
+    *ngIf="
+      !isLoading &&
+      paginatedFollowUps.length > 0
+    ">
+
+
+    <!-- FOLLOW-UP CARD -->
+
+    <div
+      class="followup-card"
+      *ngFor="
+        let followUp of paginatedFollowUps;
+        trackBy: trackByFollowUpId
+      ">
+
+
+      <!-- STATUS RAIL -->
+
+      <div
+        class="status-rail"
+        [ngClass]="getStatusClass(followUp.status)">
+
+        <i
+          class="fas"
+          [ngClass]="getStatusIcon(followUp.status)">
+        </i>
+
+      </div>
+
+
+      <!-- CARD MAIN -->
+
+      <div class="followup-card-main">
+
+
+        <!-- TOP ROW -->
+
+        <div class="card-top-row">
+
+
+          <!-- TYPE -->
+
+          <div
+            class="followup-type"
+            [ngClass]="getTypeClass(followUp.followUpType)">
+
+            <div class="type-icon">
+
+              <i
+                [ngClass]="getTypeIcon(followUp.followUpType)">
+              </i>
+
+            </div>
+
+            <span>
+              {{ formatType(followUp.followUpType) }}
+            </span>
+
+          </div>
+
+
+          <!-- STATUS -->
+
+          <div
+            class="status-badge"
+            [ngClass]="getStatusClass(followUp.status)">
+
+            <i
+              class="fas"
+              [ngClass]="getStatusIcon(followUp.status)">
+            </i>
+
+            {{ formatStatus(followUp.status) }}
+
+          </div>
+
+
+          <!-- OVERDUE -->
+
+          <span
+            class="overdue-badge"
+            *ngIf="isOverdue(followUp)">
+
+            <i class="fas fa-bell"></i>
+
+            Overdue
+
+          </span>
+
+
+          <!-- TODAY -->
+
+          <span
+            class="today-badge"
+            *ngIf="
+              !isOverdue(followUp) &&
+              isToday(followUp.scheduledAt)
+            ">
+
+            <i class="fas fa-bolt"></i>
+
+            Today
+
+          </span>
+
+        </div>
+
+
+        <!-- SUBJECT -->
+
+        <h3 class="followup-subject">
+
+          {{ followUp.subject || 'Untitled Follow-Up' }}
+
+        </h3>
+
+
+        <!-- LEAD -->
+
+        <div class="lead-information">
+
+          <div class="lead-avatar">
+
+            <i class="fas fa-user"></i>
+
+          </div>
+
+          <div class="lead-details">
+
+            <span class="info-label">
+              CUSTOMER LEAD
+            </span>
+
+            <strong>
+              {{ followUp.leadName || 'Unknown Lead' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- INFORMATION GRID -->
+
+        <div class="information-grid">
+
+
+          <!-- DATE -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-calendar-day"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                Scheduled
+              </span>
+
+              <strong>
+                {{ formatDateTime(followUp.scheduledAt) }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- EXECUTIVE -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-user-shield"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                Assigned Executive
+              </span>
+
+              <strong>
+                {{ followUp.assignedUserName || 'Unassigned' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- LOCATION -->
+
+          <div
+            class="information-item"
+            *ngIf="followUp.location">
+
+            <div class="information-icon">
+
+              <i class="fas fa-location-dot"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                Location
+              </span>
+
+              <strong>
+                {{ followUp.location }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- COMPLETED -->
+
+          <div
+            class="information-item"
+            *ngIf="followUp.completedAt">
+
+            <div class="information-icon">
+
+              <i class="fas fa-circle-check"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                Completed
+              </span>
+
+              <strong>
+                {{ formatDateTime(followUp.completedAt) }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div
+          class="description-box"
+          *ngIf="followUp.description">
+
+          <div class="description-header">
+
+            <i class="fas fa-align-left"></i>
+
+            <span>
+              Details
+            </span>
+
+          </div>
+
+          <p>
+            {{ followUp.description }}
+          </p>
+
+        </div>
+
+
+        <!-- OUTCOME -->
+
+        <div
+          class="outcome-box"
+          *ngIf="followUp.outcome">
+
+          <div class="outcome-header">
+
+            <i class="fas fa-comment-dots"></i>
+
+            <span>
+              Outcome
+            </span>
+
+          </div>
+
+          <p>
+            {{ followUp.outcome }}
+          </p>
+
+        </div>
+
+
+        <!-- BOTTOM ROW -->
+
+        <div class="card-bottom-row">
+
+
+          <!-- ID -->
+
+          <div class="followup-id">
+
+            <i class="fas fa-hashtag"></i>
+
+            FU-{{ followUp.followUpId }}
+
+          </div>
+
+
+          <!-- ACTIONS -->
+
+          <div class="card-actions">
+
+
+            
+
+            
+
+            <!-- EDIT -->
+
+            <button
+              type="button"
+              class="action-btn edit-btn"
+              title="Edit Follow-Up"
+              (click)="editFollowUp(followUp)">
+
+              <i class="fas fa-pen"></i>
+
+              <span>
+                Edit
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGINATION
+  ========================================================== -->
+
+  <div
+    class="pagination-container"
+    *ngIf="
+      !isLoading &&
+      filteredFollowUps.length > 0
+    ">
+
+
+    <!-- RESULT INFO -->
+
+    <div class="pagination-info">
+
+      Showing
+
+      <strong>
+        {{ getStartResult() }}
+      </strong>
+
+      to
+
+      <strong>
+        {{ getEndResult() }}
+      </strong>
+
+      of
+
+      <strong>
+        {{ filteredFollowUps.length }}
+      </strong>
+
+      follow-ups
+
+    </div>
+
+
+    <!-- PAGINATION -->
+
+    <div class="pagination-controls">
+
+
+      <!-- PREVIOUS -->
+
+      <button
+        type="button"
+        class="page-arrow"
+        [disabled]="currentPage === 1"
+        (click)="previousPage()">
+
+        <i class="fas fa-chevron-left"></i>
+
+      </button>
+
+
+      <!-- PAGE NUMBERS -->
+
+      <button
+        type="button"
+        class="page-number"
+        *ngFor="let page of getPageNumbers()"
+        [class.active]="page === currentPage"
+        (click)="goToPage(page)">
+
+        {{ page }}
+
+      </button>
+
+
+      <!-- NEXT -->
+
+      <button
+        type="button"
+        class="page-arrow"
+        [disabled]="currentPage === totalPages"
+        (click)="nextPage()">
+
+        <i class="fas fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- PAGE INDICATOR -->
+
+    <div class="page-indicator">
+
+      Page
+
+      <strong>
+        {{ currentPage }}
+      </strong>
+
+      of
+
+      <strong>
+        {{ totalPages }}
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>

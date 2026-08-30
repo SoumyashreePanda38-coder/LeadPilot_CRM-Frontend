@@ -1,1 +1,474 @@
-<p>view-user works!</p>
+<div class="view-user-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="onBack()"
+        aria-label="Back to user management">
+
+        <span class="back-icon">←</span>
+        <span>Back</span>
+
+      </button>
+
+      <div class="header-title">
+
+        <h2>Executive Details</h2>
+
+        <p>
+          View complete information about the selected executive.
+        </p>
+
+      </div>
+
+    </div>
+
+    <button
+      *ngIf="user"
+      type="button"
+      class="edit-button"
+      (click)="onEdit()">
+
+      <span class="button-icon">✎</span>
+      Edit Executive
+
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       LOADING
+       ====================================================== -->
+
+  <div
+    *ngIf="isLoading"
+    class="loading-container">
+
+    <div class="loader"></div>
+
+    <p>Loading executive details...</p>
+
+  </div>
+
+
+  <!-- ======================================================
+       ERROR
+       ====================================================== -->
+
+  <div
+    *ngIf="!isLoading && errorMessage"
+    class="error-container">
+
+    <div class="error-icon">
+      !
+    </div>
+
+    <div class="error-content">
+
+      <h3>Unable to load details</h3>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+
+      <button
+        type="button"
+        class="retry-button"
+        (click)="retry()">
+
+        Try Again
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       USER DETAILS
+       ====================================================== -->
+
+  <div
+    *ngIf="!isLoading && user"
+    class="details-container">
+
+
+    <!-- ====================================================
+         PROFILE CARD
+         ==================================================== -->
+
+    <div class="profile-card">
+
+      <div class="profile-avatar">
+
+        <img
+          *ngIf="user.profileImage"
+          [src]="user.profileImage"
+          [alt]="user.fullName"
+        />
+
+        <span *ngIf="!user.profileImage">
+          {{ user.fullName.charAt(0).toUpperCase() }}
+        </span>
+
+      </div>
+
+      <div class="profile-info">
+
+        <h3>
+          {{ user.fullName }}
+        </h3>
+
+        <p class="username">
+          @{{ user.username }}
+        </p>
+
+        <span
+          class="status-badge"
+          [ngClass]="getStatusClass()">
+
+          <span class="status-dot"></span>
+
+          {{ user.status }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         BASIC INFORMATION
+         ==================================================== -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Basic Information</h3>
+
+          <p>
+            Personal and employee information
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+        <!-- Employee ID -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Employee ID
+          </span>
+
+          <span class="detail-value">
+            {{ user.employeeId || 'Not available' }}
+          </span>
+
+        </div>
+
+
+        <!-- Full Name -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Full Name
+          </span>
+
+          <span class="detail-value">
+            {{ user.fullName || 'Not available' }}
+          </span>
+
+        </div>
+
+
+        <!-- Username -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Username
+          </span>
+
+          <span class="detail-value">
+            {{ user.username || 'Not available' }}
+          </span>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Email Address
+          </span>
+
+          <span class="detail-value">
+            {{ user.email || 'Not available' }}
+          </span>
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Phone Number
+          </span>
+
+          <span class="detail-value">
+            {{ user.phoneNumber || 'Not available' }}
+          </span>
+
+        </div>
+
+
+        <!-- Role -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Role
+          </span>
+
+          <span class="detail-value role-value">
+            {{ user.role }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         PROFESSIONAL INFORMATION
+         ==================================================== -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Professional Information</h3>
+
+          <p>
+            Executive role and department details
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+        <!-- Designation -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Designation
+          </span>
+
+          <span class="detail-value">
+            {{ user.designation || 'Not specified' }}
+          </span>
+
+        </div>
+
+
+        <!-- Department -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Department
+          </span>
+
+          <span class="detail-value">
+            {{ user.department || 'Not specified' }}
+          </span>
+
+        </div>
+
+
+        <!-- Account Status -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Account Status
+          </span>
+
+          <span
+            class="status-badge"
+            [ngClass]="getStatusClass()">
+
+            <span class="status-dot"></span>
+
+            {{ user.status }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Last Login -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Last Login
+          </span>
+
+          <span class="detail-value">
+
+            {{ formatDate(user.lastLogin) }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         ACCOUNT INFORMATION
+         ==================================================== -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Account Information</h3>
+
+          <p>
+            Executive account activity and timestamps
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+        <!-- User ID -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            User ID
+          </span>
+
+          <span class="detail-value">
+            #{{ user.id }}
+          </span>
+
+        </div>
+
+
+        <!-- Created At -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Account Created
+          </span>
+
+          <span class="detail-value">
+            {{ formatDate(user.createdAt) }}
+          </span>
+
+        </div>
+
+
+        <!-- Updated At -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Last Updated
+          </span>
+
+          <span class="detail-value">
+            {{ formatDate(user.updatedAt) }}
+          </span>
+
+        </div>
+
+
+        <!-- Profile Image -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Profile Image
+          </span>
+
+          <span class="detail-value">
+
+            {{ user.profileImage ? 'Available' : 'Not uploaded' }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         BOTTOM ACTIONS
+         ==================================================== -->
+
+    <div class="bottom-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="onBack()">
+
+        ← Back to Executives
+
+      </button>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="onEdit()">
+
+        ✎ Edit Executive
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

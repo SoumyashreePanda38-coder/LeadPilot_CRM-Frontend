@@ -1,0 +1,1887 @@
+/* ============================================================
+   ADD LEAD — AQUA OCEAN CRYSTAL THEME
+   Fresh • Pure • Glossy • Cyan • Navy • Pearl
+   ============================================================ */
+
+
+/* ============================================================
+   GLOBAL PAGE
+   ============================================================ */
+
+.add-lead-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 32px;
+  font-family: "Poppins", sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(255, 255, 255, 0.95) 0,
+      rgba(255, 255, 255, 0.25) 15%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 88% 8%,
+      rgba(93, 238, 255, 0.45),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 75% 80%,
+      rgba(35, 211, 235, 0.25),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #e9fdff 0%,
+      #c7f8fc 22%,
+      #9beef5 45%,
+      #64dce9 68%,
+      #2b9fc2 100%
+    );
+
+  color: #063b57;
+}
+
+
+/* ============================================================
+   OCEAN BACKGROUND
+   ============================================================ */
+
+.ocean-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 110%,
+      rgba(0, 125, 171, 0.28),
+      transparent 55%
+    );
+}
+
+
+/* ============================================================
+   SUNSHINE GLOW
+   ============================================================ */
+
+.ocean-bg::before {
+  content: "";
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  top: -170px;
+  right: -90px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 220, 0.55) 18%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 72%
+    );
+
+  filter: blur(3px);
+
+  animation: sunshine 7s ease-in-out infinite;
+}
+
+
+@keyframes sunshine {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   LIGHT BEAMS
+   ============================================================ */
+
+.ocean-bg::after {
+  content: "";
+
+  position: absolute;
+  top: -10%;
+  left: 22%;
+
+  width: 150px;
+  height: 130%;
+
+  transform: rotate(18deg);
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.02),
+    transparent
+  );
+
+  filter: blur(18px);
+
+  opacity: 0.7;
+}
+
+
+/* ============================================================
+   PEARLS
+   ============================================================ */
+
+.pearl {
+  position: absolute;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #ffffff 0%,
+      #ffffff 22%,
+      #eaffff 45%,
+      #b9f7ff 68%,
+      #65c9dc 100%
+    );
+
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.95),
+    0 0 14px rgba(144, 249, 255, 0.85),
+    0 0 25px rgba(71, 220, 240, 0.35);
+
+  animation: pearlFloat 5s ease-in-out infinite;
+}
+
+
+.pearl-1 {
+  top: 12%;
+  left: 7%;
+  animation-delay: 0s;
+}
+
+.pearl-2 {
+  top: 24%;
+  right: 8%;
+  width: 6px;
+  height: 6px;
+  animation-delay: 1s;
+}
+
+.pearl-3 {
+  top: 55%;
+  left: 3%;
+  width: 7px;
+  height: 7px;
+  animation-delay: 2s;
+}
+
+.pearl-4 {
+  bottom: 18%;
+  right: 5%;
+  width: 11px;
+  height: 11px;
+  animation-delay: 0.5s;
+}
+
+.pearl-5 {
+  bottom: 9%;
+  left: 18%;
+  width: 6px;
+  height: 6px;
+  animation-delay: 1.5s;
+}
+
+.pearl-6 {
+  top: 42%;
+  right: 15%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 2.5s;
+}
+
+
+@keyframes pearlFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translateY(-18px) translateX(8px);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   OCEAN WAVES
+   ============================================================ */
+
+.wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 180px;
+
+  border-radius: 50%;
+
+  filter: blur(1px);
+
+  opacity: 0.25;
+}
+
+
+.wave-one {
+  bottom: -100px;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  animation: waveMoveOne 12s ease-in-out infinite;
+}
+
+
+.wave-two {
+  bottom: -125px;
+
+  background: rgba(24, 182, 211, 0.28);
+
+  animation: waveMoveTwo 15s ease-in-out infinite;
+}
+
+
+.wave-three {
+  bottom: -145px;
+
+  background: rgba(255, 255, 255, 0.28);
+
+  animation: waveMoveThree 18s ease-in-out infinite;
+}
+
+
+@keyframes waveMoveOne {
+
+  0%,
+  100% {
+    transform: translateX(-3%) rotate(1deg);
+  }
+
+  50% {
+    transform: translateX(3%) rotate(-1deg);
+  }
+}
+
+
+@keyframes waveMoveTwo {
+
+  0%,
+  100% {
+    transform: translateX(3%);
+  }
+
+  50% {
+    transform: translateX(-3%);
+  }
+}
+
+
+@keyframes waveMoveThree {
+
+  0%,
+  100% {
+    transform: translateX(-2%);
+  }
+
+  50% {
+    transform: translateX(2%);
+  }
+}
+
+
+/* ============================================================
+   PAGE CONTENT
+   ============================================================ */
+
+.page-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1250px, 100%);
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  border: none;
+  border-radius: 16px;
+
+  padding: 10px 17px;
+
+  color: #075477;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  box-shadow:
+    0 8px 24px rgba(0, 106, 145, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.back-button:hover {
+  transform: translateX(-4px);
+
+  background: rgba(255, 255, 255, 0.82);
+
+  box-shadow:
+    0 12px 28px rgba(0, 122, 160, 0.2),
+    0 0 18px rgba(83, 232, 244, 0.2);
+}
+
+
+.back-button i {
+  color: #078fb2;
+}
+
+
+/* ============================================================
+   TITLE AREA
+   ============================================================ */
+
+.title-area {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 20px;
+}
+
+
+.title-icon {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 22px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      145deg,
+      #8ff8ff,
+      #19c8e4 48%,
+      #087ca8
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0, 136, 176, 0.3),
+    inset 0 2px 2px rgba(255, 255, 255, 0.65),
+    0 0 25px rgba(78, 228, 244, 0.3);
+
+  transform: rotate(-3deg);
+}
+
+
+.title-icon i {
+  font-size: 25px;
+  transform: rotate(3deg);
+}
+
+
+.title-area h1 {
+  margin: 0;
+
+  font-size: clamp(27px, 4vw, 38px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+
+  color: #064565;
+
+  text-shadow:
+    0 1px 0 white,
+    0 3px 10px rgba(0, 110, 150, 0.1);
+}
+
+
+.title-area p {
+  margin: 5px 0 0;
+
+  color: #32738c;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 18px;
+
+  padding: 13px 18px;
+
+  border-radius: 18px;
+
+  backdrop-filter: blur(16px);
+
+  animation: alertAppear 0.35s ease;
+}
+
+
+@keyframes alertAppear {
+
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.success-alert {
+  color: #05685e;
+
+  background: rgba(226, 255, 249, 0.78);
+
+  border: 1px solid rgba(91, 229, 202, 0.5);
+
+  box-shadow:
+    0 8px 25px rgba(0, 135, 119, 0.1);
+}
+
+
+.error-alert {
+  color: #9b3e4a;
+
+  background: rgba(255, 240, 243, 0.82);
+
+  border: 1px solid rgba(255, 143, 158, 0.5);
+
+  box-shadow:
+    0 8px 25px rgba(190, 69, 91, 0.1);
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* ============================================================
+   FORM SECTION — GLASS OCEAN CRYSTAL
+   ============================================================ */
+
+.form-section {
+  position: relative;
+
+  padding: 28px;
+
+  border-radius: 30px 18px 32px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(236, 253, 255, 0.68)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 18px 45px rgba(0, 105, 145, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(95, 214, 232, 0.14);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.form-section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+  right: 8%;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.95),
+      #64e7f2,
+      rgba(255, 255, 255, 0.95),
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px rgba(79, 229, 241, 0.65);
+}
+
+
+.form-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -80px;
+  top: -80px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.75),
+      rgba(118, 238, 248, 0.15),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+
+.form-section:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 22px 52px rgba(0, 105, 145, 0.16),
+    0 0 30px rgba(89, 224, 239, 0.12),
+    inset 0 1px 0 white;
+}
+
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+
+.section-icon {
+  width: 47px;
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  flex-shrink: 0;
+
+  color: #fff;
+
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.55),
+    0 7px 18px rgba(0, 119, 155, 0.2);
+}
+
+
+.personal-icon {
+  background:
+    linear-gradient(145deg, #62e8f2, #0799be);
+}
+
+
+.location-icon {
+  background:
+    linear-gradient(145deg, #5de8d4, #008fa8);
+}
+
+
+.classification-icon {
+  background:
+    linear-gradient(145deg, #82dcff, #1476b0);
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #075071;
+
+  font-size: 18px;
+
+  font-weight: 750;
+}
+
+
+.section-heading p {
+  margin: 3px 0 0;
+
+  color: #6592a2;
+
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   FORM GRID
+   ============================================================ */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px 22px;
+}
+
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   FORM GROUP
+   ============================================================ */
+
+.form-group {
+  min-width: 0;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #14546d;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+
+.form-group label span {
+  color: #00a9c7;
+
+  margin-left: 2px;
+}
+
+
+/* ============================================================
+   INPUT WRAPPER
+   ============================================================ */
+
+.input-wrapper,
+.textarea-wrapper,
+.select-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+
+.input-wrapper > i:first-child,
+.textarea-wrapper > i:first-child,
+.select-wrapper > i:first-child {
+  position: absolute;
+
+  left: 15px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 2;
+
+  color: #42b8ca;
+
+  font-size: 13px;
+
+  pointer-events: none;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.input-wrapper input,
+.select-wrapper select,
+.textarea-wrapper textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(89, 191, 210, 0.32);
+
+  border-radius: 17px;
+
+  outline: none;
+
+  color: #164e65;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(239, 253, 255, 0.72)
+    );
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 4px 14px rgba(0, 119, 148, 0.055);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    transform 0.2s ease;
+}
+
+
+.input-wrapper input,
+.select-wrapper select {
+  height: 48px;
+
+  padding: 0 16px 0 43px;
+}
+
+
+.textarea-wrapper textarea {
+  min-height: 92px;
+
+  padding: 14px 16px 14px 43px;
+
+  resize: vertical;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+   ============================================================ */
+
+input::placeholder,
+textarea::placeholder {
+  color: #92b3bd;
+
+  opacity: 1;
+}
+
+
+/* ============================================================
+   INPUT FOCUS
+   ============================================================ */
+
+.input-wrapper input:focus,
+.select-wrapper select:focus,
+.textarea-wrapper textarea:focus {
+
+  border-color: #26c8df;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(224, 252, 255, 0.9)
+    );
+
+  box-shadow:
+    0 0 0 3px rgba(38, 200, 223, 0.12),
+    0 8px 24px rgba(0, 153, 184, 0.1),
+    inset 0 1px 2px white;
+
+  transform: translateY(-1px);
+}
+
+
+.input-wrapper:focus-within > i:first-child,
+.textarea-wrapper:focus-within > i:first-child,
+.select-wrapper:focus-within > i:first-child {
+  color: #008eae;
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+
+/* ============================================================
+   SELECT
+   ============================================================ */
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+
+  cursor: pointer;
+}
+
+
+.select-wrapper .select-arrow {
+  position: absolute;
+
+  right: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #55a9b8;
+
+  pointer-events: none;
+
+  font-size: 11px;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.select-wrapper:focus-within .select-arrow {
+  color: #008eae;
+
+  transform:
+    translateY(-50%)
+    rotate(180deg);
+}
+
+
+.select-wrapper select:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.55;
+
+  background: rgba(220, 246, 250, 0.6);
+}
+
+
+/* ============================================================
+   VALIDATION
+   ============================================================ */
+
+.field-error {
+  display: block;
+
+  margin-top: 5px;
+
+  padding-left: 5px;
+
+  color: #d94d62;
+
+  font-size: 11px;
+
+  animation: errorFade 0.25s ease;
+}
+
+
+@keyframes errorFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 4px 2px 25px;
+}
+
+
+/* ============================================================
+   COMMON BUTTON
+   ============================================================ */
+
+.cancel-btn,
+.reset-btn,
+.save-btn {
+
+  min-height: 48px;
+
+  padding: 0 20px;
+
+  border-radius: 17px;
+
+  border: 1px solid transparent;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.cancel-btn:hover,
+.reset-btn:hover,
+.save-btn:not(:disabled):hover {
+  transform: translateY(-3px);
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+   ============================================================ */
+
+.cancel-btn {
+
+  color: #417080;
+
+  background:
+    rgba(255, 255, 255, 0.75);
+
+  border-color:
+    rgba(105, 191, 207, 0.25);
+
+  box-shadow:
+    0 7px 18px rgba(0, 112, 145, 0.08);
+}
+
+
+.cancel-btn:hover {
+
+  color: #0b6078;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 12px 25px rgba(0, 112, 145, 0.13);
+}
+
+
+/* ============================================================
+   RESET BUTTON
+   ============================================================ */
+
+.reset-btn {
+
+  color: #087f9b;
+
+  background:
+    rgba(215, 250, 253, 0.8);
+
+  border-color:
+    rgba(44, 197, 217, 0.25);
+
+  box-shadow:
+    0 7px 18px rgba(0, 144, 168, 0.08);
+}
+
+
+.reset-btn:hover {
+
+  background:
+    rgba(233, 254, 255, 0.95);
+
+  box-shadow:
+    0 12px 25px rgba(0, 144, 168, 0.15);
+}
+
+
+/* ============================================================
+   CREATE LEAD — OCEAN CRYSTAL BUTTON
+   ============================================================ */
+
+.save-btn {
+
+  position: relative;
+
+  min-width: 165px;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  background:
+    linear-gradient(
+      135deg,
+      #70f5ff 0%,
+      #18d1e8 35%,
+      #078db8 70%,
+      #07527c 100%
+    );
+
+  box-shadow:
+    0 10px 25px rgba(0, 120, 163, 0.3),
+    0 0 18px rgba(50, 224, 241, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 4px rgba(0, 70, 110, 0.18);
+
+  text-shadow:
+    0 1px 2px rgba(0, 72, 105, 0.35);
+}
+
+
+.save-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  transform: skewX(-20deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.65),
+      transparent
+    );
+
+  z-index: 2;
+
+  transition: left 0.7s ease;
+
+  pointer-events: none;
+}
+
+
+.save-btn:hover::before {
+  left: 140%;
+}
+
+
+.save-btn:not(:disabled):hover {
+
+  box-shadow:
+    0 15px 35px rgba(0, 113, 160, 0.35),
+    0 0 28px rgba(53, 224, 242, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+
+.save-btn:active:not(:disabled) {
+
+  transform: translateY(1px) scale(0.98);
+
+  box-shadow:
+    0 5px 14px rgba(0, 110, 145, 0.25);
+}
+
+
+.save-btn:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.72;
+}
+
+
+/* ============================================================
+   WATER RIPPLE LAYER
+   ============================================================ */
+
+.ripple-button {
+  --ripple-x: 50%;
+  --ripple-y: 50%;
+}
+
+
+.button-water {
+
+  position: absolute;
+
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+
+  width: 20px;
+  height: 20px;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(141, 247, 255, 0.3) 35%,
+      rgba(47, 220, 241, 0.2) 55%,
+      transparent 72%
+    );
+
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.6);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/*
+  Add the "ripple-active" class from createRipple()
+  when the button is clicked.
+*/
+
+.ripple-button.ripple-active .button-water {
+
+  animation:
+    waterRipple 0.85s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+}
+
+
+@keyframes waterRipple {
+
+  0% {
+
+    width: 18px;
+    height: 18px;
+
+    opacity: 0.8;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  30% {
+
+    opacity: 0.65;
+
+    transform:
+      translate(-50%, -50%)
+      scale(4);
+  }
+
+  70% {
+
+    opacity: 0.35;
+
+    transform:
+      translate(-50%, -50%)
+      scale(9);
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(15);
+  }
+}
+
+
+/* ============================================================
+   EXTRA WATER RINGS
+   ============================================================ */
+
+.ripple-button.ripple-active::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.75);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  animation:
+    rippleRing 0.9s ease-out forwards;
+}
+
+
+@keyframes rippleRing {
+
+  0% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+
+    opacity: 0.85;
+  }
+
+  55% {
+
+    opacity: 0.35;
+  }
+
+  100% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(12);
+
+    opacity: 0;
+  }
+}
+
+
+/* ============================================================
+   BUTTON CONTENT
+   ============================================================ */
+
+.button-content {
+
+  position: relative;
+
+  z-index: 3;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+
+.button-content i {
+  transition: transform 0.3s ease;
+}
+
+
+.save-btn:hover .button-content i {
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   SHIMMER / GLITTER
+   ============================================================ */
+
+.save-btn::after {
+
+  pointer-events: none;
+}
+
+
+.save-btn:hover {
+
+  animation:
+    oceanGlow 1.8s ease-in-out infinite;
+}
+
+
+@keyframes oceanGlow {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+  }
+}
+
+
+/* ============================================================
+   FORM SECTION SHIMMER
+   ============================================================ */
+
+.form-section {
+  background-size: 200% 200%;
+
+  animation:
+    crystalShimmer 12s ease-in-out infinite;
+}
+
+
+@keyframes crystalShimmer {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+.add-lead-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.add-lead-page::-webkit-scrollbar-track {
+  background: rgba(220, 251, 255, 0.7);
+}
+
+
+.add-lead-page::-webkit-scrollbar-thumb {
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #63e5ef,
+      #0c8eaf
+    );
+
+  border: 2px solid rgba(235, 253, 255, 0.8);
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .add-lead-page {
+    padding: 24px;
+  }
+
+  .form-section {
+    padding: 23px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .add-lead-page {
+    padding: 16px;
+  }
+
+
+  .page-header {
+    margin-bottom: 20px;
+  }
+
+
+  .back-button {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+
+  .title-area {
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 17px;
+  }
+
+
+  .title-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 17px;
+  }
+
+
+  .title-icon i {
+    font-size: 19px;
+  }
+
+
+  .title-area h1 {
+    font-size: 25px;
+  }
+
+
+  .title-area p {
+    font-size: 11px;
+
+    line-height: 1.5;
+  }
+
+
+  .form-section {
+    padding: 20px;
+
+    border-radius:
+      24px 15px 26px 16px;
+  }
+
+
+  .section-heading {
+    align-items: flex-start;
+
+    gap: 11px;
+  }
+
+
+  .section-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 14px;
+  }
+
+
+  .section-heading h2 {
+    font-size: 16px;
+  }
+
+
+  .section-heading p {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+
+  .form-grid {
+    gap: 16px;
+  }
+
+
+  .form-actions {
+
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+
+    padding-bottom: 10px;
+  }
+
+
+  .cancel-btn,
+  .reset-btn,
+  .save-btn {
+    width: 100%;
+  }
+
+
+  .save-btn {
+    min-width: 0;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION ACCESSIBILITY
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+  }
+/* =========================================================
+   CREATE LEAD - WATER RIPPLE SYSTEM
+   ========================================================= */
+
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+/*
+ * Keep button text/icons above the water.
+ */
+.ripple-button .button-content {
+  position: relative;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+/*
+ * Soft water layer underneath the content.
+ */
+.ripple-button .button-water {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.38),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(0, 220, 255, 0.10)
+    );
+
+  opacity: 0.65;
+}
+
+/*
+ * THE ACTUAL WATER RIPPLE
+ */
+.ripple-button .water-ripple {
+  position: absolute;
+
+  display: block;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 3;
+
+  /*
+   * Crystal aqua water.
+   */
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(150, 247, 255, 0.48) 18%,
+      rgba(0, 225, 255, 0.28) 40%,
+      rgba(0, 180, 255, 0.12) 60%,
+      transparent 72%
+    );
+
+  /*
+   * Glass/water glow.
+   */
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.85),
+    0 0 28px rgba(0, 229, 255, 0.65),
+    0 0 55px rgba(0, 180, 255, 0.35);
+
+  transform: scale(0);
+
+  opacity: 0.95;
+
+  animation: oceanRipple 900ms cubic-bezier(0.12, 0.7, 0.25, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   OCEAN RIPPLE ANIMATION
+   ========================================================= */
+
+@keyframes oceanRipple {
+
+  0% {
+    transform: scale(0);
+    opacity: 0.95;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  45% {
+    opacity: 0.65;
+  }
+
+  70% {
+    opacity: 0.32;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SECONDARY WATER RING
+   ========================================================= */
+
+.ripple-button .water-ripple::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 12%;
+
+  border-radius: 50%;
+
+  border: 2px solid
+    rgba(255, 255, 255, 0.65);
+
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.65),
+    0 0 25px rgba(0, 225, 255, 0.45);
+
+  animation: rippleRing 900ms ease-out forwards;
+}
+
+
+@keyframes rippleRing {
+
+  0% {
+    transform: scale(0.35);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL WATER HIGHLIGHT
+   ========================================================= */
+
+.ripple-button .water-ripple::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 22%;
+  height: 22%;
+
+  top: 20%;
+  left: 24%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+
+  filter: blur(2px);
+
+  animation: waterSparkle 900ms ease-out forwards;
+}
+
+
+@keyframes waterSparkle {
+
+  0% {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.ripple-button:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 160, 220, 0.28),
+    0 0 25px rgba(0, 220, 255, 0.20);
+
+}
+
+
+/* =========================================================
+   BUTTON PRESS
+   ========================================================= */
+
+.ripple-button:active {
+
+  transform: scale(0.975);
+
+}
+
+
+/* =========================================================
+   DISABLED STATE
+   ========================================================= */
+
+.ripple-button:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.72;
+
+  transform: none;
+
+}
+}

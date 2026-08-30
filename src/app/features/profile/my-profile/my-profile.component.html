@@ -1,1 +1,811 @@
-<p>my-profile works!</p>
+<div class="profile-page">
+
+  <!-- ======================================================
+       BACKGROUND
+  ======================================================= -->
+
+  <div class="profile-bg">
+
+    <span class="emerald-orb orb-one"></span>
+    <span class="emerald-orb orb-two"></span>
+    <span class="emerald-orb orb-three"></span>
+
+    <div class="grid-overlay"></div>
+
+  </div>
+
+
+  <!-- ======================================================
+       MAIN CONTAINER
+  ======================================================= -->
+
+  <div class="profile-container">
+
+
+    <!-- ====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <header class="page-header">
+
+      <div class="title-area">
+
+        <div class="title-icon">
+          <i class="fas fa-user"></i>
+        </div>
+
+        <div>
+
+          <span class="eyebrow">
+            ACCOUNT
+          </span>
+
+          <h1>
+            My Profile
+          </h1>
+
+          <p>
+            View and manage your administrator account
+            information and security preferences.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- HEADER ACTIONS -->
+
+      <div class="header-actions">
+
+        <!-- REFRESH -->
+
+        <button
+          type="button"
+          class="refresh-btn"
+          (click)="refreshProfile()"
+          [disabled]="isLoading">
+
+          <i
+            class="fas fa-rotate"
+            [class.fa-spin]="isLoading">
+          </i>
+
+          <span>
+            {{ isLoading ? 'Loading...' : 'Refresh' }}
+          </span>
+
+        </button>
+
+
+        <!-- CHANGE PASSWORD -->
+
+        <button
+          type="button"
+          class="change-password-btn"
+          (click)="goToChangePassword()">
+
+          <i class="fas fa-key"></i>
+
+          <span>
+            Change Password
+          </span>
+
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- ====================================================
+         ERROR
+    ===================================================== -->
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <div class="alert-icon">
+
+        <i class="fas fa-triangle-exclamation"></i>
+
+      </div>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="clearError()">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================
+         SUCCESS
+    ===================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <div class="alert-icon">
+
+        <i class="fas fa-circle-check"></i>
+
+      </div>
+
+      <span>
+        {{ successMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="clearSuccess()">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================
+         LOADING
+    ===================================================== -->
+
+    <div
+      class="loading-state"
+      *ngIf="isLoading">
+
+      <div class="loading-spinner">
+
+        <i class="fas fa-spinner fa-spin"></i>
+
+      </div>
+
+      <h3>
+        Loading Profile
+      </h3>
+
+      <p>
+        Fetching your account information...
+      </p>
+
+    </div>
+
+
+    <!-- ====================================================
+         PROFILE CONTENT
+    ===================================================== -->
+
+    <div
+      class="profile-content"
+      *ngIf="!isLoading && profile">
+
+
+      <!-- ==================================================
+           PROFILE HERO CARD
+      =================================================== -->
+
+      <section class="profile-hero-card">
+
+
+        <!-- ================================================
+             PROFILE IMAGE
+        ================================================= -->
+
+        <div class="profile-image-section">
+
+          <div class="profile-image-wrapper">
+
+            <div class="profile-image-ring">
+
+              <!-- ACTUAL IMAGE -->
+
+              <img
+                *ngIf="profile.profileImage"
+                [src]="getProfileImage()"
+                [alt]="profile.fullName"
+                class="profile-image">
+
+
+              <!-- INITIALS -->
+
+              <div
+                *ngIf="!profile.profileImage"
+                class="profile-initials">
+
+                {{ getInitials() }}
+
+              </div>
+
+            </div>
+
+
+            <!-- ONLINE STATUS -->
+
+            <span
+              class="online-indicator"
+              [class.offline]="profile.status !== 'ACTIVE'">
+            </span>
+
+
+            <!-- ==========================================
+                 UPLOAD BUTTON
+            =========================================== -->
+
+            <label
+              class="upload-image-btn"
+              title="Upload profile picture">
+
+              <i class="fas fa-camera"></i>
+
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/jpg,image/webp"
+                (change)="onProfileImageSelected($event)"
+                hidden>
+
+            </label>
+
+          </div>
+
+
+          <span class="upload-hint">
+            JPG, PNG or WEBP
+          </span>
+
+        </div>
+
+
+        <!-- ================================================
+             PROFILE BASIC INFO
+        ================================================= -->
+
+        <div class="profile-identity">
+
+          <span class="profile-label">
+            ADMINISTRATOR ACCOUNT
+          </span>
+
+          <h2>
+            {{ profile.fullName }}
+          </h2>
+
+          <p class="designation">
+            {{ profile.designation || 'Administrator' }}
+          </p>
+
+
+          <div class="identity-badges">
+
+            <span class="role-badge">
+
+              <i class="fas fa-shield-halved"></i>
+
+              {{ getRoleLabel() }}
+
+            </span>
+
+
+            <span
+              class="status-badge"
+              [ngClass]="getStatusClass()">
+
+              <span class="status-dot"></span>
+
+              {{ profile.status }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             ACCOUNT REFERENCE
+        ================================================= -->
+
+        <div class="account-reference">
+
+          <span>
+            EMPLOYEE ID
+          </span>
+
+          <strong>
+            {{ profile.employeeId || '—' }}
+          </strong>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           PERSONAL INFORMATION
+      =================================================== -->
+
+      <section class="profile-card">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+
+            <i class="fas fa-address-card"></i>
+
+          </div>
+
+          <div>
+
+            <span class="section-eyebrow">
+              PROFILE
+            </span>
+
+            <h2>
+              Personal Information
+            </h2>
+
+            <p>
+              Basic information associated with your
+              administrator account.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="information-grid">
+
+
+          <!-- FULL NAME -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-user"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                FULL NAME
+              </span>
+
+              <strong>
+                {{ profile.fullName || '—' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- USERNAME -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-at"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                USERNAME
+              </span>
+
+              <strong>
+                {{ profile.username || '—' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-envelope"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                EMAIL ADDRESS
+              </span>
+
+              <strong>
+                {{ profile.email || '—' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-phone"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                PHONE NUMBER
+              </span>
+
+              <strong>
+                {{ profile.phoneNumber || '—' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- DESIGNATION -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-briefcase"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                DESIGNATION
+              </span>
+
+              <strong>
+                {{ profile.designation || '—' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- ROLE -->
+
+          <div class="information-item">
+
+            <div class="information-icon">
+
+              <i class="fas fa-user-shield"></i>
+
+            </div>
+
+            <div>
+
+              <span>
+                SYSTEM ROLE
+              </span>
+
+              <strong>
+                {{ getRoleLabel() }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           ACCOUNT INFORMATION
+      =================================================== -->
+
+      <section class="profile-card">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+
+            <i class="fas fa-circle-info"></i>
+
+          </div>
+
+          <div>
+
+            <span class="section-eyebrow">
+              ACCOUNT
+            </span>
+
+            <h2>
+              Account Information
+            </h2>
+
+            <p>
+              System information associated with your account.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="account-grid">
+
+
+          <!-- EMPLOYEE ID -->
+
+          <div class="account-item">
+
+            <span>
+              Employee ID
+            </span>
+
+            <strong>
+              {{ profile.employeeId || '—' }}
+            </strong>
+
+          </div>
+
+
+          <!-- USER ID -->
+
+          <div class="account-item">
+
+            <span>
+              User ID
+            </span>
+
+            <strong>
+              #{{ profile.id }}
+            </strong>
+
+          </div>
+
+
+          <!-- STATUS -->
+
+          <div class="account-item">
+
+            <span>
+              Account Status
+            </span>
+
+            <strong
+              class="account-status"
+              [ngClass]="getStatusClass()">
+
+              {{ profile.status }}
+
+            </strong>
+
+          </div>
+
+
+          <!-- CREATED -->
+
+          <div class="account-item">
+
+            <span>
+              Account Created
+            </span>
+
+            <strong>
+              {{ formatDate(profile.createdAt) }}
+            </strong>
+
+          </div>
+
+
+          <!-- UPDATED -->
+
+          <div class="account-item">
+
+            <span>
+              Last Updated
+            </span>
+
+            <strong>
+              {{ formatDateTime(profile.updatedAt) }}
+            </strong>
+
+          </div>
+
+
+          <!-- ACCESS -->
+
+          <div class="account-item">
+
+            <span>
+              Access Level
+            </span>
+
+            <strong>
+              {{ getRoleLabel() }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           ACCOUNT SECURITY
+      =================================================== -->
+
+      <section class="security-card">
+
+
+        <div class="security-icon">
+
+          <i class="fas fa-shield-halved"></i>
+
+        </div>
+
+
+        <div class="security-content">
+
+          <span class="section-eyebrow">
+            ACCOUNT SECURITY
+          </span>
+
+          <h3>
+            Keep your account secure
+          </h3>
+
+          <p>
+            Protect your administrator account by regularly
+            updating your password and reviewing your
+            security settings.
+          </p>
+
+        </div>
+
+
+        <div class="security-actions">
+
+          <div class="security-status-badge">
+
+            <span class="status-dot"></span>
+
+            Account Protected
+
+          </div>
+
+
+          <button
+            type="button"
+            class="security-password-btn"
+            (click)="goToChangePassword()">
+
+            <i class="fas fa-key"></i>
+
+            Change Password
+
+            <i class="fas fa-arrow-right"></i>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           SECURITY SETTINGS LINK
+      =================================================== -->
+
+      <section class="security-settings-card">
+
+        <div class="security-settings-icon">
+
+          <i class="fas fa-user-shield"></i>
+
+        </div>
+
+
+        <div class="security-settings-content">
+
+          <span>
+            SECURITY CENTER
+          </span>
+
+          <h3>
+            Manage Security Settings
+          </h3>
+
+          <p>
+            Configure password policies, login protection,
+            session security, two-factor authentication
+            and security notifications.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="open-security-btn"
+          (click)="goToSecuritySettings()">
+
+          Security Settings
+
+          <i class="fas fa-arrow-right"></i>
+
+        </button>
+
+      </section>
+
+
+    </div>
+
+
+
+    <!-- ====================================================
+         NO PROFILE
+    ===================================================== -->
+
+    <div
+      class="no-profile"
+      *ngIf="!isLoading && !profile && !errorMessage">
+
+      <div class="no-profile-icon">
+
+        <i class="fas fa-user-slash"></i>
+
+      </div>
+
+      <h2>
+        Profile Not Available
+      </h2>
+
+      <p>
+        We could not find your account information.
+      </p>
+
+      <button
+        type="button"
+        class="retry-btn"
+        (click)="loadProfile()">
+
+        <i class="fas fa-rotate"></i>
+
+        Try Again
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>

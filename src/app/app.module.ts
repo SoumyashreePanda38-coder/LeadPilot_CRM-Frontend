@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -33,6 +34,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
 
     // Toast Notifications
     ToastrModule.forRoot({

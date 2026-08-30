@@ -1,1 +1,581 @@
-<p>edit-follow-up works!</p>
+<div class="edit-follow-up-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        [disabled]="isSaving"
+      >
+        <span class="back-icon">←</span>
+        Back
+      </button>
+
+      <div class="header-title">
+
+        <div class="title-icon">
+          ✎
+        </div>
+
+        <div>
+          <h1>Edit Follow-Up</h1>
+
+          <p>
+            Update the scheduled follow-up details
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       LOADING
+       ====================================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading"
+  >
+
+    <div class="spinner"></div>
+
+    <p>
+      Loading follow-up details...
+    </p>
+
+  </div>
+
+
+  <!-- ======================================================
+       ERROR MESSAGE
+       ====================================================== -->
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage && !isLoading"
+  >
+
+    <span class="alert-icon">
+      !
+    </span>
+
+    <span>
+      {{ errorMessage }}
+    </span>
+
+    <button
+      type="button"
+      (click)="clearError()"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       SUCCESS MESSAGE
+       ====================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage"
+  >
+
+    <span class="alert-icon">
+      ✓
+    </span>
+
+    <span>
+      {{ successMessage }}
+    </span>
+
+    <button
+      type="button"
+      (click)="clearSuccess()"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       FORM
+       ====================================================== -->
+
+  <form
+    class="follow-up-form"
+    *ngIf="!isLoading"
+    (ngSubmit)="saveFollowUp()"
+  >
+
+
+    <!-- ====================================================
+         BASIC INFORMATION
+         ==================================================== -->
+
+    <section class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+          01
+        </div>
+
+        <div>
+          <h2>Follow-Up Information</h2>
+
+          <p>
+            Update the lead and follow-up details.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- LEAD -->
+
+        <div class="form-group">
+
+          <label for="leadId">
+            Customer Lead
+            <span class="required">*</span>
+          </label>
+
+          <select
+            id="leadId"
+            name="leadId"
+            title="Customer Lead"
+            [(ngModel)]="followUp.leadId"
+            (change)="onLeadChange()"
+            required
+          >
+
+            <option
+              [ngValue]="null"
+              disabled
+            >
+              Select customer lead
+            </option>
+
+            <option
+              *ngFor="let lead of leads"
+              [ngValue]="lead.leadId"
+            >
+              {{ getLeadName(lead) }}
+            </option>
+
+          </select>
+
+          <small
+            *ngIf="isLoadingLeads"
+            class="field-loading"
+          >
+            Loading leads...
+          </small>
+
+        </div>
+
+
+        <!-- EXECUTIVE -->
+
+        <div class="form-group">
+
+          <label for="assignedUserId">
+            Assigned Executive
+            <span class="required">*</span>
+          </label>
+
+          <select
+            id="assignedUserId"
+            name="assignedUserId"
+            title="Assigned Executive"
+            [(ngModel)]="followUp.assignedUserId"
+            required
+          >
+
+            <option
+              [ngValue]="null"
+              disabled
+            >
+              Select executive
+            </option>
+
+            <option
+              *ngFor="let executive of executives"
+              [ngValue]="getExecutiveId(executive)"
+            >
+              {{ getExecutiveName(executive) }}
+            </option>
+
+          </select>
+
+          <small
+            *ngIf="isLoadingExecutives"
+            class="field-loading"
+          >
+            Loading executives...
+          </small>
+
+        </div>
+
+
+        <!-- FOLLOW-UP TYPE -->
+
+        <div class="form-group">
+
+          <label for="followUpType">
+            Follow-Up Type
+            <span class="required">*</span>
+          </label>
+
+          <select
+            id="followUpType"
+            name="followUpType"
+            title="Follow-Up Type"
+            [(ngModel)]="followUp.followUpType"
+            (change)="onFollowUpTypeChange()"
+            required
+          >
+
+            <option
+              *ngFor="let type of followUpTypes"
+              [ngValue]="type"
+            >
+              {{ formatEnum(type) }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+
+          <label for="status">
+            Status
+          </label>
+
+          <select
+            id="status"
+            name="status"
+            title="Status"
+            [(ngModel)]="followUp.status"
+          >
+
+            <option
+              *ngFor="let status of followUpStatuses"
+              [ngValue]="status"
+            >
+              {{ formatEnum(status) }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- SUBJECT -->
+
+        <div class="form-group full-width">
+
+          <label for="subject">
+            Subject
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="subject"
+            type="text"
+            name="subject"
+            title="Follow-Up Subject"
+            [(ngModel)]="followUp.subject"
+            maxlength="150"
+            placeholder="Enter follow-up subject"
+            required
+          />
+
+          <div class="character-count">
+
+            {{ followUp.subject?.length || 0 }}/150
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         SCHEDULE
+         ==================================================== -->
+
+    <section class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+          02
+        </div>
+
+        <div>
+
+          <h2>Schedule</h2>
+
+          <p>
+            Set the date and time for the follow-up.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- DATE -->
+
+        <div class="form-group">
+
+          <label for="selectedDate">
+            Follow-Up Date
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="selectedDate"
+            type="date"
+            name="selectedDate"
+            title="Follow-Up Date"
+            [(ngModel)]="selectedDate"
+            (change)="onDateTimeChange()"
+            required
+          />
+
+        </div>
+
+
+        <!-- TIME -->
+
+        <div class="form-group">
+
+          <label for="selectedTime">
+            Follow-Up Time
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="selectedTime"
+            type="time"
+            name="selectedTime"
+            title="Follow-Up Time"
+            [(ngModel)]="selectedTime"
+            (change)="onDateTimeChange()"
+            required
+          />
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="form-group full-width">
+
+          <label for="location">
+
+            Location
+
+            <span
+              class="recommended"
+              *ngIf="isLocationRecommended()"
+            >
+              Recommended
+            </span>
+
+          </label>
+
+          <input
+            id="location"
+            type="text"
+            name="location"
+            title="Follow-Up Location"
+            [(ngModel)]="followUp.location"
+            maxlength="500"
+            placeholder="Enter meeting / visit location"
+          />
+
+          <div class="character-count">
+
+            {{ followUp.location?.length || 0 }}/500
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         DESCRIPTION
+         ==================================================== -->
+
+    <section class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+          03
+        </div>
+
+        <div>
+
+          <h2>Additional Details</h2>
+
+          <p>
+            Add notes or additional information.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+          name="description"
+          [(ngModel)]="followUp.description"
+          maxlength="1000"
+          rows="6"
+          placeholder="Enter additional details..."
+        ></textarea>
+
+        <div class="character-count">
+
+          {{ followUp.description?.length || 0 }}/1000
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         COMPLETION INFORMATION
+         ==================================================== -->
+
+    <section
+      class="form-card"
+      *ngIf="
+        followUp.status === 'COMPLETED'
+      "
+    >
+
+      <div class="card-header">
+
+        <div class="section-icon">
+          04
+        </div>
+
+        <div>
+
+          <h2>Completion Details</h2>
+
+          <p>
+            Information recorded after completion.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>
+          Outcome
+        </label>
+
+        <textarea
+          name="outcome"
+          [(ngModel)]="followUp.outcome"
+          rows="5"
+          placeholder="Enter the outcome of the follow-up..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         ACTIONS
+         ==================================================== -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+        [disabled]="isSaving"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="isSaving"
+      >
+
+        <span
+          class="button-spinner"
+          *ngIf="isSaving"
+        ></span>
+
+        <span *ngIf="!isSaving">
+          ✓
+        </span>
+
+        {{
+          isSaving
+            ? 'Saving Changes...'
+            : 'Save Changes'
+        }}
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

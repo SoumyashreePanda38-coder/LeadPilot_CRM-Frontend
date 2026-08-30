@@ -1,1 +1,731 @@
-<p>add-lead works!</p>
+<div class="add-lead-page">
+
+  <!-- ====================================================== -->
+  <!-- OCEAN BACKGROUND -->
+  <!-- ====================================================== -->
+
+  <div class="ocean-bg">
+
+    <span class="pearl pearl-1"></span>
+    <span class="pearl pearl-2"></span>
+    <span class="pearl pearl-3"></span>
+    <span class="pearl pearl-4"></span>
+    <span class="pearl pearl-5"></span>
+    <span class="pearl pearl-6"></span>
+
+    <div class="wave wave-one"></div>
+    <div class="wave wave-two"></div>
+    <div class="wave wave-three"></div>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- MAIN CONTENT -->
+  <!-- ====================================================== -->
+
+  <div class="page-content">
+
+
+    <!-- ==================================================== -->
+    <!-- HEADER -->
+    <!-- ==================================================== -->
+
+    <div class="page-header">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()">
+
+        <i class="fas fa-arrow-left"></i>
+
+        <span>Back to Leads</span>
+
+      </button>
+
+
+      <div class="title-area">
+
+        <div class="title-icon">
+
+          <i class="fas fa-user-plus"></i>
+
+        </div>
+
+        <div>
+
+          <h1>Add Customer Lead</h1>
+
+          <p>
+            Create a new customer lead and add it to your CRM pipeline.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==================================================== -->
+    <!-- ALERTS -->
+    <!-- ==================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <i class="fas fa-check-circle"></i>
+
+      <span>{{ successMessage }}</span>
+
+    </div>
+
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <i class="fas fa-exclamation-circle"></i>
+
+      <span>{{ errorMessage }}</span>
+
+    </div>
+
+
+    <!-- ==================================================== -->
+    <!-- FORM CARD -->
+    <!-- ==================================================== -->
+
+    <form
+      #leadForm="ngForm"
+      (ngSubmit)="saveLead(leadForm)"
+      class="lead-form">
+
+
+      <!-- ================================================== -->
+      <!-- PERSONAL INFORMATION -->
+      <!-- ================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon personal-icon">
+            <i class="fas fa-user"></i>
+          </div>
+
+          <div>
+
+            <h2>Customer Information</h2>
+
+            <p>
+              Basic information about the potential customer.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- FULL NAME -->
+
+          <div class="form-group">
+
+            <label>
+              Full Name
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-user"></i>
+
+              <input
+                type="text"
+                name="fullName"
+                [(ngModel)]="lead.fullName"
+                required
+                maxlength="100"
+                placeholder="Enter customer's full name"
+                #fullName="ngModel"
+              />
+
+            </div>
+
+            <small
+              class="field-error"
+              *ngIf="fullName.invalid && fullName.touched">
+
+              Full name is required.
+
+            </small>
+
+          </div>
+
+
+          <!-- AGE -->
+
+          <div class="form-group">
+
+            <label>Age</label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-calendar-alt"></i>
+
+              <input
+                type="number"
+                name="age"
+                [(ngModel)]="lead.age"
+                min="1"
+                max="120"
+                placeholder="Enter age"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="form-group">
+
+            <label>
+              Phone Number
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-phone"></i>
+
+              <input
+                type="tel"
+                name="phoneNumber"
+                [(ngModel)]="lead.phoneNumber"
+                required
+                maxlength="15"
+                placeholder="Enter phone number"
+                #phoneNumber="ngModel"
+              />
+
+            </div>
+
+            <small
+              class="field-error"
+              *ngIf="phoneNumber.invalid && phoneNumber.touched">
+
+              Phone number is required.
+
+            </small>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label>Email Address</label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-envelope"></i>
+
+              <input
+                type="email"
+                name="email"
+                [(ngModel)]="lead.email"
+                email
+                maxlength="100"
+                placeholder="customer@example.com"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================================== -->
+      <!-- ADDRESS -->
+      <!-- ================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon location-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+
+          <div>
+
+            <h2>Location Details</h2>
+
+            <p>
+              Add the customer's address and location.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- ADDRESS -->
+
+          <div class="form-group full-width">
+
+            <label>Address</label>
+
+            <div class="textarea-wrapper">
+
+              <i class="fas fa-home"></i>
+
+              <textarea
+                name="address"
+                [(ngModel)]="lead.address"
+                maxlength="500"
+                rows="3"
+                placeholder="Enter complete address">
+              </textarea>
+
+            </div>
+
+          </div>
+
+
+          <!-- CITY -->
+
+          <div class="form-group">
+
+            <label>City</label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-city"></i>
+
+              <input
+                type="text"
+                name="city"
+                [(ngModel)]="lead.city"
+                maxlength="100"
+                placeholder="Enter city"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- STATE -->
+
+          <div class="form-group">
+
+            <label>State</label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-map"></i>
+
+              <input
+                type="text"
+                name="state"
+                [(ngModel)]="lead.state"
+                maxlength="100"
+                placeholder="Enter state"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- PINCODE -->
+
+          <div class="form-group">
+
+            <label>Pincode</label>
+
+            <div class="input-wrapper">
+
+              <i class="fas fa-location-arrow"></i>
+
+              <input
+                type="text"
+                name="pincode"
+                [(ngModel)]="lead.pincode"
+                maxlength="10"
+                placeholder="Enter pincode"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================================== -->
+      <!-- LEAD CLASSIFICATION -->
+      <!-- ================================================== -->
+
+      <section class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon classification-icon">
+            <i class="fas fa-layer-group"></i>
+          </div>
+
+          <div>
+
+            <h2>Lead Classification</h2>
+
+            <p>
+              Categorize and identify the source of this lead.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- CATEGORY -->
+
+          <div class="form-group">
+
+            <label>
+              Lead Category
+              <span>*</span>
+            </label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-folder"></i>
+
+              <select
+                name="categoryId"
+                [(ngModel)]="lead.categoryId"
+                title="Select lead category"
+                aria-label="Select lead category"
+                required
+                (change)="onCategoryChange()">
+
+                <option [ngValue]="null">
+                  Select category
+                </option>
+
+                <option
+                  *ngFor="let category of categories"
+                  [ngValue]="category.categoryId">
+
+                  {{ category.categoryName }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+
+          <!-- SUBCATEGORY -->
+
+          <div class="form-group">
+
+            <label>
+              Lead Subcategory
+              <span>*</span>
+            </label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-folder-open"></i>
+
+              <select
+                name="subCategoryId"
+                [(ngModel)]="lead.subCategoryId"
+                title="Select lead subcategory"
+                aria-label="Select lead subcategory"
+                required
+                [disabled]="!lead.categoryId || loadingSubCategories">
+
+                <option [ngValue]="null">
+
+                  {{
+                    loadingSubCategories
+                      ? 'Loading subcategories...'
+                      : 'Select subcategory'
+                  }}
+
+                </option>
+
+                <option
+                  *ngFor="let subCategory of subCategories"
+                  [ngValue]="subCategory.subCategoryId">
+
+                  {{ subCategory.subCategoryName }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+
+          <!-- SOURCE -->
+
+          <div class="form-group">
+
+            <label>
+              Lead Source
+              <span>*</span>
+            </label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-bullseye"></i>
+
+              <select
+                name="leadSourceId"
+                [(ngModel)]="lead.leadSourceId"
+                title="Select lead source"
+                required>
+
+                <option [ngValue]="null">
+                  Select lead source
+                </option>
+
+                <option
+                  *ngFor="let source of sources"
+                  [ngValue]="source.leadSourceId">
+
+                  {{ source.sourceName }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+
+          <!-- STATUS -->
+
+          <div class="form-group">
+
+            <label>
+              Lead Status
+              <span>*</span>
+            </label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-chart-line"></i>
+
+              <select
+                name="leadStatus"
+                [(ngModel)]="lead.leadStatus"
+                title="Select lead status"
+                required>
+
+                <option
+                  *ngFor="let status of leadStatuses"
+                  [ngValue]="status">
+
+                  {{ formatEnum(status) }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+
+          <!-- PRIORITY -->
+
+          <div class="form-group">
+
+            <label>
+              Lead Priority
+              <span>*</span>
+            </label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-fire"></i>
+
+              <select
+                name="leadPriority"
+                [(ngModel)]="lead.leadPriority"
+                title="Select lead priority"
+                aria-label="Select lead priority"
+                required>
+
+                <option
+                  *ngFor="let priority of leadPriorities"
+                  [ngValue]="priority">
+
+                  {{ formatEnum(priority) }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+
+          <!-- ASSIGNED EXECUTIVE -->
+
+          <div class="form-group">
+
+            <label>Assigned Executive</label>
+
+            <div class="select-wrapper">
+
+              <i class="fas fa-user-tie"></i>
+
+              <select
+                name="assignedUserId"
+                [(ngModel)]="lead.assignedUserId"
+                title="Select assigned executive">
+
+                <option [ngValue]="null">
+                  Unassigned
+                </option>
+
+                <option
+                  *ngFor="let executive of executives"
+                  [ngValue]="executive.id">
+
+                  {{ executive.fullName }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================================================== -->
+      <!-- FORM ACTIONS -->
+      <!-- ================================================== -->
+
+      <div class="form-actions">
+
+
+        <!-- CANCEL -->
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="goBack()">
+
+          <i class="fas fa-times"></i>
+
+          Cancel
+
+        </button>
+
+
+        <!-- RESET -->
+
+        <button
+          type="button"
+          class="reset-btn"
+          (click)="resetForm(leadForm)">
+
+          <i class="fas fa-redo"></i>
+
+          Reset
+
+        </button>
+
+
+        <!-- ================================================= -->
+        <!-- CREATE LEAD WITH WATER RIPPLE -->
+        <!-- ================================================= -->
+
+        <button
+          type="submit"
+          class="save-btn ripple-button"
+          [disabled]="isSaving"
+          (click)="createRipple($event)">
+
+          <span class="button-water"></span>
+
+          <span class="button-content">
+
+            <span *ngIf="!isSaving">
+
+              <i class="fas fa-water"></i>
+
+              Create Lead
+
+            </span>
+
+            <span *ngIf="isSaving">
+
+              <i class="fas fa-spinner fa-spin"></i>
+
+              Creating...
+
+            </span>
+
+          </span>
+
+        </button>
+
+
+      </div>
+
+
+    </form>
+
+  </div>
+
+</div>

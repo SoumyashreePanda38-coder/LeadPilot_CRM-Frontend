@@ -7,22 +7,16 @@
     <div class="sidebar-header">
 
         <div class="logo">
-
             <i class="bi bi-graph-up-arrow"></i>
-
         </div>
 
         <div class="brand">
-
             <h3>LeadPilot</h3>
-
             <span>CRM Administrator</span>
-
         </div>
 
     </div>
 
-    
 
     <!-- ========================================= -->
     <!-- Navigation -->
@@ -30,13 +24,17 @@
 
     <ul class="sidebar-menu">
 
+
+        <!-- ========================================= -->
         <!-- Dashboard -->
+        <!-- ========================================= -->
 
         <li>
 
             <a
                 routerLink="/admin/dashboard"
-                routerLinkActive="active">
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
 
                 <i class="bi bi-speedometer2"></i>
 
@@ -46,13 +44,17 @@
 
         </li>
 
+
+        <!-- ========================================= -->
         <!-- Lead Management -->
+        <!-- ========================================= -->
 
         <li class="menu-title">
-
             Lead Management
-
         </li>
+
+
+        <!-- Customer Leads -->
 
         <li>
 
@@ -68,6 +70,9 @@
 
         </li>
 
+
+        <!-- Follow Ups -->
+
         <li>
 
             <a
@@ -81,6 +86,9 @@
             </a>
 
         </li>
+
+
+        <!-- Reminders -->
 
         <li>
 
@@ -96,13 +104,77 @@
 
         </li>
 
-        <!-- Users -->
+
+        <!-- ========================================= -->
+        <!-- Lead Configuration -->
+        <!-- ========================================= -->
 
         <li class="menu-title">
+            Lead Configuration
+        </li>
 
-            Administration
+
+        <!-- Lead Category -->
+
+        <li>
+
+            <a
+                routerLink="/admin/lead-configuration/category"
+                routerLinkActive="active">
+
+                <i class="bi bi-tags-fill"></i>
+
+                <span>Lead Category</span>
+
+            </a>
 
         </li>
+
+
+        <!-- Lead Subcategory -->
+
+        <li>
+
+            <a
+                routerLink="/admin/lead-configuration/subcategory"
+                routerLinkActive="active">
+
+                <i class="bi bi-diagram-3-fill"></i>
+
+                <span>Lead Subcategory</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- Lead Source -->
+
+        <li>
+
+            <a
+                routerLink="/admin/lead-configuration/source"
+                routerLinkActive="active">
+
+                <i class="bi bi-broadcast-pin"></i>
+
+                <span>Lead Source</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- ========================================= -->
+        <!-- Administration -->
+        <!-- ========================================= -->
+
+        <li class="menu-title">
+            Administration
+        </li>
+
+
+        <!-- Manage Users -->
 
         <li>
 
@@ -118,9 +190,10 @@
 
         </li>
 
+
         <!-- Reports -->
 
-        <li>
+        <!--<li>
 
             <a
                 routerLink="/admin/reports"
@@ -132,7 +205,8 @@
 
             </a>
 
-        </li>
+        </li>-->
+
 
         <!-- Settings -->
 
@@ -150,6 +224,7 @@
 
         </li>
 
+
         <!-- Profile -->
 
         <li>
@@ -166,11 +241,7 @@
 
         </li>
 
+
     </ul>
-
-    
-
-
-  
 
 </div>

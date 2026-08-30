@@ -1,0 +1,529 @@
+<div class="category-page">
+
+  <!-- ===================================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="header-icon">
+        <i class="bi bi-grid-3x3-gap-fill"></i>
+      </div>
+
+      <div>
+        <div class="breadcrumb">
+          <span>Lead Management</span>
+          <i class="bi bi-chevron-right"></i>
+          <span>Configuration</span>
+        </div>
+
+        <h1>Lead Categories</h1>
+
+        <p>
+          Organize and manage the categories used to classify customer leads.
+        </p>
+      </div>
+
+    </div>
+
+    <button
+      class="add-category-btn"
+      type="button"
+      (click)="addCategory()">
+
+      <i class="bi bi-plus-lg"></i>
+
+      <span>Add Category</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- STATISTICS -->
+  <!-- ===================================================== -->
+
+  <div class="stats-grid">
+
+    <!-- Total -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon total">
+        <i class="bi bi-collection-fill"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Total Categories
+        </span>
+
+        <strong>
+          {{ categories?.length || 0 }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- Active -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon active">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Active
+        </span>
+
+        <strong>
+          {{ getActiveCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- Inactive -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon inactive">
+        <i class="bi bi-pause-circle-fill"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Inactive
+        </span>
+
+        <strong>
+          {{ getInactiveCount() }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- Display Order -->
+
+    <div class="stat-card">
+
+      <div class="stat-icon order">
+        <i class="bi bi-sort-numeric-down"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Configured
+        </span>
+
+        <strong>
+          {{ categories?.length || 0 }}
+        </strong>
+
+      </div>
+
+      <div class="stat-decoration"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- MAIN CONTENT CARD -->
+  <!-- ===================================================== -->
+
+  <div class="content-card">
+
+    <!-- =================================================== -->
+    <!-- TOOLBAR -->
+    <!-- =================================================== -->
+
+    <div class="toolbar">
+
+      <div class="toolbar-title">
+
+        <div class="title-icon">
+          <i class="bi bi-list-ul"></i>
+        </div>
+
+        <div>
+
+          <h2>Category Directory</h2>
+
+          <span>
+            Manage your lead classification structure
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="toolbar-actions">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            placeholder="Search categories..."
+            aria-label="Search categories"
+          />
+
+          <button
+            *ngIf="searchTerm"
+            type="button"
+            class="clear-search"
+            (click)="searchTerm = ''">
+
+            <i class="bi bi-x"></i>
+
+          </button>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="filter-box">
+
+          <i class="bi bi-funnel"></i>
+
+          <select
+            [(ngModel)]="selectedStatus">
+
+            <option value="ALL">
+              All Status
+            </option>
+
+            <option value="ACTIVE">
+              Active
+            </option>
+
+            <option value="INACTIVE">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- TABLE -->
+    <!-- =================================================== -->
+
+    <div
+      class="table-container"
+      *ngIf="filteredCategories?.length; else emptyState">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th class="number-column">
+              #
+            </th>
+
+            <th>
+              CATEGORY
+            </th>
+
+            <th>
+              DESCRIPTION
+            </th>
+
+            <th class="order-column">
+              DISPLAY ORDER
+            </th>
+
+            <th>
+              STATUS
+            </th>
+
+            <th>
+              LAST UPDATED
+            </th>
+
+            <th class="action-column">
+              ACTIONS
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let category of filteredCategories;
+              let i = index
+            "
+            class="category-row">
+
+            <!-- Number -->
+
+            <td class="number-cell">
+
+              <span class="row-number">
+                {{ i + 1 }}
+              </span>
+
+            </td>
+
+
+            <!-- Category -->
+
+            <td>
+
+              <div class="category-info">
+
+                <div class="category-avatar">
+                  <i class="bi bi-grid-fill"></i>
+                </div>
+
+                <div class="category-details">
+
+                  <strong>
+                    {{ category.categoryName }}
+                  </strong>
+
+                  <span>
+                    ID #{{ category.categoryId }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Description -->
+
+            <td>
+
+              <div
+                class="description"
+                [title]="category.description">
+
+                {{ category.description || 'No description added' }}
+
+              </div>
+
+            </td>
+
+
+            <!-- Display Order -->
+
+            <td class="order-cell">
+
+              <span class="order-badge">
+
+                {{ category.displayOrder || '-' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'active': category.status === 'ACTIVE',
+                  'inactive': category.status === 'INACTIVE'
+                }">
+
+                <span class="status-dot"></span>
+
+                {{ category.status }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Updated -->
+
+            <td>
+
+              <div class="updated-date">
+
+                <i class="bi bi-clock-history"></i>
+
+                <span>
+                  {{ category.updatedAt | date:'dd MMM yyyy' }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="action-btn edit"
+                  title="Edit Category"
+                  (click)="editCategory(category.categoryId)">
+
+                  <i class="bi bi-pencil-square"></i>
+
+                </button>
+
+
+                <button
+                  *ngIf="category.status === 'ACTIVE'"
+                  type="button"
+                  class="action-btn deactivate"
+                  title="Deactivate Category"
+                  (click)="toggleStatus(category)">
+
+                  <i class="bi bi-pause-circle"></i>
+
+                </button>
+
+
+                <button
+                  *ngIf="category.status === 'INACTIVE'"
+                  type="button"
+                  class="action-btn activate"
+                  title="Activate Category"
+                  (click)="toggleStatus(category)">
+
+                  <i class="bi bi-play-circle"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- EMPTY STATE -->
+    <!-- =================================================== -->
+
+    <ng-template #emptyState>
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+
+          <i class="bi bi-grid-3x3-gap"></i>
+
+        </div>
+
+        <h3>No Categories Found</h3>
+
+        <p>
+          There are no lead categories matching your current search
+          or filter.
+        </p>
+
+        <button
+          type="button"
+          class="empty-btn"
+          (click)="addCategory()">
+
+          <i class="bi bi-plus-lg"></i>
+
+          Create First Category
+
+        </button>
+
+      </div>
+
+    </ng-template>
+
+
+    <!-- =================================================== -->
+    <!-- FOOTER -->
+    <!-- =================================================== -->
+
+    <div
+      class="table-footer"
+      *ngIf="filteredCategories?.length">
+
+      <div class="results-info">
+
+        Showing
+
+        <strong>
+          {{ filteredCategories.length }}
+        </strong>
+
+        of
+
+        <strong>
+          {{ categories?.length || 0 }}
+        </strong>
+
+        categories
+
+      </div>
+
+      <div class="footer-status">
+
+        <span class="online-dot"></span>
+
+        Configuration synced
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,1 +1,364 @@
-<p>edit-lead works!</p>
+<div class="edit-lead-page">
+
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+  <div class="glow glow-three"></div>
+
+  <div class="page-content">
+
+    <div class="page-header">
+
+      <button type="button" class="back-button" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Leads</span>
+      </button>
+
+      <div class="title-area">
+
+        <div class="title-icon">
+          <i class="fas fa-pen-to-square"></i>
+        </div>
+
+        <div>
+          <h1>Edit Customer Lead</h1>
+          <p>Update lead details, classification and assignment information.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="alert success-alert" *ngIf="successMessage">
+      <i class="fas fa-check-circle"></i>
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <div class="alert error-alert" *ngIf="errorMessage">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <form #leadForm="ngForm" (ngSubmit)="updateLead(leadForm)" class="lead-form">
+
+      <section class="form-section">
+
+        <div class="section-heading">
+          <div class="section-icon personal-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div>
+            <h2>Customer Information</h2>
+            <p>Keep the lead profile accurate and up to date.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Full Name <span>*</span></label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                name="fullName"
+                [(ngModel)]="lead.fullName"
+                required
+                maxlength="100"
+                placeholder="Enter customer's full name"
+                #fullName="ngModel"
+              />
+            </div>
+            <small class="field-error" *ngIf="fullName.invalid && fullName.touched">
+              Full name is required.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label>Age</label>
+            <div class="input-wrapper">
+              <i class="fas fa-calendar-alt"></i>
+              <input
+                type="number"
+                name="age"
+                [(ngModel)]="lead.age"
+                min="1"
+                max="120"
+                placeholder="Enter age"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number <span>*</span></label>
+            <div class="input-wrapper">
+              <i class="fas fa-phone"></i>
+              <input
+                type="tel"
+                name="phoneNumber"
+                [(ngModel)]="lead.phoneNumber"
+                required
+                maxlength="15"
+                placeholder="Enter phone number"
+                #phoneNumber="ngModel"
+              />
+            </div>
+            <small class="field-error" *ngIf="phoneNumber.invalid && phoneNumber.touched">
+              Phone number is required.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input
+                type="email"
+                name="email"
+                [(ngModel)]="lead.email"
+                email
+                maxlength="100"
+                placeholder="customer@example.com"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="form-section">
+
+        <div class="section-heading">
+          <div class="section-icon location-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h2>Location Details</h2>
+            <p>Update the customer address and area information.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+            <label>Address</label>
+            <div class="textarea-wrapper">
+              <i class="fas fa-house"></i>
+              <textarea
+                name="address"
+                [(ngModel)]="lead.address"
+                maxlength="500"
+                rows="3"
+                placeholder="Enter complete address"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>City</label>
+            <div class="input-wrapper">
+              <i class="fas fa-city"></i>
+              <input
+                type="text"
+                name="city"
+                [(ngModel)]="lead.city"
+                maxlength="100"
+                placeholder="Enter city"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>State</label>
+            <div class="input-wrapper">
+              <i class="fas fa-map"></i>
+              <input
+                type="text"
+                name="state"
+                [(ngModel)]="lead.state"
+                maxlength="100"
+                placeholder="Enter state"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Pincode</label>
+            <div class="input-wrapper">
+              <i class="fas fa-location-arrow"></i>
+              <input
+                type="text"
+                name="pincode"
+                [(ngModel)]="lead.pincode"
+                maxlength="10"
+                placeholder="Enter pincode"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="form-section">
+
+        <div class="section-heading">
+          <div class="section-icon classification-icon">
+            <i class="fas fa-layer-group"></i>
+          </div>
+          <div>
+            <h2>Lead Classification</h2>
+            <p>Adjust lead source, category, priority and executive assignment.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Lead Category <span>*</span></label>
+            <div class="select-wrapper">
+              <i class="fas fa-folder"></i>
+              <select
+                name="categoryId"
+                [(ngModel)]="lead.categoryId"
+                required
+                (change)="onCategoryChange()"
+              >
+                <option [ngValue]="null">Select category</option>
+                <option *ngFor="let category of categories" [ngValue]="category.categoryId">
+                  {{ category.categoryName }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Lead Subcategory <span>*</span></label>
+            <div class="select-wrapper">
+              <i class="fas fa-folder-open"></i>
+              <select
+                name="subCategoryId"
+                [(ngModel)]="lead.subCategoryId"
+                required
+                [disabled]="!lead.categoryId || loadingSubCategories"
+              >
+                <option [ngValue]="null">
+                  {{ loadingSubCategories ? 'Loading subcategories...' : 'Select subcategory' }}
+                </option>
+                <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory.subCategoryId">
+                  {{ subCategory.subCategoryName }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Lead Source <span>*</span></label>
+            <div class="select-wrapper">
+              <i class="fas fa-bullseye"></i>
+              <select
+                name="leadSourceId"
+                [(ngModel)]="lead.leadSourceId"
+                required
+              >
+                <option [ngValue]="null">Select lead source</option>
+                <option *ngFor="let source of sources" [ngValue]="source.leadSourceId">
+                  {{ source.sourceName }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Lead Status <span>*</span></label>
+            <div class="select-wrapper">
+              <i class="fas fa-chart-line"></i>
+              <select
+                name="leadStatus"
+                [(ngModel)]="lead.leadStatus"
+                required
+              >
+                <option *ngFor="let status of leadStatuses" [ngValue]="status">
+                  {{ formatEnum(status) }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Lead Priority <span>*</span></label>
+            <div class="select-wrapper">
+              <i class="fas fa-fire"></i>
+              <select
+                name="leadPriority"
+                [(ngModel)]="lead.leadPriority"
+                required
+              >
+                <option *ngFor="let priority of leadPriorities" [ngValue]="priority">
+                  {{ formatEnum(priority) }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Assigned Executive</label>
+            <div class="select-wrapper">
+              <i class="fas fa-user-tie"></i>
+              <select name="assignedUserId" [(ngModel)]="lead.assignedUserId">
+                <option [ngValue]="null">Unassigned</option>
+                <option *ngFor="let executive of executives" [ngValue]="executive.id">
+                  {{ executive.fullName }}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="form-actions">
+
+        <button type="button" class="cancel-btn" (click)="goBack()">
+          <i class="fas fa-times"></i>
+          Cancel
+        </button>
+
+        <button type="button" class="reset-btn" (click)="resetForm(leadForm)">
+          <i class="fas fa-rotate-right"></i>
+          Reset
+        </button>
+
+        <button
+          type="submit"
+          class="save-btn ripple-button"
+          [disabled]="isSaving"
+          (click)="createRipple($event)"
+        >
+          <span class="button-water"></span>
+          <span class="button-content">
+            <span *ngIf="!isSaving">
+              <i class="fas fa-save"></i>
+              Update Lead
+            </span>
+            <span *ngIf="isSaving">
+              <i class="fas fa-spinner fa-spin"></i>
+              Updating...
+            </span>
+          </span>
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

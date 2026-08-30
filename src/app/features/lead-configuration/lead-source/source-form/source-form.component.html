@@ -1,0 +1,503 @@
+<div class="source-form-page">
+
+  <!-- ====================================================== -->
+  <!-- BACKGROUND DECORATION -->
+  <!-- ====================================================== -->
+
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <div class="background-glow glow-three"></div>
+
+
+  <!-- ====================================================== -->
+  <!-- PAGE CONTAINER -->
+  <!-- ====================================================== -->
+
+  <div class="form-container">
+
+    <!-- ==================================================== -->
+    <!-- BACK BUTTON -->
+    <!-- ==================================================== -->
+
+    <button
+      type="button"
+      class="back-button"
+      (click)="goBack()">
+
+      <i class="fas fa-arrow-left"></i>
+
+      <span>Back to Sources</span>
+
+    </button>
+
+
+    <!-- ==================================================== -->
+    <!-- HEADER -->
+    <!-- ==================================================== -->
+
+    <div class="form-header">
+
+      <div class="header-icon">
+
+        <i class="fas fa-bullseye"></i>
+
+      </div>
+
+      <div class="header-text">
+
+        <span class="eyebrow">
+          LEAD CONFIGURATION
+        </span>
+
+        <h1>
+          {{ isEditMode ? 'Edit Lead Source' : 'Create Lead Source' }}
+        </h1>
+
+        <p>
+          {{ isEditMode
+            ? 'Update the details of this lead source.'
+            : 'Add a new source through which your leads are generated.' }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==================================================== -->
+    <!-- SUCCESS MESSAGE -->
+    <!-- ==================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <div class="alert-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+
+      <div class="alert-content">
+        <strong>Success</strong>
+        <span>{{ successMessage }}</span>
+      </div>
+
+      <button
+        type="button"
+        (click)="successMessage = ''">
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ==================================================== -->
+    <!-- ERROR MESSAGE -->
+    <!-- ==================================================== -->
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <div class="alert-icon">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+
+      <div class="alert-content">
+        <strong>Error</strong>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <button
+        type="button"
+        (click)="errorMessage = ''">
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ==================================================== -->
+    <!-- FORM CARD -->
+    <!-- ==================================================== -->
+
+    <div class="form-card">
+
+      <!-- TOP GLOW LINE -->
+
+      <div class="card-glow-line"></div>
+
+
+      <form
+        [formGroup]="sourceForm"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+
+
+        <!-- ================================================ -->
+        <!-- SOURCE INFORMATION -->
+        <!-- ================================================ -->
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+
+          <div>
+            <h2>Source Information</h2>
+
+            <p>
+              Enter the basic information about this lead source.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- ================================================ -->
+        <!-- SOURCE NAME -->
+        <!-- ================================================ -->
+
+        <div class="form-group">
+
+          <label for="sourceName">
+
+            <i class="fas fa-tag"></i>
+
+            Source Name
+
+            <span class="required">*</span>
+
+          </label>
+
+          <div
+            class="input-wrapper"
+            [class.input-error]="
+              sourceForm.get('sourceName')?.invalid &&
+              sourceForm.get('sourceName')?.touched
+            "
+            [class.input-valid]="
+              sourceForm.get('sourceName')?.valid &&
+              sourceForm.get('sourceName')?.touched
+            ">
+
+            <i class="fas fa-bullseye input-icon"></i>
+
+            <input
+              id="sourceName"
+              type="text"
+              formControlName="sourceName"
+              placeholder="Enter source name"
+              maxlength="100"
+              autocomplete="off"
+            />
+
+            <span class="character-count">
+              {{ sourceForm.get('sourceName')?.value?.length || 0 }}/100
+            </span>
+
+          </div>
+
+          <div
+            class="field-error"
+            *ngIf="
+              sourceForm.get('sourceName')?.touched &&
+              sourceForm.get('sourceName')?.hasError('required')
+            ">
+
+            <i class="fas fa-exclamation-circle"></i>
+
+            Source name is required.
+
+          </div>
+
+          <div
+            class="field-error"
+            *ngIf="
+              sourceForm.get('sourceName')?.touched &&
+              sourceForm.get('sourceName')?.hasError('maxlength')
+            ">
+
+            <i class="fas fa-exclamation-circle"></i>
+
+            Source name cannot exceed 100 characters.
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================ -->
+        <!-- DESCRIPTION -->
+        <!-- ================================================ -->
+
+        <div class="form-group">
+
+          <label for="description">
+
+            <i class="fas fa-align-left"></i>
+
+            Description
+
+            <span class="optional">
+              Optional
+            </span>
+
+          </label>
+
+          <div
+            class="textarea-wrapper"
+            [class.input-error]="
+              sourceForm.get('description')?.invalid &&
+              sourceForm.get('description')?.touched
+            ">
+
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Describe this lead source..."
+              maxlength="500"
+              rows="5">
+            </textarea>
+
+            <span class="character-count textarea-count">
+              {{ sourceForm.get('description')?.value?.length || 0 }}/500
+            </span>
+
+          </div>
+
+          <div
+            class="field-error"
+            *ngIf="
+              sourceForm.get('description')?.touched &&
+              sourceForm.get('description')?.hasError('maxlength')
+            ">
+
+            <i class="fas fa-exclamation-circle"></i>
+
+            Description cannot exceed 500 characters.
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================ -->
+        <!-- TWO COLUMN ROW -->
+        <!-- ================================================ -->
+
+        <div class="form-row">
+
+
+          <!-- ============================================== -->
+          <!-- DISPLAY ORDER -->
+          <!-- ============================================== -->
+
+          <div class="form-group">
+
+            <label for="displayOrder">
+
+              <i class="fas fa-sort-numeric-down"></i>
+
+              Display Order
+
+              <span class="required">*</span>
+
+            </label>
+
+            <div
+              class="input-wrapper"
+              [class.input-error]="
+                sourceForm.get('displayOrder')?.invalid &&
+                sourceForm.get('displayOrder')?.touched
+              ">
+
+              <i class="fas fa-list-ol input-icon"></i>
+
+              <input
+                id="displayOrder"
+                type="number"
+                formControlName="displayOrder"
+                placeholder="Enter display order"
+                min="1"
+              />
+
+            </div>
+
+            <small class="field-hint">
+              <i class="fas fa-lightbulb"></i>
+              Determines the order in which sources are displayed.
+            </small>
+
+            <div
+              class="field-error"
+              *ngIf="
+                sourceForm.get('displayOrder')?.touched &&
+                sourceForm.get('displayOrder')?.hasError('min')
+              ">
+
+              <i class="fas fa-exclamation-circle"></i>
+
+              Display order must be greater than 0.
+
+            </div>
+
+            <div
+              class="field-error"
+              *ngIf="
+                sourceForm.get('displayOrder')?.touched &&
+                sourceForm.get('displayOrder')?.hasError('required')
+              ">
+
+              <i class="fas fa-exclamation-circle"></i>
+
+              Display order is required.
+
+            </div>
+
+          </div>
+
+
+          <!-- ============================================== -->
+          <!-- STATUS -->
+          <!-- ============================================== -->
+
+          <div class="form-group">
+
+            <label for="status">
+
+              <i class="fas fa-toggle-on"></i>
+
+              Status
+
+              <span class="required">*</span>
+
+            </label>
+
+            <div
+              class="select-wrapper"
+              [class.input-error]="
+                sourceForm.get('status')?.invalid &&
+                sourceForm.get('status')?.touched
+              ">
+
+              <i class="fas fa-circle input-icon"></i>
+
+              <select
+                id="status"
+                formControlName="status">
+
+                <option value="">
+                  Select status
+                </option>
+
+                <option [value]="LeadCategoryStatus.ACTIVE">
+                  Active
+                </option>
+
+                <option [value]="LeadCategoryStatus.INACTIVE">
+                  Inactive
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+            <small class="field-hint">
+              <i class="fas fa-info-circle"></i>
+              Inactive sources cannot be selected for new leads.
+            </small>
+
+            <div
+              class="field-error"
+              *ngIf="
+                sourceForm.get('status')?.touched &&
+                sourceForm.get('status')?.hasError('required')
+              ">
+
+              <i class="fas fa-exclamation-circle"></i>
+
+              Source status is required.
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================ -->
+        <!-- FORM FOOTER -->
+        <!-- ================================================ -->
+
+        <div class="form-footer">
+
+          <div class="footer-note">
+
+            <i class="fas fa-shield-alt"></i>
+
+            <span>
+              All source information is securely managed.
+            </span>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <!-- CANCEL -->
+
+            <button
+              type="button"
+              class="cancel-button"
+              (click)="goBack()">
+
+              <i class="fas fa-times"></i>
+
+              <span>Cancel</span>
+
+            </button>
+
+
+            <!-- SAVE -->
+
+            <button
+              type="submit"
+              class="save-button"
+              [disabled]="isSaving">
+
+              <span
+                class="button-spinner"
+                *ngIf="isSaving">
+              </span>
+
+              <i
+                class="fas fa-save"
+                *ngIf="!isSaving">
+              </i>
+
+              <span>
+                {{ isSaving
+                  ? 'Saving...'
+                  : (isEditMode ? 'Update Source' : 'Create Source') }}
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

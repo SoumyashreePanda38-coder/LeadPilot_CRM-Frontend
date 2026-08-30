@@ -8,6 +8,12 @@ const routes: Routes = [
 
   {
     path: '',
+    redirectTo: 'general',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'general',
     component: GeneralSettingsComponent
   },
 
@@ -19,7 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
-export class SettingsRoutingModule { }
+export class SettingsRoutingModule {}

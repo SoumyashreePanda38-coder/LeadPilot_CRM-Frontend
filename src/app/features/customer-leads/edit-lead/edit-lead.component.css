@@ -1,0 +1,1568 @@
+/* ============================================================
+   EDIT LEAD — VIOLET GOLD ELEGANCE
+   Luxurious • Purple • Golden Shine • Modern CRM UI
+   ============================================================ */
+
+:host {
+  display: block;
+}
+
+
+/* ============================================================
+   MAIN PAGE
+   ============================================================ */
+
+.edit-lead-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 32px;
+
+  font-family: "Poppins", sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 85% 8%,
+      rgba(255, 204, 92, 0.18),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(178, 110, 255, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #12091f 0%,
+      #211039 18%,
+      #37165d 38%,
+      #542078 55%,
+      #35154f 74%,
+      #160a25 100%
+    );
+
+  color: #f8efff;
+}
+
+
+/* ============================================================
+   BACKGROUND SHINE
+   ============================================================ */
+
+.edit-lead-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 215, 126, 0.025) 35%,
+      rgba(255, 255, 255, 0.045) 50%,
+      rgba(255, 215, 126, 0.02) 65%,
+      transparent 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   DECORATIVE GLOWS
+   ============================================================ */
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.glow-one {
+  width: 280px;
+  height: 280px;
+
+  top: -90px;
+  right: 8%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 211, 102, 0.25),
+      rgba(255, 185, 55, 0.08),
+      transparent 70%
+    );
+
+  animation: goldenFloat 8s ease-in-out infinite;
+}
+
+.glow-two {
+  width: 340px;
+  height: 340px;
+
+  bottom: -120px;
+  left: -80px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(173, 94, 255, 0.24),
+      rgba(126, 62, 211, 0.08),
+      transparent 70%
+    );
+
+  animation: purpleFloat 10s ease-in-out infinite;
+}
+
+.glow-three {
+  width: 180px;
+  height: 180px;
+
+  top: 42%;
+  left: 48%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 218, 132, 0.08),
+      transparent 70%
+    );
+
+  filter: blur(35px);
+
+  animation: centerGlow 7s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   GLOW ANIMATIONS
+   ============================================================ */
+
+@keyframes goldenFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translate(-25px, 20px);
+    opacity: 1;
+  }
+}
+
+@keyframes purpleFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translate(30px, -20px);
+    opacity: 0.95;
+  }
+}
+
+@keyframes centerGlow {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
+
+
+/* ============================================================
+   PAGE CONTENT
+   ============================================================ */
+
+.page-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1250px, 100%);
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+   ============================================================ */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 11px 18px;
+
+  border: 1px solid rgba(255, 221, 145, 0.18);
+  border-radius: 16px;
+
+  color: #f9dda0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.035)
+    );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.back-button i {
+  color: #ffd36b;
+  transition: transform 0.25s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+
+  border-color: rgba(255, 211, 107, 0.4);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 211, 107, 0.12),
+      rgba(255, 255, 255, 0.06)
+    );
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.28),
+    0 0 25px rgba(255, 196, 70, 0.08);
+}
+
+.back-button:hover i {
+  transform: translateX(-3px);
+}
+
+
+/* ============================================================
+   TITLE AREA
+   ============================================================ */
+
+.title-area {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 24px;
+}
+
+
+/* ============================================================
+   TITLE ICON
+   ============================================================ */
+
+.title-icon {
+  width: 68px;
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 21px;
+
+  color: #321642;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff2bd 0%,
+      #ffd86f 35%,
+      #eeb344 68%,
+      #b96e1c 100%
+    );
+
+  box-shadow:
+    0 18px 35px rgba(255, 190, 63, 0.25),
+    0 0 30px rgba(255, 204, 91, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 5px rgba(111, 59, 0, 0.15);
+
+  transform: rotate(-4deg);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.title-icon:hover {
+  transform: rotate(0deg) scale(1.04);
+
+  box-shadow:
+    0 20px 40px rgba(255, 190, 63, 0.32),
+    0 0 35px rgba(255, 204, 91, 0.18),
+    inset 0 2px 5px rgba(255, 255, 255, 0.9);
+}
+
+.title-icon i {
+  font-size: 28px;
+  transform: rotate(4deg);
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.title-area h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  color: #fffaf0;
+
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+
+  text-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(255, 211, 105, 0.08);
+}
+
+.title-area p {
+  margin: 6px 0 0;
+
+  color: rgba(241, 224, 255, 0.75);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 18px;
+  padding: 14px 18px;
+
+  border-radius: 17px;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  animation: alertIn 0.35s ease;
+}
+
+.alert i {
+  font-size: 16px;
+}
+
+@keyframes alertIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-alert {
+  color: #e9fff8;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(24, 139, 108, 0.22),
+      rgba(24, 92, 76, 0.15)
+    );
+
+  border: 1px solid rgba(104, 242, 198, 0.35);
+
+  box-shadow:
+    0 12px 28px rgba(0, 255, 194, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.success-alert i {
+  color: #74f4c8;
+}
+
+.error-alert {
+  color: #fff1f4;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(174, 45, 79, 0.22),
+      rgba(99, 27, 50, 0.15)
+    );
+
+  border: 1px solid rgba(255, 137, 166, 0.35);
+
+  box-shadow:
+    0 12px 28px rgba(255, 70, 120, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.error-alert i {
+  color: #ff91ac;
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+
+/* ============================================================
+   FORM SECTION
+   ============================================================ */
+
+.form-section {
+  position: relative;
+
+  padding: 28px;
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(24, 13, 40, 0.88),
+      rgba(55, 26, 76, 0.82) 55%,
+      rgba(38, 18, 57, 0.9)
+    );
+
+  border: 1px solid rgba(221, 186, 255, 0.14);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 25px 55px rgba(8, 3, 16, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    inset 0 -1px 0 rgba(255, 203, 92, 0.035);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+/* Top golden shine */
+
+.form-section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 7%;
+  right: 7%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 213, 113, 0.18),
+      rgba(255, 231, 167, 0.65),
+      rgba(255, 213, 113, 0.18),
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px rgba(255, 207, 99, 0.18);
+}
+
+
+/* Corner glow */
+
+.form-section::after {
+  content: "";
+
+  position: absolute;
+
+  right: -85px;
+  top: -85px;
+
+  width: 190px;
+  height: 190px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 207, 100, 0.18),
+      rgba(172, 108, 255, 0.07),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+.form-section:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255, 211, 113, 0.19);
+
+  box-shadow:
+    0 30px 65px rgba(8, 3, 16, 0.48),
+    0 0 30px rgba(163, 87, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+
+.section-heading {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+
+/* ============================================================
+   SECTION ICON
+   ============================================================ */
+
+.section-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  color: #ffffff;
+
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.42),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.22);
+}
+
+.personal-icon {
+  background:
+    linear-gradient(
+      135deg,
+      #e5b5ff,
+      #a45be8 48%,
+      #6533ad 100%
+    );
+}
+
+.location-icon {
+  background:
+    linear-gradient(
+      135deg,
+      #ffe99d,
+      #efbd4d 48%,
+      #a96818 100%
+    );
+}
+
+.classification-icon {
+  background:
+    linear-gradient(
+      135deg,
+      #d2a7ff,
+      #8859db 48%,
+      #5630a0 100%
+    );
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #ffe7a5;
+
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.section-heading p {
+  margin: 4px 0 0;
+
+  color: rgba(228, 211, 249, 0.68);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   FORM GRID
+   ============================================================ */
+
+.form-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px 20px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   FORM GROUP
+   ============================================================ */
+
+.form-group {
+  min-width: 0;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #efd8ff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+.form-group label span {
+  color: #ffd56f;
+
+  margin-left: 2px;
+}
+
+
+/* ============================================================
+   WRAPPERS
+   ============================================================ */
+
+.input-wrapper,
+.textarea-wrapper,
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+
+/* ============================================================
+   LEFT ICON
+   ============================================================ */
+
+.input-wrapper > i:first-child,
+.textarea-wrapper > i:first-child,
+.select-wrapper > i:first-child {
+  position: absolute;
+
+  left: 15px;
+  top: 50%;
+
+  z-index: 3;
+
+  transform: translateY(-50%);
+
+  color: #eec45f;
+
+  font-size: 13px;
+
+  pointer-events: none;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* ============================================================
+   INPUT / SELECT / TEXTAREA
+   ============================================================ */
+
+.input-wrapper input,
+.select-wrapper select,
+.textarea-wrapper textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  outline: none;
+
+  border: 1px solid rgba(205, 173, 246, 0.2);
+
+  border-radius: 15px;
+
+  color: #f7efff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37, 21, 57, 0.95),
+      rgba(61, 34, 81, 0.9)
+    );
+
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.035),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    background 0.25s ease;
+}
+
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+
+.input-wrapper input,
+.select-wrapper select {
+  height: 48px;
+
+  padding:
+    0 42px
+    0 42px;
+}
+
+
+/* ============================================================
+   TEXTAREA
+   ============================================================ */
+
+.textarea-wrapper textarea {
+  min-height: 92px;
+
+  padding:
+    14px
+    16px
+    14px
+    42px;
+
+  resize: vertical;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+   ============================================================ */
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(216, 195, 245, 0.48);
+}
+
+
+/* ============================================================
+   FOCUS
+   ============================================================ */
+
+.input-wrapper input:focus,
+.select-wrapper select:focus,
+.textarea-wrapper textarea:focus {
+  border-color: rgba(255, 211, 105, 0.7);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(48, 27, 68, 0.98),
+      rgba(72, 40, 96, 0.94)
+    );
+
+  box-shadow:
+    0 0 0 3px rgba(255, 205, 92, 0.09),
+    0 0 20px rgba(255, 205, 92, 0.07),
+    0 12px 25px rgba(0, 0, 0, 0.16);
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   ICON FOCUS
+   ============================================================ */
+
+.input-wrapper:focus-within > i:first-child,
+.textarea-wrapper:focus-within > i:first-child,
+.select-wrapper:focus-within > i:first-child {
+  color: #ffd86e;
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+
+/* ============================================================
+   SELECT
+   ============================================================ */
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+
+  cursor: pointer;
+
+  color: #f9f3ff;
+
+  color-scheme: dark;
+}
+
+.select-wrapper select option {
+  color: #ffffff;
+  background: #27163c;
+}
+
+.select-wrapper select option:checked {
+  background: #65409a;
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   SELECT ARROW
+   ============================================================ */
+
+.select-wrapper .select-arrow {
+  position: absolute;
+
+  right: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #edc65e;
+
+  font-size: 11px;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.select-wrapper:focus-within .select-arrow {
+  color: #ffd86d;
+
+  transform:
+    translateY(-50%)
+    rotate(180deg);
+}
+
+
+/* ============================================================
+   DISABLED SELECT
+   ============================================================ */
+
+.select-wrapper select:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.55;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(29, 18, 44, 0.7),
+      rgba(47, 27, 62, 0.7)
+    );
+}
+
+
+/* ============================================================
+   FIELD ERROR
+   ============================================================ */
+
+.field-error {
+  display: block;
+
+  margin-top: 6px;
+  padding-left: 4px;
+
+  color: #ffacbf;
+
+  font-size: 11px;
+
+  animation: errorIn 0.25s ease;
+}
+
+@keyframes errorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+   ============================================================ */
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 4px 2px 18px;
+}
+
+
+/* ============================================================
+   COMMON BUTTON
+   ============================================================ */
+
+.cancel-btn,
+.reset-btn,
+.save-btn {
+  min-height: 48px;
+
+  padding: 0 20px;
+
+  border-radius: 15px;
+
+  border: 1px solid transparent;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cancel-btn:hover,
+.reset-btn:hover,
+.save-btn:not(:disabled):hover {
+  transform: translateY(-3px);
+}
+
+
+/* ============================================================
+   CANCEL
+   ============================================================ */
+
+.cancel-btn {
+  color: #f1d8a0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.035)
+    );
+
+  border-color: rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.cancel-btn:hover {
+  border-color: rgba(255, 213, 110, 0.25);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 210, 103, 0.11),
+      rgba(255, 255, 255, 0.05)
+    );
+
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.22);
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+.reset-btn {
+  color: #eedcff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(164, 112, 255, 0.2),
+      rgba(105, 62, 163, 0.18)
+    );
+
+  border-color: rgba(204, 169, 255, 0.18);
+
+  box-shadow:
+    0 8px 22px rgba(101, 58, 157, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.reset-btn:hover {
+  border-color: rgba(218, 183, 255, 0.35);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(177, 121, 255, 0.27),
+      rgba(115, 68, 179, 0.23)
+    );
+
+  box-shadow:
+    0 14px 28px rgba(101, 58, 157, 0.28);
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+   ============================================================ */
+
+.save-btn {
+  position: relative;
+
+  min-width: 175px;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  color: #321b39;
+
+  border: 1px solid rgba(255, 231, 159, 0.65);
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0b3 0%,
+      #ffd66d 25%,
+      #eeb343 58%,
+      #b86c1d 100%
+    );
+
+  box-shadow:
+    0 14px 32px rgba(255, 180, 43, 0.25),
+    0 0 25px rgba(255, 194, 67, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.78),
+    inset 0 -2px 4px rgba(117, 61, 0, 0.13);
+
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+
+/* ============================================================
+   GOLDEN SHINE
+   ============================================================ */
+
+.save-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  transform: skewX(-18deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.78),
+      transparent
+    );
+
+  z-index: 2;
+
+  transition: left 0.7s ease;
+}
+
+.save-btn:hover::before {
+  left: 140%;
+}
+
+
+/* ============================================================
+   SAVE HOVER
+   ============================================================ */
+
+.save-btn:not(:disabled):hover {
+  box-shadow:
+    0 18px 38px rgba(255, 180, 43, 0.36),
+    0 0 28px rgba(255, 204, 92, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85);
+}
+
+
+/* ============================================================
+   SAVE DISABLED
+   ============================================================ */
+
+.save-btn:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+
+  transform: none !important;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ============================================================
+   BUTTON CONTENT
+   ============================================================ */
+
+.button-content {
+  position: relative;
+
+  z-index: 3;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.button-content i {
+  transition: transform 0.3s ease;
+}
+
+.save-btn:hover .button-content i {
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   GOLDEN WATER / RIPPLE
+   ============================================================ */
+
+.ripple-button {
+  --ripple-x: 50%;
+  --ripple-y: 50%;
+}
+
+.button-water {
+  position: absolute;
+
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 237, 174, 0.58) 35%,
+      rgba(255, 193, 71, 0.2) 55%,
+      transparent 72%
+    );
+
+  box-shadow:
+    0 0 18px rgba(255, 221, 134, 0.72);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.ripple-button.ripple-active .button-water {
+  animation:
+    goldenRipple
+    0.9s
+    cubic-bezier(0.12, 0.75, 0.28, 1)
+    forwards;
+}
+
+@keyframes goldenRipple {
+  0% {
+    width: 16px;
+    height: 16px;
+
+    opacity: 0.8;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  30% {
+    opacity: 0.7;
+
+    transform:
+      translate(-50%, -50%)
+      scale(4);
+  }
+
+  70% {
+    opacity: 0.34;
+
+    transform:
+      translate(-50%, -50%)
+      scale(10);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(16);
+  }
+}
+
+
+/* ============================================================
+   SPINNER
+   ============================================================ */
+
+.fa-spinner {
+  color: #4a2840;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .edit-lead-page {
+    padding: 24px 18px;
+  }
+
+  .form-section {
+    padding: 24px;
+  }
+
+  .form-grid {
+    gap: 16px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .edit-lead-page {
+    padding: 18px 14px 24px;
+  }
+
+
+  .page-header {
+    margin-bottom: 22px;
+  }
+
+
+  .title-area {
+    align-items: flex-start;
+    gap: 13px;
+
+    margin-top: 20px;
+  }
+
+
+  .title-icon {
+    width: 56px;
+    height: 56px;
+
+    border-radius: 17px;
+  }
+
+
+  .title-icon i {
+    font-size: 23px;
+  }
+
+
+  .title-area h1 {
+    font-size: 26px;
+  }
+
+
+  .title-area p {
+    font-size: 12px;
+  }
+
+
+  .form-section {
+    padding: 21px 17px;
+
+    border-radius: 21px;
+  }
+
+
+  .section-heading {
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+  }
+
+
+  .section-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 13px;
+  }
+
+
+  .section-heading h2 {
+    font-size: 16px;
+  }
+
+
+  .section-heading p {
+    font-size: 11px;
+  }
+
+
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+
+  .full-width {
+    grid-column: auto;
+  }
+
+
+  .form-actions {
+    flex-wrap: wrap;
+
+    justify-content: stretch;
+
+    padding-bottom: 10px;
+  }
+
+
+  .cancel-btn,
+  .reset-btn,
+  .save-btn {
+    flex: 1 1 100%;
+
+    width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .edit-lead-page {
+    padding: 14px 10px 20px;
+  }
+
+
+  .back-button {
+    padding: 10px 14px;
+
+    border-radius: 14px;
+
+    font-size: 12px;
+  }
+
+
+  .title-area {
+    gap: 11px;
+  }
+
+
+  .title-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+  }
+
+
+  .title-icon i {
+    font-size: 20px;
+  }
+
+
+  .title-area h1 {
+    font-size: 23px;
+
+    letter-spacing: -0.4px;
+  }
+
+
+  .title-area p {
+    margin-top: 4px;
+
+    font-size: 11px;
+  }
+
+
+  .form-section {
+    padding: 18px 14px;
+
+    border-radius: 19px;
+  }
+
+
+  .input-wrapper input,
+  .select-wrapper select {
+    height: 46px;
+
+    font-size: 12px;
+  }
+
+
+  .textarea-wrapper textarea {
+    font-size: 12px;
+  }
+
+
+  .form-group label {
+    font-size: 11px;
+  }
+
+
+  .alert {
+    padding: 12px 14px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+}

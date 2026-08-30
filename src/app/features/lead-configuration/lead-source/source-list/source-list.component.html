@@ -1,0 +1,559 @@
+<div class="source-page">
+
+  <!-- ====================================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="header-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+
+      <div>
+        <h1>Lead Sources</h1>
+        <p>
+          Manage and organize the sources through which your leads are generated.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ADD SOURCE -->
+    <button
+      class="add-source-btn"
+      routerLink="../source/add">
+
+      <i class="fas fa-plus"></i>
+      <span>Add Lead Source</span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- SUCCESS MESSAGE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage">
+
+    <i class="fas fa-check-circle"></i>
+
+    <span>{{ successMessage }}</span>
+
+    <button
+      type="button"
+      (click)="successMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- ERROR MESSAGE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage">
+
+    <i class="fas fa-exclamation-circle"></i>
+
+    <span>{{ errorMessage }}</span>
+
+    <button
+      type="button"
+      (click)="errorMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- STATISTICS -->
+  <!-- ====================================================== -->
+
+  <div class="statistics-grid">
+
+    <!-- TOTAL -->
+
+    <div class="stat-card total-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Total Sources
+        </span>
+
+        <strong>
+          {{ getTotalCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVE -->
+
+    <div class="stat-card active-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Active Sources
+        </span>
+
+        <strong>
+          {{ getActiveCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- INACTIVE -->
+
+    <div class="stat-card inactive-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-pause-circle"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Inactive Sources
+        </span>
+
+        <strong>
+          {{ getInactiveCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- SEARCH / FILTER BAR -->
+  <!-- ====================================================== -->
+
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <i class="fas fa-search"></i>
+
+      <input
+        type="text"
+        [(ngModel)]="searchKeyword"
+        (input)="onSearch()"
+        placeholder="Search lead sources..."
+      />
+
+      <button
+        *ngIf="searchKeyword"
+        type="button"
+        class="clear-search"
+        (click)="clearSearch()">
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+
+    <div class="status-filter">
+
+      <label>
+
+        <i class="fas fa-filter"></i>
+        Status
+
+      </label>
+
+      <select
+        [(ngModel)]="selectedStatus"
+        (change)="onStatusChange()"
+        title="Filter lead sources by status">
+
+        <option value="ALL">
+          All Sources
+        </option>
+
+        <option [value]="LeadCategoryStatus.ACTIVE">
+          Active
+        </option>
+
+        <option [value]="LeadCategoryStatus.INACTIVE">
+          Inactive
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- LOADING -->
+  <!-- ====================================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="loading-spinner"></div>
+
+    <p>
+      Loading lead sources...
+    </p>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- EMPTY STATE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="empty-state"
+    *ngIf="!isLoading && filteredSources.length === 0">
+
+    <div class="empty-icon">
+      <i class="fas fa-bullseye"></i>
+    </div>
+
+    <h3>
+      No Lead Sources Found
+    </h3>
+
+    <p *ngIf="searchKeyword || selectedStatus !== 'ALL'">
+      Try changing your search or filter criteria.
+    </p>
+
+    <p *ngIf="!searchKeyword && selectedStatus === 'ALL'">
+      You haven't created any lead sources yet.
+    </p>
+
+    <!-- CREATE SOURCE -->
+    <button
+      class="empty-add-btn"
+      routerLink="../source/add">
+
+      <i class="fas fa-plus"></i>
+      Create Lead Source
+
+    </button>
+
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- SOURCE TABLE -->
+  <!-- ====================================================== -->
+
+  <div
+    class="table-card"
+    *ngIf="!isLoading && filteredSources.length > 0">
+
+    <!-- TABLE HEADER -->
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>
+          All Lead Sources
+        </h2>
+
+        <span>
+          {{ filteredSources.length }}
+          source{{ filteredSources.length !== 1 ? 's' : '' }} found
+        </span>
+
+      </div>
+
+      <button
+        class="refresh-btn"
+        type="button"
+        (click)="loadLeadSources()">
+
+        <i class="fas fa-sync-alt"></i>
+        Refresh
+
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- TABLE -->
+    <!-- ====================================================== -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th class="order-column">
+              #
+            </th>
+
+            <th>
+              Source
+            </th>
+
+            <th>
+              Description
+            </th>
+
+            <th>
+              Display Order
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Created By
+            </th>
+
+            <th>
+              Created At
+            </th>
+
+            <th class="action-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="let source of filteredSources; let i = index">
+
+            <!-- NUMBER -->
+
+            <td class="order-column">
+
+              <div class="row-number">
+                {{ i + 1 }}
+              </div>
+
+            </td>
+
+
+            <!-- SOURCE -->
+
+            <td>
+
+              <div class="source-info">
+
+                <div class="source-avatar">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ source.sourceName }}
+                  </strong>
+
+                  <small>
+                    ID: #{{ source.leadSourceId }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- DESCRIPTION -->
+
+            <td>
+
+              <div
+                class="description-cell"
+                [title]="source.description || 'No description'">
+
+                {{ source.description || 'No description provided' }}
+
+              </div>
+
+            </td>
+
+
+            <!-- DISPLAY ORDER -->
+
+            <td>
+
+              <span class="display-order">
+                {{ source.displayOrder || '-' }}
+              </span>
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [class.active]="isActive(source)"
+                [class.inactive]="isInactive(source)">
+
+                <span class="status-dot"></span>
+
+                {{ source.status }}
+
+              </span>
+
+            </td>
+
+
+            <!-- CREATED BY -->
+
+            <td>
+
+              <div class="user-info">
+
+                <div class="user-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+
+                <span>
+                  {{ source.createdByName || 'System' }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- CREATED AT -->
+
+            <td>
+
+              <span class="date-text">
+
+                {{ source.createdAt
+                  ? (source.createdAt | date:'dd MMM yyyy')
+                  : '-' }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ================================================= -->
+            <!-- ACTIONS -->
+            <!-- ================================================= -->
+
+            <td class="action-column">
+
+              <div class="action-buttons">
+
+                <!-- EDIT -->
+
+                <button
+                  class="action-btn edit-btn"
+                  title="Edit Source"
+                  [routerLink]="['../edit', source.leadSourceId]">
+
+                  <i class="fas fa-edit"></i>
+
+                </button>
+
+
+                <!-- ACTIVATE -->
+
+                <button
+                  *ngIf="isInactive(source)"
+                  class="action-btn activate-btn"
+                  title="Activate Source"
+                  type="button"
+                  (click)="activateSource(source)">
+
+                  <i class="fas fa-check"></i>
+
+                </button>
+
+
+                <!-- DEACTIVATE -->
+
+                <button
+                  *ngIf="isActive(source)"
+                  class="action-btn deactivate-btn"
+                  title="Deactivate Source"
+                  type="button"
+                  (click)="deactivateSource(source)">
+
+                  <i class="fas fa-ban"></i>
+
+                </button>
+
+
+                <!-- DELETE -->
+
+                <button
+                  class="action-btn delete-btn"
+                  title="Delete Source"
+                  type="button"
+                  (click)="deleteSource(source)">
+
+                  <i class="fas fa-trash-alt"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

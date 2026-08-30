@@ -1,1 +1,808 @@
-<p>add-follow-up works!</p>
+<div class="followup-page">
+
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-btn"
+        (click)="goBack()"
+        title="Go Back">
+
+        <i class="fas fa-arrow-left"></i>
+
+      </button>
+
+
+      <div class="header-icon">
+
+        <i class="fas fa-calendar-check"></i>
+
+      </div>
+
+
+      <div class="header-content">
+
+        <span class="eyebrow">
+          FOLLOW-UP MANAGEMENT
+        </span>
+
+        <h1>
+          Add Follow-Up
+        </h1>
+
+        <p>
+          Schedule a follow-up action for a customer lead.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       MAIN FORM CARD
+  ========================================================== -->
+
+  <div class="form-glass-card">
+
+    <form
+      #followUpFormRef="ngForm"
+      (ngSubmit)="saveFollowUp()"
+      novalidate>
+
+
+      <!-- =====================================================
+           SECTION 1 : LEAD & ASSIGNMENT
+      ====================================================== -->
+
+      <div class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+
+            <i class="fas fa-user-group"></i>
+
+          </div>
+
+
+          <div>
+
+            <h2>
+              Lead & Assignment
+            </h2>
+
+            <p>
+              Select the customer lead and responsible executive.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- =================================================
+               CUSTOMER LEAD
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="leadId">
+
+              Customer Lead
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-user-tie input-icon">
+              </i>
+
+
+              <select
+                id="leadId"
+                name="leadId"
+                [(ngModel)]="followUp.leadId"
+                (ngModelChange)="onLeadChange()"
+                required>
+
+                <option
+                  [ngValue]="null">
+
+                  Select customer lead
+
+                </option>
+
+
+                <option
+                  *ngFor="let lead of leads"
+                  [ngValue]="lead.leadId">
+
+                  {{ getLeadName(lead) }}
+
+                </option>
+
+              </select>
+
+
+              <i
+                class="fas fa-chevron-down select-arrow">
+              </i>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <small
+              class="field-hint"
+              *ngIf="isLoadingLeads">
+
+              <i class="fas fa-spinner fa-spin"></i>
+
+              Loading customer leads...
+
+            </small>
+
+
+            <!-- No Leads -->
+
+            <small
+              class="field-error"
+              *ngIf="
+                !isLoadingLeads &&
+                leads.length === 0
+              ">
+
+              No customer leads available.
+
+            </small>
+
+          </div>
+
+
+
+          <!-- =================================================
+               ASSIGNED EXECUTIVE
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="assignedUserId">
+
+              Assigned Executive
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-user-shield input-icon">
+              </i>
+
+
+              <select
+                id="assignedUserId"
+                name="assignedUserId"
+                [(ngModel)]="followUp.assignedUserId"
+                required>
+
+                <option
+                  [ngValue]="null">
+
+                  Select executive
+
+                </option>
+
+
+                <option
+                  *ngFor="let executive of executives"
+                  [ngValue]="getExecutiveId(executive)">
+
+                  {{ getExecutiveName(executive) }}
+
+                </option>
+
+              </select>
+
+
+              <i
+                class="fas fa-chevron-down select-arrow">
+              </i>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <small
+              class="field-hint"
+              *ngIf="isLoadingExecutives">
+
+              <i class="fas fa-spinner fa-spin"></i>
+
+              Loading executives...
+
+            </small>
+
+
+            <!-- No Executives -->
+
+            <small
+              class="field-error"
+              *ngIf="
+                !isLoadingExecutives &&
+                executives.length === 0
+              ">
+
+              No executives available.
+
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           SECTION 2 : FOLLOW-UP DETAILS
+      ====================================================== -->
+
+      <div class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+
+            <i class="fas fa-calendar-plus"></i>
+
+          </div>
+
+
+          <div>
+
+            <h2>
+              Follow-Up Details
+            </h2>
+
+            <p>
+              Define what needs to be done and when.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- =================================================
+               FOLLOW-UP TYPE
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="followUpType">
+
+              Follow-Up Type
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-phone-volume input-icon">
+              </i>
+
+
+              <select
+                id="followUpType"
+                name="followUpType"
+                [(ngModel)]="followUp.followUpType"
+                (ngModelChange)="onFollowUpTypeChange()"
+                required>
+
+                <option
+                  value=""
+                  disabled>
+
+                  Select follow-up type
+
+                </option>
+
+
+                <option
+                  *ngFor="let type of followUpTypes"
+                  [ngValue]="type">
+
+                  {{ formatFollowUpType(type) }}
+
+                </option>
+
+              </select>
+
+
+              <i
+                class="fas fa-chevron-down select-arrow">
+              </i>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               SUBJECT
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="subject">
+
+              Subject
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-heading input-icon">
+              </i>
+
+
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                [(ngModel)]="followUp.subject"
+                placeholder="Enter follow-up subject"
+                maxlength="150"
+                autocomplete="off"
+                required>
+
+            </div>
+
+
+            <div class="character-info">
+
+              {{ followUp.subject?.length || 0 }}/150
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               DATE
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="scheduledDate">
+
+              Scheduled Date
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-calendar-day input-icon">
+              </i>
+
+
+              <input
+                type="date"
+                id="scheduledDate"
+                name="scheduledDate"
+                [(ngModel)]="selectedDate"
+                (ngModelChange)="onDateTimeChange()"
+                required>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               TIME
+          ================================================== -->
+
+          <div class="form-group">
+
+            <label for="scheduledTime">
+
+              Scheduled Time
+
+              <span class="required">
+                *
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-clock input-icon">
+              </i>
+
+
+              <input
+                type="time"
+                id="scheduledTime"
+                name="scheduledTime"
+                [(ngModel)]="selectedTime"
+                (ngModelChange)="onDateTimeChange()"
+                required>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               LOCATION
+          ================================================== -->
+
+          <div class="form-group full-width-mobile">
+
+            <label for="location">
+
+              Location
+
+              <span class="optional">
+                (Optional)
+              </span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i
+                class="fas fa-location-dot input-icon">
+              </i>
+
+
+              <input
+                type="text"
+                id="location"
+                name="location"
+                [(ngModel)]="followUp.location"
+                placeholder="Meeting / visit location"
+                maxlength="500">
+
+            </div>
+
+
+            <small
+              class="field-hint"
+              *ngIf="isLocationRecommended()">
+
+              <i class="fas fa-location-dot"></i>
+
+              Location is recommended for
+              {{ formatFollowUpType(followUp.followUpType) }}.
+
+            </small>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             DESCRIPTION
+        ====================================================== -->
+
+        <div class="form-group full-width">
+
+          <label for="description">
+
+            Follow-Up Details
+
+            <span class="optional">
+              (Optional)
+            </span>
+
+          </label>
+
+
+          <div class="textarea-wrapper">
+
+            <i
+              class="fas fa-align-left textarea-icon">
+            </i>
+
+
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="followUp.description"
+              rows="5"
+              maxlength="1000"
+              placeholder="Describe what needs to be discussed, customer requirements, meeting purpose, etc.">
+            </textarea>
+
+          </div>
+
+
+          <div class="character-info">
+
+            {{ followUp.description?.length || 0 }}/1000
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           SELECTED INFORMATION PREVIEW
+      ====================================================== -->
+
+      <div
+        class="selection-preview"
+        *ngIf="
+          getSelectedLead() ||
+          getSelectedExecutive()
+        ">
+
+
+        <!-- SELECTED LEAD -->
+
+        <div
+          class="preview-item"
+          *ngIf="getSelectedLead()">
+
+          <div class="preview-icon">
+
+            <i class="fas fa-user"></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              CUSTOMER LEAD
+            </span>
+
+            <strong>
+              {{ getLeadName(getSelectedLead()!) }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- SELECTED EXECUTIVE -->
+
+        <div
+          class="preview-item"
+          *ngIf="getSelectedExecutive()">
+
+          <div class="preview-icon">
+
+            <i class="fas fa-user-shield"></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              ASSIGNED EXECUTIVE
+            </span>
+
+            <strong>
+              {{ getExecutiveName(getSelectedExecutive()) }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           INFO CARD
+      ====================================================== -->
+
+      <div class="info-card">
+
+        <div class="info-icon">
+
+          <i class="fas fa-circle-info"></i>
+
+        </div>
+
+
+        <div class="info-content">
+
+          <strong>
+            Follow-Up Status
+          </strong>
+
+          <p>
+
+            New follow-ups will be created with
+
+            <span>
+              SCHEDULED
+            </span>
+
+            status automatically.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           SUCCESS MESSAGE
+      ====================================================== -->
+
+      <div
+        class="message success-message"
+        *ngIf="successMessage">
+
+        <i class="fas fa-circle-check"></i>
+
+        <span>
+          {{ successMessage }}
+        </span>
+
+        <button
+          type="button"
+          (click)="clearSuccess()">
+
+          <i class="fas fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           ERROR MESSAGE
+      ====================================================== -->
+
+      <div
+        class="message error-message"
+        *ngIf="errorMessage">
+
+        <i class="fas fa-circle-exclamation"></i>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+
+        <button
+          type="button"
+          (click)="clearError()">
+
+          <i class="fas fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           FORM ACTIONS
+      ====================================================== -->
+
+      <div class="form-actions">
+
+
+        <!-- CANCEL -->
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="cancel()"
+          [disabled]="isSaving">
+
+          <i class="fas fa-xmark"></i>
+
+          Cancel
+
+        </button>
+
+
+
+        <!-- SAVE -->
+
+        <button
+          type="submit"
+          class="save-btn"
+          [disabled]="
+            isSaving ||
+            followUpFormRef.invalid
+          ">
+
+
+          <span
+            *ngIf="!isSaving">
+
+            <i class="fas fa-calendar-check"></i>
+
+            Schedule Follow-Up
+
+          </span>
+
+
+          <span
+            *ngIf="isSaving">
+
+            <i class="fas fa-spinner fa-spin"></i>
+
+            Scheduling...
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

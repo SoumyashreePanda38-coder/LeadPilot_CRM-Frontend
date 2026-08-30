@@ -1,1 +1,437 @@
-<p>dashboard-charts works!</p>
+<div class="charts-wrapper">
+
+
+  <!-- ========================================================
+       TOP THREE DONUT CHARTS
+  ========================================================= -->
+
+  <div class="donut-grid">
+
+
+    <!-- ======================================================
+         LEAD STATUS
+    ======================================================= -->
+
+    <article class="chart-card">
+
+      <div class="chart-card-header">
+
+        <div>
+
+          <span class="chart-eyebrow">
+            LEAD STATUS
+          </span>
+
+          <h3>
+            Lead Status Distribution
+          </h3>
+
+          <p>
+            Current status of all customer leads
+          </p>
+
+        </div>
+
+        <div class="chart-header-icon status-icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+
+      </div>
+
+
+      <div
+        class="donut-area"
+        *ngIf="statusSegments.length > 0">
+
+        <div
+          class="donut-chart"
+          [ngStyle]="
+            getDonutStyle(statusSegments)
+          ">
+
+          <div class="donut-hole">
+
+            <strong>
+              {{ statusTotal | number }}
+            </strong>
+
+            <span>
+              Total
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="legend">
+
+          <div
+            class="legend-item"
+            *ngFor="
+              let item of statusSegments;
+              trackBy: trackByIndex
+            ">
+
+            <span
+              class="legend-dot"
+              [ngStyle]="{
+                'background': item.color
+              }">
+            </span>
+
+            <span class="legend-name">
+              {{ item.label }}
+            </span>
+
+            <strong>
+              {{ item.count | number }}
+            </strong>
+
+            <small>
+              {{ item.percentage | number:'1.0-0' }}%
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="chart-empty"
+        *ngIf="statusSegments.length === 0">
+
+        <i class="fas fa-chart-pie"></i>
+
+        <strong>
+          No status data
+        </strong>
+
+        <span>
+          Lead status analytics will appear here.
+        </span>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- ======================================================
+         LEAD PRIORITY
+    ======================================================= -->
+
+    <article class="chart-card">
+
+      <div class="chart-card-header">
+
+        <div>
+
+          <span class="chart-eyebrow">
+            PRIORITY
+          </span>
+
+          <h3>
+            Lead Priority
+          </h3>
+
+          <p>
+            Distribution by customer priority
+          </p>
+
+        </div>
+
+        <div class="chart-header-icon priority-icon">
+          <i class="fas fa-fire"></i>
+        </div>
+
+      </div>
+
+
+      <div
+        class="donut-area"
+        *ngIf="prioritySegments.length > 0">
+
+        <div
+          class="donut-chart"
+          [ngStyle]="
+            getDonutStyle(prioritySegments)
+          ">
+
+          <div class="donut-hole">
+
+            <strong>
+              {{ priorityTotal | number }}
+            </strong>
+
+            <span>
+              Total
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="legend">
+
+          <div
+            class="legend-item"
+            *ngFor="
+              let item of prioritySegments;
+              trackBy: trackByIndex
+            ">
+
+            <span
+              class="legend-dot"
+              [ngStyle]="{
+                'background': item.color
+              }">
+            </span>
+
+            <span class="legend-name">
+              {{ item.label }}
+            </span>
+
+            <strong>
+              {{ item.count | number }}
+            </strong>
+
+            <small>
+              {{ item.percentage | number:'1.0-0' }}%
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="chart-empty"
+        *ngIf="prioritySegments.length === 0">
+
+        <i class="fas fa-fire"></i>
+
+        <strong>
+          No priority data
+        </strong>
+
+        <span>
+          Lead priority analytics will appear here.
+        </span>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- ======================================================
+         LEAD SOURCE
+    ======================================================= -->
+
+    <article class="chart-card">
+
+      <div class="chart-card-header">
+
+        <div>
+
+          <span class="chart-eyebrow">
+            LEAD SOURCE
+          </span>
+
+          <h3>
+            Lead Sources
+          </h3>
+
+          <p>
+            Where your customer leads originate
+          </p>
+
+        </div>
+
+        <div class="chart-header-icon source-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+
+      </div>
+
+
+      <div
+        class="donut-area"
+        *ngIf="sourceSegments.length > 0">
+
+        <div
+          class="donut-chart"
+          [ngStyle]="
+            getDonutStyle(sourceSegments)
+          ">
+
+          <div class="donut-hole">
+
+            <strong>
+              {{ sourceTotal | number }}
+            </strong>
+
+            <span>
+              Total
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="legend">
+
+          <div
+            class="legend-item"
+            *ngFor="
+              let item of sourceSegments;
+              trackBy: trackByIndex
+            ">
+
+            <span
+              class="legend-dot"
+              [ngStyle]="{
+                'background': item.color
+              }">
+            </span>
+
+            <span class="legend-name">
+              {{ item.label }}
+            </span>
+
+            <strong>
+              {{ item.count | number }}
+            </strong>
+
+            <small>
+              {{ item.percentage | number:'1.0-0' }}%
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="chart-empty"
+        *ngIf="sourceSegments.length === 0">
+
+        <i class="fas fa-bullseye"></i>
+
+        <strong>
+          No source data
+        </strong>
+
+        <span>
+          Lead source analytics will appear here.
+        </span>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+
+  <!-- ========================================================
+       MONTHLY LEADS
+  ========================================================= -->
+
+  <article class="monthly-card">
+
+    <div class="monthly-header">
+
+      <div>
+
+        <span class="chart-eyebrow">
+          PERFORMANCE
+        </span>
+
+        <h3>
+          Monthly Lead Generation
+        </h3>
+
+        <p>
+          Lead generation trend over time
+        </p>
+
+      </div>
+
+      <div class="monthly-icon">
+        <i class="fas fa-chart-column"></i>
+      </div>
+
+    </div>
+
+
+    <div
+      class="monthly-chart"
+      *ngIf="monthlyLeads.length > 0">
+
+      <div
+        class="bar-column"
+        *ngFor="
+          let item of monthlyLeads;
+          trackBy: trackByIndex
+        ">
+
+        <div class="bar-value">
+
+          {{ item.count | number }}
+
+        </div>
+
+
+        <div class="bar-wrapper">
+
+          <div
+            class="monthly-bar"
+            [style.height.%]="
+              getBarHeight(item.count)
+            ">
+
+          </div>
+
+        </div>
+
+
+        <span class="bar-label">
+
+          {{ item.month }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="chart-empty monthly-empty"
+      *ngIf="monthlyLeads.length === 0">
+
+      <i class="fas fa-chart-column"></i>
+
+      <strong>
+        No monthly data
+      </strong>
+
+      <span>
+        Lead generation trend will appear here.
+      </span>
+
+    </div>
+
+  </article>
+
+</div>

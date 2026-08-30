@@ -1,0 +1,981 @@
+<div class="subcategory-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <header class="page-header">
+
+    <div class="breadcrumb">
+      <span>Lead Management</span>
+
+      <i class="fas fa-chevron-right separator"></i>
+
+      <span>Lead Configuration</span>
+
+      <i class="fas fa-chevron-right separator"></i>
+
+      <span class="current-page">Lead Subcategories</span>
+    </div>
+
+
+    <div class="header-main">
+
+      <div class="title-area">
+
+        <button
+          type="button"
+          class="back-btn"
+          routerLink="/admin/lead-configuration"
+          aria-label="Go back">
+
+          <i class="fas fa-arrow-left"></i>
+
+        </button>
+
+
+        <div class="title-icon">
+
+          <i class="fas fa-sitemap"></i>
+
+        </div>
+
+
+        <div class="title-text">
+
+          <h1>Lead Subcategories</h1>
+
+          <p>
+            Organize your leads with structured subcategories
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="add-btn"
+        (click)="addSubCategory()">
+
+        <i class="fas fa-plus"></i>
+
+        <span>Add Subcategory</span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ======================================================
+       ALERTS
+       ====================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+
+    <span>{{ successMessage }}</span>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="successMessage = ''"
+      aria-label="Close">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+
+    <span>{{ errorMessage }}</span>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="errorMessage = ''"
+      aria-label="Close">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       STATISTICS
+       ====================================================== -->
+
+  <section class="stats-grid">
+
+    <!-- TOTAL -->
+
+    <div class="stat-card total-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Total Subcategories
+        </span>
+
+        <strong class="stat-value">
+          {{ totalSubCategoryCount }}
+        </strong>
+
+      </div>
+
+      <div class="stat-glow"></div>
+
+    </div>
+
+
+    <!-- ACTIVE -->
+
+    <div class="stat-card active-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-circle-check"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Active
+        </span>
+
+        <strong class="stat-value">
+          {{ activeSubCategoryCount }}
+        </strong>
+
+      </div>
+
+      <div class="stat-glow"></div>
+
+    </div>
+
+
+    <!-- INACTIVE -->
+
+    <div class="stat-card inactive-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-circle-pause"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Inactive
+        </span>
+
+        <strong class="stat-value">
+          {{ inactiveSubCategoryCount }}
+        </strong>
+
+      </div>
+
+      <div class="stat-glow"></div>
+
+    </div>
+
+
+    <!-- FILTERED -->
+
+    <div class="stat-card filtered-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-filter"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span class="stat-label">
+          Showing
+        </span>
+
+        <strong class="stat-value">
+          {{ filteredSubCategoryCount }}
+        </strong>
+
+      </div>
+
+      <div class="stat-glow"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ======================================================
+       MAIN CONTENT CARD
+       ====================================================== -->
+
+  <section class="content-card">
+
+
+    <!-- ====================================================
+         CARD HEADER
+         ==================================================== -->
+
+    <div class="content-header">
+
+      <div>
+
+        <div class="content-title">
+
+          <span class="title-line"></span>
+
+          <h2>Subcategory Directory</h2>
+
+        </div>
+
+        <p>
+          Manage categories, statuses and subcategory details
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="refreshSubCategories()"
+        [disabled]="loading">
+
+        <i
+          class="fas fa-sync-alt"
+          [class.spinning]="loading">
+        </i>
+
+        <span>Refresh</span>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         FILTER BAR
+         ==================================================== -->
+
+    <div class="filter-panel">
+
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+
+        <i class="fas fa-search search-icon"></i>
+
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          (ngModelChange)="onSearch()"
+          placeholder="Search subcategories..."
+          aria-label="Search subcategories">
+
+        <button
+          *ngIf="searchText"
+          type="button"
+          class="clear-search"
+          (click)="clearSearch()"
+          aria-label="Clear search">
+
+          <i class="fas fa-times"></i>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- CATEGORY FILTER -->
+
+      <div class="filter-control">
+
+        <label for="categoryFilter">
+          <i class="fas fa-folder-tree"></i>
+          Category
+        </label>
+
+        <div class="select-wrapper">
+
+          <select
+            id="categoryFilter"
+            [(ngModel)]="selectedCategoryId"
+            (ngModelChange)="onCategoryChange()">
+
+            <option value="ALL">
+              All Categories
+            </option>
+
+            <option
+              *ngFor="let category of categories"
+              [ngValue]="category.categoryId">
+
+              {{ category.categoryName }}
+
+            </option>
+
+          </select>
+
+          <i class="fas fa-chevron-down"></i>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- STATUS FILTER -->
+
+      <div class="filter-control">
+
+        <label for="statusFilter">
+          <i class="fas fa-signal"></i>
+          Status
+        </label>
+
+        <div class="select-wrapper">
+
+          <select
+            id="statusFilter"
+            [(ngModel)]="selectedStatus"
+            (ngModelChange)="onStatusChange()">
+
+            <option value="ALL">
+              All Status
+            </option>
+
+            <option
+              [ngValue]="CategoryStatus.ACTIVE">
+
+              Active
+
+            </option>
+
+            <option
+              [ngValue]="CategoryStatus.INACTIVE">
+
+              Inactive
+
+            </option>
+
+          </select>
+
+          <i class="fas fa-chevron-down"></i>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CLEAR -->
+
+      <button
+        type="button"
+        class="clear-filter-btn"
+        (click)="clearFilters()">
+
+        <i class="fas fa-filter-circle-xmark"></i>
+
+        <span>Clear</span>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         LOADING
+         ==================================================== -->
+
+    <div
+      class="loading-state"
+      *ngIf="loading">
+
+      <div class="neon-loader">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </div>
+
+      <h3>Loading subcategories...</h3>
+
+      <p>
+        Please wait while we fetch your data.
+      </p>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         EMPTY STATE
+         ==================================================== -->
+
+    <div
+      class="empty-state"
+      *ngIf="
+        !loading &&
+        filteredSubCategories.length === 0
+      ">
+
+      <div class="empty-icon">
+
+        <i class="fas fa-layer-group"></i>
+
+      </div>
+
+      <h3>No subcategories found</h3>
+
+      <p>
+        {{
+          searchText ||
+          selectedStatus !== 'ALL' ||
+          selectedCategoryId !== 'ALL'
+            ? 'Try adjusting your filters or search criteria.'
+            : 'Start by creating your first lead subcategory.'
+        }}
+      </p>
+
+
+      <div class="empty-actions">
+
+        <button
+          *ngIf="
+            searchText ||
+            selectedStatus !== 'ALL' ||
+            selectedCategoryId !== 'ALL'
+          "
+          type="button"
+          class="secondary-action"
+          (click)="clearFilters()">
+
+          <i class="fas fa-filter-circle-xmark"></i>
+          Clear Filters
+
+        </button>
+
+
+        <button
+          type="button"
+          class="primary-action"
+          (click)="addSubCategory()">
+
+          <i class="fas fa-plus"></i>
+          Add Subcategory
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         DESKTOP TABLE
+         ==================================================== -->
+
+    <div
+      class="table-wrapper"
+      *ngIf="
+        !loading &&
+        filteredSubCategories.length > 0
+      ">
+
+      <table class="subcategory-table">
+
+        <thead>
+
+          <tr>
+
+            <th class="number-column">
+              #
+            </th>
+
+            <th>
+              Subcategory
+            </th>
+
+            <th>
+              Parent Category
+            </th>
+
+            <th>
+              Description
+            </th>
+
+            <th class="order-column">
+              Order
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th class="actions-column">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let subCategory of filteredSubCategories;
+              let i = index;
+              trackBy: trackBySubCategoryId
+            ">
+
+            <!-- NUMBER -->
+
+            <td class="number-cell">
+
+              <span class="row-number">
+                {{ i + 1 }}
+              </span>
+
+            </td>
+
+
+            <!-- SUBCATEGORY -->
+
+            <td>
+
+              <div class="subcategory-info">
+
+                <div class="subcategory-avatar">
+
+                  <i class="fas fa-layer-group"></i>
+
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ subCategory.subCategoryName }}
+                  </strong>
+
+                  <small>
+                    ID #{{ subCategory.subCategoryId }}
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- CATEGORY -->
+
+            <td>
+
+              <div class="category-badge">
+
+                <i class="fas fa-folder"></i>
+
+                <span>
+                  {{
+                    subCategory.categoryName ||
+                    getCategoryName(subCategory.categoryId)
+                  }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- DESCRIPTION -->
+
+            <td>
+
+              <div
+                class="description-cell"
+                [title]="subCategory.description || ''">
+
+                {{
+                  subCategory.description
+                    ? subCategory.description
+                    : 'No description'
+                }}
+
+              </div>
+
+            </td>
+
+
+            <!-- DISPLAY ORDER -->
+
+            <td class="order-cell">
+
+              <span class="order-number">
+
+                {{
+                  subCategory.displayOrder || '—'
+                }}
+
+              </span>
+
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+              <button
+                type="button"
+                class="status-badge"
+                [class.status-active]="
+                  subCategory.status ===
+                  CategoryStatus.ACTIVE
+                "
+                [class.status-inactive]="
+                  subCategory.status ===
+                  CategoryStatus.INACTIVE
+                "
+                (click)="toggleStatus(subCategory)"
+                [title]="
+                  subCategory.status ===
+                  CategoryStatus.ACTIVE
+                    ? 'Click to deactivate'
+                    : 'Click to activate'
+                ">
+
+                <span class="status-dot"></span>
+
+                {{
+                  subCategory.status ===
+                  CategoryStatus.ACTIVE
+                    ? 'Active'
+                    : 'Inactive'
+                }}
+
+              </button>
+
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td>
+
+              <div class="action-buttons">
+
+
+                <!-- VIEW -->
+
+                <button
+                  type="button"
+                  class="action-btn view-btn"
+                  (click)="
+                    viewSubCategory(
+                      subCategory.subCategoryId
+                    )
+                  "
+                  title="View subcategory"
+                  aria-label="View subcategory">
+
+                  <i class="fas fa-eye"></i>
+
+                </button>
+
+
+                <!-- EDIT -->
+
+                <button
+                  type="button"
+                  class="action-btn edit-btn"
+                  (click)="
+                    editSubCategory(
+                      subCategory.subCategoryId
+                    )
+                  "
+                  title="Edit subcategory"
+                  aria-label="Edit subcategory">
+
+                  <i class="fas fa-pen"></i>
+
+                </button>
+
+
+                <!-- DELETE -->
+
+                <button
+                  type="button"
+                  class="action-btn delete-btn"
+                  (click)="
+                    deleteSubCategory(subCategory)
+                  "
+                  title="Delete subcategory"
+                  aria-label="Delete subcategory">
+
+                  <i class="fas fa-trash"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         MOBILE CARDS
+         ==================================================== -->
+
+    <div
+      class="mobile-list"
+      *ngIf="
+        !loading &&
+        filteredSubCategories.length > 0
+      ">
+
+      <article
+        class="mobile-subcategory-card"
+        *ngFor="
+          let subCategory of filteredSubCategories;
+          trackBy: trackBySubCategoryId
+        ">
+
+
+        <!-- CARD TOP -->
+
+        <div class="mobile-card-top">
+
+          <div class="subcategory-info">
+
+            <div class="subcategory-avatar">
+
+              <i class="fas fa-layer-group"></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                {{ subCategory.subCategoryName }}
+              </strong>
+
+              <small>
+                ID #{{ subCategory.subCategoryId }}
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="status-badge"
+            [class.status-active]="
+              subCategory.status ===
+              CategoryStatus.ACTIVE
+            "
+            [class.status-inactive]="
+              subCategory.status ===
+              CategoryStatus.INACTIVE
+            "
+            (click)="toggleStatus(subCategory)">
+
+            <span class="status-dot"></span>
+
+            {{
+              subCategory.status ===
+              CategoryStatus.ACTIVE
+                ? 'Active'
+                : 'Inactive'
+            }}
+
+          </button>
+
+        </div>
+
+
+
+        <!-- CATEGORY -->
+
+        <div class="mobile-detail">
+
+          <span>
+            <i class="fas fa-folder"></i>
+            Parent Category
+          </span>
+
+          <strong>
+            {{
+              subCategory.categoryName ||
+              getCategoryName(subCategory.categoryId)
+            }}
+          </strong>
+
+        </div>
+
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="mobile-description">
+
+          <span>
+            Description
+          </span>
+
+          <p>
+            {{
+              subCategory.description ||
+              'No description available.'
+            }}
+          </p>
+
+        </div>
+
+
+
+        <!-- ORDER -->
+
+        <div class="mobile-detail">
+
+          <span>
+            <i class="fas fa-sort"></i>
+            Display Order
+          </span>
+
+          <strong>
+            {{ subCategory.displayOrder || '—' }}
+          </strong>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="mobile-actions">
+
+          <button
+            type="button"
+            class="mobile-action view-btn"
+            (click)="
+              viewSubCategory(
+                subCategory.subCategoryId
+              )
+            ">
+
+            <i class="fas fa-eye"></i>
+            View
+
+          </button>
+
+
+          <button
+            type="button"
+            class="mobile-action edit-btn"
+            (click)="
+              editSubCategory(
+                subCategory.subCategoryId
+              )
+            ">
+
+            <i class="fas fa-pen"></i>
+            Edit
+
+          </button>
+
+
+          <button
+            type="button"
+            class="mobile-action delete-btn"
+            (click)="
+              deleteSubCategory(subCategory)
+            ">
+
+            <i class="fas fa-trash"></i>
+            Delete
+
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ======================================================
+       FOOTER INFORMATION
+       ====================================================== -->
+
+  <div class="page-footer">
+
+    <div>
+      <i class="fas fa-circle-info"></i>
+
+      <span>
+        Showing
+        <strong>{{ filteredSubCategoryCount }}</strong>
+        of
+        <strong>{{ totalSubCategoryCount }}</strong>
+        subcategories
+      </span>
+    </div>
+
+    <span class="secure-label">
+      <i class="fas fa-shield-halved"></i>
+      LeadPilot CRM
+    </span>
+
+  </div>
+
+</div>

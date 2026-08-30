@@ -1,0 +1,749 @@
+/* ==========================================================
+   MAIN WRAPPER
+========================================================== */
+
+.charts-wrapper {
+  width: 100%;
+}
+
+
+/* ==========================================================
+   DONUT GRID
+========================================================== */
+
+.donut-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  width: 100%;
+}
+
+
+/* ==========================================================
+   CHART CARD
+========================================================== */
+
+.chart-card {
+  position: relative;
+
+  min-height: 390px;
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fafbff
+    );
+
+  border: 1px solid
+    rgba(94, 74, 180, 0.11);
+
+  box-shadow:
+    0 12px 35px
+      rgba(39, 34, 85, 0.08);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.chart-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6546d7,
+      #16b8d4
+    );
+}
+
+
+.chart-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 20px 45px
+      rgba(43, 36, 97, 0.13);
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.chart-card-header,
+.monthly-header {
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap: 15px;
+}
+
+
+.chart-eyebrow {
+
+  display: block;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+
+  color: #315cff;
+
+  margin-bottom: 7px;
+}
+
+
+.chart-card h3,
+.monthly-card h3 {
+
+  margin: 0;
+
+  color: #10182d;
+
+  font-size: 19px;
+
+  font-weight: 800;
+}
+
+
+.chart-card p,
+.monthly-card p {
+
+  margin:
+    7px 0 0;
+
+  font-size: 12px;
+
+  color: #7b879d;
+}
+
+
+/* ==========================================================
+   HEADER ICON
+========================================================== */
+
+.chart-header-icon,
+.monthly-icon {
+
+  width: 46px;
+  height: 46px;
+
+  min-width: 46px;
+
+  border-radius: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+
+.status-icon {
+
+  background:
+    rgba(101, 70, 215, 0.11);
+
+  color: #6546d7;
+}
+
+
+.priority-icon {
+
+  background:
+    rgba(239, 91, 103, 0.11);
+
+  color: #ef5b67;
+}
+
+
+.source-icon {
+
+  background:
+    rgba(22, 184, 212, 0.11);
+
+  color: #16a9c5;
+}
+
+
+/* ==========================================================
+   DONUT AREA
+========================================================== */
+
+.donut-area {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  margin-top: 28px;
+}
+
+
+/* ==========================================================
+   DONUT
+========================================================== */
+
+.donut-chart {
+
+  width: 185px;
+  height: 185px;
+
+  min-width: 185px;
+
+  border-radius: 50%;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow:
+    0 10px 30px
+      rgba(50, 40, 100, 0.12);
+
+  animation:
+    donutAppear 0.7s ease;
+}
+
+
+@keyframes donutAppear {
+
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+/* ==========================================================
+   DONUT HOLE
+========================================================== */
+
+.donut-hole {
+
+  width: 112px;
+  height: 112px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(50, 40, 100, 0.06);
+}
+
+
+.donut-hole strong {
+
+  font-size: 25px;
+
+  font-weight: 800;
+
+  color: #11182b;
+
+  line-height: 1.1;
+}
+
+
+.donut-hole span {
+
+  margin-top: 5px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  color: #8993a8;
+}
+
+
+/* ==========================================================
+   LEGEND
+========================================================== */
+
+.legend {
+
+  flex: 1;
+
+  min-width: 0;
+
+  max-height: 205px;
+
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+
+.legend::-webkit-scrollbar {
+
+  width: 4px;
+}
+
+
+.legend::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(85, 64, 200, 0.2);
+
+  border-radius: 10px;
+}
+
+
+.legend-item {
+
+  display: grid;
+
+  grid-template-columns:
+    10px minmax(0, 1fr) auto auto;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 0;
+
+  border-bottom:
+    1px solid
+      rgba(30, 35, 70, 0.06);
+}
+
+
+.legend-dot {
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+
+.legend-name {
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  color: #526079;
+
+  font-weight: 600;
+}
+
+
+.legend-item strong {
+
+  font-size: 11px;
+
+  color: #192039;
+}
+
+
+.legend-item small {
+
+  font-size: 10px;
+
+  color: #8b95a9;
+
+  min-width: 31px;
+
+  text-align: right;
+}
+
+
+/* ==========================================================
+   EMPTY
+========================================================== */
+
+.chart-empty {
+
+  min-height: 250px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color: #8993a8;
+}
+
+
+.chart-empty i {
+
+  font-size: 35px;
+
+  margin-bottom: 13px;
+
+  opacity: 0.45;
+}
+
+
+.chart-empty strong {
+
+  color: #4c5870;
+
+  font-size: 14px;
+
+  margin-bottom: 5px;
+}
+
+
+.chart-empty span {
+
+  font-size: 11px;
+}
+
+
+/* ==========================================================
+   MONTHLY CARD
+========================================================== */
+
+.monthly-card {
+
+  margin-top: 20px;
+
+  padding: 25px;
+
+  min-height: 430px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fafbff
+    );
+
+  border: 1px solid
+    rgba(94, 74, 180, 0.11);
+
+  box-shadow:
+    0 12px 35px
+      rgba(39, 34, 85, 0.08);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.monthly-card::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #159c64,
+      #16b8d4
+    );
+}
+
+
+.monthly-icon {
+
+  background:
+    rgba(21, 156, 100, 0.11);
+
+  color: #159c64;
+}
+
+
+/* ==========================================================
+   MONTHLY CHART
+========================================================== */
+
+.monthly-chart {
+
+  height: 300px;
+
+  margin-top: 35px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content:
+    space-around;
+
+  gap: 14px;
+
+  padding:
+    20px 15px 0;
+
+  border-bottom:
+    1px solid
+      rgba(40, 45, 80, 0.1);
+}
+
+
+.bar-column {
+
+  height: 100%;
+
+  flex: 1;
+
+  max-width: 90px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  position: relative;
+}
+
+
+.bar-value {
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  color: #273352;
+
+  margin-bottom: 8px;
+}
+
+
+.bar-wrapper {
+
+  width: 45px;
+
+  height: 210px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+}
+
+
+.monthly-bar {
+
+  width: 100%;
+
+  min-height: 5px;
+
+  border-radius:
+    13px 13px 6px 6px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #16b8d4 0%,
+      #6546d7 100%
+    );
+
+  box-shadow:
+    0 8px 20px
+      rgba(101, 70, 215, 0.18);
+
+  animation:
+    barGrow 0.8s ease;
+}
+
+
+@keyframes barGrow {
+
+  from {
+    height: 0;
+  }
+
+}
+
+
+.bar-label {
+
+  margin-top: 10px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  color: #748097;
+
+  white-space: nowrap;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1200px) {
+
+  .donut-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .donut-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .chart-card {
+
+    min-height: auto;
+
+  }
+
+
+  .donut-area {
+
+    justify-content:
+      space-around;
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .donut-area {
+
+    flex-direction: column;
+
+  }
+
+
+  .donut-chart {
+
+    width: 170px;
+    height: 170px;
+
+    min-width: 170px;
+
+  }
+
+
+  .donut-hole {
+
+    width: 104px;
+    height: 104px;
+
+  }
+
+
+  .legend {
+
+    width: 100%;
+
+    max-height: none;
+
+  }
+
+
+  .monthly-card {
+
+    padding: 18px;
+
+  }
+
+
+  .monthly-chart {
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    min-width: 600px;
+
+  }
+
+}

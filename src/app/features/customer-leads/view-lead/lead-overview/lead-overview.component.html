@@ -1,0 +1,674 @@
+# Lead Overview HTML
+
+<div class="overview-container">
+
+  <!-- ==========================================================
+       OVERVIEW HEADER
+       ========================================================== -->
+
+  <div class="overview-heading">
+
+```
+<div class="heading-icon">
+  <i class="fas fa-id-card"></i>
+</div>
+
+<div class="heading-content">
+  <h2>Lead Overview</h2>
+  <p>Complete information about this customer lead.</p>
+</div>
+
+<div class="heading-status" *ngIf="lead">
+  <span class="live-dot"></span>
+  Lead #{{ lead.leadId }}
+</div>
+```
+
+  </div>
+
+  <!-- ==========================================================
+       EMPTY STATE
+       ========================================================== -->
+
+  <div
+    class="overview-empty"
+    *ngIf="!lead">
+
+
+<div class="empty-icon">
+  <i class="fas fa-user-slash"></i>
+</div>
+
+<h3>No Lead Information</h3>
+
+<p>
+  Lead information is currently unavailable.
+</p>
+
+  </div>
+
+  <!-- ==========================================================
+       LEAD INFORMATION
+       ========================================================== -->
+
+  <div
+    class="overview-content"
+    *ngIf="lead">
+
+
+<!-- ========================================================
+     CUSTOMER INFORMATION
+     ======================================================== -->
+
+<section class="overview-card customer-card">
+
+  <div class="card-header">
+
+    <div class="card-title-wrapper">
+
+      <div class="card-icon customer-icon">
+        <i class="fas fa-user"></i>
+      </div>
+
+      <div>
+        <h3>Customer Information</h3>
+        <p>Basic details of the customer.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="information-grid">
+
+    <!-- FULL NAME -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-user"></i>
+        Full Name
+      </span>
+
+      <strong>
+        {{ displayValue(lead.fullName) }}
+      </strong>
+
+    </div>
+
+
+    <!-- AGE -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-cake-candles"></i>
+        Age
+      </span>
+
+      <strong>
+        {{ displayValue($any(lead).age) }}
+      </strong>
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-phone"></i>
+        Phone Number
+      </span>
+
+      <strong class="contact-value">
+        {{ displayValue(lead.phoneNumber) }}
+      </strong>
+
+    </div>
+
+
+    <!-- ALTERNATE PHONE -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-phone-volume"></i>
+        Alternate Number
+      </span>
+
+      <strong class="contact-value">
+        {{ displayValue($any(lead).alternateNumber) }}
+      </strong>
+
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-envelope"></i>
+        Email Address
+      </span>
+
+      <strong class="contact-value email-value">
+        {{ displayValue(lead.email) }}
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     LOCATION DETAILS
+     ======================================================== -->
+
+<section class="overview-card">
+
+  <div class="card-header">
+
+    <div class="card-title-wrapper">
+
+      <div class="card-icon location-icon">
+        <i class="fas fa-location-dot"></i>
+      </div>
+
+      <div>
+        <h3>Location Details</h3>
+        <p>Customer address and location information.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="information-grid">
+
+    <!-- ADDRESS -->
+
+    <div class="info-item full-width">
+
+      <span class="info-label">
+        <i class="fas fa-house"></i>
+        Address
+      </span>
+
+      <strong>
+        {{ displayValue(lead.address) }}
+      </strong>
+
+    </div>
+
+
+    <!-- CITY -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-city"></i>
+        City
+      </span>
+
+      <strong>
+        {{ displayValue(lead.city) }}
+      </strong>
+
+    </div>
+
+
+    <!-- STATE -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-map"></i>
+        State
+      </span>
+
+      <strong>
+        {{ displayValue($any(lead).state) }}
+      </strong>
+
+    </div>
+
+
+    <!-- PINCODE -->
+
+    <div class="info-item">
+
+      <span class="info-label">
+        <i class="fas fa-location-crosshairs"></i>
+        Pincode
+      </span>
+
+      <strong>
+        {{ displayValue($any(lead).pincode) }}
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     LEAD CLASSIFICATION
+     ======================================================== -->
+
+<section class="overview-card classification-card">
+
+  <div class="card-header">
+
+    <div class="card-title-wrapper">
+
+      <div class="card-icon classification-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div>
+        <h3>Lead Classification</h3>
+        <p>Category, source and current lead position.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="classification-grid">
+
+    <!-- CATEGORY -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-folder"></i>
+        Category
+      </span>
+
+      <div class="classification-value">
+
+        <span class="value-chip category-chip">
+          <i class="fas fa-layer-group"></i>
+          {{ displayValue($any(lead).categoryName) }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUBCATEGORY -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-folder-tree"></i>
+        Subcategory
+      </span>
+
+      <div class="classification-value">
+
+        <span class="value-chip subcategory-chip">
+          <i class="fas fa-sitemap"></i>
+          {{ displayValue($any(lead).subCategoryName) }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOURCE -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-bullseye"></i>
+        Lead Source
+      </span>
+
+      <div class="classification-value">
+
+        <span class="value-chip source-chip">
+          <i class="fas fa-compass"></i>
+          {{ displayValue($any(lead).sourceName) }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-circle-half-stroke"></i>
+        Lead Status
+      </span>
+
+      <div class="classification-value">
+
+        <span
+          class="status-display"
+          [ngClass]="getStatusClass()">
+
+          <span class="status-dot"></span>
+
+          {{ formatEnum($any(lead).leadStatus ?? $any(lead).status) }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRIORITY -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-bolt"></i>
+        Priority
+      </span>
+
+      <div class="classification-value">
+
+        <span
+          class="priority-display"
+          [ngClass]="getPriorityClass()">
+
+          <i
+            class="fas"
+            [ngClass]="{
+              'fa-fire': $any(lead).leadPriority === 'HOT',
+              'fa-temperature-half': $any(lead).leadPriority === 'WARM',
+              'fa-snowflake': $any(lead).leadPriority === 'COLD',
+              'fa-user-slash': $any(lead).leadPriority === 'NOT_A_CUSTOMER'
+            }">
+          </i>
+
+          {{ formatEnum($any(lead).leadPriority ?? $any(lead).priority) }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ASSIGNED EXECUTIVE -->
+
+    <div class="classification-item">
+
+      <span class="info-label">
+        <i class="fas fa-user-tie"></i>
+        Assigned Executive
+      </span>
+
+      <div class="assigned-executive">
+
+        <div class="executive-avatar">
+          <i class="fas fa-user-tie"></i>
+        </div>
+
+        <strong>
+          {{ displayValue(lead.assignedUserName) }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     REQUIREMENT & DISCUSSION
+     ======================================================== -->
+
+<section class="overview-card">
+
+  <div class="card-header">
+
+    <div class="card-title-wrapper">
+
+      <div class="card-icon requirement-icon">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+
+      <div>
+        <h3>Requirement & Discussion</h3>
+        <p>Customer requirement and discussion details.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="text-information-grid">
+
+    <!-- REQUIREMENT -->
+
+    <div class="text-information">
+
+      <div class="text-information-header">
+
+        <span class="text-icon">
+          <i class="fas fa-list-check"></i>
+        </span>
+
+        <span>
+          Requirement
+        </span>
+
+      </div>
+
+      <p>
+        {{ displayValue($any(lead).requirement) }}
+      </p>
+
+    </div>
+
+
+    <!-- DISCUSSION -->
+
+    <div class="text-information">
+
+      <div class="text-information-header">
+
+        <span class="text-icon">
+          <i class="fas fa-comments"></i>
+        </span>
+
+        <span>
+          Discussion Details
+        </span>
+
+      </div>
+
+      <p>
+        {{ displayValue($any(lead).discussionDetails) }}
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     FOLLOW-UP & IMPORTANT DATES
+     ======================================================== -->
+
+<section class="overview-card dates-card">
+
+  <div class="card-header">
+
+    <div class="card-title-wrapper">
+
+      <div class="card-icon calendar-icon">
+        <i class="fas fa-calendar-days"></i>
+      </div>
+
+      <div>
+        <h3>Important Dates</h3>
+        <p>Lead visits, follow-ups and creation information.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="date-grid">
+
+    <!-- VISIT DATE -->
+
+    <div class="date-item">
+
+      <div class="date-icon visit-date-icon">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+
+      <div>
+
+        <span>
+          Visit Date
+        </span>
+
+        <strong>
+          {{ formatDate($any(lead).visitDate) }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- NEXT FOLLOW UP -->
+
+    <div class="date-item">
+
+      <div class="date-icon followup-date-icon">
+        <i class="fas fa-clock"></i>
+      </div>
+
+      <div>
+
+        <span>
+          Next Follow-up
+        </span>
+
+        <strong>
+          {{ formatDate($any(lead).nextFollowUpDate) }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- CREATED DATE -->
+
+    <div class="date-item">
+
+      <div class="date-icon created-date-icon">
+        <i class="fas fa-plus"></i>
+      </div>
+
+      <div>
+
+        <span>
+          Created Date
+        </span>
+
+        <strong>
+          {{ formatDateTime($any(lead).createdAt) }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- UPDATED DATE -->
+
+    <div class="date-item">
+
+      <div class="date-icon updated-date-icon">
+        <i class="fas fa-rotate"></i>
+      </div>
+
+      <div>
+
+        <span>
+          Last Updated
+        </span>
+
+        <strong>
+          {{ formatDateTime($any(lead).updatedAt) }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     LEAD ID / AUDIT FOOTER
+     ======================================================== -->
+
+<div class="overview-footer">
+
+  <div class="footer-item">
+
+    <i class="fas fa-fingerprint"></i>
+
+    <span>
+      Lead ID:
+    </span>
+
+    <strong>
+      #{{ lead.leadId }}
+    </strong>
+
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-item">
+
+    <i class="fas fa-shield-halved"></i>
+
+    <span>
+      CRM Record
+    </span>
+
+  </div>
+
+</div>
+
+  </div>
+
+</div>

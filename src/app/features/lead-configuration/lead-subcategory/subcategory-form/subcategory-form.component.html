@@ -1,0 +1,816 @@
+<div class="subcategory-form-page">
+
+  <!-- ==========================================================
+       BACKGROUND DECORATION
+       ========================================================== -->
+
+  <div class="ambient-glow glow-one"></div>
+  <div class="ambient-glow glow-two"></div>
+  <div class="ambient-glow glow-three"></div>
+
+
+  <!-- ==========================================================
+       PAGE HEADER
+       ========================================================== -->
+
+  <header class="page-header">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+
+      <span>Lead Management</span>
+
+      <i class="fas fa-chevron-right"></i>
+
+      <span>Lead Configuration</span>
+
+      <i class="fas fa-chevron-right"></i>
+
+      <span>Lead Subcategories</span>
+
+      <i class="fas fa-chevron-right"></i>
+
+      <span class="current">
+        {{ isEditMode ? 'Edit Subcategory' : 'Add Subcategory' }}
+      </span>
+
+    </div>
+
+
+    <!-- Header Content -->
+
+    <div class="header-content">
+
+      <div class="header-left">
+
+        <!-- Back Button -->
+
+        <button
+          type="button"
+          class="back-button"
+          (click)="cancel()"
+          aria-label="Go back">
+
+          <i class="fas fa-arrow-left"></i>
+
+        </button>
+
+
+        <!-- Icon -->
+
+        <div class="header-icon">
+
+          <div class="icon-glow"></div>
+
+          <i class="fas fa-layer-group"></i>
+
+        </div>
+
+
+        <!-- Title -->
+
+        <div class="header-text">
+
+          <span class="eyebrow">
+            {{ isEditMode ? 'SUBCATEGORY MANAGEMENT' : 'CREATE SUBCATEGORY' }}
+          </span>
+
+          <h1>
+            {{ isEditMode ? 'Edit Lead Subcategory' : 'Add Lead Subcategory' }}
+          </h1>
+
+          <p>
+            {{
+              isEditMode
+                ? 'Update the details of your existing lead subcategory.'
+                : 'Create a structured subcategory for better lead organization.'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ==========================================================
+       ALERTS
+       ========================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-check"></i>
+    </div>
+
+    <div class="alert-content">
+      <strong>Success</strong>
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="successMessage = ''"
+      aria-label="Close notification">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-exclamation"></i>
+    </div>
+
+    <div class="alert-content">
+      <strong>Something went wrong</strong>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="errorMessage = ''"
+      aria-label="Close notification">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- ==========================================================
+       MAIN FORM CARD
+       ========================================================== -->
+
+  <main class="form-container">
+
+    <section class="form-card">
+
+
+      <!-- ======================================================
+           STATIC NEON BORDER
+           ====================================================== -->
+
+      <div class="neon-border"></div>
+
+
+      <!-- ======================================================
+           CARD HEADER
+           ====================================================== -->
+
+      <div class="form-card-header">
+
+        <div class="card-heading">
+
+          <div class="heading-icon">
+            <i class="fas fa-sitemap"></i>
+          </div>
+
+          <div>
+
+            <h2>
+              Subcategory Information
+            </h2>
+
+            <p>
+              Enter the details required to configure this
+              lead subcategory.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Required Indicator -->
+
+        <div class="required-note">
+
+          <span class="required-star">*</span>
+
+          Required fields
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================================
+           FORM
+           ====================================================== -->
+
+      <form
+        [formGroup]="subcategoryForm"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+
+
+        <!-- ====================================================
+             FORM GRID
+             ==================================================== -->
+
+        <div class="form-grid">
+
+
+          <!-- ==================================================
+               PARENT CATEGORY
+               ================================================== -->
+
+          <div class="form-field">
+
+            <label for="categoryId">
+
+              <span class="label-icon">
+                <i class="fas fa-folder-tree"></i>
+              </span>
+
+              Parent Category
+
+              <span class="required-star">*</span>
+
+            </label>
+
+
+            <div
+              class="input-wrapper select-wrapper"
+              [class.input-error]="
+                categoryId?.invalid &&
+                categoryId?.touched
+              ">
+
+              <i class="fas fa-folder-open field-icon"></i>
+
+              <select
+                id="categoryId"
+                formControlName="categoryId">
+
+                <option
+                  value=""
+                  disabled>
+
+                  Select a parent category
+
+                </option>
+
+                <option
+                  *ngFor="let category of categories"
+                  [ngValue]="category.categoryId">
+
+                  {{ category.categoryName }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+
+            <div
+              class="field-error"
+              *ngIf="
+                categoryId?.invalid &&
+                categoryId?.touched
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              <span>
+                Please select a parent category.
+              </span>
+
+            </div>
+
+
+            <small class="field-hint">
+
+              Choose the lead category this subcategory
+              belongs to.
+
+            </small>
+
+          </div>
+
+
+
+          <!-- ==================================================
+               SUBCATEGORY NAME
+               ================================================== -->
+
+          <div class="form-field">
+
+            <label for="subCategoryName">
+
+              <span class="label-icon">
+                <i class="fas fa-tag"></i>
+              </span>
+
+              Subcategory Name
+
+              <span class="required-star">*</span>
+
+            </label>
+
+
+            <div
+              class="input-wrapper"
+              [class.input-error]="
+                subCategoryName?.invalid &&
+                subCategoryName?.touched
+              ">
+
+              <i class="fas fa-layer-group field-icon"></i>
+
+              <input
+                id="subCategoryName"
+                type="text"
+                formControlName="subCategoryName"
+                placeholder="Enter subcategory name"
+                maxlength="100"
+                autocomplete="off" />
+
+            </div>
+
+
+            <div
+              class="field-meta">
+
+              <div
+                class="field-error"
+                *ngIf="
+                  subCategoryName?.invalid &&
+                  subCategoryName?.touched
+                ">
+
+                <i class="fas fa-circle-exclamation"></i>
+
+                <span
+                  *ngIf="subCategoryName?.errors?.['required']">
+
+                  Subcategory name is required.
+
+                </span>
+
+                <span
+                  *ngIf="subCategoryName?.errors?.['maxlength']">
+
+                  Subcategory name cannot exceed
+                  100 characters.
+
+                </span>
+
+              </div>
+
+
+              <span class="character-count">
+
+                {{ subCategoryName?.value?.length || 0 }}/100
+
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ==================================================
+               DISPLAY ORDER
+               ================================================== -->
+
+          <div class="form-field small-field">
+
+            <label for="displayOrder">
+
+              <span class="label-icon">
+                <i class="fas fa-arrow-down-1-9"></i>
+              </span>
+
+              Display Order
+
+              <span class="required-star">*</span>
+
+            </label>
+
+
+            <div
+              class="input-wrapper"
+              [class.input-error]="
+                displayOrder?.invalid &&
+                displayOrder?.touched
+              ">
+
+              <i class="fas fa-sort-numeric-down field-icon"></i>
+
+              <input
+                id="displayOrder"
+                type="number"
+                formControlName="displayOrder"
+                min="1"
+                placeholder="1" />
+
+            </div>
+
+
+            <div
+              class="field-error"
+              *ngIf="
+                displayOrder?.invalid &&
+                displayOrder?.touched
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              <span>
+                Display order must be greater than 0.
+              </span>
+
+            </div>
+
+
+            <small class="field-hint">
+
+              Determines the order in which the
+              subcategory appears.
+
+            </small>
+
+          </div>
+
+
+
+          <!-- ==================================================
+               STATUS
+               ================================================== -->
+
+          <div class="form-field small-field">
+
+            <label for="status">
+
+              <span class="label-icon">
+                <i class="fas fa-signal"></i>
+              </span>
+
+              Status
+
+              <span class="required-star">*</span>
+
+            </label>
+
+
+            <div
+              class="input-wrapper select-wrapper"
+              [class.input-error]="
+                status?.invalid &&
+                status?.touched
+              ">
+
+              <i class="fas fa-circle-half-stroke field-icon"></i>
+
+              <select
+                id="status"
+                formControlName="status">
+
+                <option
+                  [ngValue]="CategoryStatus.ACTIVE">
+
+                  Active
+
+                </option>
+
+                <option
+                  [ngValue]="CategoryStatus.INACTIVE">
+
+                  Inactive
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+
+            <small class="field-hint">
+
+              Inactive subcategories will not be available
+              for active lead configuration.
+
+            </small>
+
+          </div>
+
+
+
+          <!-- ==================================================
+               DESCRIPTION
+               ================================================== -->
+
+          <div class="form-field full-width">
+
+            <label for="description">
+
+              <span class="label-icon">
+                <i class="fas fa-align-left"></i>
+              </span>
+
+              Description
+
+              <span class="optional-label">
+                Optional
+              </span>
+
+            </label>
+
+
+            <div
+              class="textarea-wrapper"
+              [class.input-error]="
+                description?.invalid &&
+                description?.touched
+              ">
+
+              <textarea
+                id="description"
+                formControlName="description"
+                rows="5"
+                maxlength="500"
+                placeholder="Describe what this subcategory represents..."></textarea>
+
+            </div>
+
+
+            <div class="field-meta">
+
+              <div
+                class="field-error"
+                *ngIf="
+                  description?.invalid &&
+                  description?.touched
+                ">
+
+                <i class="fas fa-circle-exclamation"></i>
+
+                <span>
+                  Description cannot exceed
+                  500 characters.
+                </span>
+
+              </div>
+
+
+              <span class="character-count">
+
+                {{ description?.value?.length || 0 }}/500
+
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ======================================================
+             FORM DIVIDER
+             ====================================================== -->
+
+        <div class="form-divider">
+
+          <span></span>
+
+          <div class="divider-icon">
+            <i class="fas fa-sparkles"></i>
+          </div>
+
+          <span></span>
+
+        </div>
+
+
+
+        <!-- ======================================================
+             PREVIEW
+             ====================================================== -->
+
+        <div class="subcategory-preview">
+
+          <div class="preview-header">
+
+            <div>
+
+              <span class="preview-eyebrow">
+                LIVE PREVIEW
+              </span>
+
+              <h3>
+                Subcategory Preview
+              </h3>
+
+            </div>
+
+            <div class="preview-light">
+              <span></span>
+              Preview
+            </div>
+
+          </div>
+
+
+          <div class="preview-content">
+
+            <div class="preview-icon">
+
+              <i class="fas fa-layer-group"></i>
+
+            </div>
+
+
+            <div class="preview-info">
+
+              <strong>
+                {{
+                  subCategoryName?.value ||
+                  'Subcategory Name'
+                }}
+              </strong>
+
+              <span>
+
+                {{
+                  getSelectedCategoryName() ||
+                  'Parent Category'
+                }}
+
+              </span>
+
+              <p>
+
+                {{
+                  description?.value ||
+                  'Your subcategory description will appear here.'
+                }}
+
+              </p>
+
+            </div>
+
+
+            <div
+              class="preview-status"
+              [class.preview-inactive]="
+                status?.value === CategoryStatus.INACTIVE
+              ">
+
+              <span class="preview-status-dot"></span>
+
+              {{
+                status?.value === CategoryStatus.INACTIVE
+                  ? 'Inactive'
+                  : 'Active'
+              }}
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ======================================================
+             FORM ACTIONS
+             ====================================================== -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="cancel()"
+            [disabled]="loading">
+
+            <i class="fas fa-xmark"></i>
+
+            <span>
+              Cancel
+            </span>
+
+          </button>
+
+
+          <div class="right-actions">
+
+            <button
+              type="button"
+              class="reset-btn"
+              (click)="resetForm()"
+              [disabled]="loading">
+
+              <i class="fas fa-rotate-left"></i>
+
+              <span>
+                Reset
+              </span>
+
+            </button>
+
+
+            <button
+              type="submit"
+              class="submit-btn"
+              [disabled]="loading">
+
+              <span
+                class="button-loader"
+                *ngIf="loading">
+              </span>
+
+              <i
+                class="fas fa-check"
+                *ngIf="!loading">
+
+              </i>
+
+              <span>
+
+                {{
+                  loading
+                    ? 'Saving...'
+                    : isEditMode
+                      ? 'Update Subcategory'
+                      : 'Create Subcategory'
+                }}
+
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ==========================================================
+       FOOTER
+       ========================================================== -->
+
+  <footer class="page-footer">
+
+    <div class="footer-left">
+
+      <i class="fas fa-shield-halved"></i>
+
+      <span>
+        LeadPilot CRM
+      </span>
+
+      <span class="footer-separator">•</span>
+
+      <span>
+        Secure Configuration
+      </span>
+
+    </div>
+
+
+    <div class="footer-right">
+
+      <span class="footer-status-dot"></span>
+
+      System Ready
+
+    </div>
+
+  </footer>
+
+</div>

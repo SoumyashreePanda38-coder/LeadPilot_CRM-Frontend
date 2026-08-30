@@ -1,0 +1,791 @@
+<div class="notes-container">
+
+  <!-- ==========================================================
+       HEADER
+       ========================================================== -->
+
+  <div class="notes-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="fas fa-note-sticky"></i>
+      </div>
+
+      <div class="header-text">
+
+        <span class="section-kicker">
+          CUSTOMER LEAD
+        </span>
+
+        <h2>
+          Lead Notes
+        </h2>
+
+        <p>
+          Capture important information, conversations and customer details.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-note-btn"
+      (click)="openAddNote()">
+
+      <i class="fas fa-plus"></i>
+
+      <span>
+        Add Note
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       SUCCESS MESSAGE
+       ========================================================== -->
+
+  <div
+    class="message success-message"
+    *ngIf="successMessage">
+
+    <i class="fas fa-circle-check"></i>
+
+    <span>
+      {{ successMessage }}
+    </span>
+
+    <button
+      type="button"
+      (click)="successMessage = ''"
+      aria-label="Close message">
+
+      <i class="fas fa-xmark"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       ERROR MESSAGE
+       ========================================================== -->
+
+  <div
+    class="message error-message"
+    *ngIf="errorMessage">
+
+    <i class="fas fa-circle-exclamation"></i>
+
+    <span>
+      {{ errorMessage }}
+    </span>
+
+    <button
+      type="button"
+      (click)="errorMessage = ''"
+      aria-label="Close message">
+
+      <i class="fas fa-xmark"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       NOTE STATISTICS
+       ========================================================== -->
+
+  <div
+    class="notes-stats"
+    *ngIf="!isLoading">
+
+    <!-- TOTAL -->
+
+    <div class="stat-card total-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Total Notes
+        </span>
+
+        <strong>
+          {{ getTotalCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- PINNED -->
+
+    <div class="stat-card pinned-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-thumbtack"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Pinned
+        </span>
+
+        <strong>
+          {{ getPinnedCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- IMPORTANT -->
+
+    <div class="stat-card important-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-star"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Important
+        </span>
+
+        <strong>
+          {{ getImportantCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- NORMAL -->
+
+    <div class="stat-card normal-card">
+
+      <div class="stat-icon">
+        <i class="fas fa-file-lines"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Normal
+        </span>
+
+        <strong>
+          {{ getNormalCount() }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================================
+       SEARCH + FILTER
+       ========================================================== -->
+
+  <div class="notes-toolbar">
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <i class="fas fa-magnifying-glass search-icon"></i>
+
+      <input
+        type="text"
+        [(ngModel)]="searchKeyword"
+        (input)="onSearch()"
+        placeholder="Search notes, content or creator..."
+        aria-label="Search notes">
+
+      <button
+        type="button"
+        class="clear-search"
+        *ngIf="searchKeyword"
+        (click)="clearSearch()"
+        aria-label="Clear search">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filter-box">
+
+      <label for="note-filter">
+        <i class="fas fa-filter"></i>
+        Filter
+      </label>
+
+      <select
+        id="note-filter"
+        [(ngModel)]="selectedFilter"
+        (change)="onFilterChange()">
+
+        <option value="ALL">
+          All Notes
+        </option>
+
+        <option value="PINNED">
+          Pinned Notes
+        </option>
+
+        <option value="IMPORTANT">
+          Important Notes
+        </option>
+
+        <option value="NORMAL">
+          Normal Notes
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- CLEAR FILTERS -->
+
+    <button
+      type="button"
+      class="clear-filters-btn"
+      *ngIf="searchKeyword || selectedFilter !== 'ALL'"
+      (click)="clearFilters()">
+
+      <i class="fas fa-rotate-left"></i>
+
+      Clear
+
+    </button>
+
+
+    <!-- RESULT -->
+
+    <div class="result-count">
+
+      <strong>
+        {{ filteredNotes.length }}
+      </strong>
+
+      <span>
+        {{ filteredNotes.length === 1 ? 'note' : 'notes' }}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================================
+       ADD / EDIT NOTE FORM
+       ========================================================== -->
+
+  <div
+    class="note-form-wrapper"
+    *ngIf="showNoteForm">
+
+    <div class="note-form-card">
+
+      <!-- FORM HEADER -->
+
+      <div class="form-header">
+
+        <div class="form-title">
+
+          <div class="form-icon">
+            <i
+              class="fas"
+              [ngClass]="isEditMode
+                ? 'fa-pen-to-square'
+                : 'fa-plus'">
+            </i>
+          </div>
+
+          <div>
+
+            <span>
+              {{ isEditMode ? 'EDIT NOTE' : 'NEW NOTE' }}
+            </span>
+
+            <h3>
+              {{ isEditMode ? 'Update Note' : 'Create Note' }}
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="close-form-btn"
+          (click)="closeNoteForm()"
+          aria-label="Close form">
+
+          <i class="fas fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+
+      <!-- FORM -->
+
+      <div class="note-form">
+
+        <!-- TITLE -->
+
+        <div class="form-group">
+
+          <label for="note-title">
+            Note Title
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-heading"></i>
+
+            <input
+              id="note-title"
+              type="text"
+              [(ngModel)]="noteForm.title"
+              placeholder="Enter note title"
+              maxlength="150">
+
+          </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="form-group">
+
+          <label for="note-content">
+            Note Content
+            <span>*</span>
+          </label>
+
+          <div class="textarea-wrapper">
+
+            <i class="fas fa-align-left"></i>
+
+            <textarea
+              id="note-content"
+              [(ngModel)]="noteForm.content"
+              placeholder="Write your note here..."
+              rows="6">
+            </textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- FLAGS -->
+
+        <div class="note-flags">
+
+          <!-- PINNED -->
+
+          <label
+            class="flag-option"
+            [class.active]="noteForm.pinned">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="noteForm.pinned">
+
+            <span class="custom-checkbox">
+              <i class="fas fa-thumbtack"></i>
+            </span>
+
+            <span class="flag-text">
+
+              <strong>
+                Pin this note
+              </strong>
+
+              <small>
+                Keep this note highlighted
+              </small>
+
+            </span>
+
+          </label>
+
+
+          <!-- IMPORTANT -->
+
+          <label
+            class="flag-option important-option"
+            [class.active]="noteForm.important">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="noteForm.important">
+
+            <span class="custom-checkbox">
+              <i class="fas fa-star"></i>
+            </span>
+
+            <span class="flag-text">
+
+              <strong>
+                Mark important
+              </strong>
+
+              <small>
+                Highlight as important
+              </small>
+
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <!-- FORM ACTIONS -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeNoteForm()"
+            [disabled]="isSaving">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+            class="save-btn"
+            (click)="saveNote()"
+            [disabled]="isSaving">
+
+            <i
+              class="fas"
+              [ngClass]="isSaving
+                ? 'fa-spinner fa-spin'
+                : 'fa-floppy-disk'">
+            </i>
+
+            <span>
+              {{ isSaving
+                ? 'Saving...'
+                : (isEditMode ? 'Update Note' : 'Save Note')
+              }}
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================================
+       LOADING
+       ========================================================== -->
+
+  <div
+    class="loading-state"
+    *ngIf="isLoading">
+
+    <div class="loading-orbit">
+
+      <div class="orbit-ring"></div>
+
+      <div class="loading-icon">
+
+        <i class="fas fa-note-sticky"></i>
+
+      </div>
+
+    </div>
+
+    <h3>
+      Loading Notes
+    </h3>
+
+    <p>
+      Retrieving notes for this customer lead...
+    </p>
+
+  </div>
+
+
+  <!-- ==========================================================
+       EMPTY STATE
+       ========================================================== -->
+
+  <div
+    class="empty-state"
+    *ngIf="
+      !isLoading &&
+      filteredNotes.length === 0 &&
+      !errorMessage
+    ">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-note-sticky"></i>
+
+    </div>
+
+    <h3>
+      No Notes Found
+    </h3>
+
+    <p *ngIf="!searchKeyword && selectedFilter === 'ALL'">
+      This customer lead does not have any notes yet.
+    </p>
+
+    <p *ngIf="searchKeyword || selectedFilter !== 'ALL'">
+      No notes match your current search or filter.
+    </p>
+
+    <button
+      type="button"
+      class="empty-add-btn"
+      *ngIf="!searchKeyword && selectedFilter === 'ALL'"
+      (click)="openAddNote()">
+
+      <i class="fas fa-plus"></i>
+      Add First Note
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       NOTES GRID
+       ========================================================== -->
+
+  <div
+    class="notes-grid"
+    *ngIf="
+      !isLoading &&
+      filteredNotes.length > 0
+    ">
+
+
+    <!-- NOTE CARD -->
+
+    <article
+      class="note-card"
+      *ngFor="let note of filteredNotes">
+
+
+      <!-- TOP -->
+
+      <div class="note-card-top">
+
+        <div class="note-type-icon">
+
+          <i
+            class="fas"
+            [ngClass]="note.important
+              ? 'fa-star'
+              : (note.pinned
+                ? 'fa-thumbtack'
+                : 'fa-note-sticky')">
+          </i>
+
+        </div>
+
+
+        <div class="note-badges">
+
+          <span
+            class="note-badge pinned-badge"
+            *ngIf="note.pinned">
+
+            <i class="fas fa-thumbtack"></i>
+            Pinned
+
+          </span>
+
+
+          <span
+            class="note-badge important-badge"
+            *ngIf="note.important">
+
+            <i class="fas fa-star"></i>
+            Important
+
+          </span>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <div class="note-actions">
+
+          <button
+            type="button"
+            title="Edit note"
+            (click)="openEditNote(note)">
+
+            <i class="fas fa-pen"></i>
+
+          </button>
+
+          <button
+            type="button"
+            title="Delete note"
+            class="delete-action"
+            (click)="deleteNote(note)">
+
+            <i class="fas fa-trash"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <h3 class="note-title">
+        {{ note.title }}
+      </h3>
+
+
+      <!-- CONTENT -->
+
+      <div class="note-content">
+
+        <p>
+          {{ note.content }}
+        </p>
+
+      </div>
+
+
+      <!-- META -->
+
+      <div class="note-meta">
+
+        <div class="meta-item">
+
+          <i class="fas fa-user"></i>
+
+          <div>
+
+            <span>
+              Created By
+            </span>
+
+            <strong>
+              {{ note.createdByName || 'Unknown' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="meta-item">
+
+          <i class="fas fa-calendar"></i>
+
+          <div>
+
+            <span>
+              Created
+            </span>
+
+            <strong>
+              {{ note.createdAt | date:'dd MMM yyyy, hh:mm a' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="note-footer">
+
+        <button
+          type="button"
+          class="flag-btn"
+          [class.active]="note.pinned"
+          (click)="togglePin(note)"
+          [title]="note.pinned ? 'Unpin note' : 'Pin note'">
+
+          <i class="fas fa-thumbtack"></i>
+
+          {{ note.pinned ? 'Pinned' : 'Pin' }}
+
+        </button>
+
+
+        <button
+          type="button"
+          class="flag-btn important-toggle"
+          [class.active]="note.important"
+          (click)="toggleImportant(note)"
+          [title]="note.important
+            ? 'Remove important'
+            : 'Mark important'">
+
+          <i class="fas fa-star"></i>
+
+          {{ note.important ? 'Important' : 'Important' }}
+
+        </button>
+
+
+        <span class="note-id">
+          #{{ note.noteId }}
+        </span>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</div>

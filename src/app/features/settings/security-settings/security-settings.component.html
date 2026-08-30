@@ -1,1 +1,1093 @@
-<p>security-settings works!</p>
+<div class="security-page">
+
+
+  <!-- ======================================================
+       BACKGROUND
+  ======================================================= -->
+
+  <div class="emerald-bg">
+
+    <span class="emerald-orb orb-one"></span>
+    <span class="emerald-orb orb-two"></span>
+    <span class="emerald-orb orb-three"></span>
+
+  </div>
+
+
+
+  <div class="security-container">
+
+
+    <!-- ====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <header class="page-header">
+
+      <div class="title-area">
+
+        <div class="title-icon">
+
+          <i class="fas fa-shield-halved"></i>
+
+        </div>
+
+
+        <div>
+
+          <span class="eyebrow">
+            SECURITY CENTER
+          </span>
+
+          <h1>
+            Security Settings
+          </h1>
+
+          <p>
+            Manage authentication, password,
+            session and security preferences.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SECURITY STATUS -->
+
+      <div class="security-status">
+
+        <div class="status-dot"></div>
+
+        <div>
+
+          <span>
+            SECURITY STATUS
+          </span>
+
+          <strong>
+            {{ getSecurityStatus() }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ====================================================
+         SUCCESS MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <div class="alert-icon">
+
+        <i class="fas fa-circle-check"></i>
+
+      </div>
+
+      <span>
+        {{ successMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="clearSuccess()">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         ERROR MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <div class="alert-icon">
+
+        <i class="fas fa-triangle-exclamation"></i>
+
+      </div>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="clearError()">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         PASSWORD SECURITY
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon green-icon">
+
+          <i class="fas fa-key"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Password Security
+          </h2>
+
+          <p>
+            Define the minimum password requirements
+            for CRM accounts.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+
+        <!-- PASSWORD LENGTH -->
+
+        <div class="form-group">
+
+          <label>
+            Minimum Password Length
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-ruler-horizontal"></i>
+
+            <input
+              type="number"
+              min="6"
+              max="32"
+              title="Minimum Password Length"
+              placeholder="Minimum password length"
+              [(ngModel)]="minimumPasswordLength">
+
+            <span class="input-suffix">
+              characters
+            </span>
+
+          </div>
+
+          <small>
+            Minimum 6 and maximum 32 characters.
+          </small>
+
+        </div>
+
+
+        <!-- PASSWORD EXPIRY -->
+
+        <div class="form-group">
+
+          <label>
+            Password Expiration
+          </label>
+
+          <div class="inline-setting">
+
+            <button
+              type="button"
+              class="toggle"
+              [class.enabled]="passwordExpiry"
+              (click)="toggleSetting('passwordExpiry')">
+
+              <span></span>
+
+            </button>
+
+            <span>
+              Require periodic password changes
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- PASSWORD RULES -->
+
+      <div class="security-options">
+
+        <div class="option-title">
+
+          <i class="fas fa-lock"></i>
+
+          <span>
+            Password Requirements
+          </span>
+
+        </div>
+
+
+        <div class="checkbox-grid">
+
+
+          <label class="check-option">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="requireUppercase">
+
+            <span class="custom-check">
+
+              <i class="fas fa-check"></i>
+
+            </span>
+
+            <span>
+              Uppercase letter
+            </span>
+
+          </label>
+
+
+          <label class="check-option">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="requireLowercase">
+
+            <span class="custom-check">
+
+              <i class="fas fa-check"></i>
+
+            </span>
+
+            <span>
+              Lowercase letter
+            </span>
+
+          </label>
+
+
+          <label class="check-option">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="requireNumber">
+
+            <span class="custom-check">
+
+              <i class="fas fa-check"></i>
+
+            </span>
+
+            <span>
+              Number
+            </span>
+
+          </label>
+
+
+          <label class="check-option">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="requireSpecialCharacter">
+
+            <span class="custom-check">
+
+              <i class="fas fa-check"></i>
+
+            </span>
+
+            <span>
+              Special character
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- PASSWORD SCORE -->
+
+      <div class="security-score">
+
+        <div class="score-header">
+
+          <div>
+
+            <span>
+              PASSWORD POLICY STRENGTH
+            </span>
+
+            <strong>
+              {{ getPasswordSecurityLabel() }}
+            </strong>
+
+          </div>
+
+          <strong class="score-number">
+            {{ getPasswordSecurityScore() }}%
+          </strong>
+
+        </div>
+
+
+        <div class="score-bar">
+
+          <div
+            class="score-progress"
+            [style.width.%]="getPasswordSecurityScore()">
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         LOGIN PROTECTION
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon warning-icon">
+
+          <i class="fas fa-user-shield"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Login Protection
+          </h2>
+
+          <p>
+            Protect CRM accounts from repeated
+            unsuccessful login attempts.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+
+        <!-- MAX ATTEMPTS -->
+
+        <div class="form-group">
+
+          <label>
+            Maximum Login Attempts
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-arrow-rotate-right"></i>
+
+            <input
+              type="number"
+              min="1"
+              max="20"
+              title="Maximum Login Attempts"
+              placeholder="Maximum login attempts"
+              [(ngModel)]="maxLoginAttempts">
+
+            <span class="input-suffix">
+              attempts
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOCKOUT -->
+
+        <div class="form-group">
+
+          <label>
+            Lockout Duration
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-hourglass-half"></i>
+
+            <input
+              type="number"
+              min="1"
+              max="1440"
+              title="Lockout Duration"
+              placeholder="Lockout duration"
+              [(ngModel)]="lockoutDuration">
+
+            <span class="input-suffix">
+              minutes
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon green-setting">
+
+            <i class="fas fa-user-lock"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Account Lockout Protection
+            </strong>
+
+            <p>
+              Temporarily lock an account after
+              repeated failed login attempts.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="accountLockout"
+          (click)="toggleSetting('accountLockout')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         TWO FACTOR AUTHENTICATION
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon emerald-icon">
+
+          <i class="fas fa-mobile-screen-button"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Two-Factor Authentication
+          </h2>
+
+          <p>
+            Add an additional verification layer
+            to CRM account login.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="security-highlight">
+
+        <div class="highlight-icon">
+
+          <i class="fas fa-shield-check"></i>
+
+        </div>
+
+        <div>
+
+          <strong>
+            Additional account protection
+          </strong>
+
+          <p>
+            Two-factor authentication requires users
+            to verify their identity using an additional
+            authentication method.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-shield-halved"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Enable Two-Factor Authentication
+            </strong>
+
+            <p>
+              Require an additional verification step
+              during login.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="twoFactorAuthentication"
+          (click)="toggleSetting('twoFactorAuthentication')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="setting-row nested-row"
+        *ngIf="twoFactorAuthentication">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-user-shield"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Require 2FA for Administrators
+            </strong>
+
+            <p>
+              Administrators must use two-factor
+              authentication when signing in.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="requireTwoFactorForAdmins"
+          (click)="toggleSetting('requireTwoFactorForAdmins')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         SESSION SECURITY
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon cyan-icon">
+
+          <i class="fas fa-clock-rotate-left"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Session Security
+          </h2>
+
+          <p>
+            Control how long authenticated sessions
+            remain active.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+
+        <!-- SESSION TIMEOUT -->
+
+        <div class="form-group">
+
+          <label>
+            Session Timeout
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-clock"></i>
+
+            <input
+              type="number"
+              min="5"
+              max="1440"
+              title="Session Timeout"
+              placeholder="Session timeout"
+              [(ngModel)]="sessionTimeout">
+
+            <span class="input-suffix">
+              minutes
+            </span>
+
+          </div>
+
+          <small>
+            Users will be logged out after inactivity.
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- REMEMBER LOGIN -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-memory"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Remember Login
+            </strong>
+
+            <p>
+              Allow the login session to remain active
+              between browser sessions.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="rememberLogin"
+          (click)="toggleSetting('rememberLogin')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- LOGOUT BROWSER -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-window-close"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Logout When Browser Closes
+            </strong>
+
+            <p>
+              End the authenticated session when
+              the browser is closed.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="logoutOnBrowserClose"
+          (click)="toggleSetting('logoutOnBrowserClose')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         SECURITY NOTIFICATIONS
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon notification-icon">
+
+          <i class="fas fa-bell"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Security Notifications
+          </h2>
+
+          <p>
+            Receive alerts when important security
+            events occur.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- LOGIN -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-right-to-bracket"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              New Login Notifications
+            </strong>
+
+            <p>
+              Notify users when a new login
+              occurs on their account.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="loginNotifications"
+          (click)="toggleSetting('loginNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- PASSWORD -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-key"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Password Change Notifications
+            </strong>
+
+            <p>
+              Notify users whenever their password
+              is changed.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="passwordChangeNotifications"
+          (click)="toggleSetting('passwordChangeNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- SUSPICIOUS -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon danger-setting">
+
+            <i class="fas fa-triangle-exclamation"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Suspicious Activity Alerts
+            </strong>
+
+            <p>
+              Notify administrators about unusual
+              authentication activity.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="suspiciousActivityNotifications"
+          (click)="toggleSetting('suspiciousActivityNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         SESSION MONITORING
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <i class="fas fa-eye"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Session Monitoring
+          </h2>
+
+          <p>
+            Monitor authenticated sessions and
+            account access activity.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon green-setting">
+
+            <i class="fas fa-desktop"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Session Monitoring
+            </strong>
+
+            <p>
+              Track active sessions and authentication
+              activity for security auditing.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="sessionMonitoring"
+          (click)="toggleSetting('sessionMonitoring')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <div class="security-note">
+
+        <i class="fas fa-circle-info"></i>
+
+        <p>
+          Session monitoring can help administrators
+          identify unusual access patterns and
+          unauthorized account activity.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         ACTION BAR
+    ===================================================== -->
+
+    <div class="action-bar">
+
+
+      <button
+        type="button"
+        class="reset-btn"
+        (click)="resetSettings()">
+
+        <i class="fas fa-rotate-left"></i>
+
+        Reset Defaults
+
+      </button>
+
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveSettings()"
+        [disabled]="isSaving">
+
+        <i
+          class="fas"
+          [class.fa-floppy-disk]="!isSaving"
+          [class.fa-spinner]="isSaving"
+          [class.fa-spin]="isSaving">
+        </i>
+
+        <span>
+          {{ isSaving ? 'Saving...' : 'Save Security Settings' }}
+        </span>
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>

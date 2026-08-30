@@ -78,6 +78,14 @@ mouseY = '50%';
 
   // Save logged-in user
   localStorage.setItem('user', JSON.stringify(response));
+  // --------------------------------------------------------
+  // Save logged-in ADMIN / EXECUTIVE ID
+  // --------------------------------------------------------
+
+  localStorage.setItem(
+    'userId',
+    response.id.toString()
+  );
 
   // Determine role
   const role = this.getUserRole(response);

@@ -7,9 +7,11 @@
 
     display: block;
     height: 100%;
+
     font-family: 'Poppins', sans-serif;
 
 }
+
 
 /*=========================================================
                         SIDEBAR
@@ -40,6 +42,7 @@
 
 }
 
+
 /*=========================================================
                     CUSTOM SCROLLBAR
 =========================================================*/
@@ -53,6 +56,7 @@
 .sidebar::-webkit-scrollbar-thumb {
 
     background: #00D4FF;
+
     border-radius: 50px;
 
 }
@@ -63,6 +67,7 @@
 
 }
 
+
 /*=========================================================
                     HEADER
 =========================================================*/
@@ -70,14 +75,18 @@
 .sidebar-header {
 
     display: flex;
+
     align-items: center;
+
     gap: 16px;
 
     padding: 22px;
 
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 
 }
+
 
 .logo {
 
@@ -85,8 +94,11 @@
     height: 56px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
+
+    flex-shrink: 0;
 
     border-radius: 16px;
 
@@ -106,11 +118,15 @@
 
 }
 
+
 .brand {
 
     flex: 1;
 
+    min-width: 0;
+
 }
+
 
 .brand h3 {
 
@@ -119,9 +135,11 @@
     color: #FFFFFF;
 
     font-size: 22px;
+
     font-weight: 700;
 
 }
+
 
 .brand span {
 
@@ -135,6 +153,7 @@
 
 }
 
+
 /*=========================================================
                         MENU
 =========================================================*/
@@ -144,11 +163,13 @@
     flex: 1;
 
     margin: 0;
+
     padding: 18px 0;
 
     list-style: none;
 
 }
+
 
 .sidebar-menu li {
 
@@ -156,17 +177,20 @@
 
 }
 
+
 /*=========================================================
                     SECTION TITLE
 =========================================================*/
 
 .menu-title {
 
-    padding: 18px 24px 8px;
+    padding:
+        18px 24px 8px;
 
     color: #7FAFD3;
 
     font-size: 11px;
+
     font-weight: 600;
 
     text-transform: uppercase;
@@ -175,17 +199,23 @@
 
 }
 
+
 /*=========================================================
                     MENU LINKS
 =========================================================*/
 
 .sidebar-menu a {
 
+    position: relative;
+
     display: flex;
+
     align-items: center;
+
     gap: 15px;
 
     margin: 6px 12px;
+
     padding: 14px 18px;
 
     border-radius: 14px;
@@ -194,9 +224,13 @@
 
     color: #EAF5FF;
 
-    transition: all .25s ease;
+    transition:
+        background .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
+
 
 .sidebar-menu a i {
 
@@ -206,18 +240,23 @@
 
     color: #00D4FF;
 
-    transition: .25s;
+    transition:
+        color .25s ease,
+        transform .25s ease;
 
 }
 
-.sidebar-menu a span {
+
+.sidebar-menu a span:not(.configuration-badge) {
 
     font-size: 15px;
+
     font-weight: 500;
 
     white-space: nowrap;
 
 }
+
 
 /*=========================================================
                         HOVER
@@ -236,11 +275,15 @@
 
 }
 
-.sidebar-menu a:hover i {
+
+.sidebar-menu a:hover > i {
 
     color: #42E8FF;
 
+    transform: scale(1.08);
+
 }
+
 
 /*=========================================================
                         ACTIVE
@@ -261,18 +304,127 @@
 
 }
 
-.sidebar-menu a.active i,
-.sidebar-menu a.router-link-active i {
+
+.sidebar-menu a.active > i,
+.sidebar-menu a.router-link-active > i {
 
     color: #42E8FF;
 
 }
 
+
 /*=========================================================
-                    TABLET
+                  LEAD CONFIGURATION
 =========================================================*/
 
-@media (max-width:768px) {
+.configuration-link {
+
+    position: relative;
+
+    border:
+        1px solid rgba(0,212,255,.08);
+
+}
+
+
+.configuration-link:hover {
+
+    border-color:
+        rgba(0,212,255,.20);
+
+}
+
+
+/*=========================================================
+                CONFIGURATION ARROW
+=========================================================*/
+
+.configuration-badge {
+
+    margin-left: auto;
+
+    min-width: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: .55;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+
+}
+
+
+.configuration-badge i {
+
+    min-width: auto !important;
+
+    font-size: 12px !important;
+
+    color: #8CCFE8 !important;
+
+}
+
+
+/* Arrow movement on hover */
+
+.configuration-link:hover
+.configuration-badge {
+
+    opacity: 1;
+
+    transform: translateX(3px);
+
+}
+
+
+/* Arrow when active */
+
+.configuration-link.active
+.configuration-badge,
+.configuration-link.router-link-active
+.configuration-badge {
+
+    opacity: 1;
+
+}
+
+
+.configuration-link.active
+.configuration-badge i,
+.configuration-link.router-link-active
+.configuration-badge i {
+
+    color: #42E8FF !important;
+
+}
+
+
+/*=========================================================
+                CONFIGURATION ACTIVE GLOW
+=========================================================*/
+
+.configuration-link.active {
+
+    border:
+        1px solid rgba(0,212,255,.18);
+
+    box-shadow:
+        0 8px 24px rgba(0,212,255,.16);
+
+}
+
+
+/*=========================================================
+                        TABLET
+=========================================================*/
+
+@media (max-width: 768px) {
 
     .sidebar-header {
 
@@ -280,20 +432,24 @@
 
     }
 
+
     .logo {
 
         width: 52px;
+
         height: 52px;
 
         font-size: 22px;
 
     }
 
+
     .brand h3 {
 
         font-size: 20px;
 
     }
+
 
     .brand span {
 
@@ -301,20 +457,30 @@
 
     }
 
+
     .sidebar-menu a {
 
         margin: 6px 10px;
+
         padding: 15px 18px;
+
+    }
+
+
+    .menu-title {
+
+        padding-left: 20px;
 
     }
 
 }
 
+
 /*=========================================================
-                    MOBILE
+                        MOBILE
 =========================================================*/
 
-@media (max-width:576px) {
+@media (max-width: 576px) {
 
     .sidebar-header {
 
@@ -322,14 +488,17 @@
 
     }
 
+
     .logo {
 
         width: 48px;
+
         height: 48px;
 
         font-size: 20px;
 
     }
+
 
     .brand h3 {
 
@@ -337,22 +506,112 @@
 
     }
 
+
     .brand span {
 
         font-size: 11px;
 
     }
 
+
+    .sidebar-menu {
+
+        padding-top: 12px;
+
+    }
+
+
     .sidebar-menu a {
 
         margin: 6px 8px;
+
         padding: 14px 16px;
 
     }
 
-    .sidebar-menu a span {
+
+    .sidebar-menu a span:not(.configuration-badge) {
 
         font-size: 14px;
+
+    }
+
+
+    .menu-title {
+
+        padding:
+            16px 18px 7px;
+
+        font-size: 10px;
+
+    }
+
+
+    .configuration-badge {
+
+        min-width: 20px;
+
+    }
+
+}
+
+
+/*=========================================================
+                  VERY SMALL DEVICES
+=========================================================*/
+
+@media (max-width: 380px) {
+
+    .sidebar-header {
+
+        gap: 12px;
+
+        padding: 16px;
+
+    }
+
+
+    .logo {
+
+        width: 44px;
+
+        height: 44px;
+
+        border-radius: 13px;
+
+        font-size: 18px;
+
+    }
+
+
+    .brand h3 {
+
+        font-size: 17px;
+
+    }
+
+
+    .brand span {
+
+        font-size: 10px;
+
+    }
+
+
+    .sidebar-menu a {
+
+        gap: 12px;
+
+        padding: 13px 14px;
+
+    }
+
+
+    .sidebar-menu a > i {
+
+        min-width: 22px;
+
+        font-size: 18px;
 
     }
 

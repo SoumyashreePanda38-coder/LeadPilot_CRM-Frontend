@@ -1,1 +1,942 @@
-<p>general-settings works!</p>
+<div class="settings-page">
+
+  <!-- ======================================================
+       BACKGROUND
+  ======================================================= -->
+
+  <div class="rose-bg">
+    <span class="rose-orb orb-1"></span>
+    <span class="rose-orb orb-2"></span>
+    <span class="rose-orb orb-3"></span>
+  </div>
+
+
+  <div class="settings-container">
+    <!-- ======================================================
+     SETTINGS NAVIGATION
+======================================================= -->
+
+<nav class="settings-navigation">
+
+  <a
+    routerLink="/admin/settings/general"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+
+    <i class="fas fa-sliders"></i>
+
+    <span>
+      General
+    </span>
+
+  </a>
+
+
+  <a
+    routerLink="/admin/settings/security"
+    routerLinkActive="active">
+
+    <i class="fas fa-shield-halved"></i>
+
+    <span>
+      Security
+    </span>
+
+  </a>
+
+</nav>
+
+    <!-- ====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <header class="page-header">
+
+      <div class="title-area">
+
+        <div class="title-icon">
+          <i class="fas fa-sliders"></i>
+        </div>
+
+        <div>
+
+          <span class="eyebrow">
+            SYSTEM PREFERENCES
+          </span>
+
+          <h1>
+            General Settings
+          </h1>
+
+          <p>
+            Configure your LeadPilot CRM preferences and
+            notification behaviour.
+          </p>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ====================================================
+         SUCCESS MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <div class="alert-icon">
+        <i class="fas fa-circle-check"></i>
+      </div>
+
+      <span>
+        {{ successMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="successMessage = ''">
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================
+         ERROR MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <div class="alert-icon">
+        <i class="fas fa-circle-exclamation"></i>
+      </div>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+    </div>
+
+
+    <!-- ====================================================
+         CRM SETTINGS
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+          <i class="fas fa-building"></i>
+        </div>
+
+        <div>
+
+          <h2>
+            CRM Configuration
+          </h2>
+
+          <p>
+            Basic information used throughout the system.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <!-- CRM NAME -->
+
+        <div class="form-group">
+
+          <label>
+            CRM Name
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-tag"></i>
+
+            <input
+              type="text"
+              [(ngModel)]="crmName"
+              placeholder="Enter CRM name">
+
+          </div>
+
+          <small>
+            Name displayed across the CRM.
+          </small>
+
+        </div>
+
+
+        <!-- TIMEZONE -->
+
+        <div class="form-group">
+
+          <label>
+            Timezone
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-globe"></i>
+
+            <select
+              [(ngModel)]="timezone"
+              aria-label="Timezone"
+              title="Timezone">
+
+              <option value="Asia/Kolkata">
+                India Standard Time (IST)
+              </option>
+
+              <option value="Asia/Dubai">
+                Gulf Standard Time
+              </option>
+
+              <option value="Europe/London">
+                London
+              </option>
+
+              <option value="America/New_York">
+                Eastern Time
+              </option>
+
+              <option value="America/Los_Angeles">
+                Pacific Time
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         DATE & TIME
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+          <i class="fas fa-calendar-days"></i>
+        </div>
+
+        <div>
+
+          <h2>
+            Date & Time
+          </h2>
+
+          <p>
+            Control how dates and times appear in LeadPilot.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <!-- DATE FORMAT -->
+
+        <div class="form-group">
+
+          <label>
+            Date Format
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-calendar"></i>
+
+            <select [(ngModel)]="dateFormat" aria-label="Date format">
+
+              <option value="dd MMM yyyy">
+                25 Aug 2026
+              </option>
+
+              <option value="dd/MM/yyyy">
+                25/08/2026
+              </option>
+
+              <option value="MM/dd/yyyy">
+                08/25/2026
+              </option>
+
+              <option value="yyyy-MM-dd">
+                2026-08-25
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- TIME FORMAT -->
+
+        <div class="form-group">
+
+          <label>
+            Time Format
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-clock"></i>
+
+            <select [(ngModel)]="timeFormat" aria-label="Time format">
+
+              <option value="12-hour">
+                12 Hour — 10:30 PM
+              </option>
+
+              <option value="24-hour">
+                24 Hour — 22:30
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         FOLLOW-UP SETTINGS
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <i class="fas fa-calendar-check"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Follow-Up & Reminder
+          </h2>
+
+          <p>
+            Configure automatic reminder generation.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <!-- DEFAULT DURATION -->
+
+        <div class="form-group">
+
+          <label>
+            Default Follow-Up Duration
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-hourglass-half"></i>
+
+            <input
+              type="number"
+              min="5"
+              max="240"
+              [(ngModel)]="defaultFollowUpDuration"
+              aria-label="Default Follow-Up Duration in minutes">
+
+            <span class="input-suffix">
+              min
+            </span>
+
+          </div>
+
+          <small>
+            Default duration when creating a follow-up.
+          </small>
+
+        </div>
+
+
+        <!-- REMINDER BEFORE -->
+
+        <div class="form-group">
+
+          <label for="reminderBeforeMinutes">
+            Remind Me Before
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-bell"></i>
+
+            <select id="reminderBeforeMinutes" [(ngModel)]="reminderBeforeMinutes" aria-label="Remind Me Before">
+
+              <option [ngValue]="5">
+                5 minutes before
+              </option>
+
+              <option [ngValue]="10">
+                10 minutes before
+              </option>
+
+              <option [ngValue]="15">
+                15 minutes before
+              </option>
+
+              <option [ngValue]="30">
+                30 minutes before
+              </option>
+
+              <option [ngValue]="60">
+                1 hour before
+              </option>
+
+              <option [ngValue]="120">
+                2 hours before
+              </option>
+
+              <option [ngValue]="1440">
+                1 day before
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- AUTO CREATE REMINDER -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-wand-magic-sparkles"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Automatically Create Reminders
+            </strong>
+
+            <p>
+              Automatically generate a reminder whenever
+              a follow-up is scheduled.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="autoCreateReminder"
+          (click)="toggleSetting('autoCreateReminder')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         NOTIFICATION SETTINGS
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon notification-icon">
+
+          <i class="fas fa-bell"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Notifications
+          </h2>
+
+          <p>
+            Choose how LeadPilot should notify you.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- BROWSER -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-window-maximize"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Browser Notifications
+            </strong>
+
+            <p>
+              Show notifications even when LeadPilot
+              is not the active browser tab.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="browserNotifications"
+          (click)="toggleSetting('browserNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <!-- IN APP -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-bell"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              In-App Notifications
+            </strong>
+
+            <p>
+              Display reminder notifications inside
+              the LeadPilot application.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="inAppNotifications"
+          (click)="toggleSetting('inAppNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-envelope"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Email Notifications
+            </strong>
+
+            <p>
+              Receive reminder notifications through email.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="emailNotifications"
+          (click)="toggleSetting('emailNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <!-- SOUND -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-volume-high"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Notification Sound
+            </strong>
+
+            <p>
+              Play a sound when a new reminder arrives.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="soundNotifications"
+          (click)="toggleSetting('soundNotifications')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         REMINDER DISPLAY
+    ===================================================== -->
+
+    <section class="settings-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <i class="fas fa-list-check"></i>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Reminder Display
+          </h2>
+
+          <p>
+            Configure how reminders are displayed and refreshed.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- AUTO REFRESH -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-rotate"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Automatically Refresh Reminders
+            </strong>
+
+            <p>
+              Periodically check the backend for new reminders.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="autoRefreshReminders"
+          (click)="toggleSetting('autoRefreshReminders')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <!-- REFRESH INTERVAL -->
+
+        <div class="form-group">
+
+          <label>
+            Refresh Interval
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-arrows-rotate"></i>
+
+            <select [(ngModel)]="refreshInterval" aria-label="Refresh Interval">
+
+              <option [ngValue]="15">
+                Every 15 seconds
+              </option>
+
+              <option [ngValue]="30">
+                Every 30 seconds
+              </option>
+
+              <option [ngValue]="60">
+                Every 1 minute
+              </option>
+
+              <option [ngValue]="300">
+                Every 5 minutes
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- DENSITY -->
+
+        <div class="form-group">
+
+          <label>
+            List Density
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="fas fa-table-list"></i>
+
+            <select [(ngModel)]="listDensity" aria-label="List Density">
+
+              <option value="comfortable">
+                Comfortable
+              </option>
+
+              <option value="compact">
+                Compact
+              </option>
+
+              <option value="spacious">
+                Spacious
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- OVERDUE -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon overdue-icon">
+
+            <i class="fas fa-triangle-exclamation"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Show Overdue Reminders
+            </strong>
+
+            <p>
+              Keep overdue reminders visible until they
+              are completed or dismissed.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="showOverdueReminders"
+          (click)="toggleSetting('showOverdueReminders')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <!-- COMPLETED -->
+
+      <div class="setting-row">
+
+        <div class="setting-information">
+
+          <div class="setting-icon">
+
+            <i class="fas fa-circle-check"></i>
+
+          </div>
+
+          <div>
+
+            <strong>
+              Show Completed Follow-Ups
+            </strong>
+
+            <p>
+              Keep completed follow-ups visible in follow-up
+              history.
+            </p>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="toggle"
+          [class.enabled]="showCompletedFollowUps"
+          (click)="toggleSetting('showCompletedFollowUps')">
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         ACTION BAR
+    ===================================================== -->
+
+    <div class="action-bar">
+
+      <button
+        type="button"
+        class="reset-btn"
+        (click)="resetSettings()">
+
+        <i class="fas fa-rotate-left"></i>
+
+        Reset Defaults
+
+      </button>
+
+
+      <button
+        type="button"
+        class="save-btn"
+        (click)="saveSettings()"
+        [disabled]="isSaving">
+
+        <i
+          class="fas"
+          [class.fa-floppy-disk]="!isSaving"
+          [class.fa-spinner]="isSaving"
+          [class.fa-spin]="isSaving">
+        </i>
+
+        <span>
+          {{ isSaving ? 'Saving...' : 'Save Settings' }}
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

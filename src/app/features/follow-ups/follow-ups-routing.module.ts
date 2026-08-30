@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FollowUpListComponent } from './follow-up-list/follow-up-list.component';
 import { AddFollowUpComponent } from './add-follow-up/add-follow-up.component';
 import { EditFollowUpComponent } from './edit-follow-up/edit-follow-up.component';
-import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
 
 const routes: Routes = [
 
@@ -23,10 +22,7 @@ const routes: Routes = [
     component: EditFollowUpComponent
   },
 
-  {
-    path: 'details/:id',
-    component: FollowUpDetailsComponent
-  }
+ 
 
 ];
 

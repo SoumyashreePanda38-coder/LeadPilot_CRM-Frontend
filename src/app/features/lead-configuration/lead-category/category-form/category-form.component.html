@@ -1,0 +1,642 @@
+<div class="category-form-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="breadcrumb">
+      <button
+        type="button"
+        class="back-btn"
+        (click)="cancel()">
+
+        <i class="fas fa-arrow-left"></i>
+
+      </button>
+
+      <span>Lead Configuration</span>
+
+      <i class="fas fa-chevron-right separator"></i>
+
+      <span>Lead Categories</span>
+
+      <i class="fas fa-chevron-right separator"></i>
+
+      <span class="current-page">
+        {{ isEditMode ? 'Edit Category' : 'Add Category' }}
+      </span>
+    </div>
+
+
+    <div class="header-content">
+
+      <div class="title-section">
+
+        <div class="title-icon">
+
+          <i
+            class="fas"
+            [ngClass]="
+              isEditMode
+                ? 'fa-pen-to-square'
+                : 'fa-layer-group'
+            ">
+          </i>
+
+        </div>
+
+        <div>
+
+          <h1>
+            {{ isEditMode ? 'Edit Lead Category' : 'Add Lead Category' }}
+          </h1>
+
+          <p>
+            {{
+              isEditMode
+                ? 'Update the details of this lead category.'
+                : 'Create a new category to organize your leads.'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       SUCCESS MESSAGE
+       ====================================================== -->
+
+  <div
+    class="alert success-alert"
+    *ngIf="successMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-circle-check"></i>
+    </div>
+
+    <div class="alert-message">
+      {{ successMessage }}
+    </div>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="successMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       ERROR MESSAGE
+       ====================================================== -->
+
+  <div
+    class="alert error-alert"
+    *ngIf="errorMessage">
+
+    <div class="alert-icon">
+      <i class="fas fa-circle-exclamation"></i>
+    </div>
+
+    <div class="alert-message">
+      {{ errorMessage }}
+    </div>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="errorMessage = ''">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       FORM CARD
+       ====================================================== -->
+
+  <div class="form-card">
+
+
+    <!-- ====================================================
+         CARD HEADER
+         ==================================================== -->
+
+    <div class="form-card-header">
+
+      <div>
+
+        <h2>
+          Category Information
+        </h2>
+
+        <p>
+          Enter the information below to
+          {{ isEditMode ? 'update' : 'create' }}
+          the lead category.
+        </p>
+
+      </div>
+
+      <div class="required-note">
+        <span class="required-star">*</span>
+        Required fields
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         LOADING
+         ==================================================== -->
+
+    <div
+      class="loading-container"
+      *ngIf="loading">
+
+      <div class="loader"></div>
+
+      <p>
+        Loading category details...
+      </p>
+
+    </div>
+
+
+    <!-- ====================================================
+         FORM
+         ==================================================== -->
+
+    <form
+      *ngIf="!loading"
+      [formGroup]="categoryForm"
+      (ngSubmit)="onSubmit()"
+      novalidate>
+
+
+      <!-- ==================================================
+           CATEGORY NAME
+           ================================================== -->
+
+      <div class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+            <i class="fas fa-tag"></i>
+          </div>
+
+          <div>
+            <h3>Basic Details</h3>
+
+            <span>
+              Define the basic information for this category.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- Category Name -->
+
+          <div class="form-group full-width">
+
+            <label for="categoryName">
+
+              Category Name
+
+              <span class="required-star">*</span>
+
+            </label>
+
+            <div
+              class="input-wrapper"
+              [class.input-error]="
+                isFieldInvalid('categoryName')
+              "
+              [class.input-valid]="
+                categoryName?.valid &&
+                categoryName?.touched
+              ">
+
+              <i class="fas fa-layer-group input-icon"></i>
+
+              <input
+                id="categoryName"
+                type="text"
+                formControlName="categoryName"
+                maxlength="100"
+                placeholder="Enter category name"
+                autocomplete="off"
+              />
+
+              <span class="character-count">
+                {{ categoryName?.value?.length || 0 }}/100
+              </span>
+
+            </div>
+
+
+            <!-- Required Error -->
+
+            <div
+              class="field-error"
+              *ngIf="
+                categoryName?.hasError('required') &&
+                isFieldInvalid('categoryName')
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              Category name is required.
+
+            </div>
+
+
+            <!-- Max Length Error -->
+
+            <div
+              class="field-error"
+              *ngIf="
+                categoryName?.hasError('maxlength') &&
+                isFieldInvalid('categoryName')
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              Category name cannot exceed 100 characters.
+
+            </div>
+
+          </div>
+
+
+          <!-- Description -->
+
+          <div class="form-group full-width">
+
+            <label for="description">
+
+              Description
+
+              <span class="optional-label">
+                Optional
+              </span>
+
+            </label>
+
+            <div
+              class="textarea-wrapper"
+              [class.input-error]="
+                isFieldInvalid('description')
+              ">
+
+              <textarea
+                id="description"
+                formControlName="description"
+                maxlength="500"
+                rows="5"
+                placeholder="Describe what type of leads belong to this category..."
+              ></textarea>
+
+              <span class="character-count textarea-count">
+                {{ description?.value?.length || 0 }}/500
+              </span>
+
+            </div>
+
+
+            <div
+              class="field-error"
+              *ngIf="
+                description?.hasError('maxlength') &&
+                isFieldInvalid('description')
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              Description cannot exceed 500 characters.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           ORGANIZATION
+           ================================================== -->
+
+      <div class="form-section">
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+            <i class="fas fa-sliders"></i>
+          </div>
+
+          <div>
+            <h3>Category Settings</h3>
+
+            <span>
+              Configure how this category behaves in the system.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- Display Order -->
+
+          <div class="form-group">
+
+            <label for="displayOrder">
+
+              Display Order
+
+              <span class="optional-label">
+                Optional
+              </span>
+
+            </label>
+
+            <div
+              class="input-wrapper"
+              [class.input-error]="
+                isFieldInvalid('displayOrder')
+              ">
+
+              <i class="fas fa-arrow-down-1-9 input-icon"></i>
+
+              <input
+                id="displayOrder"
+                type="number"
+                formControlName="displayOrder"
+                min="1"
+                placeholder="e.g. 1"
+              />
+
+            </div>
+
+            <div class="field-hint">
+              <i class="fas fa-circle-info"></i>
+              Used to control the display sequence of categories.
+            </div>
+
+
+            <div
+              class="field-error"
+              *ngIf="
+                displayOrder?.hasError('min') &&
+                isFieldInvalid('displayOrder')
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              Display order must be greater than 0.
+
+            </div>
+
+          </div>
+
+
+          <!-- Status -->
+
+          <div class="form-group">
+
+            <label for="status">
+
+              Status
+
+              <span class="required-star">*</span>
+
+            </label>
+
+            <div
+              class="input-wrapper select-wrapper"
+              [class.input-error]="
+                isFieldInvalid('status')
+              ">
+
+              <i class="fas fa-toggle-on input-icon"></i>
+
+              <select
+                id="status"
+                formControlName="status">
+
+                <option
+                  *ngFor="let option of statusOptions"
+                  [value]="option.value">
+
+                  {{ option.label }}
+
+                </option>
+
+              </select>
+
+              <i class="fas fa-chevron-down select-arrow"></i>
+
+            </div>
+
+
+            <div class="field-hint">
+
+              <i class="fas fa-circle-info"></i>
+
+              Inactive categories won't be available
+              for new lead assignments.
+
+            </div>
+
+
+            <div
+              class="field-error"
+              *ngIf="
+                status?.hasError('required') &&
+                isFieldInvalid('status')
+              ">
+
+              <i class="fas fa-circle-exclamation"></i>
+
+              Category status is required.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           EDIT INFORMATION
+           ================================================== -->
+
+      <div
+        class="edit-info"
+        *ngIf="isEditMode">
+
+        <div class="edit-info-icon">
+          <i class="fas fa-clock-rotate-left"></i>
+        </div>
+
+        <div>
+
+          <strong>
+            Editing existing category
+          </strong>
+
+          <p>
+            Changes will be applied to this category
+            after you save the form.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           FORM FOOTER
+           ================================================== -->
+
+      <div class="form-footer">
+
+
+        <!-- Left side -->
+
+        <div class="footer-note">
+
+          <i class="fas fa-shield-halved"></i>
+
+          <span>
+            Your changes are securely saved.
+          </span>
+
+        </div>
+
+
+        <!-- Right side -->
+
+        <div class="footer-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="cancel()"
+            [disabled]="submitting">
+
+            <i class="fas fa-xmark"></i>
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+            class="reset-btn"
+            (click)="resetForm()"
+            [disabled]="submitting">
+
+            <i class="fas fa-rotate-left"></i>
+
+            Reset
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="submitting || categoryForm.invalid">
+
+            <span
+              class="button-loader"
+              *ngIf="submitting">
+            </span>
+
+            <i
+              *ngIf="!submitting"
+              class="fas"
+              [ngClass]="
+                isEditMode
+                  ? 'fa-floppy-disk'
+                  : 'fa-plus'
+              ">
+            </i>
+
+            <span>
+              {{
+                submitting
+                  ? (isEditMode
+                      ? 'Updating...'
+                      : 'Creating...')
+                  : (isEditMode
+                      ? 'Update Category'
+                      : 'Add Category')
+              }}
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- ======================================================
+       BOTTOM TIP
+       ====================================================== -->
+
+  <div class="form-tip">
+
+    <div class="tip-icon">
+      <i class="fas fa-lightbulb"></i>
+    </div>
+
+    <div>
+
+      <strong>
+        Tip
+      </strong>
+
+      <span>
+        Keep category names short and descriptive so
+        your sales team can identify them quickly.
+      </span>
+
+    </div>
+
+  </div>
+
+</div>

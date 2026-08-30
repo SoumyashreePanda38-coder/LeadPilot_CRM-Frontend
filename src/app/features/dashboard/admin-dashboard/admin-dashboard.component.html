@@ -1,1 +1,796 @@
-<p>admin-dashboard works!</p>
+<div class="admin-dashboard">
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header class="dashboard-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="fas fa-chart-pie"></i>
+      </div>
+
+      <div class="header-content">
+
+        <span class="eyebrow">
+          LEADPILOT CRM
+        </span>
+
+        <h1>
+          Admin Dashboard
+        </h1>
+
+        <p>
+          Organization-wide overview of your CRM activity
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="refreshDashboard()"
+        [disabled]="isLoading">
+
+        <i
+          class="fas fa-sync-alt"
+          [class.spin]="isLoading">
+        </i>
+
+        <span>Refresh</span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       LOADING
+  ========================================================== -->
+  <section
+    class="loading-state"
+    *ngIf="isLoading">
+
+    <div class="loading-spinner">
+      <i class="fas fa-chart-line"></i>
+    </div>
+
+    <h3>
+      Loading dashboard
+    </h3>
+
+    <p>
+      Gathering your CRM analytics...
+    </p>
+
+  </section>
+
+
+  <!-- =========================================================
+       ERROR
+  ========================================================== -->
+  <section
+    class="error-state"
+    *ngIf="errorMessage && !isLoading">
+
+    <div class="error-icon">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+
+    <div class="error-text">
+
+      <strong>
+        Unable to load dashboard
+      </strong>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="retry-btn"
+      (click)="retryLoad()">
+
+      <i class="fas fa-redo"></i>
+
+      Retry
+
+    </button>
+
+  </section>
+
+
+  <!-- =========================================================
+       DASHBOARD
+  ========================================================== -->
+  <main
+    class="dashboard-content"
+    *ngIf="!isLoading && dashboard">
+
+
+    <!-- =======================================================
+         DASHBOARD SUMMARY CARDS
+    ======================================================== -->
+    <section class="dashboard-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span>
+            CRM OVERVIEW
+          </span>
+
+          <h2>
+            Lead Performance
+          </h2>
+
+          <p>
+            Real-time organization performance
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!--
+        IMPORTANT:
+
+        We pass SUMMARY to dashboard-card.
+
+        Do NOT use:
+
+        [dashboard]="dashboard"
+
+        because your DashboardCardComponent does not currently
+        have a dashboard input.
+      -->
+
+      <app-dashboard-card
+        [summary]="summary">
+      </app-dashboard-card>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         FOLLOW-UP OVERVIEW
+    ======================================================== -->
+    <section class="followup-overview">
+
+      <div class="followup-heading">
+
+        <div class="followup-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+
+        <div>
+
+          <span>
+            FOLLOW-UP MANAGEMENT
+          </span>
+
+          <h2>
+            Follow-Up Overview
+          </h2>
+
+          <p>
+            Current CRM follow-up activity
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL -->
+      <div class="followup-stat">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          {{ getTotalFollowUps() | number }}
+        </strong>
+
+      </div>
+
+
+      <!-- TODAY -->
+      <div class="followup-stat today">
+
+        <span>
+          Today
+        </span>
+
+        <strong>
+          {{ getTodayFollowUpCount() | number }}
+        </strong>
+
+      </div>
+
+
+      <!-- OVERDUE -->
+      <div class="followup-stat overdue">
+
+        <span>
+          Overdue
+        </span>
+
+        <strong>
+          {{ getOverdueFollowUpCount() | number }}
+        </strong>
+
+      </div>
+
+
+      <!-- COMPLETED -->
+      <div class="followup-stat completed">
+
+        <span>
+          Completed
+        </span>
+
+        <strong>
+          {{ getCompletedFollowUpCount() | number }}
+        </strong>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="followup-action"
+        (click)="viewAllFollowUps()">
+
+        <span>
+          View Follow-Ups
+        </span>
+
+        <i class="fas fa-arrow-right"></i>
+
+      </button>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         ANALYTICS / CHARTS
+    ======================================================== -->
+    <section class="dashboard-section charts-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span>
+            ANALYTICS
+          </span>
+
+          <h2>
+            Lead Analytics
+          </h2>
+
+          <p>
+            Visual overview of your lead performance
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!--
+        DashboardChartsComponent receives the four chart datasets
+        from AdminDashboardComponent.
+      -->
+
+      <app-dashboard-charts
+
+        [leadStatus]="leadStatus"
+
+        [leadPriority]="leadPriority"
+
+        [leadSource]="leadSource"
+
+        [monthlyLeads]="monthlyLeads">
+
+      </app-dashboard-charts>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         RECENT LEADS + TODAY FOLLOW UPS
+    ======================================================== -->
+    <section class="dashboard-two-column">
+
+
+      <!-- =====================================================
+           RECENT LEADS
+      ====================================================== -->
+      <article class="dashboard-panel">
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              CUSTOMER LEADS
+            </span>
+
+            <h2>
+              Recent Leads
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="panel-link"
+            (click)="viewAllLeads()">
+
+            View All
+
+            <i class="fas fa-arrow-right"></i>
+
+          </button>
+
+        </div>
+
+
+        <!-- LEAD LIST -->
+        <div
+          class="lead-list"
+          *ngIf="recentLeads.length > 0">
+
+          <div
+            class="lead-item"
+            *ngFor="
+              let lead of recentLeads;
+              trackBy: trackByLeadId
+            "
+            (click)="viewLead(lead.leadId)">
+
+
+            <!-- AVATAR -->
+            <div class="lead-avatar">
+
+              {{ getLeadInitials(lead.leadName) }}
+
+            </div>
+
+
+            <!-- INFORMATION -->
+            <div class="lead-information">
+
+              <strong>
+                {{ lead.leadName || 'Unnamed Lead' }}
+              </strong>
+
+              <span>
+                {{ lead.assignedExecutive || 'Unassigned' }}
+              </span>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <div class="lead-status-area">
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(lead.status)">
+
+                {{ formatEnum(lead.status) }}
+
+              </span>
+
+
+              <span
+                class="priority-badge"
+                [ngClass]="getPriorityClass(lead.priority)">
+
+                <i
+                  [class]="getPriorityIcon(lead.priority)">
+                </i>
+
+                {{ formatEnum(lead.priority) }}
+
+              </span>
+
+            </div>
+
+
+            <i class="fas fa-chevron-right lead-arrow"></i>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMPTY -->
+        <div
+          class="empty-state"
+          *ngIf="recentLeads.length === 0">
+
+          <i class="fas fa-users"></i>
+
+          <strong>
+            No recent leads
+          </strong>
+
+          <span>
+            Newly created leads will appear here.
+          </span>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- =====================================================
+           TODAY FOLLOW UPS
+      ====================================================== -->
+      <article class="dashboard-panel">
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              FOLLOW-UP MANAGEMENT
+            </span>
+
+            <h2>
+              Today's Follow-Ups
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="panel-link"
+            (click)="viewAllFollowUps()">
+
+            View All
+
+            <i class="fas fa-arrow-right"></i>
+
+          </button>
+
+        </div>
+
+
+        <!-- FOLLOW-UP LIST -->
+        <div
+          class="followup-list"
+          *ngIf="todayFollowUps.length > 0">
+
+          <div
+            class="followup-item"
+            *ngFor="
+              let followUp of todayFollowUps;
+              trackBy: trackByFollowUpId
+            "
+            (click)="viewFollowUp(followUp.leadId)">
+
+
+            <div class="followup-type">
+
+              <i
+                [class]="
+                  getFollowUpIcon(
+                    followUp.followUpType
+                  )
+                ">
+              </i>
+
+              <span>
+                {{ followUp.scheduledAt }}
+              </span>
+
+            </div>
+
+
+            <div class="followup-information">
+
+              <strong>
+                {{ followUp.leadName || 'Unnamed Lead' }}
+              </strong>
+
+              <span>
+
+                {{ formatEnum(followUp.followUpType) }}
+
+                <ng-container
+                  *ngIf="followUp.assignedExecutive">
+
+                  • {{ followUp.assignedExecutive }}
+
+                </ng-container>
+
+              </span>
+
+            </div>
+
+
+            <span
+              class="followup-status"
+              [ngClass]="getStatusClass(followUp.status)">
+
+              {{ formatEnum(followUp.status) }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMPTY -->
+        <div
+          class="empty-state"
+          *ngIf="todayFollowUps.length === 0">
+
+          <i class="fas fa-calendar-check"></i>
+
+          <strong>
+            No follow-ups today
+          </strong>
+
+          <span>
+            Your scheduled follow-ups will appear here.
+          </span>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         NOTES + UPCOMING VISITS
+    ======================================================== -->
+    <section class="dashboard-two-column">
+
+
+      <!-- =====================================================
+           RECENT NOTES
+      ====================================================== -->
+      <article class="dashboard-panel">
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              ACTIVITY
+            </span>
+
+            <h2>
+              Recent Notes
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="panel-link"
+            (click)="viewNotes()">
+
+            Notes
+
+            <i class="fas fa-arrow-right"></i>
+
+          </button>
+
+        </div>
+
+
+        <!-- NOTES -->
+        <div
+          class="notes-list"
+          *ngIf="recentNotes.length > 0">
+
+          <div
+            class="note-item"
+            *ngFor="
+              let note of recentNotes;
+              trackBy: trackByNoteId
+            ">
+
+
+            <div class="note-icon">
+
+              <i class="fas fa-sticky-note"></i>
+
+            </div>
+
+
+            <div class="note-information">
+
+              <div class="note-heading">
+
+                <strong>
+                  {{ note.leadName || 'Lead' }}
+                </strong>
+
+                <small>
+                  {{ note.createdAt }}
+                </small>
+
+              </div>
+
+
+              <p>
+                {{ note.note }}
+              </p>
+
+
+              <span>
+
+                <i class="fas fa-user"></i>
+
+                {{ note.createdBy || 'Unknown' }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMPTY -->
+        <div
+          class="empty-state"
+          *ngIf="recentNotes.length === 0">
+
+          <i class="fas fa-sticky-note"></i>
+
+          <strong>
+            No recent notes
+          </strong>
+
+          <span>
+            Recent lead notes will appear here.
+          </span>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- =====================================================
+           UPCOMING VISITS
+      ====================================================== -->
+      <article class="dashboard-panel">
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              SCHEDULE
+            </span>
+
+            <h2>
+              Upcoming Visits
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <!-- VISITS -->
+        <div
+          class="visit-list"
+          *ngIf="upcomingVisits.length > 0">
+
+          <div
+            class="visit-item"
+            *ngFor="
+              let visit of upcomingVisits;
+              trackBy: trackByVisitId
+            "
+            (click)="viewFollowUp(visit.leadId)">
+
+
+            <div class="visit-icon">
+
+              <i class="fas fa-location-dot"></i>
+
+            </div>
+
+
+            <div class="visit-information">
+
+              <strong>
+                {{ visit.leadName || 'Unnamed Lead' }}
+              </strong>
+
+              <span>
+                {{ visit.visitDate }}
+              </span>
+
+
+              <small
+                *ngIf="visit.location">
+
+                <i class="fas fa-location-dot"></i>
+
+                {{ visit.location }}
+
+              </small>
+
+            </div>
+
+
+            <div class="visit-executive">
+
+              <strong>
+                {{ visit.assignedExecutive || 'Unassigned' }}
+              </strong>
+
+              <span>
+                {{ formatEnum(visit.status) }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMPTY -->
+        <div
+          class="empty-state"
+          *ngIf="upcomingVisits.length === 0">
+
+          <i class="fas fa-location-dot"></i>
+
+          <strong>
+            No upcoming visits
+          </strong>
+
+          <span>
+            Scheduled visits will appear here.
+          </span>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+  </main>
+
+</div>

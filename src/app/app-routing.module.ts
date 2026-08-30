@@ -1,23 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
+
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { ExecutiveLayoutComponent } from './layout/executive-layout/executive-layout.component';
 
+
 const routes: Routes = [
 
-  // Default Route
+  // ==========================================================
+  // DEFAULT ROUTE
+  // ==========================================================
+
   {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
   },
 
-  // ==========================
-  // Authentication
-  // ==========================
+
+  // ==========================================================
+  // AUTHENTICATION
+  // ==========================================================
+
   {
     path: 'auth',
     component: AuthLayoutComponent,
@@ -26,29 +34,41 @@ const routes: Routes = [
         .then(m => m.AuthModule)
   },
 
-  // ==========================
-  // Admin
-  // ==========================
+
+  // ==========================================================
+  // ADMIN
+  // ==========================================================
+
   {
     path: 'admin',
     component: AdminLayoutComponent,
 
-     canActivate:[
-        AuthGuard,
-        RoleGuard
+    canActivate: [
+      AuthGuard,
+      RoleGuard
     ],
 
-    data:{
-        role:'ADMIN'
+    data: {
+      role: 'ADMIN'
     },
+
     children: [
 
-     {
-  path: 'dashboard',
-  loadChildren: () =>
-    import('./features/dashboard/dashboard.module')
-      .then(m => m.DashboardModule)
-},
+      // --------------------------------------------------------
+      // ADMIN DASHBOARD
+      // --------------------------------------------------------
+
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module')
+            .then(m => m.DashboardModule)
+      },
+
+
+      // --------------------------------------------------------
+      // USER MANAGEMENT
+      // --------------------------------------------------------
 
       {
         path: 'users',
@@ -57,12 +77,34 @@ const routes: Routes = [
             .then(m => m.UserManagementModule)
       },
 
+
+      // --------------------------------------------------------
+      // CUSTOMER LEADS
+      // --------------------------------------------------------
+
       {
         path: 'leads',
         loadChildren: () =>
           import('./features/customer-leads/customer-leads.module')
             .then(m => m.CustomerLeadsModule)
       },
+
+
+      // --------------------------------------------------------
+      // LEAD CONFIGURATION
+      // --------------------------------------------------------
+
+      {
+        path: 'lead-configuration',
+        loadChildren: () =>
+          import('./features/lead-configuration/lead-configuration.module')
+            .then(m => m.LeadConfigurationModule)
+      },
+
+
+      // --------------------------------------------------------
+      // FOLLOW UPS
+      // --------------------------------------------------------
 
       {
         path: 'followups',
@@ -71,6 +113,11 @@ const routes: Routes = [
             .then(m => m.FollowUpsModule)
       },
 
+
+      // --------------------------------------------------------
+      // REMINDERS
+      // --------------------------------------------------------
+
       {
         path: 'reminders',
         loadChildren: () =>
@@ -78,12 +125,17 @@ const routes: Routes = [
             .then(m => m.RemindersModule)
       },
 
-      {
-        path: 'reports',
-        loadChildren: () =>
-          import('./features/reports/reports.module')
-            .then(m => m.ReportsModule)
-      },
+
+      // --------------------------------------------------------
+      // REPORTS
+      // --------------------------------------------------------
+
+     
+
+
+      // --------------------------------------------------------
+      // PROFILE
+      // --------------------------------------------------------
 
       {
         path: 'profile',
@@ -91,6 +143,11 @@ const routes: Routes = [
           import('./features/profile/profile.module')
             .then(m => m.ProfileModule)
       },
+
+
+      // --------------------------------------------------------
+      // SETTINGS
+      // --------------------------------------------------------
 
       {
         path: 'settings',
@@ -102,34 +159,53 @@ const routes: Routes = [
     ]
   },
 
-  // ==========================
-  // Executive
-  // ==========================
+
+  // ==========================================================
+  // EXECUTIVE
+  // ==========================================================
+
   {
     path: 'executive',
     component: ExecutiveLayoutComponent,
-    canActivate:[
-        AuthGuard,
-        RoleGuard
+
+    canActivate: [
+      AuthGuard,
+      RoleGuard
     ],
 
-    data:{
-        role:'EXECUTIVE'
+    data: {
+      role: 'EXECUTIVE'
     },
+
     children: [
 
-     {
-  path: 'dashboard',
-  loadChildren: () =>
-    import('./features/dashboard/dashboard.module')
-      .then(m => m.DashboardModule)
-},
+      // --------------------------------------------------------
+      // EXECUTIVE DASHBOARD
+      // --------------------------------------------------------
+
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module')
+            .then(m => m.DashboardModule)
+      },
+
+
+      // --------------------------------------------------------
+      // CUSTOMER LEADS
+      // --------------------------------------------------------
+
       {
         path: 'leads',
         loadChildren: () =>
           import('./features/customer-leads/customer-leads.module')
             .then(m => m.CustomerLeadsModule)
       },
+
+
+      // --------------------------------------------------------
+      // FOLLOW UPS
+      // --------------------------------------------------------
 
       {
         path: 'followups',
@@ -138,6 +214,11 @@ const routes: Routes = [
             .then(m => m.FollowUpsModule)
       },
 
+
+      // --------------------------------------------------------
+      // REMINDERS
+      // --------------------------------------------------------
+
       {
         path: 'reminders',
         loadChildren: () =>
@@ -145,12 +226,17 @@ const routes: Routes = [
             .then(m => m.RemindersModule)
       },
 
-      {
-        path: 'reports',
-        loadChildren: () =>
-          import('./features/reports/reports.module')
-            .then(m => m.ReportsModule)
-      },
+
+      // --------------------------------------------------------
+      // REPORTS
+      // --------------------------------------------------------
+
+      
+
+
+      // --------------------------------------------------------
+      // PROFILE
+      // --------------------------------------------------------
 
       {
         path: 'profile',
@@ -162,9 +248,11 @@ const routes: Routes = [
     ]
   },
 
-  // ==========================
-  // Invalid Route
-  // ==========================
+
+  // ==========================================================
+  // INVALID ROUTE
+  // ==========================================================
+
   {
     path: '**',
     redirectTo: 'auth'
@@ -172,8 +260,17 @@ const routes: Routes = [
 
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+
+  exports: [
+    RouterModule
+  ]
+
 })
+
 export class AppRoutingModule { }

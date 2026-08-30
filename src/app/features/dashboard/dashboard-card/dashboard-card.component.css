@@ -1,0 +1,721 @@
+/* =========================================================
+   LEADPILOT CRM
+   DASHBOARD CARD COMPONENT
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   SUMMARY GRID
+   ========================================================= */
+
+.summary-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SUMMARY CARD
+   ========================================================= */
+
+.summary-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 190px;
+
+  padding: 25px 24px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 16px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf2;
+
+  border-radius: 24px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 8px 25px rgba(20, 43, 85, 0.055),
+    0 2px 7px rgba(20, 43, 85, 0.035);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+/* =========================================================
+   TOP COLOR LINE
+   ========================================================= */
+
+.summary-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 4px;
+
+  background: var(--card-color);
+
+  border-radius: 24px 24px 0 0;
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.summary-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(103, 125, 170, 0.28);
+
+  box-shadow:
+    0 18px 38px rgba(20, 43, 85, 0.10),
+    0 6px 14px rgba(20, 43, 85, 0.055);
+}
+
+
+/* =========================================================
+   CARD ICON
+   ========================================================= */
+
+.card-icon {
+  position: relative;
+  z-index: 3;
+
+  flex: 0 0 52px;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: var(--card-gradient);
+
+  color: #ffffff;
+
+  font-size: 21px;
+
+  box-shadow:
+    0 9px 20px var(--card-shadow);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* ICON HOVER */
+
+.summary-card:hover .card-icon {
+  transform: translateY(-2px) scale(1.05);
+
+  box-shadow:
+    0 12px 25px var(--card-shadow);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.card-content {
+  position: relative;
+  z-index: 3;
+
+  min-width: 0;
+
+  padding-top: 1px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   CARD LABEL
+   ========================================================= */
+
+.card-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #62738c;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  line-height: 1.3;
+
+  letter-spacing: 0.7px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MAIN NUMBER
+   ========================================================= */
+
+.card-content strong {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #102849;
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.card-content small {
+  display: block;
+
+  color: #627590;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTTOM RIGHT GLOW
+   ========================================================= */
+
+.card-glow {
+  position: absolute;
+
+  z-index: 1;
+
+  width: 125px;
+  height: 125px;
+
+  right: -42px;
+  bottom: -52px;
+
+  border-radius: 50%;
+
+  background: var(--card-glow);
+
+  opacity: 0.65;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
+}
+
+
+/* =========================================================
+   GLOW HOVER
+   ========================================================= */
+
+.summary-card:hover .card-glow {
+  transform: scale(1.15);
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   SUBTLE INNER HIGHLIGHT
+   ========================================================= */
+
+.summary-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.45),
+      transparent 45%
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   TOTAL LEADS
+   ========================================================= */
+
+.total-card {
+  --card-color: #6338e8;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #7138ed,
+      #5035e8
+    );
+
+  --card-shadow:
+    rgba(99, 56, 232, 0.28);
+
+  --card-glow:
+    rgba(132, 78, 244, 0.22);
+}
+
+
+/* =========================================================
+   ACTIVE LEADS
+   ========================================================= */
+
+.active-card {
+  --card-color: #168ee6;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #2777ee,
+      #08a9d7
+    );
+
+  --card-shadow:
+    rgba(20, 142, 230, 0.28);
+
+  --card-glow:
+    rgba(34, 193, 224, 0.23);
+}
+
+
+/* =========================================================
+   NEW TODAY
+   ========================================================= */
+
+.new-card {
+  --card-color: #08a8c5;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #08a8c5,
+      #078dd0
+    );
+
+  --card-shadow:
+    rgba(5, 158, 196, 0.28);
+
+  --card-glow:
+    rgba(45, 201, 220, 0.23);
+}
+
+
+/* =========================================================
+   PENDING
+   ========================================================= */
+
+.pending-card {
+  --card-color: #f5ad08;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #ffb500,
+      #f39b00
+    );
+
+  --card-shadow:
+    rgba(245, 169, 8, 0.28);
+
+  --card-glow:
+    rgba(255, 195, 58, 0.26);
+}
+
+
+/* =========================================================
+   HOT LEADS
+   ========================================================= */
+
+.hot-card {
+  --card-color: #ff562b;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #ff681f,
+      #f23c3b
+    );
+
+  --card-shadow:
+    rgba(246, 70, 48, 0.28);
+
+  --card-glow:
+    rgba(255, 93, 94, 0.25);
+}
+
+
+/* =========================================================
+   CLOSED DEALS
+   ========================================================= */
+
+.closed-card {
+  --card-color: #18b85b;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #16bd57,
+      #0daf65
+    );
+
+  --card-shadow:
+    rgba(20, 183, 87, 0.28);
+
+  --card-glow:
+    rgba(65, 215, 116, 0.25);
+}
+
+
+/* =========================================================
+   LOST LEADS
+   ========================================================= */
+
+.lost-card {
+  --card-color: #ed2d3b;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #f2393f,
+      #e72232
+    );
+
+  --card-shadow:
+    rgba(233, 40, 53, 0.28);
+
+  --card-glow:
+    rgba(255, 91, 101, 0.25);
+}
+
+
+/* =========================================================
+   ACTIVE EXECUTIVES
+   ========================================================= */
+
+.executive-card {
+  --card-color: #7d3be9;
+
+  --card-gradient:
+    linear-gradient(
+      135deg,
+      #843cef,
+      #7134e5
+    );
+
+  --card-shadow:
+    rgba(123, 57, 232, 0.28);
+
+  --card-glow:
+    rgba(164, 91, 255, 0.25);
+}
+
+
+/* =========================================================
+   CARD BACKGROUND TINT
+   ========================================================= */
+
+.total-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #faf8ff 100%
+    );
+}
+
+.active-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #f6fbff 100%
+    );
+}
+
+.new-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #f4fcfd 100%
+    );
+}
+
+.pending-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #fffaf0 100%
+    );
+}
+
+.hot-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #fff7f5 100%
+    );
+}
+
+.closed-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #f4fcf7 100%
+    );
+}
+
+.lost-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #fff7f7 100%
+    );
+}
+
+.executive-card {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 60%,
+      #faf7ff 100%
+    );
+}
+
+
+/* =========================================================
+   LARGE LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .summary-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .summary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+  }
+
+  .summary-card {
+    min-height: 180px;
+
+    padding: 23px 21px;
+
+    border-radius: 21px;
+  }
+
+  .card-icon {
+    flex-basis: 50px;
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 20px;
+
+    border-radius: 14px;
+  }
+
+  .card-content strong {
+    font-size: 32px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+  .summary-card {
+    min-height: 150px;
+
+    padding: 21px 19px;
+
+    gap: 15px;
+
+    border-radius: 20px;
+  }
+
+  .card-icon {
+    flex-basis: 48px;
+
+    width: 48px;
+    height: 48px;
+
+    font-size: 19px;
+
+    border-radius: 14px;
+  }
+
+  .card-label {
+    margin-bottom: 6px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.6px;
+  }
+
+  .card-content strong {
+    margin-bottom: 6px;
+
+    font-size: 30px;
+  }
+
+  .card-content small {
+    font-size: 11px;
+  }
+
+  .card-glow {
+    width: 105px;
+    height: 105px;
+
+    right: -35px;
+    bottom: -45px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .summary-card {
+    padding: 19px 16px;
+
+    gap: 13px;
+
+    border-radius: 18px;
+  }
+
+  .card-icon {
+    flex-basis: 45px;
+
+    width: 45px;
+    height: 45px;
+
+    font-size: 18px;
+  }
+
+  .card-content strong {
+    font-size: 28px;
+  }
+
+  .card-content small {
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .summary-card,
+  .card-icon,
+  .card-glow {
+    transition: none;
+  }
+
+  .summary-card:hover {
+    transform: none;
+  }
+
+  .summary-card:hover .card-icon {
+    transform: none;
+  }
+
+}

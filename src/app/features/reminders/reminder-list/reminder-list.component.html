@@ -1,1 +1,803 @@
-<p>reminder-list works!</p>
+<div class="reminder-page">
+
+
+  <!-- ======================================================
+       BACKGROUND
+  ======================================================= -->
+
+  <div class="ocean-bg">
+
+    <span class="bubble bubble-1"></span>
+    <span class="bubble bubble-2"></span>
+    <span class="bubble bubble-3"></span>
+    <span class="bubble bubble-4"></span>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       NEW REMINDER NOTIFICATION
+  ======================================================= -->
+
+  <div
+    class="notification-popup"
+    *ngIf="showNotification && latestNotification">
+
+    <div class="notification-icon">
+
+      <i class="fas fa-bell"></i>
+
+    </div>
+
+
+    <div class="notification-content">
+
+      <span class="notification-label">
+        NEW REMINDER
+      </span>
+
+      <strong>
+        {{ latestNotification.title }}
+      </strong>
+
+      <p>
+        {{ latestNotification.message || 'You have a new CRM reminder.' }}
+      </p>
+
+      <small>
+
+        {{ formatDate(latestNotification) }}
+        •
+        {{ formatTime(latestNotification) }}
+
+      </small>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="notification-close"
+      (click)="closeNotification()">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       MAIN CONTENT
+  ======================================================= -->
+
+  <div class="page-content">
+
+
+    <!-- ====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="page-header">
+
+      <div class="title-area">
+
+        <div class="title-icon">
+
+          <i class="fas fa-bell"></i>
+
+        </div>
+
+
+        <div>
+
+          <h1>
+            Reminders
+          </h1>
+
+          <p>
+            Stay on top of your scheduled customer follow-ups.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="refreshReminders()"
+        [disabled]="isRefreshing">
+
+        <i
+          class="fas fa-sync-alt"
+          [class.fa-spin]="isRefreshing">
+        </i>
+
+        <span>
+          Refresh
+        </span>
+
+      </button>
+
+    </header>
+
+
+
+    <!-- ====================================================
+         SUCCESS MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert success-alert"
+      *ngIf="successMessage">
+
+      <i class="fas fa-circle-check"></i>
+
+      <span>
+        {{ successMessage }}
+      </span>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         ERROR MESSAGE
+    ===================================================== -->
+
+    <div
+      class="alert error-alert"
+      *ngIf="errorMessage">
+
+      <i class="fas fa-circle-exclamation"></i>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         SUMMARY CARDS
+    ===================================================== -->
+
+    <section class="summary-grid">
+
+
+      <!-- TOTAL -->
+
+      <button
+        type="button"
+        class="summary-card"
+        [class.active]="activeFilter === 'ALL'"
+        (click)="setFilter('ALL')">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-layer-group"></i>
+
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            TOTAL
+          </span>
+
+          <strong>
+            {{ getTotalCount() }}
+          </strong>
+
+          <small>
+            All reminders
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <!-- UNREAD -->
+
+      <button
+        type="button"
+        class="summary-card unread-card"
+        [class.active]="activeFilter === 'UNREAD'"
+        (click)="setFilter('UNREAD')">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-bell"></i>
+
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            UNREAD
+          </span>
+
+          <strong>
+            {{ getUnreadCount() }}
+          </strong>
+
+          <small>
+            Need your attention
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <!-- PENDING -->
+
+      <button
+        type="button"
+        class="summary-card"
+        [class.active]="activeFilter === 'PENDING'"
+        (click)="setFilter('PENDING')">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-clock"></i>
+
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            PENDING
+          </span>
+
+          <strong>
+            {{ getPendingCount() }}
+          </strong>
+
+          <small>
+            Active reminders
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <!-- DUE -->
+
+      <button
+        type="button"
+        class="summary-card due-card"
+        [class.active]="activeFilter === 'DUE'"
+        (click)="setFilter('DUE')">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-exclamation"></i>
+
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            DUE
+          </span>
+
+          <strong>
+            {{ getDueCount() }}
+          </strong>
+
+          <small>
+            Requires action
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <!-- COMPLETED -->
+
+      <button
+        type="button"
+        class="summary-card"
+        [class.active]="activeFilter === 'COMPLETED'"
+        (click)="setFilter('COMPLETED')">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-circle-check"></i>
+
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            COMPLETED
+          </span>
+
+          <strong>
+            {{ getCompletedCount() }}
+          </strong>
+
+          <small>
+            Finished reminders
+          </small>
+
+        </div>
+
+      </button>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         FILTER BAR
+    ===================================================== -->
+
+    <section class="filter-bar">
+
+      <div class="filter-title">
+
+        <i class="fas fa-filter"></i>
+
+        <span>
+          Reminder Status
+        </span>
+
+      </div>
+
+
+      <div class="filter-buttons">
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'ALL'"
+          (click)="setFilter('ALL')">
+
+          All
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'UNREAD'"
+          (click)="setFilter('UNREAD')">
+
+          Unread
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'PENDING'"
+          (click)="setFilter('PENDING')">
+
+          Pending
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'UPCOMING'"
+          (click)="setFilter('UPCOMING')">
+
+          Upcoming
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'DUE'"
+          (click)="setFilter('DUE')">
+
+          Due
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'COMPLETED'"
+          (click)="setFilter('COMPLETED')">
+
+          Completed
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="activeFilter === 'DISMISSED'"
+          (click)="setFilter('DISMISSED')">
+
+          Dismissed
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         LOADING
+    ===================================================== -->
+
+    <div
+      class="loading-state"
+      *ngIf="isLoading">
+
+      <div class="spinner">
+
+        <i class="fas fa-spinner fa-spin"></i>
+
+      </div>
+
+      <p>
+        Loading reminders...
+      </p>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         EMPTY STATE
+    ===================================================== -->
+
+    <section
+      class="empty-state"
+      *ngIf="
+        !isLoading &&
+        filteredReminders.length === 0
+      ">
+
+      <div class="empty-icon">
+
+        <i class="fas fa-bell-slash"></i>
+
+      </div>
+
+      <h2>
+        No reminders found
+      </h2>
+
+      <p>
+
+        There are no reminders in this category.
+
+        Reminders are automatically generated
+        when follow-ups are scheduled.
+
+      </p>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         REMINDER LIST
+    ===================================================== -->
+
+    <section
+      class="reminder-list"
+      *ngIf="
+        !isLoading &&
+        filteredReminders.length > 0
+      ">
+
+
+      <article
+        class="reminder-card"
+        *ngFor="let reminder of filteredReminders"
+        [class.unread]="!reminder.read"
+        [class.due]="getReminderStatus(reminder) === 'DUE'"
+        [class.completed]="reminder.completed"
+        [class.dismissed]="reminder.dismissed">
+
+
+        <!-- ==================================================
+             LEFT ICON
+        =================================================== -->
+
+        <div
+          class="reminder-status-icon"
+          [ngClass]="getStatusClass(reminder)">
+
+          <i
+            [class]="getReminderIcon(reminder)">
+          </i>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MAIN CONTENT
+        =================================================== -->
+
+        <div class="reminder-main">
+
+
+          <div class="reminder-header">
+
+            <div>
+
+              <div class="title-row">
+
+                <h3>
+                  {{ reminder.title }}
+                </h3>
+
+
+                <span
+                  class="unread-dot"
+                  *ngIf="!reminder.read">
+                </span>
+
+              </div>
+
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(reminder)">
+
+                {{ getReminderStatus(reminder) }}
+
+              </span>
+
+            </div>
+
+
+            <div class="reminder-time">
+
+              <strong>
+                {{ formatTime(reminder) }}
+              </strong>
+
+              <span>
+                {{ formatDate(reminder) }}
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               MESSAGE
+          ================================================== -->
+
+          <p
+            class="reminder-message"
+            *ngIf="reminder.message">
+
+            {{ reminder.message }}
+
+          </p>
+
+
+
+          <!-- =================================================
+               RELATED INFORMATION
+          ================================================== -->
+
+          <div class="reminder-meta">
+
+
+            <!-- LEAD -->
+
+            <div
+              class="meta-item"
+              *ngIf="reminder.leadName">
+
+              <i class="fas fa-user"></i>
+
+              <div>
+
+                <span>
+                  CUSTOMER LEAD
+                </span>
+
+                <strong>
+                  {{ reminder.leadName }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- FOLLOW-UP -->
+
+            <div
+              class="meta-item"
+              *ngIf="reminder.followUpSubject">
+
+              <i class="fas fa-calendar-check"></i>
+
+              <div>
+
+                <span>
+                  FOLLOW-UP
+                </span>
+
+                <strong>
+                  {{ reminder.followUpSubject }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- ASSIGNED USER -->
+
+            <div
+              class="meta-item"
+              *ngIf="reminder.assignedToName">
+
+              <i class="fas fa-user-tie"></i>
+
+              <div>
+
+                <span>
+                  ASSIGNED TO
+                </span>
+
+                <strong>
+                  {{ reminder.assignedToName }}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =================================================
+               ACTIONS
+          ================================================== -->
+
+          <div class="reminder-actions">
+
+
+            <!-- MARK READ -->
+
+            <button
+              type="button"
+              class="action-btn read-btn"
+              *ngIf="!reminder.read"
+              (click)="markAsRead(reminder)">
+
+              <i class="fas fa-check"></i>
+
+              Mark as read
+
+            </button>
+
+
+
+            <!-- COMPLETE -->
+
+            <button
+              type="button"
+              class="action-btn complete-btn"
+              *ngIf="
+                !reminder.completed &&
+                !reminder.dismissed
+              "
+              (click)="completeReminder(reminder)">
+
+              <i class="fas fa-circle-check"></i>
+
+              Complete
+
+            </button>
+
+
+
+            <!-- DISMISS -->
+
+            <button
+              type="button"
+              class="action-btn dismiss-btn"
+              *ngIf="
+                !reminder.dismissed &&
+                !reminder.completed
+              "
+              (click)="dismissReminder(reminder)">
+
+              <i class="fas fa-ban"></i>
+
+              Dismiss
+
+            </button>
+
+
+
+            <!-- RESTORE -->
+
+            <button
+              type="button"
+              class="action-btn restore-btn"
+              *ngIf="reminder.dismissed"
+              (click)="restoreReminder(reminder)">
+
+              <i class="fas fa-rotate-left"></i>
+
+              Restore
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- ====================================================
+         FOOTER
+    ===================================================== -->
+
+    <div
+      class="list-footer"
+      *ngIf="
+        !isLoading &&
+        filteredReminders.length > 0
+      ">
+
+      <span>
+
+        Showing
+        <strong>
+          {{ filteredReminders.length }}
+        </strong>
+        of
+        <strong>
+          {{ reminders.length }}
+        </strong>
+        reminders
+
+      </span>
+
+
+      <span class="auto-refresh">
+
+        <i class="fas fa-rotate"></i>
+
+        Automatically checking for new reminders
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,1 +1,633 @@
-<p>edit-user works!</p>
+<div class="edit-user-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="onBack()">
+
+        <span class="back-icon">←</span>
+
+        <span>Back</span>
+
+      </button>
+
+      <div class="header-title">
+
+        <h2>Edit Executive</h2>
+
+        <p>
+          Update executive account information
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       LOADING STATE
+       ====================================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="loader"></div>
+
+    <p>
+      Loading executive details...
+    </p>
+
+  </div>
+
+
+  <!-- ======================================================
+       ERROR STATE
+       ====================================================== -->
+
+  <div
+    class="message error-message"
+    *ngIf="errorMessage && !isLoading">
+
+    <span class="message-icon">!</span>
+
+    <span>
+      {{ errorMessage }}
+    </span>
+
+  </div>
+
+
+  <!-- ======================================================
+       FORM
+       ====================================================== -->
+
+  <div
+    class="form-card"
+    *ngIf="!isLoading && executiveForm && executive">
+
+    <!-- ====================================================
+         CARD HEADER
+         ==================================================== -->
+
+    <div class="card-header">
+
+      <div class="card-icon">
+        👤
+      </div>
+
+      <div>
+
+        <h3>Executive Information</h3>
+
+        <p>
+          Modify the information you want to update.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         SUCCESS MESSAGE
+         ==================================================== -->
+
+    <div
+      class="message success-message"
+      *ngIf="successMessage">
+
+      <span class="message-icon">✓</span>
+
+      <span>
+        {{ successMessage }}
+      </span>
+
+    </div>
+
+
+    <!-- ====================================================
+         ERROR MESSAGE
+         ==================================================== -->
+
+    <div
+      class="message error-message"
+      *ngIf="errorMessage">
+
+      <span class="message-icon">!</span>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+    </div>
+
+
+    <!-- ====================================================
+         FORM
+         ==================================================== -->
+
+    <form
+      [formGroup]="executiveForm"
+      (ngSubmit)="onSubmit()"
+      novalidate>
+
+
+      <!-- ==================================================
+           BASIC INFORMATION
+           ================================================== -->
+
+      <div class="section-title">
+
+        <span class="section-line"></span>
+
+        <h4>Basic Information</h4>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- Employee ID -->
+
+        <div class="form-group">
+
+          <label for="employeeId">
+            Employee ID
+          </label>
+
+          <input
+            id="employeeId"
+            type="text"
+            formControlName="employeeId"
+            readonly
+            class="readonly-input">
+
+          <small class="field-info">
+            Employee ID cannot be changed.
+          </small>
+
+        </div>
+
+
+        <!-- Full Name -->
+
+        <div class="form-group">
+
+          <label for="fullName">
+            Full Name
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="fullName"
+            type="text"
+            formControlName="fullName"
+            placeholder="Enter full name"
+            autocomplete="name">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['fullName'].touched &&
+              f['fullName'].invalid
+            ">
+
+            Full name is required and cannot exceed
+            100 characters.
+
+          </small>
+
+        </div>
+
+
+        <!-- Username -->
+
+        <div class="form-group">
+
+          <label for="username">
+            Username
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            placeholder="Enter username"
+            autocomplete="username">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['username'].touched &&
+              f['username'].invalid
+            ">
+
+            Username is required and cannot exceed
+            50 characters.
+
+          </small>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="form-group">
+
+          <label for="email">
+            Email
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Enter email address"
+            autocomplete="email">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['email'].touched &&
+              f['email'].invalid
+            ">
+
+            Please enter a valid email address.
+
+          </small>
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="form-group">
+
+          <label for="phoneNumber">
+            Phone Number
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="phoneNumber"
+            type="tel"
+            formControlName="phoneNumber"
+            placeholder="Enter phone number"
+            autocomplete="tel">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['phoneNumber'].touched &&
+              f['phoneNumber'].invalid
+            ">
+
+            Please enter a valid phone number.
+
+          </small>
+
+        </div>
+
+
+        <!-- Designation -->
+
+        <div class="form-group">
+
+          <label for="designation">
+            Designation
+          </label>
+
+          <input
+            id="designation"
+            type="text"
+            formControlName="designation"
+            placeholder="e.g. Sales Executive">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['designation'].touched &&
+              f['designation'].invalid
+            ">
+
+            Designation cannot exceed 100 characters.
+
+          </small>
+
+        </div>
+
+
+        <!-- Department -->
+
+        <div class="form-group">
+
+          <label for="department">
+            Department
+          </label>
+
+          <input
+            id="department"
+            type="text"
+            formControlName="department"
+            placeholder="e.g. Sales">
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['department'].touched &&
+              f['department'].invalid
+            ">
+
+            Department cannot exceed 100 characters.
+
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           PASSWORD SECTION
+           ================================================== -->
+
+      <div class="section-title password-section-title">
+
+        <span class="section-line"></span>
+
+        <h4>Password</h4>
+
+      </div>
+
+      <div class="password-info">
+
+        <span class="info-icon">i</span>
+
+        <span>
+          Leave the password fields empty if you do not want
+          to change the current password.
+        </span>
+
+      </div>
+
+
+      <div class="form-grid password-grid">
+
+
+        <!-- Password -->
+
+        <div class="form-group">
+
+          <label for="password">
+            New Password
+          </label>
+
+          <div class="password-wrapper">
+
+            <input
+              id="password"
+              [type]="
+                showPassword
+                  ? 'text'
+                  : 'password'
+              "
+              formControlName="password"
+              placeholder="Enter new password"
+              autocomplete="new-password">
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+              [attr.aria-label]="
+                showPassword
+                  ? 'Hide password'
+                  : 'Show password'
+              ">
+
+              {{ showPassword ? 'Hide' : 'Show' }}
+
+            </button>
+
+          </div>
+
+          <small class="field-info">
+            Leave blank to keep the existing password.
+          </small>
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['password'].touched &&
+              f['password'].invalid
+            ">
+
+            Password must contain between 6 and
+            100 characters.
+
+          </small>
+
+        </div>
+
+
+        <!-- Confirm Password -->
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm New Password
+          </label>
+
+          <div class="password-wrapper">
+
+            <input
+              id="confirmPassword"
+              [type]="
+                showConfirmPassword
+                  ? 'text'
+                  : 'password'
+              "
+              formControlName="confirmPassword"
+              placeholder="Confirm new password"
+              autocomplete="new-password">
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="toggleConfirmPassword()"
+              [attr.aria-label]="
+                showConfirmPassword
+                  ? 'Hide password'
+                  : 'Show password'
+              ">
+
+              {{ showConfirmPassword ? 'Hide' : 'Show' }}
+
+            </button>
+
+          </div>
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['confirmPassword'].touched &&
+              !passwordsMatch()
+            ">
+
+            Passwords do not match.
+
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           EXISTING ACCOUNT INFORMATION
+           ================================================== -->
+
+      <div class="account-info"
+           *ngIf="executive">
+
+        <div class="account-info-header">
+
+          <span class="account-icon">●</span>
+
+          <h4>Account Information</h4>
+
+        </div>
+
+        <div class="account-grid">
+
+          <div class="account-item">
+
+            <span class="account-label">
+              Role
+            </span>
+
+            <span class="account-value role-badge">
+              {{ executive.role }}
+            </span>
+
+          </div>
+
+          <div class="account-item">
+
+            <span class="account-label">
+              Status
+            </span>
+
+            <span
+              class="account-value status-badge"
+              [class.active]="
+                executive.status === 'ACTIVE'
+              "
+              [class.inactive]="
+                executive.status !== 'ACTIVE'
+              ">
+
+              {{ executive.status }}
+
+            </span>
+
+          </div>
+
+          <div class="account-item">
+
+            <span class="account-label">
+              Created At
+            </span>
+
+            <span class="account-value">
+
+              {{
+                executive.createdAt
+                  | date:'dd MMM yyyy, hh:mm a'
+              }}
+
+            </span>
+
+          </div>
+
+          <div class="account-item">
+
+            <span class="account-label">
+              Last Login
+            </span>
+
+            <span class="account-value">
+
+              {{
+                executive.lastLogin
+                  ? (executive.lastLogin
+                      | date:'dd MMM yyyy, hh:mm a')
+                  : 'Never logged in'
+              }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           FORM ACTIONS
+           ================================================== -->
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onCancel()"
+          [disabled]="isSubmitting">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isSubmitting">
+
+          <span
+            class="button-loader"
+            *ngIf="isSubmitting">
+          </span>
+
+          <span *ngIf="!isSubmitting">
+            Save Changes
+          </span>
+
+          <span *ngIf="isSubmitting">
+            Saving...
+          </span>
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

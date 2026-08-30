@@ -6,14 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RemindersRoutingModule } from './reminders-routing.module';
 
 import { ReminderListComponent } from './reminder-list/reminder-list.component';
-import { AddReminderComponent } from './add-reminder/add-reminder.component';
-import { EditReminderComponent } from './edit-reminder/edit-reminder.component';
 
 @NgModule({
   declarations: [
-    ReminderListComponent,
-    AddReminderComponent,
-    EditReminderComponent
+    ReminderListComponent
   ],
   imports: [
     CommonModule,

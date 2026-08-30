@@ -1,1 +1,226 @@
-<p>dashboard-card works!</p>
+<section class="summary-grid">
+
+  <!-- TOTAL LEADS -->
+  <article class="summary-card total-card">
+
+    <div class="card-icon">
+      <i class="fas fa-users"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        TOTAL LEADS
+      </span>
+
+      <strong>
+        {{ getTotalLeads() | number }}
+      </strong>
+
+      <small>
+        All customer leads
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- ACTIVE LEADS -->
+  <article class="summary-card active-card">
+
+    <div class="card-icon">
+      <i class="fas fa-bolt"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        ACTIVE LEADS
+      </span>
+
+      <strong>
+        {{ getActiveLeads() | number }}
+      </strong>
+
+      <small>
+        Currently in progress
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- NEW TODAY -->
+  <article class="summary-card new-card">
+
+    <div class="card-icon">
+      <i class="fas fa-user-plus"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        NEW TODAY
+      </span>
+
+      <strong>
+        {{ getNewLeadsToday() | number }}
+      </strong>
+
+      <small>
+        Leads created today
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- PENDING -->
+  <article class="summary-card pending-card">
+
+    <div class="card-icon">
+      <i class="fas fa-hourglass-half"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        PENDING LEADS
+      </span>
+
+      <strong>
+        {{ getPendingLeads() | number }}
+      </strong>
+
+      <small>
+        Awaiting closure
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- HOT -->
+  <article class="summary-card hot-card">
+
+    <div class="card-icon">
+      <i class="fas fa-fire"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        HOT LEADS
+      </span>
+
+      <strong>
+        {{ getHotLeads() | number }}
+      </strong>
+
+      <small>
+        High priority customers
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- CLOSED -->
+  <article class="summary-card closed-card">
+
+    <div class="card-icon">
+      <i class="fas fa-circle-check"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        CLOSED DEALS
+      </span>
+
+      <strong>
+        {{ getClosedDeals() | number }}
+      </strong>
+
+      <small>
+        Successfully won
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- LOST -->
+  <article class="summary-card lost-card">
+
+    <div class="card-icon">
+      <i class="fas fa-circle-xmark"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        LOST LEADS
+      </span>
+
+      <strong>
+        {{ getLostLeads() | number }}
+      </strong>
+
+      <small>
+        Leads marked lost
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+
+  <!-- ACTIVE EXECUTIVES -->
+  <article class="summary-card executive-card">
+
+    <div class="card-icon">
+      <i class="fas fa-user-tie"></i>
+    </div>
+
+    <div class="card-content">
+
+      <span class="card-label">
+        ACTIVE EXECUTIVES
+      </span>
+
+      <strong>
+        {{ getActiveExecutives() | number }}
+      </strong>
+
+      <small>
+        Sales executives
+      </small>
+
+    </div>
+
+    <div class="card-glow"></div>
+
+  </article>
+
+</section>

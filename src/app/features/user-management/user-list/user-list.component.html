@@ -1,1 +1,734 @@
-<p>user-list works!</p>
+<div class="user-list-page">
+
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <div class="title-section">
+
+        <div class="title-icon">
+          <span>👥</span>
+        </div>
+
+        <div>
+          <h1>Executive Management</h1>
+
+          <p>
+            Create, view, update and manage CRM executives.
+          </p>
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="add-user-btn"
+        (click)="addUser()"
+      >
+        <span class="btn-icon">+</span>
+        <span>Add Executive</span>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================
+       SUCCESS MESSAGE
+       ====================================================== -->
+
+  <div
+    *ngIf="successMessage"
+    class="alert alert-success"
+  >
+    <span class="alert-icon">✓</span>
+
+    <span>{{ successMessage }}</span>
+  </div>
+
+
+  <!-- ======================================================
+       ERROR MESSAGE
+       ====================================================== -->
+
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-error"
+  >
+    <span class="alert-icon">!</span>
+
+    <span>{{ errorMessage }}</span>
+
+    <button
+      type="button"
+      class="alert-close"
+      (click)="errorMessage = ''"
+    >
+      ×
+    </button>
+  </div>
+
+
+  <!-- ======================================================
+       MAIN CARD
+       ====================================================== -->
+
+  <div class="users-card">
+
+    <!-- ====================================================
+         TOOLBAR
+         ==================================================== -->
+
+    <div class="toolbar">
+
+      <div class="search-wrapper">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search by name, username, employee ID..."
+          [(ngModel)]="searchText"
+          (input)="onSearch()"
+        />
+
+        <button
+          *ngIf="searchText"
+          type="button"
+          class="clear-search"
+          (click)="searchText = ''; onSearch()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="filter-wrapper">
+
+        <label for="statusFilter">
+          Status
+        </label>
+
+        <select
+          id="statusFilter"
+          class="status-filter"
+          [(ngModel)]="selectedStatus"
+          (change)="onStatusChange()"
+        >
+          <option value="ALL">
+            All Status
+          </option>
+
+          <option value="ACTIVE">
+            Active
+          </option>
+
+          <option value="INACTIVE">
+            Inactive
+          </option>
+
+          <option value="DEACTIVATED">
+            Deactivated
+          </option>
+
+          <option value="PENDING">
+            Pending
+          </option>
+        </select>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="refresh-btn"
+        title="Refresh"
+        (click)="loadExecutives()"
+      >
+        ↻
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================
+         SUMMARY
+         ==================================================== -->
+
+    <div class="list-summary">
+
+      <div>
+
+        <span class="summary-label">
+          Total Executives
+        </span>
+
+        <strong>
+          {{ filteredExecutives.length }}
+        </strong>
+
+      </div>
+
+      <div
+        *ngIf="searchText || selectedStatus !== 'ALL'"
+        class="filter-info"
+      >
+        Filtered results
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         LOADING
+         ==================================================== -->
+
+    <div
+      *ngIf="isLoading"
+      class="loading-container"
+    >
+
+      <div class="loading-spinner"></div>
+
+      <p>
+        Loading executives...
+      </p>
+
+    </div>
+
+
+    <!-- ====================================================
+         EMPTY STATE
+         ==================================================== -->
+
+    <div
+      *ngIf="
+        !isLoading &&
+        filteredExecutives.length === 0
+      "
+      class="empty-state"
+    >
+
+      <div class="empty-icon">
+        👥
+      </div>
+
+      <h3>
+        No executives found
+      </h3>
+
+      <p *ngIf="searchText || selectedStatus !== 'ALL'">
+        Try changing your search or filter.
+      </p>
+
+      <p *ngIf="!searchText && selectedStatus === 'ALL'">
+        No executive accounts have been created yet.
+      </p>
+
+      <button
+        type="button"
+        class="empty-add-btn"
+        (click)="addUser()"
+      >
+        + Add Executive
+      </button>
+
+    </div>
+
+
+    <!-- ====================================================
+         DESKTOP TABLE
+         ==================================================== -->
+
+    <div
+      *ngIf="
+        !isLoading &&
+        filteredExecutives.length > 0
+      "
+      class="table-wrapper"
+    >
+
+      <table class="users-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Executive
+            </th>
+
+            <th>
+              Employee ID
+            </th>
+
+            <th>
+              Contact
+            </th>
+
+            <th>
+              Department
+            </th>
+
+            <th>
+              Designation
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Last Login
+            </th>
+
+            <th class="actions-header">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let user of paginatedExecutives;
+              trackBy: trackByUserId
+            "
+          >
+
+            <!-- Executive -->
+
+            <td>
+
+              <div class="user-cell">
+
+                <div class="avatar">
+                  {{ getInitials(user.fullName) }}
+                </div>
+
+                <div class="user-info">
+
+                  <strong>
+                    {{ user.fullName }}
+                  </strong>
+
+                  <span>
+                    @{{ user.username }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Employee ID -->
+
+            <td>
+
+              <span class="employee-id">
+                {{ user.employeeId }}
+              </span>
+
+            </td>
+
+
+            <!-- Contact -->
+
+            <td>
+
+              <div class="contact-info">
+
+                <span>
+                  {{ user.email }}
+                </span>
+
+                <span>
+                  {{ user.phoneNumber }}
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Department -->
+
+            <td>
+
+              <span>
+                {{ user.department || '—' }}
+              </span>
+
+            </td>
+
+
+            <!-- Designation -->
+
+            <td>
+
+              <span>
+                {{ user.designation || '—' }}
+              </span>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(user.status)"
+              >
+                <span class="status-dot"></span>
+
+                {{ user.status }}
+              </span>
+
+            </td>
+
+
+            <!-- Last Login -->
+
+            <td>
+
+              <span class="last-login">
+                {{ formatDate(user.lastLogin) }}
+              </span>
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  type="button"
+                  class="action-btn view-btn"
+                  title="View executive"
+                  (click)="viewUser(user.id)"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="action-btn edit-btn"
+                  title="Edit executive"
+                  (click)="editUser(user.id)"
+                >
+                  Edit
+                </button>
+
+                <button
+                  *ngIf="
+                    String(user.status).toUpperCase() === 'ACTIVE'
+                  "
+                  type="button"
+                  class="action-btn deactivate-btn"
+                  title="Deactivate executive"
+                  (click)="deactivateUser(user)"
+                >
+                  Deactivate
+                </button>
+
+                <button
+                  *ngIf="
+                    String(user.status).toUpperCase() !== 'ACTIVE'
+                  "
+                  type="button"
+                  class="action-btn activate-btn"
+                  title="Activate executive"
+                  (click)="activateUser(user)"
+                >
+                  Activate
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- ====================================================
+         MOBILE CARDS
+         ==================================================== -->
+
+    <div
+      *ngIf="
+        !isLoading &&
+        filteredExecutives.length > 0
+      "
+      class="mobile-user-list"
+    >
+
+      <div
+        *ngFor="
+          let user of paginatedExecutives;
+          trackBy: trackByUserId
+        "
+        class="mobile-user-card"
+      >
+
+        <!-- Card Header -->
+
+        <div class="mobile-card-header">
+
+          <div class="user-cell">
+
+            <div class="avatar">
+              {{ getInitials(user.fullName) }}
+            </div>
+
+            <div class="user-info">
+
+              <strong>
+                {{ user.fullName }}
+              </strong>
+
+              <span>
+                @{{ user.username }}
+              </span>
+
+            </div>
+
+          </div>
+
+          <span
+            class="status-badge"
+            [ngClass]="getStatusClass(user.status)"
+          >
+            <span class="status-dot"></span>
+            {{ user.status }}
+          </span>
+
+        </div>
+
+
+        <!-- Card Details -->
+
+        <div class="mobile-card-details">
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Employee ID
+            </span>
+
+            <span class="detail-value">
+              {{ user.employeeId }}
+            </span>
+
+          </div>
+
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Email
+            </span>
+
+            <span class="detail-value email-value">
+              {{ user.email }}
+            </span>
+
+          </div>
+
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Phone
+            </span>
+
+            <span class="detail-value">
+              {{ user.phoneNumber }}
+            </span>
+
+          </div>
+
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Department
+            </span>
+
+            <span class="detail-value">
+              {{ user.department || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Designation
+            </span>
+
+            <span class="detail-value">
+              {{ user.designation || '—' }}
+            </span>
+
+          </div>
+
+
+          <div class="mobile-detail">
+
+            <span class="detail-label">
+              Last Login
+            </span>
+
+            <span class="detail-value">
+              {{ formatDate(user.lastLogin) }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Mobile Actions -->
+
+        <div class="mobile-actions">
+
+          <button
+            type="button"
+            class="mobile-action view-btn"
+            (click)="viewUser(user.id)"
+          >
+            View
+          </button>
+
+          <button
+            type="button"
+            class="mobile-action edit-btn"
+            (click)="editUser(user.id)"
+          >
+            Edit
+          </button>
+
+          <button
+            *ngIf="
+              String(user.status).toUpperCase() === 'ACTIVE'
+            "
+            type="button"
+            class="mobile-action deactivate-btn"
+            (click)="deactivateUser(user)"
+          >
+            Deactivate
+          </button>
+
+          <button
+            *ngIf="
+              String(user.status).toUpperCase() !== 'ACTIVE'
+            "
+            type="button"
+            class="mobile-action activate-btn"
+            (click)="activateUser(user)"
+          >
+            Activate
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         PAGINATION
+         ==================================================== -->
+
+    <div
+      *ngIf="
+        !isLoading &&
+        filteredExecutives.length > pageSize
+      "
+      class="pagination"
+    >
+
+      <button
+        type="button"
+        class="pagination-btn"
+        [disabled]="currentPage === 1"
+        (click)="previousPage()"
+      >
+        ‹
+      </button>
+
+
+      <button
+        *ngFor="let page of pageNumbers"
+        type="button"
+        class="pagination-number"
+        [class.active]="currentPage === page"
+        (click)="goToPage(page)"
+      >
+        {{ page }}
+      </button>
+
+
+      <button
+        type="button"
+        class="pagination-btn"
+        [disabled]="currentPage === totalPages"
+        (click)="nextPage()"
+      >
+        ›
+      </button>
+
+    </div>
+
+
+    <div
+      *ngIf="
+        !isLoading &&
+        filteredExecutives.length > 0
+      "
+      class="pagination-info"
+    >
+      Showing
+      {{
+        ((currentPage - 1) * pageSize) + 1
+      }}
+      -
+      {{
+        Math.min(
+          currentPage * pageSize,
+          filteredExecutives.length
+        )
+      }}
+      of
+      {{ filteredExecutives.length }}
+      executives
+    </div>
+
+  </div>
+
+</div>

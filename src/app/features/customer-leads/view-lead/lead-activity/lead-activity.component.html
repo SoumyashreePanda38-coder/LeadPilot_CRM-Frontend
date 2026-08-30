@@ -1,0 +1,318 @@
+
+<div class="activity-container">
+
+  <!-- ==========================================================
+       HEADER
+       ========================================================== -->
+
+  <div class="activity-header">
+
+    <div class="header-icon">
+      <i class="fas fa-wave-square"></i>
+    </div>
+
+    <div class="header-content">
+      <h2>Lead Activity</h2>
+      <p>Complete timeline of interactions and updates</p>
+    </div>
+
+    <button
+      type="button"
+      class="refresh-button"
+      (click)="loadActivities()"
+      title="Refresh Activity">
+
+      <i class="fas fa-rotate-right"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       LOADING
+       ========================================================== -->
+
+  <div
+    class="activity-loading"
+    *ngIf="isLoading">
+
+    <div class="loading-orbit">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+    <h3>Loading Activity</h3>
+
+    <p>Retrieving the latest lead interactions...</p>
+
+  </div>
+
+
+  <!-- ==========================================================
+       ERROR
+       ========================================================== -->
+
+  <div
+    class="activity-error"
+    *ngIf="!isLoading && errorMessage">
+
+    <div class="error-icon">
+      <i class="fas fa-circle-exclamation"></i>
+    </div>
+
+    <div>
+      <h3>Unable to Load Activity</h3>
+
+      <p>
+        {{ errorMessage }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="retry-button"
+      (click)="loadActivities()">
+
+      <i class="fas fa-rotate-right"></i>
+      Retry
+
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================================
+       EMPTY STATE
+       ========================================================== -->
+
+  <div
+    class="activity-empty"
+    *ngIf="
+      !isLoading &&
+      !errorMessage &&
+      activities.length === 0
+    ">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-clock-rotate-left"></i>
+
+    </div>
+
+    <h3>No Activity Yet</h3>
+
+    <p>
+      Activity related to this lead will appear here.
+    </p>
+
+  </div>
+
+
+  <!-- ==========================================================
+       TIMELINE
+       ========================================================== -->
+
+  <div
+    class="activity-timeline"
+    *ngIf="
+      !isLoading &&
+      !errorMessage &&
+      activities.length > 0
+    ">
+
+    <div
+      class="timeline-item"
+      *ngFor="
+        let activity of activities;
+        let i = index
+      "
+      [style.animation-delay]="(i * 0.08) + 's'">
+
+
+      <!-- ======================================================
+           TIMELINE CONNECTOR
+           ====================================================== -->
+
+      <div class="timeline-marker">
+
+        <div class="marker-glow"></div>
+
+        <div class="marker-icon">
+
+          <i
+            class="fas"
+            [ngClass]="getActivityIcon(activity.activityType)">
+          </i>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           ACTIVITY CARD
+           ====================================================== -->
+
+      <div class="activity-card">
+
+
+        <!-- CARD TOP -->
+        <div class="activity-card-top">
+
+          <div class="activity-type">
+
+            <span class="activity-type-icon">
+
+              <i
+                class="fas"
+                [ngClass]="getActivityIcon(activity.activityType)">
+              </i>
+
+            </span>
+
+            <div>
+
+              <span class="activity-label">
+                Activity
+              </span>
+
+              <h3>
+                {{ formatActivityType(activity.activityType) }}
+              </h3>
+
+            </div>
+
+          </div>
+
+
+          <!-- DATE / TIME -->
+
+          <div class="activity-time">
+
+            <span class="activity-date">
+
+              <i class="far fa-calendar"></i>
+
+              {{ formatDate(activity.createdAt) }}
+
+            </span>
+
+            <span class="activity-clock">
+
+              <i class="far fa-clock"></i>
+
+              {{ formatTime(activity.createdAt) }}
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             DESCRIPTION
+             ==================================================== -->
+
+        <div
+          class="activity-description"
+          *ngIf="activity.description">
+
+          <div class="description-line"></div>
+
+          <p>
+            {{ activity.description }}
+          </p>
+
+        </div>
+
+
+        <!-- ====================================================
+             PERFORMED BY
+             ==================================================== -->
+
+        <div
+          class="activity-footer"
+          *ngIf="activity.performedByName">
+
+          <div class="performed-user">
+
+            <div class="user-avatar">
+
+              <i class="fas fa-user"></i>
+
+            </div>
+
+            <div class="user-info">
+
+              <span>
+                Performed by
+              </span>
+
+              <strong>
+                {{ activity.performedByName }}
+              </strong>
+
+            </div>
+
+          </div>
+
+          <span class="activity-id">
+
+            #{{ activity.activityId }}
+
+          </span>
+
+        </div>
+
+
+        <!-- ====================================================
+             FALLBACK USER
+             ==================================================== -->
+
+        <div
+          class="activity-footer"
+          *ngIf="!activity.performedByName">
+
+          <div class="performed-user">
+
+            <div class="user-avatar">
+
+              <i class="fas fa-user"></i>
+
+            </div>
+
+            <div class="user-info">
+
+              <span>
+                Performed by
+              </span>
+
+              <strong>
+                System
+              </strong>
+
+            </div>
+
+          </div>
+
+          <span class="activity-id">
+
+            #{{ activity.activityId }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
