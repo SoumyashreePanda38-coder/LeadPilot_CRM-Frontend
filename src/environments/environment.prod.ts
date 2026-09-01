@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://leadpilot-crm-backend.onrender.com'
+  apiUrl: 'https://leadpilot-crm-backend.onrender.com/api'
 };
