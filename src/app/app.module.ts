@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,6 +19,7 @@ import { LayoutModule } from './layout/layout.module';
 
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
 
@@ -51,7 +52,13 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     LayoutModule,
 
     // Routing
-    AppRoutingModule
+    AppRoutingModule,
+     ServiceWorkerModule.register('ngsw-worker.js', {
+       enabled: !isDevMode(),
+       // Register the ServiceWorker as soon as the application is stable
+       // or after 30 seconds (whichever comes first).
+       registrationStrategy: 'registerWhenStable:30000'
+     })
 
   ],
 
