@@ -35,6 +35,11 @@
 
   position: relative;
   overflow: hidden;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -55,6 +60,8 @@
     );
 
   pointer-events: none;
+
+  transition: background 0.35s ease;
 }
 
 
@@ -91,6 +98,11 @@
 
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -332,6 +344,11 @@
   backdrop-filter: blur(16px);
 
   overflow: hidden;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -444,6 +461,11 @@
 
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -484,7 +506,9 @@
 
   transition:
     border 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -659,6 +683,11 @@
 
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -814,7 +843,11 @@
   font-family: inherit;
   font-size: 13px;
 
-  transition: 0.2s ease;
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -879,7 +912,10 @@
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    0.2s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
 
@@ -1163,6 +1199,7 @@
   padding: 0 16px;
 
   border: 0;
+
   border-radius: 10px;
 
   color: white;
@@ -1237,7 +1274,8 @@
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
-    border-color 0.22s ease;
+    border-color 0.22s ease,
+    background 0.35s ease;
 }
 
 
@@ -1373,7 +1411,10 @@
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    0.2s ease,
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -1435,6 +1476,7 @@
 
   -webkit-line-clamp: 5;
   line-clamp: 5;
+
   -webkit-box-orient: vertical;
 
   overflow: hidden;
@@ -1458,6 +1500,7 @@
   padding: 13px 0;
 
   border-top: 1px solid rgba(125,211,252,0.20);
+
   border-bottom: 1px solid rgba(125,211,252,0.20);
 }
 
@@ -1504,7 +1547,9 @@
   font-size: 10px;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
 }
 
@@ -1580,6 +1625,629 @@
 
   font-size: 10px;
   font-weight: 700;
+}
+
+
+/* ==========================================================
+   ==========================================================
+   DARK THEME
+   ==========================================================
+   ========================================================== */
+
+:host-context(body.dark-theme) .notes-container {
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(0, 217, 255, 0.13),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(124, 92, 255, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(0, 169, 212, 0.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #061426,
+      #081d35 48%,
+      #061426
+    );
+
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .notes-container::before {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,217,255,0.04),
+      rgba(124,92,255,0.03)
+    );
+}
+
+
+/* ==========================================================
+   DARK HEADER
+   ========================================================== */
+
+:host-context(body.dark-theme) .notes-header {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(11,37,68,0.88),
+      rgba(8,29,53,0.72)
+    );
+
+  border-color: rgba(0,217,255,0.20);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(0,217,255,0.08);
+}
+
+
+:host-context(body.dark-theme) .section-kicker {
+  color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .header-text h2 {
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .header-text p {
+  color: #9ab6cf;
+}
+
+
+/* ==========================================================
+   DARK STATISTICS
+   ========================================================== */
+
+:host-context(body.dark-theme) .stat-card {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(11,37,68,0.82),
+      rgba(8,29,53,0.68)
+    );
+
+  border-color: rgba(0,217,255,0.18);
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(0,217,255,0.06);
+}
+
+
+:host-context(body.dark-theme) .stat-card::after {
+  background: rgba(0,217,255,0.07);
+}
+
+
+:host-context(body.dark-theme) .total-card .stat-icon,
+:host-context(body.dark-theme) .pinned-card .stat-icon {
+
+  color: #00d9ff;
+
+  background: rgba(0,217,255,0.10);
+}
+
+
+:host-context(body.dark-theme) .important-card .stat-icon {
+
+  color: #fbbf24;
+
+  background: rgba(245,158,11,0.12);
+}
+
+
+:host-context(body.dark-theme) .normal-card .stat-icon {
+
+  color: #a9c4dc;
+
+  background: rgba(169,196,220,0.10);
+}
+
+
+:host-context(body.dark-theme) .stat-content span {
+  color: #7f9bb5;
+}
+
+
+:host-context(body.dark-theme) .stat-content strong {
+  color: #ffffff;
+}
+
+
+/* ==========================================================
+   DARK TOOLBAR
+   ========================================================== */
+
+:host-context(body.dark-theme) .notes-toolbar {
+
+  background:
+    rgba(8,29,53,0.72);
+
+  border-color: rgba(0,217,255,0.18);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.28);
+}
+
+
+/* ==========================================================
+   DARK SEARCH
+   ========================================================== */
+
+:host-context(body.dark-theme) .search-box input {
+
+  background:
+    rgba(6,20,38,0.78);
+
+  border-color: rgba(0,217,255,0.20);
+
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .search-box input::placeholder {
+  color: #6f8ba5;
+}
+
+
+:host-context(body.dark-theme) .search-icon {
+  color: #00c8ee;
+}
+
+
+:host-context(body.dark-theme) .clear-search {
+
+  background: rgba(0,217,255,0.10);
+
+  color: #00d9ff;
+}
+
+
+/* ==========================================================
+   DARK FILTER
+   ========================================================== */
+
+:host-context(body.dark-theme) .filter-box label {
+  color: #a9c4dc;
+}
+
+
+:host-context(body.dark-theme) .filter-box select {
+
+  background:
+    rgba(6,20,38,0.78);
+
+  border-color: rgba(0,217,255,0.20);
+
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .filter-box select option {
+  background: #081d35;
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .clear-filters-btn {
+
+  background:
+    rgba(6,20,38,0.70);
+
+  border-color: rgba(0,217,255,0.20);
+
+  color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .result-count {
+  color: #7f9bb5;
+}
+
+
+:host-context(body.dark-theme) .result-count strong {
+  color: #00d9ff;
+}
+
+
+/* ==========================================================
+   DARK FORM
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-form-card {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(11,37,68,0.90),
+      rgba(8,29,53,0.76)
+    );
+
+  border-color: rgba(0,217,255,0.22);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(0,217,255,0.08);
+}
+
+
+:host-context(body.dark-theme) .form-header {
+  border-bottom-color: rgba(0,217,255,0.14);
+}
+
+
+:host-context(body.dark-theme) .form-title span {
+  color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .form-title h3 {
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .close-form-btn {
+
+  background:
+    rgba(6,20,38,0.65);
+
+  border-color: rgba(0,217,255,0.18);
+
+  color: #a9c4dc;
+}
+
+
+:host-context(body.dark-theme) .form-group label {
+  color: #a9c4dc;
+}
+
+
+:host-context(body.dark-theme) .form-group label span {
+  color: #00d9ff;
+}
+
+
+/* ==========================================================
+   DARK INPUTS
+   ========================================================== */
+
+:host-context(body.dark-theme) .input-wrapper input,
+:host-context(body.dark-theme) .textarea-wrapper textarea {
+
+  background:
+    rgba(6,20,38,0.78);
+
+  border-color: rgba(0,217,255,0.18);
+
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .input-wrapper input::placeholder,
+:host-context(body.dark-theme) .textarea-wrapper textarea::placeholder {
+  color: #68849e;
+}
+
+
+:host-context(body.dark-theme) .input-wrapper > i,
+:host-context(body.dark-theme) .textarea-wrapper > i {
+  color: #00c8ee;
+}
+
+
+/* ==========================================================
+   DARK FLAGS
+   ========================================================== */
+
+:host-context(body.dark-theme) .flag-option {
+
+  background:
+    rgba(6,20,38,0.48);
+
+  border-color: rgba(0,217,255,0.15);
+}
+
+
+:host-context(body.dark-theme) .flag-option:hover,
+:host-context(body.dark-theme) .flag-option.active {
+
+  background:
+    rgba(0,217,255,0.08);
+
+  border-color: rgba(0,217,255,0.35);
+}
+
+
+:host-context(body.dark-theme) .custom-checkbox {
+
+  background:
+    rgba(0,217,255,0.10);
+
+  color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .flag-text strong {
+  color: #dcecff;
+}
+
+
+:host-context(body.dark-theme) .flag-text small {
+  color: #7f9bb5;
+}
+
+
+/* ==========================================================
+   DARK CANCEL
+   ========================================================== */
+
+:host-context(body.dark-theme) .cancel-btn {
+
+  background:
+    rgba(6,20,38,0.65);
+
+  border-color: rgba(0,217,255,0.18);
+
+  color: #a9c4dc;
+}
+
+
+/* ==========================================================
+   DARK LOADING
+   ========================================================== */
+
+:host-context(body.dark-theme) .orbit-ring {
+
+  border-color: rgba(0,217,255,0.12);
+
+  border-top-color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .loading-icon {
+
+  color: #00d9ff;
+
+  background:
+    rgba(6,20,38,0.75);
+}
+
+
+:host-context(body.dark-theme) .loading-state h3 {
+  color: #dcecff;
+}
+
+
+:host-context(body.dark-theme) .loading-state p {
+  color: #7f9bb5;
+}
+
+
+/* ==========================================================
+   DARK EMPTY STATE
+   ========================================================== */
+
+:host-context(body.dark-theme) .empty-icon {
+
+  color: #00d9ff;
+
+  background:
+    rgba(0,217,255,0.10);
+}
+
+
+:host-context(body.dark-theme) .empty-state h3 {
+  color: #dcecff;
+}
+
+
+:host-context(body.dark-theme) .empty-state p {
+  color: #7f9bb5;
+}
+
+
+/* ==========================================================
+   DARK NOTE CARD
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-card {
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(11,37,68,0.88),
+      rgba(8,29,53,0.70)
+    );
+
+  border-color: rgba(0,217,255,0.16);
+
+  box-shadow:
+    0 13px 34px rgba(0,0,0,0.30),
+    inset 0 1px 0 rgba(0,217,255,0.06);
+}
+
+
+:host-context(body.dark-theme) .note-card::before {
+
+  background:
+    linear-gradient(
+      180deg,
+      #00d9ff,
+      #7c5cff
+    );
+}
+
+
+:host-context(body.dark-theme) .note-card:hover {
+
+  border-color: rgba(0,217,255,0.38);
+
+  box-shadow:
+    0 18px 42px rgba(0,0,0,0.40),
+    0 0 24px rgba(0,217,255,0.08);
+}
+
+
+/* ==========================================================
+   DARK NOTE TOP
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-type-icon {
+
+  color: #00d9ff;
+
+  background:
+    rgba(0,217,255,0.10);
+}
+
+
+:host-context(body.dark-theme) .pinned-badge {
+
+  color: #00d9ff;
+
+  background:
+    rgba(0,217,255,0.10);
+}
+
+
+:host-context(body.dark-theme) .important-badge {
+
+  color: #fbbf24;
+
+  background:
+    rgba(245,158,11,0.12);
+}
+
+
+/* ==========================================================
+   DARK NOTE ACTIONS
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-actions button {
+
+  background:
+    rgba(6,20,38,0.55);
+
+  border-color: rgba(0,217,255,0.15);
+
+  color: #8faec8;
+}
+
+
+:host-context(body.dark-theme) .note-actions button:hover {
+
+  color: #00d9ff;
+
+  background:
+    rgba(0,217,255,0.10);
+}
+
+
+/* ==========================================================
+   DARK NOTE CONTENT
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-title {
+  color: #ffffff;
+}
+
+
+:host-context(body.dark-theme) .note-content {
+  color: #9ab6cf;
+}
+
+
+/* ==========================================================
+   DARK META
+   ========================================================== */
+
+:host-context(body.dark-theme) .note-meta {
+
+  border-top-color: rgba(0,217,255,0.12);
+
+  border-bottom-color: rgba(0,217,255,0.12);
+}
+
+
+:host-context(body.dark-theme) .meta-item > i {
+  color: #00c8ee;
+}
+
+
+:host-context(body.dark-theme) .meta-item span {
+  color: #6f8ba5;
+}
+
+
+:host-context(body.dark-theme) .meta-item strong {
+  color: #a9c4dc;
+}
+
+
+/* ==========================================================
+   DARK FOOTER
+   ========================================================== */
+
+:host-context(body.dark-theme) .flag-btn {
+
+  background:
+    rgba(6,20,38,0.50);
+
+  border-color: rgba(0,217,255,0.14);
+
+  color: #8faec8;
+}
+
+
+:host-context(body.dark-theme) .flag-btn:hover {
+
+  background:
+    rgba(0,217,255,0.08);
+
+  color: #00d9ff;
+}
+
+
+:host-context(body.dark-theme) .flag-btn.active {
+
+  color: #00d9ff;
+
+  background:
+    rgba(0,217,255,0.10);
+
+  border-color: rgba(0,217,255,0.25);
+}
+
+
+:host-context(body.dark-theme) .important-toggle.active {
+
+  color: #fbbf24;
+
+  background:
+    rgba(245,158,11,0.12);
+
+  border-color: rgba(245,158,11,0.25);
+}
+
+
+:host-context(body.dark-theme) .note-id {
+  color: #66829b;
 }
 
 

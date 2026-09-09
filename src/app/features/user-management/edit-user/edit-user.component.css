@@ -1,21 +1,26 @@
 /* ==========================================================
    EDIT USER PAGE
    LeadPilot CRM - Navy Blue / White / Cyan Theme
+   Global Theme: Navbar Toggle
+   Initial Theme: LIGHT
    Responsive Design
    ========================================================== */
 
 :host {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .edit-user-page {
-  width: 100%;
-  min-height: calc(100vh - 80px);
-  padding: 28px 32px 40px;
-  background: #f4f8fc;
-  box-sizing: border-box;
-  color: #102a43;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 28px 32px 40px;
+    background: #f4f8fc;
+    box-sizing: border-box;
+    color: #102a43;
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
 }
 
 /* ==========================================================
@@ -23,63 +28,64 @@
    ========================================================== */
 
 .page-header {
-  width: 100%;
-  margin-bottom: 24px;
+    width: 100%;
+    margin-bottom: 24px;
 }
 
 .header-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  height: 42px;
-  padding: 0 16px;
-
-  border: 1px solid #cbdbea;
-  border-radius: 8px;
-
-  background: #ffffff;
-  color: #12355b;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 16px;
+    border: 1px solid #cbdbea;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #12355b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    white-space: nowrap;
 }
 
 .back-button:hover {
-  background: #eafaff;
-  border-color: #08b9d5;
-  color: #008da7;
-  transform: translateX(-2px);
+    background: #eafaff;
+    border-color: #08b9d5;
+    color: #008da7;
+    transform: translateX(-2px);
 }
 
 .back-icon {
-  font-size: 20px;
-  line-height: 1;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .header-title h2 {
-  margin: 0;
-  color: #0d2b4f;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.2;
+    margin: 0;
+    color: #0d2b4f;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color 0.35s ease;
 }
 
 .header-title p {
-  margin: 6px 0 0;
-  color: #71849a;
-  font-size: 14px;
+    margin: 6px 0 0;
+    color: #71849a;
+    font-size: 14px;
+    transition: color 0.35s ease;
 }
 
 /* ==========================================================
@@ -87,42 +93,42 @@
    ========================================================== */
 
 .loading-container {
-  width: 100%;
-  min-height: 300px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background: #ffffff;
-  border: 1px solid #dbe6f0;
-  border-radius: 14px;
-
-  box-shadow: 0 4px 18px rgba(13, 43, 79, 0.06);
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #dbe6f0;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(13, 43, 79, 0.06);
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .loader {
-  width: 42px;
-  height: 42px;
-
-  border: 4px solid #dceaf2;
-  border-top-color: #08b9d5;
-  border-radius: 50%;
-
-  animation: spin 0.8s linear infinite;
+    width: 42px;
+    height: 42px;
+    border: 4px solid #dceaf2;
+    border-top-color: #08b9d5;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
 .loading-container p {
-  margin-top: 14px;
-  color: #70849a;
-  font-size: 14px;
+    margin-top: 14px;
+    color: #70849a;
+    font-size: 14px;
+    transition: color 0.35s ease;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ==========================================================
@@ -130,18 +136,18 @@
    ========================================================== */
 
 .form-card {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-
-  background: #ffffff;
-
-  border: 1px solid #dce7f0;
-  border-radius: 16px;
-
-  box-shadow: 0 8px 30px rgba(13, 43, 79, 0.08);
-
-  overflow: hidden;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #dce7f0;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(13, 43, 79, 0.08);
+    overflow: hidden;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 /* ==========================================================
@@ -149,51 +155,42 @@
    ========================================================== */
 
 .card-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  padding: 24px 28px;
-
-  background: linear-gradient(
-    135deg,
-    #09294b,
-    #123f6b
-  );
-
-  color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px;
+    background: linear-gradient(
+        135deg,
+        #09294b,
+        #123f6b
+    );
+    color: #ffffff;
+    transition: background 0.35s ease;
 }
 
 .card-icon {
-  width: 50px;
-  height: 50px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 12px;
-
-  background: rgba(8, 185, 213, 0.18);
-  border: 1px solid rgba(8, 185, 213, 0.45);
-
-  color: #55e8ff;
-
-  font-size: 25px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(8, 185, 213, 0.18);
+    border: 1px solid rgba(8, 185, 213, 0.45);
+    color: #55e8ff;
+    font-size: 25px;
 }
 
 .card-header h3 {
-  margin: 0;
-
-  font-size: 19px;
-  font-weight: 700;
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
 }
 
 .card-header p {
-  margin: 5px 0 0;
-
-  color: #b9d1e6;
-  font-size: 13px;
+    margin: 5px 0 0;
+    color: #b9d1e6;
+    font-size: 13px;
 }
 
 /* ==========================================================
@@ -201,55 +198,52 @@
    ========================================================== */
 
 .message {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin: 20px 28px 0;
-  padding: 13px 16px;
-
-  border-radius: 8px;
-
-  font-size: 14px;
-  line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 28px 0;
+    padding: 13px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
 }
 
 .message-icon {
-  width: 22px;
-  height: 22px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  font-size: 12px;
-  font-weight: 700;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .success-message {
-  color: #087f68;
-  background: #e9fbf6;
-  border: 1px solid #a9eadb;
+    color: #087f68;
+    background: #e9fbf6;
+    border: 1px solid #a9eadb;
 }
 
 .success-message .message-icon {
-  background: #0bbf9a;
-  color: #ffffff;
+    background: #0bbf9a;
+    color: #ffffff;
 }
 
 .error-message {
-  color: #b42335;
-  background: #fff1f3;
-  border: 1px solid #f5b8c0;
+    color: #b42335;
+    background: #fff1f3;
+    border: 1px solid #f5b8c0;
 }
 
 .error-message .message-icon {
-  background: #e53952;
-  color: #ffffff;
+    background: #e53952;
+    color: #ffffff;
 }
 
 /* ==========================================================
@@ -257,7 +251,7 @@
    ========================================================== */
 
 form {
-  padding: 28px;
+    padding: 28px;
 }
 
 /* ==========================================================
@@ -265,33 +259,29 @@ form {
    ========================================================== */
 
 .section-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  margin: 8px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 20px;
 }
 
 .section-line {
-  width: 4px;
-  height: 24px;
-
-  border-radius: 4px;
-
-  background: #08b9d5;
+    width: 4px;
+    height: 24px;
+    border-radius: 4px;
+    background: #08b9d5;
 }
 
 .section-title h4 {
-  margin: 0;
-
-  color: #12355b;
-
-  font-size: 16px;
-  font-weight: 700;
+    margin: 0;
+    color: #12355b;
+    font-size: 16px;
+    font-weight: 700;
+    transition: color 0.35s ease;
 }
 
 .password-section-title {
-  margin-top: 34px;
+    margin-top: 34px;
 }
 
 /* ==========================================================
@@ -299,12 +289,10 @@ form {
    ========================================================== */
 
 .form-grid {
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  column-gap: 24px;
-  row-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 20px;
 }
 
 /* ==========================================================
@@ -312,23 +300,22 @@ form {
    ========================================================== */
 
 .form-group {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group label {
-  margin-bottom: 7px;
-
-  color: #274c70;
-
-  font-size: 13px;
-  font-weight: 600;
+    margin-bottom: 7px;
+    color: #274c70;
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 0.35s ease;
 }
 
 .required {
-  margin-left: 3px;
-  color: #e63950;
+    margin-left: 3px;
+    color: #e63950;
 }
 
 /* ==========================================================
@@ -336,44 +323,36 @@ form {
    ========================================================== */
 
 .form-group input {
-  width: 100%;
-  height: 44px;
-
-  padding: 0 13px;
-
-  box-sizing: border-box;
-
-  border: 1px solid #cbd9e7;
-  border-radius: 8px;
-
-  background: #ffffff;
-
-  color: #163b61;
-
-  font-family: inherit;
-  font-size: 14px;
-
-  outline: none;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    width: 100%;
+    height: 44px;
+    padding: 0 13px;
+    box-sizing: border-box;
+    border: 1px solid #cbd9e7;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #163b61;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .form-group input::placeholder {
-  color: #9aabba;
+    color: #9aabba;
 }
 
 .form-group input:focus {
-  border-color: #08b9d5;
-
-  box-shadow:
-    0 0 0 3px rgba(8, 185, 213, 0.12);
+    border-color: #08b9d5;
+    box-shadow:
+        0 0 0 3px rgba(8, 185, 213, 0.12);
 }
 
 .form-group input:hover:not(:focus) {
-  border-color: #9db5ca;
+    border-color: #9db5ca;
 }
 
 /* ==========================================================
@@ -381,9 +360,9 @@ form {
    ========================================================== */
 
 .readonly-input {
-  background: #eef4f8 !important;
-  color: #667f96 !important;
-  cursor: not-allowed;
+    background: #eef4f8 !important;
+    color: #667f96 !important;
+    cursor: not-allowed;
 }
 
 /* ==========================================================
@@ -391,12 +370,11 @@ form {
    ========================================================== */
 
 .field-info {
-  margin-top: 6px;
-
-  color: #8295a8;
-
-  font-size: 11px;
-  line-height: 1.4;
+    margin-top: 6px;
+    color: #8295a8;
+    font-size: 11px;
+    line-height: 1.4;
+    transition: color 0.35s ease;
 }
 
 /* ==========================================================
@@ -404,12 +382,10 @@ form {
    ========================================================== */
 
 .field-error {
-  margin-top: 6px;
-
-  color: #d7354b;
-
-  font-size: 11px;
-  line-height: 1.4;
+    margin-top: 6px;
+    color: #d7354b;
+    font-size: 11px;
+    line-height: 1.4;
 }
 
 /* ==========================================================
@@ -417,39 +393,34 @@ form {
    ========================================================== */
 
 .password-grid {
-  margin-top: 4px;
+    margin-top: 4px;
 }
 
 .password-wrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .password-wrapper input {
-  padding-right: 70px;
+    padding-right: 70px;
 }
 
 .password-toggle {
-  position: absolute;
-
-  top: 50%;
-  right: 9px;
-
-  transform: translateY(-50%);
-
-  border: none;
-  background: transparent;
-
-  color: #009bb7;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 9px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #009bb7;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .password-toggle:hover {
-  color: #006f83;
+    color: #006f83;
 }
 
 /* ==========================================================
@@ -457,42 +428,35 @@ form {
    ========================================================== */
 
 .password-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-
-  margin: 0 0 20px;
-
-  padding: 12px 14px;
-
-  border: 1px solid #bdebf2;
-  border-radius: 8px;
-
-  background: #effcff;
-
-  color: #346277;
-
-  font-size: 12px;
-  line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #bdebf2;
+    border-radius: 8px;
+    background: #effcff;
+    color: #346277;
+    font-size: 12px;
+    line-height: 1.5;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
 }
 
 .info-icon {
-  width: 20px;
-  height: 20px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #08b9d5;
-  color: #ffffff;
-
-  font-size: 12px;
-  font-weight: 700;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #08b9d5;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 /* ==========================================================
@@ -500,79 +464,71 @@ form {
    ========================================================== */
 
 .account-info {
-  margin-top: 34px;
-
-  padding: 20px;
-
-  border: 1px solid #d8e5ef;
-  border-radius: 10px;
-
-  background: #f8fbfd;
+    margin-top: 34px;
+    padding: 20px;
+    border: 1px solid #d8e5ef;
+    border-radius: 10px;
+    background: #f8fbfd;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease;
 }
 
 .account-info-header {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
 }
 
 .account-icon {
-  color: #08b9d5;
-  font-size: 14px;
+    color: #08b9d5;
+    font-size: 14px;
 }
 
 .account-info-header h4 {
-  margin: 0;
-
-  color: #12355b;
-
-  font-size: 15px;
-  font-weight: 700;
+    margin: 0;
+    color: #12355b;
+    font-size: 15px;
+    font-weight: 700;
+    transition: color 0.35s ease;
 }
 
 .account-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-
-  gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .account-item {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-
-  padding: 13px;
-
-  border-radius: 8px;
-
-  background: #ffffff;
-
-  border: 1px solid #e1eaf1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 13px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e1eaf1;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease;
 }
 
 .account-label {
-  color: #7a8fa4;
-
-  font-size: 11px;
-  font-weight: 600;
-
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+    color: #7a8fa4;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: color 0.35s ease;
 }
 
 .account-value {
-  color: #183e63;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  word-break: break-word;
+    color: #183e63;
+    font-size: 13px;
+    font-weight: 600;
+    word-break: break-word;
+    transition: color 0.35s ease;
 }
 
 /* ==========================================================
@@ -580,30 +536,27 @@ form {
    ========================================================== */
 
 .role-badge {
-  color: #086a91;
+    color: #086a91;
 }
 
 .status-badge {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-
-  padding: 4px 9px;
-
-  border-radius: 20px;
-
-  font-size: 10px;
-  font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .status-badge.active {
-  color: #07836d;
-  background: #e5faf5;
+    color: #07836d;
+    background: #e5faf5;
 }
 
 .status-badge.inactive {
-  color: #c83246;
-  background: #fff0f2;
+    color: #c83246;
+    background: #fff0f2;
 }
 
 /* ==========================================================
@@ -611,71 +564,63 @@ form {
    ========================================================== */
 
 .form-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-
-  margin-top: 32px;
-  padding-top: 22px;
-
-  border-top: 1px solid #e1eaf1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid #e1eaf1;
+    transition: border-color 0.35s ease;
 }
 
 .btn {
-  min-width: 125px;
-  height: 44px;
-
-  padding: 0 20px;
-
-  border-radius: 8px;
-
-  font-family: inherit;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    min-width: 125px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .btn-secondary {
-  border: 1px solid #c6d6e4;
-  background: #ffffff;
-  color: #385873;
+    border: 1px solid #c6d6e4;
+    background: #ffffff;
+    color: #385873;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  border-color: #8da8bd;
-  background: #f3f7fa;
+    border-color: #8da8bd;
+    background: #f3f7fa;
 }
 
 .btn-primary {
-  border: 1px solid #08b9d5;
-  background: #08b9d5;
-  color: #ffffff;
-
-  box-shadow: 0 4px 12px rgba(8, 185, 213, 0.2);
+    border: 1px solid #08b9d5;
+    background: #08b9d5;
+    color: #ffffff;
+    box-shadow:
+        0 4px 12px rgba(8, 185, 213, 0.2);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #009fb9;
-  border-color: #009fb9;
-
-  transform: translateY(-1px);
-
-  box-shadow: 0 6px 16px rgba(8, 185, 213, 0.28);
+    background: #009fb9;
+    border-color: #009fb9;
+    transform: translateY(-1px);
+    box-shadow:
+        0 6px 16px rgba(8, 185, 213, 0.28);
 }
 
 /* ==========================================================
@@ -683,21 +628,342 @@ form {
    ========================================================== */
 
 .button-loader {
-  display: inline-block;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    vertical-align: -2px;
+    animation: spin 0.7s linear infinite;
+}
 
-  width: 14px;
-  height: 14px;
+/* ==========================================================
+   ==========================================================
+   DARK THEME
+   Activated by Navbar Theme Toggle
+   ==========================================================
+   ========================================================== */
 
-  margin-right: 7px;
+:host-context(body.dark-theme) .edit-user-page {
+    background:
+        linear-gradient(
+            180deg,
+            #061426 0%,
+            #071a2f 50%,
+            #061426 100%
+        );
+    color: #ffffff;
+}
 
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #ffffff;
+/* ==========================================================
+   DARK - PAGE HEADER
+   ========================================================== */
 
-  border-radius: 50%;
+:host-context(body.dark-theme) .back-button {
+    border-color: rgba(0, 217, 255, 0.18);
+    background: #0b2544;
+    color: #c7d9eb;
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.18);
+}
 
-  vertical-align: -2px;
+:host-context(body.dark-theme) .back-button:hover {
+    border-color: #00d9ff;
+    background: #0f3157;
+    color: #00d9ff;
+}
 
-  animation: spin 0.7s linear infinite;
+:host-context(body.dark-theme) .header-title h2 {
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .header-title p {
+    color: #9db7cf;
+}
+
+/* ==========================================================
+   DARK - LOADING
+   ========================================================== */
+
+:host-context(body.dark-theme) .loading-container {
+    background: #0b2544;
+    border-color: rgba(0, 217, 255, 0.14);
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+:host-context(body.dark-theme) .loader {
+    border-color: rgba(0, 217, 255, 0.15);
+    border-top-color: #00d9ff;
+}
+
+:host-context(body.dark-theme) .loading-container p {
+    color: #8fa9c1;
+}
+
+/* ==========================================================
+   DARK - FORM CARD
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11, 37, 68, 0.98),
+            rgba(7, 28, 54, 0.98)
+        );
+    border-color: rgba(0, 217, 255, 0.14);
+    box-shadow:
+        0 12px 38px rgba(0, 0, 0, 0.30),
+        inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+/* ==========================================================
+   DARK - CARD HEADER
+   ========================================================== */
+
+:host-context(body.dark-theme) .card-header {
+    background:
+        linear-gradient(
+            135deg,
+            #071c36,
+            #0b3155
+        );
+}
+
+:host-context(body.dark-theme) .card-icon {
+    background: rgba(0, 217, 255, 0.10);
+    border-color: rgba(0, 217, 255, 0.28);
+    color: #55e8ff;
+}
+
+:host-context(body.dark-theme) .card-header p {
+    color: #9ebbd4;
+}
+
+/* ==========================================================
+   DARK - MESSAGES
+   ========================================================== */
+
+:host-context(body.dark-theme) .success-message {
+    color: #6ee7c8;
+    background: rgba(16, 185, 129, 0.10);
+    border-color: rgba(16, 185, 129, 0.28);
+}
+
+:host-context(body.dark-theme) .success-message .message-icon {
+    background: #059669;
+}
+
+:host-context(body.dark-theme) .error-message {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.28);
+}
+
+:host-context(body.dark-theme) .error-message .message-icon {
+    background: #dc2626;
+}
+
+/* ==========================================================
+   DARK - SECTION TITLES
+   ========================================================== */
+
+:host-context(body.dark-theme) .section-line {
+    background: #00d9ff;
+    box-shadow:
+        0 0 10px rgba(0, 217, 255, 0.25);
+}
+
+:host-context(body.dark-theme) .section-title h4 {
+    color: #ffffff;
+}
+
+/* ==========================================================
+   DARK - LABELS
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-group label {
+    color: #c5d7e8;
+}
+
+:host-context(body.dark-theme) .required {
+    color: #ff7185;
+}
+
+/* ==========================================================
+   DARK - INPUTS
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-group input {
+    border-color: rgba(0, 217, 255, 0.16);
+    background: #081d35;
+    color: #ffffff;
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.015);
+}
+
+:host-context(body.dark-theme) .form-group input::placeholder {
+    color: #718aa3;
+}
+
+:host-context(body.dark-theme) .form-group input:hover:not(:focus) {
+    border-color: rgba(0, 217, 255, 0.30);
+    background: #0a2340;
+}
+
+:host-context(body.dark-theme) .form-group input:focus {
+    border-color: #00d9ff;
+    background: #081d35;
+    color: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(0, 217, 255, 0.10),
+        0 0 18px rgba(0, 217, 255, 0.06);
+}
+
+/* ==========================================================
+   DARK - READONLY
+   ========================================================== */
+
+:host-context(body.dark-theme) .readonly-input {
+    background: #102d4b !important;
+    color: #7895ae !important;
+    border-color: rgba(0, 217, 255, 0.10) !important;
+}
+
+/* ==========================================================
+   DARK - FIELD INFORMATION
+   ========================================================== */
+
+:host-context(body.dark-theme) .field-info {
+    color: #7893ac;
+}
+
+:host-context(body.dark-theme) .field-error {
+    color: #fca5a5;
+}
+
+/* ==========================================================
+   DARK - PASSWORD
+   ========================================================== */
+
+:host-context(body.dark-theme) .password-toggle {
+    color: #22d3ee;
+}
+
+:host-context(body.dark-theme) .password-toggle:hover {
+    color: #67e8f9;
+}
+
+/* ==========================================================
+   DARK - PASSWORD INFORMATION
+   ========================================================== */
+
+:host-context(body.dark-theme) .password-info {
+    border-color: rgba(0, 217, 255, 0.20);
+    background: rgba(0, 217, 255, 0.07);
+    color: #9db9cf;
+}
+
+:host-context(body.dark-theme) .info-icon {
+    background: #00a9c7;
+    color: #031521;
+}
+
+/* ==========================================================
+   DARK - ACCOUNT INFORMATION
+   ========================================================== */
+
+:host-context(body.dark-theme) .account-info {
+    border-color: rgba(0, 217, 255, 0.14);
+    background: rgba(8, 29, 53, 0.75);
+}
+
+:host-context(body.dark-theme) .account-info-header h4 {
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .account-icon {
+    color: #00d9ff;
+}
+
+:host-context(body.dark-theme) .account-item {
+    background: #0b2544;
+    border-color: rgba(0, 217, 255, 0.12);
+}
+
+:host-context(body.dark-theme) .account-label {
+    color: #7893ac;
+}
+
+:host-context(body.dark-theme) .account-value {
+    color: #d5e5f2;
+}
+
+/* ==========================================================
+   DARK - BADGES
+   ========================================================== */
+
+:host-context(body.dark-theme) .role-badge {
+    color: #67e8f9;
+}
+
+:host-context(body.dark-theme) .status-badge.active {
+    color: #6ee7c8;
+    background: rgba(16, 185, 129, 0.14);
+}
+
+:host-context(body.dark-theme) .status-badge.inactive {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.14);
+}
+
+/* ==========================================================
+   DARK - FORM ACTIONS
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-actions {
+    border-top-color: rgba(0, 217, 255, 0.14);
+}
+
+:host-context(body.dark-theme) .btn-secondary {
+    border-color: rgba(0, 217, 255, 0.18);
+    background: #0b2544;
+    color: #c5d8e9;
+}
+
+:host-context(body.dark-theme) .btn-secondary:hover:not(:disabled) {
+    border-color: rgba(0, 217, 255, 0.38);
+    background: #0f3157;
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .btn-primary {
+    border-color: #00b8d9;
+    background:
+        linear-gradient(
+            135deg,
+            #00b8d9,
+            #009bb8
+        );
+    color: #031522;
+    box-shadow:
+        0 6px 18px rgba(0, 217, 255, 0.16);
+}
+
+:host-context(body.dark-theme) .btn-primary:hover:not(:disabled) {
+    border-color: #22d3ee;
+    background:
+        linear-gradient(
+            135deg,
+            #22d3ee,
+            #00a9c7
+        );
+    color: #031522;
+    box-shadow:
+        0 8px 24px rgba(0, 217, 255, 0.24);
 }
 
 /* ==========================================================
@@ -706,17 +972,20 @@ form {
 
 @media (max-width: 900px) {
 
-  .edit-user-page {
-    padding: 22px 20px 35px;
-  }
+    .edit-user-page {
+        padding: 22px 20px 35px;
+    }
 
-  .form-card {
-    max-width: 100%;
-  }
+    .form-card {
+        max-width: 100%;
+    }
 
-  .account-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    .account-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
 }
 
 /* ==========================================================
@@ -725,80 +994,80 @@ form {
 
 @media (max-width: 700px) {
 
-  .edit-user-page {
-    padding: 16px 12px 28px;
-  }
+    .edit-user-page {
+        padding: 16px 12px 28px;
+    }
 
-  .header-left {
-    align-items: flex-start;
-    gap: 12px;
-  }
+    .header-left {
+        align-items: flex-start;
+        gap: 12px;
+    }
 
-  .back-button {
-    height: 40px;
-    padding: 0 11px;
-  }
+    .back-button {
+        height: 40px;
+        padding: 0 11px;
+    }
 
-  .back-button span:last-child {
-    display: none;
-  }
+    .back-button span:last-child {
+        display: none;
+    }
 
-  .back-icon {
-    font-size: 20px;
-  }
+    .back-icon {
+        font-size: 20px;
+    }
 
-  .header-title h2 {
-    font-size: 22px;
-  }
+    .header-title h2 {
+        font-size: 22px;
+    }
 
-  .header-title p {
-    font-size: 12px;
-  }
+    .header-title p {
+        font-size: 12px;
+    }
 
-  .card-header {
-    padding: 18px;
-  }
+    .card-header {
+        padding: 18px;
+    }
 
-  .card-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 21px;
-  }
+    .card-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 21px;
+    }
 
-  .card-header h3 {
-    font-size: 16px;
-  }
+    .card-header h3 {
+        font-size: 16px;
+    }
 
-  .card-header p {
-    font-size: 11px;
-  }
+    .card-header p {
+        font-size: 11px;
+    }
 
-  form {
-    padding: 20px 16px;
-  }
+    form {
+        padding: 20px 16px;
+    }
 
-  .form-grid {
-    grid-template-columns: 1fr;
-    row-gap: 17px;
-  }
+    .form-grid {
+        grid-template-columns: 1fr;
+        row-gap: 17px;
+    }
 
-  .account-grid {
-    grid-template-columns: 1fr;
-  }
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .message {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
+    .message {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
 
-  .form-actions {
-    flex-direction: column-reverse;
-    align-items: stretch;
-  }
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
 
-  .btn {
-    width: 100%;
-  }
+    .btn {
+        width: 100%;
+    }
 }
 
 /* ==========================================================
@@ -807,46 +1076,46 @@ form {
 
 @media (max-width: 420px) {
 
-  .edit-user-page {
-    padding: 12px 8px 24px;
-  }
+    .edit-user-page {
+        padding: 12px 8px 24px;
+    }
 
-  .header-title h2 {
-    font-size: 19px;
-  }
+    .header-title h2 {
+        font-size: 19px;
+    }
 
-  .header-title p {
-    font-size: 11px;
-  }
+    .header-title p {
+        font-size: 11px;
+    }
 
-  .card-header {
-    gap: 11px;
-    padding: 15px;
-  }
+    .card-header {
+        gap: 11px;
+        padding: 15px;
+    }
 
-  .card-icon {
-    width: 38px;
-    height: 38px;
-  }
+    .card-icon {
+        width: 38px;
+        height: 38px;
+    }
 
-  form {
-    padding: 17px 12px;
-  }
+    form {
+        padding: 17px 12px;
+    }
 
-  .section-title h4 {
-    font-size: 14px;
-  }
+    .section-title h4 {
+        font-size: 14px;
+    }
 
-  .form-group input {
-    height: 42px;
-    font-size: 13px;
-  }
+    .form-group input {
+        height: 42px;
+        font-size: 13px;
+    }
 
-  .account-info {
-    padding: 14px;
-  }
+    .account-info {
+        padding: 14px;
+    }
 
-  .account-item {
-    padding: 11px;
-  }
+    .account-item {
+        padding: 11px;
+    }
 }

@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 
+import { ThemeService } from '../../../core/services/theme.service';
+
+
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
@@ -16,21 +19,27 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class AdminNavbarComponent implements OnInit {
 
+
   // =========================================================
-  // Output Events
+  // Sidebar
   // =========================================================
 
-  /**
-   * Toggle Drawer Sidebar
-   */
   @Output()
   sidebarToggle = new EventEmitter<void>();
+
 
   // =========================================================
   // Theme
   // =========================================================
 
-  isDarkTheme: boolean = true;
+  /*
+   * false = Light
+   * true  = Dark
+   *
+   * Default application theme is LIGHT.
+   */
+  isDarkTheme: boolean = false;
+
 
   // =========================================================
   // Logged-in User
@@ -42,11 +51,13 @@ export class AdminNavbarComponent implements OnInit {
 
   profileImage: string = '';
 
+
   // =========================================================
   // Greeting
   // =========================================================
 
   greeting: string = '';
+
 
   // =========================================================
   // Search
@@ -54,16 +65,24 @@ export class AdminNavbarComponent implements OnInit {
 
   searchText: string = '';
 
+
   // =========================================================
   // Notifications
   // =========================================================
 
   notificationCount: number = 3;
 
+
+  // =========================================================
+  // Constructor
+  // =========================================================
+
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private themeService: ThemeService
+  ) {}
+
 
   // =========================================================
   // Angular Lifecycle
@@ -71,180 +90,375 @@ export class AdminNavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadTheme();
+    /*
+     * Get the current GLOBAL theme.
+     *
+     * ThemeService is responsible for applying
+     * light-theme / dark-theme to <body>.
+     */
+    this.isDarkTheme =
+      this.themeService.isDarkTheme();
+
 
     this.loadUser();
 
     this.setGreeting();
-
   }
 
+
   // =========================================================
-  // Theme
+  // GLOBAL THEME
   // =========================================================
 
-  /**
-   * Load Saved Theme
-   */
-  loadTheme(): void {
-
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'light') {
-
-      this.isDarkTheme = false;
-
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
-
-    } else {
-
-      this.isDarkTheme = true;
-
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-
-    }
-
-  }
-
-  /**
-   * Toggle Theme
-   */
   toggleTheme(): void {
 
-    this.isDarkTheme = !this.isDarkTheme;
+    /*
+     * The navbar does NOT directly manipulate
+     * document.body anymore.
+     *
+     * ThemeService controls the entire application.
+     */
+    this.themeService.toggleTheme();
 
-    if (this.isDarkTheme) {
 
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-
-      localStorage.setItem('theme', 'dark');
-
-    } else {
-
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
-
-      localStorage.setItem('theme', 'light');
-
-    }
-
+    /*
+     * Update navbar icon.
+     */
+    this.isDarkTheme =
+      this.themeService.isDarkTheme();
   }
+
 
   // =========================================================
   // User
   // =========================================================
 
-  /**
-   * Load Logged-in User
-   */
   loadUser(): void {
 
-    const user = localStorage.getItem('user');
+    const user =
+      localStorage.getItem('user');
 
-    if (user) {
 
-      const data = JSON.parse(user);
+    if (!user) {
 
-      this.userName = data.fullName ?? '';
-
-      this.role = data.role ?? '';
-
-      this.profileImage = data.profileImage ?? '';
-
+      return;
     }
 
+
+    try {
+
+      const data =
+        JSON.parse(user);
+
+
+      this.userName =
+        data.fullName ?? '';
+
+
+      this.role =
+        data.role ?? '';
+
+
+      this.profileImage =
+        data.profileImage ?? '';
+
+
+    } catch (error) {
+
+      console.error(
+        'Unable to load logged-in user:',
+        error
+      );
+
+    }
   }
 
-  /**
-   * Greeting Message
-   */
+
+  // =========================================================
+  // Greeting
+  // =========================================================
+
   setGreeting(): void {
 
-    const hour = new Date().getHours();
+    const hour =
+      new Date().getHours();
+
 
     if (hour < 12) {
 
-      this.greeting = 'Good Morning';
+      this.greeting =
+        'Good Morning';
 
     } else if (hour < 17) {
 
-      this.greeting = 'Good Afternoon';
+      this.greeting =
+        'Good Afternoon';
 
     } else {
 
-      this.greeting = 'Good Evening';
-
+      this.greeting =
+        'Good Evening';
     }
-
   }
 
+
   // =========================================================
-  // Drawer Sidebar
+  // Sidebar
   // =========================================================
 
-  /**
-   * Open / Close Drawer Sidebar
-   */
   toggleSidebar(): void {
 
     this.sidebarToggle.emit();
-
   }
 
+
   // =========================================================
-  // Search
+  // SEARCH
   // =========================================================
 
-  /**
-   * Global Search
-   */
   search(): void {
 
-    console.log('Searching:', this.searchText);
+    const search =
+      this.searchText.trim();
 
-    // Future:
-    // Connect Global Search API
 
+    const value =
+      search.toLowerCase();
+
+
+    /*
+     * Do nothing when search box is empty.
+     */
+    if (!search) {
+
+      return;
+    }
+
+
+    // =======================================================
+    // LEAD CATEGORY
+    // =======================================================
+
+    if (
+      value.includes('lead category') ||
+      value.includes('lead categories') ||
+      value === 'category' ||
+      value === 'categories'
+    ) {
+
+      this.router.navigate(
+        ['/admin/lead-configuration/category'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // LEAD SUBCATEGORY
+    // =======================================================
+
+    if (
+      value.includes('lead subcategory') ||
+      value.includes('lead subcategories') ||
+      value === 'subcategory' ||
+      value === 'subcategories'
+    ) {
+
+      this.router.navigate(
+        ['/admin/lead-configuration/subcategory'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // LEAD SOURCE
+    // =======================================================
+
+    if (
+      value.includes('lead source') ||
+      value.includes('lead sources') ||
+      value === 'source' ||
+      value === 'sources'
+    ) {
+
+      this.router.navigate(
+        ['/admin/lead-configuration/source'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // FOLLOW UPS
+    // =======================================================
+
+    if (
+      value.includes('followup') ||
+      value.includes('follow-up') ||
+      value.includes('follow up') ||
+      value.includes('followups') ||
+      value.includes('follow-ups')
+    ) {
+
+      this.router.navigate(
+        ['/admin/followups'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // REMINDERS
+    // =======================================================
+
+    if (
+      value.includes('reminder') ||
+      value.includes('reminders')
+    ) {
+
+      this.router.navigate(
+        ['/admin/reminders']
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // PROFILE
+    // =======================================================
+
+    if (
+      value.includes('my profile') ||
+      value.includes('profile')
+    ) {
+
+      this.router.navigate(
+        ['/admin/profile']
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // EXECUTIVE MANAGEMENT
+    // =======================================================
+
+    if (
+      value.includes('executive management') ||
+      value.includes('executive') ||
+      value.includes('executives') ||
+      value.includes('employee') ||
+      value.includes('employees') ||
+      value.includes('user') ||
+      value.includes('users')
+    ) {
+
+      this.router.navigate(
+        ['/admin/users'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // SETTINGS
+    // =======================================================
+
+    if (
+      value.includes('setting') ||
+      value.includes('settings') ||
+      value.includes('configuration settings')
+    ) {
+
+      this.router.navigate(
+        ['/admin/settings']
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // CUSTOMER LEADS
+    // =======================================================
+
+    if (
+      value.includes('customer lead') ||
+      value.includes('customer leads') ||
+      value === 'lead' ||
+      value === 'leads' ||
+      value === 'customer'
+    ) {
+
+      this.router.navigate(
+        ['/admin/leads'],
+        {
+          queryParams: {
+            search: search
+          }
+        }
+      );
+
+      return;
+    }
+
+
+    // =======================================================
+    // DEFAULT SEARCH
+    // =======================================================
+
+    /*
+     * If the search term does not match any
+     * specific section, search inside Customer Leads.
+     */
+    this.router.navigate(
+      ['/admin/leads'],
+      {
+        queryParams: {
+          search: search
+        }
+      }
+    );
   }
 
-  // =========================================================
-  // Notifications
-  // =========================================================
-
-  /**
-   * Open Notification Panel
-   */
-  openNotifications(): void {
-
-    console.log('Notifications Clicked');
-
-  }
-
-  // =========================================================
-  // Profile
-  // =========================================================
-
-  /**
-   * Navigate to Profile
-   */
-  openProfile(): void {
-
-    this.router.navigate([
-      '/admin/profile'
-    ]);
-
-  }
 
   // =========================================================
   // Logout
   // =========================================================
 
-  /**
-   * Logout User
-   */
   logout(): void {
 
     this.authService.logout().subscribe({
@@ -253,9 +467,9 @@ export class AdminNavbarComponent implements OnInit {
 
         localStorage.removeItem('user');
 
-        this.router.navigate([
-          '/auth/login'
-        ]);
+        this.router.navigate(
+          ['/auth/login']
+        );
 
       },
 
@@ -263,14 +477,13 @@ export class AdminNavbarComponent implements OnInit {
 
         localStorage.removeItem('user');
 
-        this.router.navigate([
-          '/auth/login'
-        ]);
+        this.router.navigate(
+          ['/auth/login']
+        );
 
       }
 
     });
-
   }
 
 }

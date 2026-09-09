@@ -1,10 +1,54 @@
 /* ==========================================================
+   EDIT FOLLOW-UP
+   GLOBAL NAVBAR THEME SUPPORT
+   DARK • LIGHT • VIOLET • CYAN
+   ========================================================== */
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+
+  /* ---------- DARK DEFAULT VARIABLES ---------- */
+  --page-bg: #0b0b16;
+  --page-text: #f4f2ff;
+
+  --card-bg-start: rgba(30, 28, 52, 0.92);
+  --card-bg-end: rgba(18, 18, 34, 0.96);
+
+  --text-primary: #f4f2ff;
+  --text-secondary: #d8d5e8;
+  --text-muted: #9290a8;
+  --text-soft: #87859c;
+
+  --border: rgba(255, 255, 255, 0.09);
+  --border-soft: rgba(255, 255, 255, 0.07);
+
+  --input-bg: rgba(8, 8, 20, 0.72);
+  --input-focus-bg: rgba(13, 12, 29, 0.95);
+
+  --button-secondary-bg: rgba(255, 255, 255, 0.06);
+  --button-secondary-hover: rgba(255, 255, 255, 0.10);
+
+  --select-option-bg: #171528;
+
+  --shadow-card:
+    0 15px 45px rgba(0, 0, 0, 0.25);
+
+  --primary-violet: #6845ff;
+  --primary-cyan: #00cfff;
+}
+
+
+/* ==========================================================
    PAGE
    ========================================================== */
 
 .edit-follow-up-page {
   min-height: 100vh;
   padding: 28px;
+
   background:
     radial-gradient(
       circle at top right,
@@ -16,14 +60,14 @@
       rgba(0, 210, 255, 0.08),
       transparent 30%
     ),
-    #0b0b16;
+    var(--page-bg);
 
-  color: #f4f2ff;
+  color: var(--page-text);
+  font-family: inherit;
 
-  font-family:
-    'Poppins',
-    'Segoe UI',
-    sans-serif;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -46,32 +90,31 @@
   align-items: center;
   gap: 8px;
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
-
+  border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.05);
 
-  color: #ddd9f5;
+  color: var(--text-secondary);
 
   padding: 10px 16px;
-
-  border-radius: 10px;
+  border-radius: 14px;
 
   font-size: 14px;
-
   cursor: pointer;
 
   transition:
-    0.25s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .back-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.10);
 
   border-color:
     rgba(125, 95, 255, 0.55);
 
-  transform:
-    translateX(-2px);
+  transform: translateX(-2px);
 }
 
 .back-button:disabled {
@@ -102,7 +145,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 14px;
+  border-radius: 15px;
 
   background:
     linear-gradient(
@@ -112,7 +155,6 @@
     );
 
   color: white;
-
   font-size: 22px;
 
   box-shadow:
@@ -124,7 +166,6 @@
   margin: 0;
 
   font-size: 26px;
-
   font-weight: 650;
 
   letter-spacing: -0.5px;
@@ -133,8 +174,7 @@
 .header-title p {
   margin: 4px 0 0;
 
-  color: #9290a8;
-
+  color: var(--text-muted);
   font-size: 13px;
 }
 
@@ -145,7 +185,6 @@
 
 .follow-up-form {
   max-width: 1100px;
-
   margin: 0 auto;
 }
 
@@ -156,28 +195,28 @@
 
 .form-card {
   margin-bottom: 22px;
-
   padding: 26px;
 
-  border-radius: 18px;
+  border-radius: 22px;
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.09);
+    1px solid var(--border);
 
   background:
     linear-gradient(
       145deg,
-      rgba(30, 28, 52, 0.92),
-      rgba(18, 18, 34, 0.96)
+      var(--card-bg-start),
+      var(--card-bg-end)
     );
 
-  box-shadow:
-    0 15px 45px
-    rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-card);
 
-  backdrop-filter:
-    blur(16px);
+  backdrop-filter: blur(16px);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -187,18 +226,14 @@
 
 .card-header {
   display: flex;
-
   align-items: center;
-
   gap: 14px;
 
   padding-bottom: 20px;
-
   margin-bottom: 24px;
 
   border-bottom:
-    1px solid
-    rgba(255, 255, 255, 0.07);
+    1px solid var(--border-soft);
 }
 
 .section-icon {
@@ -209,7 +244,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 11px;
+  border-radius: 13px;
 
   background:
     rgba(111, 69, 255, 0.14);
@@ -217,7 +252,6 @@
   color: #9c83ff;
 
   font-size: 12px;
-
   font-weight: 700;
 }
 
@@ -225,15 +259,13 @@
   margin: 0;
 
   font-size: 17px;
-
   font-weight: 600;
 }
 
 .card-header p {
   margin: 4px 0 0;
 
-  color: #87859c;
-
+  color: var(--text-soft);
   font-size: 12px;
 }
 
@@ -260,7 +292,6 @@
   position: relative;
 
   display: flex;
-
   flex-direction: column;
 
   gap: 8px;
@@ -271,16 +302,14 @@
 }
 
 .form-group label {
-  color: #d8d5e8;
+  color: var(--text-secondary);
 
   font-size: 13px;
-
   font-weight: 500;
 }
 
 .required {
   color: #ff668c;
-
   margin-left: 3px;
 }
 
@@ -292,24 +321,20 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
-
   width: 100%;
-
   box-sizing: border-box;
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.10);
+    1px solid var(--border);
 
-  border-radius: 10px;
+  border-radius: 13px;
 
   background:
-    rgba(8, 8, 20, 0.72);
+    var(--input-bg);
 
-  color: #f1effb;
+  color: var(--text-primary);
 
   font-family: inherit;
-
   font-size: 13px;
 
   outline: none;
@@ -317,13 +342,13 @@
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .form-group input,
 .form-group select {
   height: 45px;
-
   padding: 0 13px;
 }
 
@@ -343,12 +368,11 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-
   border-color:
     rgba(115, 86, 255, 0.75);
 
   background:
-    rgba(13, 12, 29, 0.95);
+    var(--input-focus-bg);
 
   box-shadow:
     0 0 0 3px
@@ -365,9 +389,8 @@
 }
 
 .form-group select option {
-  background: #171528;
-
-  color: #f4f2ff;
+  background: var(--select-option-bg);
+  color: var(--text-primary);
 }
 
 
@@ -379,11 +402,9 @@
   position: absolute;
 
   right: 10px;
-
   bottom: -17px;
 
   color: #66647b;
-
   font-size: 10px;
 }
 
@@ -397,7 +418,7 @@
 
   padding: 3px 7px;
 
-  border-radius: 5px;
+  border-radius: 7px;
 
   background:
     rgba(0, 211, 255, 0.10);
@@ -414,7 +435,6 @@
 
 .field-loading {
   color: #7c72a5;
-
   font-size: 10px;
 }
 
@@ -430,14 +450,13 @@
     0 auto 20px;
 
   display: flex;
-
   align-items: center;
 
   gap: 10px;
 
   padding: 13px 16px;
 
-  border-radius: 10px;
+  border-radius: 15px;
 
   font-size: 13px;
 }
@@ -446,7 +465,6 @@
   margin-left: auto;
 
   border: none;
-
   background: transparent;
 
   color: inherit;
@@ -483,9 +501,7 @@
   height: 23px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   border-radius: 50%;
@@ -502,17 +518,14 @@
   min-height: 400px;
 
   display: flex;
-
   flex-direction: column;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 15px;
 
-  color: #8f8ca5;
-
+  color: var(--text-muted);
   font-size: 13px;
 }
 
@@ -537,11 +550,9 @@
 }
 
 @keyframes spin {
-
   to {
     transform: rotate(360deg);
   }
-
 }
 
 
@@ -550,7 +561,6 @@
    ========================================================== */
 
 .form-actions {
-
   display: flex;
 
   justify-content: flex-end;
@@ -562,55 +572,49 @@
 }
 
 .btn {
-
   min-width: 135px;
-
   height: 45px;
 
-  border-radius: 10px;
+  border-radius: 13px;
 
   border: none;
 
   font-family: inherit;
-
   font-size: 13px;
-
   font-weight: 600;
 
   cursor: pointer;
 
   transition:
-    0.25s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease;
 }
 
 .btn:disabled {
   opacity: 0.55;
-
   cursor: not-allowed;
 }
 
 .btn-secondary {
-
   background:
-    rgba(255, 255, 255, 0.06);
+    var(--button-secondary-bg);
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.10);
+    1px solid var(--border);
 
-  color: #bcb9ce;
+  color: var(--text-secondary);
 }
 
 .btn-secondary:hover:not(:disabled) {
-
   background:
-    rgba(255, 255, 255, 0.10);
+    var(--button-secondary-hover);
 
   color: white;
 }
 
 .btn-primary {
-
   background:
     linear-gradient(
       135deg,
@@ -626,7 +630,6 @@
 }
 
 .btn-primary:hover:not(:disabled) {
-
   transform:
     translateY(-1px);
 
@@ -641,7 +644,6 @@
    ========================================================== */
 
 .button-spinner {
-
   display: inline-block;
 
   width: 13px;
@@ -660,6 +662,314 @@
 
   animation:
     spin 0.7s linear infinite;
+}
+
+
+/* ==========================================================
+   ==========================================================
+   LIGHT THEME
+   Controlled by Navbar → ThemeService
+   ==========================================================
+   ========================================================== */
+
+:host-context(body.light-theme) {
+  --page-bg: #f4f8fc;
+  --page-text: #172033;
+
+  --card-bg-start: rgba(255, 255, 255, 0.94);
+  --card-bg-end: rgba(247, 251, 255, 0.96);
+
+  --text-primary: #172033;
+  --text-secondary: #34445c;
+  --text-muted: #718096;
+  --text-soft: #68778c;
+
+  --border: rgba(70, 90, 120, 0.16);
+  --border-soft: rgba(70, 90, 120, 0.12);
+
+  --input-bg: rgba(255, 255, 255, 0.88);
+  --input-focus-bg: #ffffff;
+
+  --button-secondary-bg: rgba(255, 255, 255, 0.78);
+  --button-secondary-hover: #f0f5fb;
+
+  --select-option-bg: #ffffff;
+
+  --shadow-card:
+    0 15px 40px
+    rgba(35, 70, 110, 0.10);
+}
+
+
+/* ==========================================================
+   LIGHT PAGE
+   ========================================================== */
+
+:host-context(body.light-theme) .edit-follow-up-page {
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(111, 69, 255, 0.10),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(0, 190, 220, 0.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #f8fbff,
+      #f2f7fc
+    );
+
+  color: #172033;
+}
+
+
+/* ==========================================================
+   LIGHT BACK BUTTON
+   ========================================================== */
+
+:host-context(body.light-theme) .back-button {
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  color: #53647b;
+
+  border-color:
+    rgba(70, 90, 120, 0.16);
+
+  box-shadow:
+    0 4px 15px
+    rgba(35, 70, 110, 0.07);
+}
+
+:host-context(body.light-theme) .back-button:hover:not(:disabled) {
+  background:
+    #ffffff;
+
+  color:
+    #6845ff;
+
+  border-color:
+    rgba(104, 69, 255, 0.30);
+
+  box-shadow:
+    0 7px 20px
+    rgba(70, 80, 150, 0.10);
+}
+
+
+/* ==========================================================
+   LIGHT TITLE
+   ========================================================== */
+
+:host-context(body.light-theme) .header-title h1 {
+  color: #172033;
+}
+
+:host-context(body.light-theme) .header-title p {
+  color: #718096;
+}
+
+
+/* ==========================================================
+   LIGHT FORM CARD
+   ========================================================== */
+
+:host-context(body.light-theme) .form-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(247, 251, 255, 0.94)
+    );
+
+  border-color:
+    rgba(70, 90, 120, 0.15);
+
+  box-shadow:
+    0 15px 40px
+    rgba(35, 70, 110, 0.10);
+}
+
+
+/* ==========================================================
+   LIGHT CARD HEADER
+   ========================================================== */
+
+:host-context(body.light-theme) .card-header {
+  border-bottom-color:
+    rgba(70, 90, 120, 0.11);
+}
+
+:host-context(body.light-theme) .section-icon {
+  background:
+    rgba(104, 69, 255, 0.09);
+
+  color:
+    #6845ff;
+}
+
+:host-context(body.light-theme) .card-header h2 {
+  color: #172033;
+}
+
+:host-context(body.light-theme) .card-header p {
+  color: #718096;
+}
+
+
+/* ==========================================================
+   LIGHT LABELS
+   ========================================================== */
+
+:host-context(body.light-theme) .form-group label {
+  color: #34445c;
+}
+
+
+/* ==========================================================
+   LIGHT INPUTS
+   ========================================================== */
+
+:host-context(body.light-theme)
+.form-group input,
+:host-context(body.light-theme)
+.form-group select,
+:host-context(body.light-theme)
+.form-group textarea {
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  color:
+    #172033;
+
+  border-color:
+    rgba(70, 90, 120, 0.17);
+
+  box-shadow:
+    0 2px 8px
+    rgba(35, 70, 110, 0.03);
+}
+
+:host-context(body.light-theme)
+.form-group input::placeholder,
+:host-context(body.light-theme)
+.form-group textarea::placeholder {
+  color: #9aa7b7;
+}
+
+:host-context(body.light-theme)
+.form-group input:focus,
+:host-context(body.light-theme)
+.form-group select:focus,
+:host-context(body.light-theme)
+.form-group textarea:focus {
+  background:
+    #ffffff;
+
+  border-color:
+    rgba(104, 69, 255, 0.55);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(104, 69, 255, 0.08),
+    0 5px 18px
+    rgba(70, 80, 150, 0.07);
+}
+
+:host-context(body.light-theme) .form-group select option {
+  background: #ffffff;
+  color: #172033;
+}
+
+
+/* ==========================================================
+   LIGHT FIELD HELPERS
+   ========================================================== */
+
+:host-context(body.light-theme) .character-count {
+  color: #8997a8;
+}
+
+:host-context(body.light-theme) .field-loading {
+  color: #756da0;
+}
+
+
+/* ==========================================================
+   LIGHT ALERTS
+   ========================================================== */
+
+:host-context(body.light-theme) .error-alert {
+  background:
+    rgba(255, 70, 105, 0.07);
+
+  border-color:
+    rgba(220, 90, 110, 0.20);
+
+  color:
+    #b34f61;
+}
+
+:host-context(body.light-theme) .success-alert {
+  background:
+    rgba(0, 190, 155, 0.07);
+
+  border-color:
+    rgba(0, 180, 150, 0.20);
+
+  color:
+    #25816e;
+}
+
+
+/* ==========================================================
+   LIGHT LOADING
+   ========================================================== */
+
+:host-context(body.light-theme) .loading-container {
+  color: #718096;
+}
+
+:host-context(body.light-theme) .spinner {
+  border-color:
+    rgba(70, 90, 120, 0.12);
+
+  border-top-color:
+    #6845ff;
+
+  border-right-color:
+    #00a8ce;
+}
+
+
+/* ==========================================================
+   LIGHT SECONDARY BUTTON
+   ========================================================== */
+
+:host-context(body.light-theme) .btn-secondary {
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  border-color:
+    rgba(70, 90, 120, 0.17);
+
+  color:
+    #53647b;
+}
+
+:host-context(body.light-theme) .btn-secondary:hover:not(:disabled) {
+  background:
+    #f1f5fa;
+
+  color:
+    #6845ff;
+
+  border-color:
+    rgba(104, 69, 255, 0.22);
 }
 
 
@@ -691,6 +1001,7 @@
 
   .form-card {
     padding: 20px;
+    border-radius: 20px;
   }
 
   .form-actions {
@@ -700,7 +1011,6 @@
   .btn {
     width: 100%;
   }
-
 }
 
 
@@ -710,13 +1020,67 @@
     padding: 12px;
   }
 
+  .header-title {
+    gap: 11px;
+  }
+
   .header-title h1 {
     font-size: 21px;
+  }
+
+  .header-title p {
+    font-size: 11px;
   }
 
   .title-icon {
     width: 42px;
     height: 42px;
+
+    border-radius: 13px;
+
+    font-size: 19px;
   }
 
+  .form-card {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .card-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline:
+    2px solid
+    rgba(104, 69, 255, 0.55);
+
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
 }

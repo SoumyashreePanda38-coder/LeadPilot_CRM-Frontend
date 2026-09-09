@@ -1,6 +1,12 @@
 /* =========================================================
    LEADPILOT CRM
    DASHBOARD CARD COMPONENT
+   GLOBAL LIGHT / DARK THEME
+   ========================================================= */
+
+
+/* =========================================================
+   HOST
    ========================================================= */
 
 :host {
@@ -18,7 +24,8 @@
 
   display: grid;
 
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
   gap: 20px;
 
@@ -45,22 +52,24 @@
 
   overflow: hidden;
 
-  background: #ffffff;
+  background: var(--dashboard-card-bg);
 
-  border: 1px solid #e5eaf2;
+  border: 1px solid var(--dashboard-card-border);
 
   border-radius: 24px;
 
   box-sizing: border-box;
 
   box-shadow:
-    0 8px 25px rgba(20, 43, 85, 0.055),
-    0 2px 7px rgba(20, 43, 85, 0.035);
+    0 8px 25px var(--dashboard-card-shadow),
+    0 2px 7px var(--dashboard-card-shadow-small);
 
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -92,11 +101,11 @@
 .summary-card:hover {
   transform: translateY(-5px);
 
-  border-color: rgba(103, 125, 170, 0.28);
+  border-color: var(--dashboard-card-hover-border);
 
   box-shadow:
-    0 18px 38px rgba(20, 43, 85, 0.10),
-    0 6px 14px rgba(20, 43, 85, 0.055);
+    0 18px 38px var(--dashboard-card-hover-shadow),
+    0 6px 14px var(--dashboard-card-hover-shadow-small);
 }
 
 
@@ -106,6 +115,7 @@
 
 .card-icon {
   position: relative;
+
   z-index: 3;
 
   flex: 0 0 52px;
@@ -135,10 +145,14 @@
 }
 
 
-/* ICON HOVER */
+/* =========================================================
+   ICON HOVER
+   ========================================================= */
 
 .summary-card:hover .card-icon {
-  transform: translateY(-2px) scale(1.05);
+  transform:
+    translateY(-2px)
+    scale(1.05);
 
   box-shadow:
     0 12px 25px var(--card-shadow);
@@ -151,6 +165,7 @@
 
 .card-content {
   position: relative;
+
   z-index: 3;
 
   min-width: 0;
@@ -172,7 +187,7 @@
 
   margin-bottom: 7px;
 
-  color: #62738c;
+  color: var(--dashboard-card-label);
 
   font-size: 11px;
 
@@ -195,7 +210,7 @@
 
   margin-bottom: 8px;
 
-  color: #102849;
+  color: var(--dashboard-card-number);
 
   font-size: 34px;
 
@@ -214,7 +229,7 @@
 .card-content small {
   display: block;
 
-  color: #627590;
+  color: var(--dashboard-card-description);
 
   font-size: 12px;
 
@@ -281,12 +296,7 @@
 
   border-radius: inherit;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.45),
-      transparent 45%
-    );
+  background: var(--dashboard-card-highlight);
 
   pointer-events: none;
 
@@ -299,6 +309,7 @@
    ========================================================= */
 
 .total-card {
+
   --card-color: #6338e8;
 
   --card-gradient:
@@ -321,6 +332,7 @@
    ========================================================= */
 
 .active-card {
+
   --card-color: #168ee6;
 
   --card-gradient:
@@ -343,6 +355,7 @@
    ========================================================= */
 
 .new-card {
+
   --card-color: #08a8c5;
 
   --card-gradient:
@@ -365,6 +378,7 @@
    ========================================================= */
 
 .pending-card {
+
   --card-color: #f5ad08;
 
   --card-gradient:
@@ -387,6 +401,7 @@
    ========================================================= */
 
 .hot-card {
+
   --card-color: #ff562b;
 
   --card-gradient:
@@ -409,6 +424,7 @@
    ========================================================= */
 
 .closed-card {
+
   --card-color: #18b85b;
 
   --card-gradient:
@@ -431,6 +447,7 @@
    ========================================================= */
 
 .lost-card {
+
   --card-color: #ed2d3b;
 
   --card-gradient:
@@ -453,6 +470,7 @@
    ========================================================= */
 
 .executive-card {
+
   --card-color: #7d3be9;
 
   --card-gradient:
@@ -471,10 +489,50 @@
 
 
 /* =========================================================
-   CARD BACKGROUND TINT
-   ========================================================= */
+   LIGHT MODE CARD BACKGROUNDS
+========================================================= */
 
-.total-card {
+:host-context(body.light-theme) {
+
+  --dashboard-card-bg: #ffffff;
+
+  --dashboard-card-border: #e5eaf2;
+
+  --dashboard-card-shadow:
+    rgba(20, 43, 85, 0.055);
+
+  --dashboard-card-shadow-small:
+    rgba(20, 43, 85, 0.035);
+
+  --dashboard-card-hover-border:
+    rgba(103, 125, 170, 0.28);
+
+  --dashboard-card-hover-shadow:
+    rgba(20, 43, 85, 0.10);
+
+  --dashboard-card-hover-shadow-small:
+    rgba(20, 43, 85, 0.055);
+
+  --dashboard-card-label: #62738c;
+
+  --dashboard-card-number: #102849;
+
+  --dashboard-card-description: #627590;
+
+  --dashboard-card-highlight:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.45),
+      transparent 45%
+    );
+}
+
+
+/* =========================================================
+   LIGHT MODE INDIVIDUAL CARD TINTS
+========================================================= */
+
+:host-context(body.light-theme) .total-card {
   background:
     linear-gradient(
       135deg,
@@ -483,7 +541,8 @@
     );
 }
 
-.active-card {
+
+:host-context(body.light-theme) .active-card {
   background:
     linear-gradient(
       135deg,
@@ -492,7 +551,8 @@
     );
 }
 
-.new-card {
+
+:host-context(body.light-theme) .new-card {
   background:
     linear-gradient(
       135deg,
@@ -501,7 +561,8 @@
     );
 }
 
-.pending-card {
+
+:host-context(body.light-theme) .pending-card {
   background:
     linear-gradient(
       135deg,
@@ -510,7 +571,8 @@
     );
 }
 
-.hot-card {
+
+:host-context(body.light-theme) .hot-card {
   background:
     linear-gradient(
       135deg,
@@ -519,7 +581,8 @@
     );
 }
 
-.closed-card {
+
+:host-context(body.light-theme) .closed-card {
   background:
     linear-gradient(
       135deg,
@@ -528,7 +591,8 @@
     );
 }
 
-.lost-card {
+
+:host-context(body.light-theme) .lost-card {
   background:
     linear-gradient(
       135deg,
@@ -537,7 +601,8 @@
     );
 }
 
-.executive-card {
+
+:host-context(body.light-theme) .executive-card {
   background:
     linear-gradient(
       135deg,
@@ -548,8 +613,147 @@
 
 
 /* =========================================================
+   DARK MODE
+========================================================= */
+
+:host-context(body.dark-theme) {
+
+  --dashboard-card-bg: #0b2544;
+
+  --dashboard-card-border:
+    rgba(0, 217, 255, 0.16);
+
+  --dashboard-card-shadow:
+    rgba(0, 0, 0, 0.28);
+
+  --dashboard-card-shadow-small:
+    rgba(0, 0, 0, 0.16);
+
+  --dashboard-card-hover-border:
+    rgba(0, 217, 255, 0.35);
+
+  --dashboard-card-hover-shadow:
+    rgba(0, 217, 255, 0.15);
+
+  --dashboard-card-hover-shadow-small:
+    rgba(0, 0, 0, 0.30);
+
+  --dashboard-card-label: #a9c4dc;
+
+  --dashboard-card-number: #ffffff;
+
+  --dashboard-card-description: #8faec7;
+
+  --dashboard-card-highlight:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06),
+      transparent 45%
+    );
+}
+
+
+/* =========================================================
+   DARK MODE CARD BACKGROUNDS
+========================================================= */
+
+:host-context(body.dark-theme) .total-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #15103b 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .active-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #082e45 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .new-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #073443 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .pending-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #342c0d 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .hot-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #381c19 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .closed-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #0c3325 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .lost-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #361b24 100%
+    );
+}
+
+
+:host-context(body.dark-theme) .executive-card {
+  background:
+    linear-gradient(
+      135deg,
+      #0b2544 55%,
+      #24143f 100%
+    );
+}
+
+
+/* =========================================================
+   DARK MODE CARD GLOW
+========================================================= */
+
+:host-context(body.dark-theme) .card-glow {
+  opacity: 0.75;
+}
+
+
+:host-context(body.dark-theme) .summary-card:hover .card-glow {
+  opacity: 1;
+}
+
+
+/* =========================================================
    LARGE LAPTOP
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 1200px) {
 
@@ -565,7 +769,7 @@
 
 /* =========================================================
    TABLET
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -576,6 +780,7 @@
     gap: 17px;
   }
 
+
   .summary-card {
     min-height: 180px;
 
@@ -583,6 +788,7 @@
 
     border-radius: 21px;
   }
+
 
   .card-icon {
     flex-basis: 50px;
@@ -595,6 +801,7 @@
     border-radius: 14px;
   }
 
+
   .card-content strong {
     font-size: 32px;
   }
@@ -604,7 +811,7 @@
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -613,6 +820,7 @@
 
     gap: 15px;
   }
+
 
   .summary-card {
     min-height: 150px;
@@ -623,6 +831,7 @@
 
     border-radius: 20px;
   }
+
 
   .card-icon {
     flex-basis: 48px;
@@ -635,6 +844,7 @@
     border-radius: 14px;
   }
 
+
   .card-label {
     margin-bottom: 6px;
 
@@ -643,15 +853,18 @@
     letter-spacing: 0.6px;
   }
 
+
   .card-content strong {
     margin-bottom: 6px;
 
     font-size: 30px;
   }
 
+
   .card-content small {
     font-size: 11px;
   }
+
 
   .card-glow {
     width: 105px;
@@ -666,7 +879,7 @@
 
 /* =========================================================
    SMALL MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 380px) {
 
@@ -678,6 +891,7 @@
     border-radius: 18px;
   }
 
+
   .card-icon {
     flex-basis: 45px;
 
@@ -687,9 +901,11 @@
     font-size: 18px;
   }
 
+
   .card-content strong {
     font-size: 28px;
   }
+
 
   .card-content small {
     font-size: 10px;
@@ -700,7 +916,7 @@
 
 /* =========================================================
    REDUCE MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -710,9 +926,11 @@
     transition: none;
   }
 
+
   .summary-card:hover {
     transform: none;
   }
+
 
   .summary-card:hover .card-icon {
     transform: none;

@@ -19,6 +19,44 @@
 
 
     <!-- ====================================================
+         SETTINGS NAVIGATION
+         ADDED: General / Security navigation
+    ===================================================== -->
+
+    <nav class="settings-navigation">
+
+      <a
+        routerLink="/admin/settings/general"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+
+        <i class="fas fa-sliders"></i>
+
+        <span>
+          General
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/admin/settings/security"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+
+        <i class="fas fa-shield-halved"></i>
+
+        <span>
+          Security
+        </span>
+
+      </a>
+
+    </nav>
+
+
+
+    <!-- ====================================================
          PAGE HEADER
     ===================================================== -->
 

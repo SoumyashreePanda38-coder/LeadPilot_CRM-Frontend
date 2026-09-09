@@ -1,39 +1,48 @@
 <nav class="admin-navbar">
 
-    <!-- Left Section -->
+    <!-- =====================================================
+         LEFT SECTION
+    ====================================================== -->
 
     <div class="navbar-left">
 
         <!-- Sidebar Toggle -->
-
         <button
+            type="button"
             class="menu-btn"
-            (click)="toggleSidebar()">
+            (click)="toggleSidebar()"
+            title="Menu">
 
             <i class="bi bi-list"></i>
 
         </button>
 
-        <!-- Logo -->
 
+        <!-- Logo -->
         <div class="logo">
 
             <i class="bi bi-graph-up-arrow"></i>
 
         </div>
 
-        <!-- Brand -->
 
+        <!-- Brand -->
         <div class="brand">
 
             <h3>LeadPilot CRM</h3>
-            <span>Customer Lead Management System</span>
+
+            <span>
+                Customer Lead Management System
+            </span>
 
         </div>
 
     </div>
 
-    <!-- Search -->
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
 
     <div class="navbar-search">
 
@@ -43,60 +52,108 @@
 
             <input
                 type="text"
-                placeholder="Search..." />
+                [(ngModel)]="searchText"
+                (keyup.enter)="search()"
+                placeholder="Search leads, categories, follow-ups..."
+                autocomplete="off"
+            />
+
+            <button
+                type="button"
+                class="search-btn"
+                (click)="search()"
+                title="Search">
+
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
 
         </div>
 
     </div>
 
-    <!-- Right -->
+
+    <!-- =====================================================
+         RIGHT SECTION
+    ====================================================== -->
 
     <div class="navbar-right">
 
-        <!-- Theme -->
+
+        <!-- =================================================
+             THEME
+        ================================================== -->
 
         <button
+            type="button"
             class="icon-btn"
             (click)="toggleTheme()"
-            title="Theme">
+            title="Toggle Theme">
 
             <i
                 class="bi"
-                [ngClass]="isDarkTheme ? 'bi-sun-fill' : 'bi-moon-stars-fill'">
+                [ngClass]="
+                    isDarkTheme
+                    ? 'bi-sun-fill'
+                    : 'bi-moon-stars-fill'
+                ">
             </i>
 
         </button>
 
-        <!-- Notifications -->
+
+        <!-- =================================================
+             NOTIFICATIONS / REMINDERS
+        ================================================== -->
 
         <button
-            class="icon-btn">
+            type="button"
+            class="icon-btn notification-btn"
+            routerLink="/admin/reminders"
+            title="Reminders">
 
             <i class="bi bi-bell"></i>
 
+            <span
+                *ngIf="notificationCount > 0"
+                class="notification-badge">
+
+                {{ notificationCount }}
+
+            </span>
+
         </button>
 
-        <!-- User -->
+
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
 
         <button
-            class="icon-btn">
+            type="button"
+            class="icon-btn"
+            routerLink="/admin/profile"
+            title="My Profile">
 
             <i class="bi bi-person-circle"></i>
 
         </button>
 
-        <!-- Logout -->
+
+        <!-- =================================================
+             LOGOUT
+        ================================================== -->
 
         <button
+            type="button"
             class="logout-btn"
-            (click)="logout()">
+            (click)="logout()"
+            title="Logout">
 
             <i class="bi bi-box-arrow-right"></i>
 
             <span class="logout-text">
-
                 Logout
-
             </span>
 
         </button>

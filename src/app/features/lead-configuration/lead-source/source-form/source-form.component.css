@@ -1,6 +1,13 @@
 /* ==========================================================
    SOURCE FORM PAGE
+   Global theme controlled by Admin Navbar
    ========================================================== */
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
 
 .source-form-page {
 
@@ -37,6 +44,9 @@
 
   color: #eafff7;
 
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -58,7 +68,6 @@
 
 }
 
-
 .glow-one {
 
   width: 280px;
@@ -73,7 +82,6 @@
 
 }
 
-
 .glow-two {
 
   width: 300px;
@@ -87,7 +95,6 @@
   background: #06b6d4;
 
 }
-
 
 .glow-three {
 
@@ -157,7 +164,6 @@
 
 }
 
-
 .back-button i {
 
   color: #67e8f9;
@@ -165,7 +171,6 @@
   transition: transform 0.3s ease;
 
 }
-
 
 .back-button:hover {
 
@@ -179,7 +184,6 @@
     0 0 20px rgba(34, 211, 238, 0.12);
 
 }
-
 
 .back-button:hover i {
 
@@ -203,7 +207,6 @@
   margin-bottom: 28px;
 
 }
-
 
 .header-icon {
 
@@ -236,7 +239,6 @@
 
 }
 
-
 .header-icon i {
 
   font-size: 29px;
@@ -254,13 +256,11 @@
 
 }
 
-
 .header-text {
 
   min-width: 0;
 
 }
-
 
 .eyebrow {
 
@@ -277,7 +277,6 @@
   letter-spacing: 2px;
 
 }
-
 
 .header-text h1 {
 
@@ -302,7 +301,6 @@
   -webkit-text-fill-color: transparent;
 
 }
-
 
 .header-text p {
 
@@ -339,7 +337,6 @@
 
 }
 
-
 .success-alert {
 
   border: 1px solid rgba(74, 222, 128, 0.25);
@@ -349,7 +346,6 @@
   color: #bbf7d0;
 
 }
-
 
 .error-alert {
 
@@ -361,13 +357,11 @@
 
 }
 
-
 .alert-icon {
 
   font-size: 19px;
 
 }
-
 
 .alert-content {
 
@@ -381,13 +375,11 @@
 
 }
 
-
 .alert-content strong {
 
   font-size: 13px;
 
 }
-
 
 .alert-content span {
 
@@ -396,7 +388,6 @@
   opacity: 0.85;
 
 }
-
 
 .alert > button {
 
@@ -440,8 +431,12 @@
 
   backdrop-filter: blur(22px);
 
-}
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 
+}
 
 .card-glow-line {
 
@@ -470,7 +465,6 @@
 
 }
 
-
 .form-card form {
 
   padding: 38px;
@@ -498,7 +492,6 @@
 
 }
 
-
 .section-icon {
 
   display: flex;
@@ -519,7 +512,6 @@
 
 }
 
-
 .section-heading h2 {
 
   margin: 0;
@@ -529,7 +521,6 @@
   font-size: 18px;
 
 }
-
 
 .section-heading p {
 
@@ -552,7 +543,6 @@
 
 }
 
-
 .form-group label {
 
   display: flex;
@@ -571,20 +561,17 @@
 
 }
 
-
 .form-group label i {
 
   color: #67e8b0;
 
 }
 
-
 .required {
 
   color: #67e8f9;
 
 }
-
 
 .optional {
 
@@ -611,7 +598,6 @@
 
 }
 
-
 .input-wrapper input,
 .textarea-wrapper textarea,
 .select-wrapper select {
@@ -634,7 +620,6 @@
 
 }
 
-
 .input-wrapper input {
 
   height: 52px;
@@ -644,7 +629,6 @@
   border-radius: 15px;
 
 }
-
 
 .textarea-wrapper textarea {
 
@@ -664,14 +648,12 @@
 
 }
 
-
 .input-wrapper input::placeholder,
 .textarea-wrapper textarea::placeholder {
 
   color: #52796d;
 
 }
-
 
 .input-wrapper input:focus,
 .textarea-wrapper textarea:focus,
@@ -708,7 +690,6 @@
 
 }
 
-
 .textarea-wrapper .character-count {
 
   position: absolute;
@@ -718,7 +699,6 @@
   bottom: 12px;
 
 }
-
 
 .character-count {
 
@@ -749,7 +729,6 @@
 
 }
 
-
 .select-wrapper select option {
 
   background: #0b2923;
@@ -757,7 +736,6 @@
   color: #eafff7;
 
 }
-
 
 .select-arrow {
 
@@ -813,7 +791,6 @@
 
 }
 
-
 .field-hint i {
 
   color: #5eead4;
@@ -833,13 +810,11 @@
 
 }
 
-
 .input-wrapper.input-valid input {
 
   border-color: rgba(74, 222, 128, 0.30);
 
 }
-
 
 .field-error {
 
@@ -856,7 +831,6 @@
   font-size: 11px;
 
 }
-
 
 .field-error i {
 
@@ -887,7 +861,6 @@
 
 }
 
-
 .footer-note {
 
   display: flex;
@@ -902,13 +875,11 @@
 
 }
 
-
 .footer-note i {
 
   color: #67e8b0;
 
 }
-
 
 .form-actions {
 
@@ -956,7 +927,6 @@
 
 }
 
-
 .cancel-button {
 
   border: 1px solid rgba(110, 231, 183, 0.16);
@@ -966,7 +936,6 @@
   color: #9bc9b8;
 
 }
-
 
 .cancel-button:hover {
 
@@ -1002,7 +971,6 @@
 
 }
 
-
 .save-button:hover:not(:disabled) {
 
   transform: translateY(-2px);
@@ -1012,7 +980,6 @@
     0 0 20px rgba(74, 222, 128, 0.12);
 
 }
-
 
 .save-button:disabled {
 
@@ -1045,11 +1012,12 @@
 
 }
 
-
 @keyframes spin {
 
   to {
+
     transform: rotate(360deg);
+
   }
 
 }
@@ -1067,20 +1035,17 @@
 
   }
 
-
   .form-card {
 
     border-radius: 22px;
 
   }
 
-
   .form-card form {
 
     padding: 27px 23px;
 
   }
-
 
   .header-icon {
 
@@ -1092,20 +1057,17 @@
 
   }
 
-
   .header-icon i {
 
     font-size: 24px;
 
   }
 
-
   .header-text h1 {
 
     font-size: 26px;
 
   }
-
 
   .form-row {
 
@@ -1115,7 +1077,6 @@
 
   }
 
-
   .form-footer {
 
     align-items: flex-start;
@@ -1124,13 +1085,11 @@
 
   }
 
-
   .form-actions {
 
     width: 100%;
 
   }
-
 
   .cancel-button,
   .save-button {
@@ -1154,7 +1113,6 @@
 
   }
 
-
   .back-button {
 
     width: 100%;
@@ -1164,7 +1122,6 @@
     margin-bottom: 20px;
 
   }
-
 
   .form-header {
 
@@ -1176,7 +1133,6 @@
 
   }
 
-
   .header-icon {
 
     width: 50px;
@@ -1187,13 +1143,11 @@
 
   }
 
-
   .header-icon i {
 
     font-size: 21px;
 
   }
-
 
   .eyebrow {
 
@@ -1203,7 +1157,6 @@
 
   }
 
-
   .header-text h1 {
 
     font-size: 22px;
@@ -1211,7 +1164,6 @@
     line-height: 1.2;
 
   }
-
 
   .header-text p {
 
@@ -1221,20 +1173,17 @@
 
   }
 
-
   .form-card {
 
     border-radius: 19px;
 
   }
 
-
   .form-card form {
 
     padding: 22px 17px;
 
   }
-
 
   .section-heading {
 
@@ -1243,7 +1192,6 @@
     padding-bottom: 18px;
 
   }
-
 
   .section-icon {
 
@@ -1255,13 +1203,11 @@
 
   }
 
-
   .section-heading h2 {
 
     font-size: 16px;
 
   }
-
 
   .section-heading p {
 
@@ -1269,13 +1215,11 @@
 
   }
 
-
   .form-group {
 
     margin-bottom: 21px;
 
   }
-
 
   .form-footer {
 
@@ -1285,7 +1229,6 @@
 
   }
 
-
   .footer-note {
 
     align-items: flex-start;
@@ -1294,7 +1237,6 @@
 
   }
 
-
   .form-actions {
 
     flex-direction: column;
@@ -1302,7 +1244,6 @@
     width: 100%;
 
   }
-
 
   .cancel-button,
   .save-button {
@@ -1328,13 +1269,11 @@
 
   }
 
-
   .header-text h1 {
 
     font-size: 20px;
 
   }
-
 
   .header-text p {
 
@@ -1342,12 +1281,497 @@
 
   }
 
-
   .input-wrapper input,
   .select-wrapper select {
 
     height: 48px;
 
   }
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME
+   Controlled by Navbar ThemeService
+   ========================================================== */
+
+:host-context(body.light-theme) .source-form-page {
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(34, 197, 94, 0.10),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(6, 182, 212, 0.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(16, 185, 129, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #f3fbf8 0%,
+      #eefaf7 45%,
+      #f0faff 100%
+    );
+
+  color: #17352d;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - GLOWS
+   ========================================================== */
+
+:host-context(body.light-theme) .background-glow {
+
+  opacity: 0.18;
+
+  filter: blur(90px);
+
+}
+
+:host-context(body.light-theme) .glow-one {
+
+  background: #4ade80;
+
+}
+
+:host-context(body.light-theme) .glow-two {
+
+  background: #22d3ee;
+
+}
+
+:host-context(body.light-theme) .glow-three {
+
+  background: #34d399;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - BACK BUTTON
+   ========================================================== */
+
+:host-context(body.light-theme) .back-button {
+
+  border-color: rgba(16, 185, 129, 0.20);
+
+  background: rgba(255, 255, 255, 0.78);
+
+  color: #236052;
+
+  box-shadow:
+    0 8px 25px rgba(15, 118, 110, 0.08);
+
+}
+
+:host-context(body.light-theme) .back-button i {
+
+  color: #0891b2;
+
+}
+
+:host-context(body.light-theme) .back-button:hover {
+
+  border-color: rgba(6, 182, 212, 0.40);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 28px rgba(6, 182, 212, 0.12);
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - HEADER
+   ========================================================== */
+
+:host-context(body.light-theme) .header-icon {
+
+  border-color: rgba(16, 185, 129, 0.22);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 197, 94, 0.10),
+      rgba(6, 182, 212, 0.10)
+    );
+
+  box-shadow:
+    0 10px 30px rgba(16, 185, 129, 0.10),
+    inset 0 0 20px rgba(6, 182, 212, 0.04);
+
+}
+
+:host-context(body.light-theme) .header-icon i {
+
+  background:
+    linear-gradient(
+      135deg,
+      #16a34a,
+      #0891b2
+    );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+:host-context(body.light-theme) .eyebrow {
+
+  color: #059669;
+
+}
+
+:host-context(body.light-theme) .header-text h1 {
+
+  background:
+    linear-gradient(
+      90deg,
+      #14532d,
+      #047857,
+      #0891b2
+    );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+:host-context(body.light-theme) .header-text p {
+
+  color: #58786e;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - ALERTS
+   ========================================================== */
+
+:host-context(body.light-theme) .success-alert {
+
+  border-color: rgba(34, 197, 94, 0.22);
+
+  background: rgba(220, 252, 231, 0.78);
+
+  color: #166534;
+
+}
+
+:host-context(body.light-theme) .error-alert {
+
+  border-color: rgba(248, 113, 113, 0.22);
+
+  background: rgba(254, 226, 226, 0.82);
+
+  color: #991b1b;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - FORM CARD
+   ========================================================== */
+
+:host-context(body.light-theme) .form-card {
+
+  border-color: rgba(16, 185, 129, 0.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(247, 253, 251, 0.96)
+    );
+
+  box-shadow:
+    0 25px 65px rgba(26, 86, 72, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(20px);
+
+}
+
+:host-context(body.light-theme) .card-glow-line {
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #22c55e,
+      #06b6d4,
+      #22c55e,
+      transparent
+    );
+
+  box-shadow:
+    0 0 15px rgba(16, 185, 129, 0.30);
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - SECTION HEADING
+   ========================================================== */
+
+:host-context(body.light-theme) .section-heading {
+
+  border-bottom-color: rgba(16, 185, 129, 0.13);
+
+}
+
+:host-context(body.light-theme) .section-icon {
+
+  background: rgba(34, 197, 94, 0.10);
+
+  color: #16a34a;
+
+}
+
+:host-context(body.light-theme) .section-heading h2 {
+
+  color: #174d3e;
+
+}
+
+:host-context(body.light-theme) .section-heading p {
+
+  color: #6a8b81;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - LABELS
+   ========================================================== */
+
+:host-context(body.light-theme) .form-group label {
+
+  color: #28594b;
+
+}
+
+:host-context(body.light-theme) .form-group label i {
+
+  color: #059669;
+
+}
+
+:host-context(body.light-theme) .required {
+
+  color: #0891b2;
+
+}
+
+:host-context(body.light-theme) .optional {
+
+  color: #78988e;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - INPUTS
+   ========================================================== */
+
+:host-context(body.light-theme) .input-wrapper input,
+:host-context(body.light-theme) .textarea-wrapper textarea,
+:host-context(body.light-theme) .select-wrapper select {
+
+  border-color: rgba(16, 185, 129, 0.17);
+
+  background: rgba(255, 255, 255, 0.88);
+
+  color: #193c33;
+
+  box-shadow:
+    0 4px 15px rgba(20, 90, 72, 0.04);
+
+}
+
+:host-context(body.light-theme) .input-wrapper input::placeholder,
+:host-context(body.light-theme) .textarea-wrapper textarea::placeholder {
+
+  color: #8aa69d;
+
+}
+
+:host-context(body.light-theme) .input-wrapper input:focus,
+:host-context(body.light-theme) .textarea-wrapper textarea:focus,
+:host-context(body.light-theme) .select-wrapper select:focus {
+
+  border-color: rgba(8, 145, 178, 0.50);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(6, 182, 212, 0.08),
+    0 8px 25px rgba(6, 182, 212, 0.08);
+
+}
+
+:host-context(body.light-theme) .input-icon {
+
+  color: #059669;
+
+}
+
+:host-context(body.light-theme) .character-count {
+
+  color: #78988e;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - SELECT
+   ========================================================== */
+
+:host-context(body.light-theme) .select-wrapper select option {
+
+  background: #ffffff;
+
+  color: #17352d;
+
+}
+
+:host-context(body.light-theme) .select-arrow {
+
+  color: #0891b2;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - HINTS
+   ========================================================== */
+
+:host-context(body.light-theme) .field-hint {
+
+  color: #6c8d82;
+
+}
+
+:host-context(body.light-theme) .field-hint i {
+
+  color: #0d9488;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - VALIDATION
+   ========================================================== */
+
+:host-context(body.light-theme) .input-wrapper.input-error input,
+:host-context(body.light-theme) .textarea-wrapper.input-error textarea,
+:host-context(body.light-theme) .select-wrapper.input-error select {
+
+  border-color: rgba(220, 38, 38, 0.45);
+
+}
+
+:host-context(body.light-theme) .input-wrapper.input-valid input {
+
+  border-color: rgba(22, 163, 74, 0.35);
+
+}
+
+:host-context(body.light-theme) .field-error {
+
+  color: #dc2626;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - FORM FOOTER
+   ========================================================== */
+
+:host-context(body.light-theme) .form-footer {
+
+  border-top-color: rgba(16, 185, 129, 0.13);
+
+}
+
+:host-context(body.light-theme) .footer-note {
+
+  color: #6b8c81;
+
+}
+
+:host-context(body.light-theme) .footer-note i {
+
+  color: #059669;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - CANCEL BUTTON
+   ========================================================== */
+
+:host-context(body.light-theme) .cancel-button {
+
+  border-color: rgba(16, 185, 129, 0.18);
+
+  background: rgba(255, 255, 255, 0.85);
+
+  color: #286052;
+
+}
+
+:host-context(body.light-theme) .cancel-button:hover {
+
+  border-color: rgba(6, 182, 212, 0.35);
+
+  background: #f5fffc;
+
+  color: #14532d;
+
+}
+
+
+/* ==========================================================
+   LIGHT THEME - SAVE BUTTON
+   ========================================================== */
+
+:host-context(body.light-theme) .save-button {
+
+  border-color: rgba(16, 185, 129, 0.30);
+
+  background:
+    linear-gradient(
+      135deg,
+      #16a34a,
+      #0d9488,
+      #0891b2
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(16, 185, 129, 0.18);
+
+}
+
+:host-context(body.light-theme) .save-button:hover:not(:disabled) {
+
+  box-shadow:
+    0 12px 30px rgba(6, 182, 212, 0.18),
+    0 0 20px rgba(34, 197, 94, 0.10);
 
 }

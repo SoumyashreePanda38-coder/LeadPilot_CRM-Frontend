@@ -1,8 +1,10 @@
 /* =========================================================
    LEADPILOT CRM
    LEAD CATEGORY FORM
+
    Premium Lavender • Purple • Cyan • Golden Glow
    Glassmorphism + Perimeter Light Sweep
+   Global Light/Dark Theme — Navbar Controlled
    ========================================================= */
 
 
@@ -15,7 +17,13 @@
   width: 100%;
   min-height: 100%;
   font-family: 'Poppins', sans-serif;
+
+  /* LIGHT THEME DEFAULT */
   color: #30244a;
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease;
 }
 
 
@@ -46,6 +54,12 @@
       #f5f0ff 42%,
       #effcff 100%
     );
+
+  color: #30244a;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -55,8 +69,8 @@
 
 .category-form-page::before {
   content: '';
-  position: absolute;
 
+  position: absolute;
   top: -180px;
   right: -150px;
 
@@ -82,8 +96,8 @@
 
 .category-form-page::after {
   content: '';
-  position: absolute;
 
+  position: absolute;
   bottom: -170px;
   left: -150px;
 
@@ -108,7 +122,6 @@
 
 
 @keyframes cornerShimmer {
-
   0%,
   100% {
     transform: translate(0, 0) scale(1);
@@ -123,7 +136,6 @@
 
 
 @keyframes oppositeShimmer {
-
   0%,
   100% {
     transform: translate(0, 0);
@@ -163,18 +175,24 @@
   color: #81769c;
   font-size: 13px;
   font-weight: 500;
+
+  transition: color 0.35s ease;
 }
 
 
 .breadcrumb .current-page {
   color: #6336a8;
   font-weight: 700;
+
+  transition: color 0.35s ease;
 }
 
 
 .separator {
   color: #b7a7d8;
   font-size: 10px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -287,7 +305,6 @@
 
 
 @keyframes iconShine {
-
   0% {
     transform: rotate(-35deg) translateX(-90px);
   }
@@ -308,6 +325,8 @@
   font-weight: 700;
 
   letter-spacing: -0.6px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -316,6 +335,8 @@
 
   color: #82779b;
   font-size: 14px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -344,7 +365,6 @@
 
 
 @keyframes alertIn {
-
   from {
     opacity: 0;
     transform: translateY(-8px);
@@ -378,6 +398,7 @@
 
 .alert-message {
   flex: 1;
+
   font-size: 13px;
   font-weight: 500;
 }
@@ -386,8 +407,8 @@
 .alert-close {
   border: 0;
   background: transparent;
-  cursor: pointer;
 
+  cursor: pointer;
   color: inherit;
   opacity: 0.65;
 
@@ -434,11 +455,15 @@
   overflow: hidden;
 
   animation: cardAppear 0.55s ease both;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
 @keyframes cardAppear {
-
   from {
     opacity: 0;
     transform: translateY(18px);
@@ -452,25 +477,16 @@
 
 
 /* =========================================================
-   COPILOT-STYLE PERIMETER NEON LIGHT
-   ---------------------------------------------------------
-   This is NOT a rotating border.
-   It is a small travelling light that continuously
-   follows the CARD PERIMETER.
+   PERIMETER NEON LIGHT
    ========================================================= */
 
 .form-card::before {
   content: '';
 
   position: absolute;
-
-  /*
-    Oversized layer creates the travelling light.
-  */
   inset: -2px;
 
   border-radius: 26px;
-
   padding: 2px;
 
   background:
@@ -478,39 +494,18 @@
       from 0deg,
       transparent 0deg,
       transparent 290deg,
-
       rgba(196, 181, 253, 0.04) 300deg,
-
       rgba(196, 181, 253, 0.18) 312deg,
-
       #c4b5fd 320deg,
-
       #e9d5ff 327deg,
-
       #f5d58a 334deg,
-
       #fff1b8 340deg,
-
       #c4b5fd 346deg,
-
       rgba(196, 181, 253, 0.12) 354deg,
-
       transparent 360deg
     );
 
-  /*
-    IMPORTANT:
-    The conic gradient itself rotates,
-    but the CARD does not rotate.
-    Only the tiny light highlight moves.
-  */
-
   animation: perimeterGlow 5.5s linear infinite;
-
-  /*
-    Mask keeps the glow ONLY on the border.
-    Nothing appears inside the card.
-  */
 
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -534,17 +529,10 @@
 }
 
 
-/*
-  Second very soft halo.
-  It stays around the perimeter rather than
-  filling the card interior.
-*/
-
 .form-card::after {
   content: '';
 
   position: absolute;
-
   inset: -3px;
 
   border-radius: 27px;
@@ -564,21 +552,14 @@
   animation: perimeterGlow 5.5s linear infinite;
 
   filter: blur(7px);
-
   opacity: 0.42;
 
   pointer-events: none;
-
   z-index: -1;
 }
 
 
-/* =========================================================
-   PERIMETER ANIMATION
-   ========================================================= */
-
 @keyframes perimeterGlow {
-
   0% {
     transform: rotate(0deg);
   }
@@ -611,6 +592,10 @@
       rgba(237, 233, 254, 0.42),
       rgba(255, 255, 255, 0.35)
     );
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
 
@@ -621,6 +606,8 @@
 
   font-size: 20px;
   font-weight: 700;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -628,8 +615,9 @@
   margin: 6px 0 0;
 
   color: #8a7ba5;
-
   font-size: 13px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -643,6 +631,11 @@
 
   color: #8a7ba5;
   font-size: 12px;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -660,6 +653,7 @@
   margin-left: 6px;
 
   color: #a294b8;
+
   font-size: 11px;
   font-weight: 500;
 }
@@ -685,7 +679,10 @@ form {
   margin-bottom: 30px;
   padding-bottom: 28px;
 
-  border-bottom: 1px solid rgba(139, 92, 246, 0.09);
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.09);
+
+  transition: border-color 0.35s ease;
 }
 
 
@@ -735,6 +732,8 @@ form {
 
   font-size: 16px;
   font-weight: 700;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -746,6 +745,8 @@ form {
   color: #9587ad;
 
   font-size: 12px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -786,6 +787,8 @@ form {
 
   font-size: 13px;
   font-weight: 600;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -796,7 +799,6 @@ form {
 .input-wrapper,
 .textarea-wrapper {
   position: relative;
-
   width: 100%;
 }
 
@@ -805,10 +807,11 @@ form {
 .input-wrapper select,
 .textarea-wrapper textarea {
   width: 100%;
-
   box-sizing: border-box;
 
-  border: 1px solid rgba(139, 92, 246, 0.16);
+  border:
+    1px solid rgba(139, 92, 246, 0.16);
+
   border-radius: 13px;
 
   outline: none;
@@ -825,6 +828,7 @@ form {
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease,
+    color 0.25s ease,
     transform 0.2s ease;
 }
 
@@ -901,7 +905,6 @@ form {
 .input-wrapper input:focus,
 .input-wrapper select:focus,
 .textarea-wrapper textarea:focus {
-
   border-color:
     rgba(139, 92, 246, 0.55);
 
@@ -919,6 +922,8 @@ form {
 .input-wrapper input::placeholder,
 .textarea-wrapper textarea::placeholder {
   color: #b2a7c2;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -940,6 +945,8 @@ form {
   font-weight: 500;
 
   pointer-events: none;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -968,6 +975,8 @@ form {
   font-size: 11px;
 
   pointer-events: none;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -977,7 +986,8 @@ form {
 
 .input-wrapper.input-valid input,
 .input-wrapper.input-valid select {
-  border-color: rgba(34, 197, 94, 0.35);
+  border-color:
+    rgba(34, 197, 94, 0.35);
 }
 
 
@@ -985,7 +995,6 @@ form {
 .input-wrapper.input-error select,
 .input-wrapper.input-error textarea,
 .textarea-wrapper.input-error textarea {
-
   border-color:
     rgba(239, 68, 68, 0.45);
 
@@ -1008,8 +1017,9 @@ form {
   color: #988cab;
 
   font-size: 11px;
-
   line-height: 1.5;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1040,7 +1050,6 @@ form {
 
 
 @keyframes errorAppear {
-
   from {
     opacity: 0;
     transform: translateY(-3px);
@@ -1067,6 +1076,8 @@ form {
   justify-content: center;
 
   color: #8d7ca6;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1076,7 +1087,8 @@ form {
 
   margin-bottom: 13px;
 
-  border: 3px solid rgba(139, 92, 246, 0.14);
+  border:
+    3px solid rgba(139, 92, 246, 0.14);
 
   border-top-color: #8b5cf6;
   border-right-color: #06b6d4;
@@ -1088,7 +1100,6 @@ form {
 
 
 @keyframes spin {
-
   to {
     transform: rotate(360deg);
   }
@@ -1107,7 +1118,9 @@ form {
   margin: 20px 0;
   padding: 15px 17px;
 
-  border: 1px solid rgba(139, 92, 246, 0.13);
+  border:
+    1px solid rgba(139, 92, 246, 0.13);
+
   border-radius: 14px;
 
   background:
@@ -1116,6 +1129,10 @@ form {
       rgba(237, 233, 254, 0.52),
       rgba(224, 242, 254, 0.38)
     );
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
 
@@ -1147,7 +1164,10 @@ form {
 
 .edit-info strong {
   color: #5b4380;
+
   font-size: 13px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1157,6 +1177,8 @@ form {
   color: #9586aa;
 
   font-size: 11px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1166,6 +1188,7 @@ form {
 
 .form-footer {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -1174,7 +1197,10 @@ form {
   margin-top: 26px;
   padding-top: 24px;
 
-  border-top: 1px solid rgba(139, 92, 246, 0.10);
+  border-top:
+    1px solid rgba(139, 92, 246, 0.10);
+
+  transition: border-color 0.35s ease;
 }
 
 
@@ -1186,6 +1212,8 @@ form {
   color: #9a8baa;
 
   font-size: 11px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1201,6 +1229,7 @@ form {
 .footer-actions {
   display: flex;
   align-items: center;
+
   gap: 10px;
 }
 
@@ -1208,12 +1237,12 @@ form {
 .cancel-btn,
 .reset-btn,
 .submit-btn {
-
   min-height: 44px;
 
   padding: 0 17px;
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -1222,6 +1251,7 @@ form {
   border-radius: 12px;
 
   font-family: inherit;
+
   font-size: 12px;
   font-weight: 600;
 
@@ -1230,7 +1260,9 @@ form {
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
-    background 0.22s ease;
+    background 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
 }
 
 
@@ -1379,6 +1411,7 @@ form {
   max-width: 1100px;
 
   margin: 18px auto 0;
+
   padding: 14px 18px;
 
   border:
@@ -1394,6 +1427,11 @@ form {
 
   box-shadow:
     0 8px 25px rgba(91, 58, 150, 0.05);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
@@ -1429,6 +1467,8 @@ form {
   color: #604484;
 
   font-size: 12px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -1436,8 +1476,590 @@ form {
   color: #9689a9;
 
   font-size: 11px;
-
   line-height: 1.5;
+
+  transition: color 0.35s ease;
+}
+
+
+/* =========================================================
+   =========================================================
+   DARK THEME
+   Navbar Toggle → body.dark-theme
+   =========================================================
+   ========================================================= */
+
+:host-context(body.dark-theme) {
+  color: #f5eaf3;
+}
+
+
+/* =========================================================
+   DARK PAGE
+   ========================================================= */
+
+:host-context(body.dark-theme) .category-form-page {
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(139, 92, 246, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 88%,
+      rgba(6, 182, 212, 0.13),
+      transparent 27%
+    ),
+    linear-gradient(
+      135deg,
+      #090817 0%,
+      #120c24 45%,
+      #071b26 100%
+    );
+
+  color: #f5eaf3;
+}
+
+
+/* =========================================================
+   DARK CORNER SHIMMERS
+   ========================================================= */
+
+:host-context(body.dark-theme) .category-form-page::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(196, 181, 253, 0.18) 0%,
+      rgba(124, 58, 237, 0.12) 32%,
+      transparent 68%
+    );
+
+  opacity: 0.75;
+}
+
+
+:host-context(body.dark-theme) .category-form-page::after {
+  background:
+    radial-gradient(
+      circle,
+      rgba(6, 182, 212, 0.14),
+      rgba(103, 232, 249, 0.08) 38%,
+      transparent 70%
+    );
+
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   DARK BREADCRUMB
+   ========================================================= */
+
+:host-context(body.dark-theme) .breadcrumb {
+  color: #9f91b8;
+}
+
+
+:host-context(body.dark-theme) .breadcrumb .current-page {
+  color: #c9b5ff;
+}
+
+
+:host-context(body.dark-theme) .separator {
+  color: #62537e;
+}
+
+
+/* =========================================================
+   DARK BACK BUTTON
+   ========================================================= */
+
+:host-context(body.dark-theme) .back-btn {
+  border-color: rgba(167, 139, 250, 0.22);
+
+  background: rgba(19, 14, 35, 0.72);
+
+  color: #bda7f5;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.30);
+}
+
+
+:host-context(body.dark-theme) .back-btn:hover {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #06b6d4
+    );
+
+  box-shadow:
+    0 10px 28px rgba(124, 58, 237, 0.30);
+}
+
+
+/* =========================================================
+   DARK TITLE
+   ========================================================= */
+
+:host-context(body.dark-theme) .title-section h1 {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #d8c9ff 45%,
+      #75e7f7
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+:host-context(body.dark-theme) .title-section p {
+  color: #a99abf;
+}
+
+
+/* =========================================================
+   DARK ALERTS
+   ========================================================= */
+
+:host-context(body.dark-theme) .success-alert {
+  border-color: rgba(74, 222, 128, 0.22);
+
+  background:
+    rgba(20, 55, 37, 0.68);
+
+  color: #9af0ba;
+}
+
+
+:host-context(body.dark-theme) .error-alert {
+  border-color: rgba(248, 113, 113, 0.22);
+
+  background:
+    rgba(65, 24, 30, 0.72);
+
+  color: #ffadb5;
+}
+
+
+/* =========================================================
+   DARK FORM CARD
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-card {
+  border-color:
+    rgba(167, 139, 250, 0.20);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25, 17, 45, 0.94),
+      rgba(13, 25, 39, 0.92)
+    );
+
+  box-shadow:
+    0 30px 75px rgba(0, 0, 0, 0.48),
+    0 5px 25px rgba(124, 58, 237, 0.10);
+}
+
+
+/* =========================================================
+   DARK PERIMETER
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-card::before {
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 290deg,
+      rgba(167, 139, 250, 0.08) 300deg,
+      rgba(167, 139, 250, 0.25) 312deg,
+      #8b5cf6 320deg,
+      #d8b4fe 327deg,
+      #f5d58a 334deg,
+      #fff1b8 340deg,
+      #67e8f9 346deg,
+      rgba(103, 232, 249, 0.12) 354deg,
+      transparent 360deg
+    );
+
+  filter:
+    drop-shadow(0 0 4px rgba(167, 139, 250, 0.75))
+    drop-shadow(0 0 9px rgba(6, 182, 212, 0.35));
+}
+
+
+:host-context(body.dark-theme) .form-card::after {
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 305deg,
+      rgba(139, 92, 246, 0) 315deg,
+      rgba(139, 92, 246, 0.28) 325deg,
+      rgba(255, 226, 150, 0.32) 335deg,
+      rgba(6, 182, 212, 0.20) 345deg,
+      transparent 358deg
+    );
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   DARK CARD HEADER
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-card-header {
+  border-bottom-color:
+    rgba(167, 139, 250, 0.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(62, 40, 94, 0.48),
+      rgba(14, 29, 43, 0.38)
+    );
+}
+
+
+:host-context(body.dark-theme) .form-card-header h2 {
+  color: #f4eaff;
+}
+
+
+:host-context(body.dark-theme) .form-card-header p {
+  color: #a99abf;
+}
+
+
+:host-context(body.dark-theme) .required-note {
+  border-color:
+    rgba(167, 139, 250, 0.20);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #a99abf;
+}
+
+
+/* =========================================================
+   DARK REQUIRED
+   ========================================================= */
+
+:host-context(body.dark-theme) .required-star {
+  color: #c4b5fd;
+}
+
+
+:host-context(body.dark-theme) .optional-label {
+  color: #857796;
+}
+
+
+/* =========================================================
+   DARK FORM SECTIONS
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-section {
+  border-bottom-color:
+    rgba(167, 139, 250, 0.12);
+}
+
+
+:host-context(body.dark-theme) .section-heading h3 {
+  color: #e8dcff;
+}
+
+
+:host-context(body.dark-theme) .section-heading span {
+  color: #9e91b3;
+}
+
+
+/* =========================================================
+   DARK FORM LABELS
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-group label {
+  color: #c9bad8;
+}
+
+
+/* =========================================================
+   DARK INPUTS
+   ========================================================= */
+
+:host-context(body.dark-theme) .input-wrapper input,
+:host-context(body.dark-theme) .input-wrapper select,
+:host-context(body.dark-theme) .textarea-wrapper textarea {
+  border-color:
+    rgba(167, 139, 250, 0.22);
+
+  color: #f3eafa;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+
+:host-context(body.dark-theme) .input-wrapper input::placeholder,
+:host-context(body.dark-theme) .textarea-wrapper textarea::placeholder {
+  color: #756985;
+}
+
+
+:host-context(body.dark-theme) .input-wrapper input:focus,
+:host-context(body.dark-theme) .input-wrapper select:focus,
+:host-context(body.dark-theme) .textarea-wrapper textarea:focus {
+  border-color:
+    rgba(167, 139, 250, 0.65);
+
+  background:
+    rgba(255, 255, 255, 0.075);
+
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+
+:host-context(body.dark-theme) .input-icon {
+  color: #a78bfa;
+}
+
+
+:host-context(body.dark-theme) .input-wrapper:focus-within .input-icon {
+  color: #67e8f9;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(103, 232, 249, 0.45)
+    );
+}
+
+
+:host-context(body.dark-theme) .character-count {
+  color: #827590;
+}
+
+
+:host-context(body.dark-theme) .select-arrow {
+  color: #a78bfa;
+}
+
+
+/* =========================================================
+   DARK FIELD HINT
+   ========================================================= */
+
+:host-context(body.dark-theme) .field-hint {
+  color: #8f829f;
+}
+
+
+:host-context(body.dark-theme) .field-hint i {
+  color: #a78bfa;
+}
+
+
+:host-context(body.dark-theme) .field-error {
+  color: #ff91a5;
+}
+
+
+/* =========================================================
+   DARK LOADING
+   ========================================================= */
+
+:host-context(body.dark-theme) .loading-container {
+  color: #9e91b3;
+}
+
+
+:host-context(body.dark-theme) .loader {
+  border-color:
+    rgba(167, 139, 250, 0.14);
+
+  border-top-color: #a78bfa;
+  border-right-color: #22d3ee;
+}
+
+
+/* =========================================================
+   DARK EDIT INFO
+   ========================================================= */
+
+:host-context(body.dark-theme) .edit-info {
+  border-color:
+    rgba(167, 139, 250, 0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(76, 55, 112, 0.30),
+      rgba(14, 55, 67, 0.24)
+    );
+}
+
+
+:host-context(body.dark-theme) .edit-info strong {
+  color: #d7c8ed;
+}
+
+
+:host-context(body.dark-theme) .edit-info p {
+  color: #9e91ad;
+}
+
+
+/* =========================================================
+   DARK FOOTER
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-footer {
+  border-top-color:
+    rgba(167, 139, 250, 0.12);
+}
+
+
+:host-context(body.dark-theme) .footer-note {
+  color: #91839f;
+}
+
+
+/* =========================================================
+   DARK BUTTONS
+   ========================================================= */
+
+:host-context(body.dark-theme) .cancel-btn {
+  border-color:
+    rgba(167, 139, 250, 0.22);
+
+  color: #c6b8d3;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+}
+
+
+:host-context(body.dark-theme) .cancel-btn:hover {
+  border-color:
+    rgba(167, 139, 250, 0.42);
+
+  background:
+    rgba(167, 139, 250, 0.09);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+
+:host-context(body.dark-theme) .reset-btn {
+  border-color:
+    rgba(34, 211, 238, 0.22);
+
+  color: #70e5f5;
+
+  background:
+    rgba(34, 211, 238, 0.055);
+}
+
+
+:host-context(body.dark-theme) .reset-btn:hover {
+  background:
+    rgba(34, 211, 238, 0.10);
+
+  box-shadow:
+    0 8px 24px rgba(6, 182, 212, 0.12);
+}
+
+
+:host-context(body.dark-theme) .submit-btn {
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #7c3aed 48%,
+      #06b6d4
+    );
+
+  box-shadow:
+    0 12px 28px rgba(124, 58, 237, 0.30),
+    0 0 22px rgba(6, 182, 212, 0.13);
+}
+
+
+:host-context(body.dark-theme) .submit-btn:hover:not(:disabled) {
+  box-shadow:
+    0 16px 36px rgba(124, 58, 237, 0.38),
+    0 0 30px rgba(6, 182, 212, 0.22);
+}
+
+
+/* =========================================================
+   DARK FORM TIP
+   ========================================================= */
+
+:host-context(body.dark-theme) .form-tip {
+  border-color:
+    rgba(167, 139, 250, 0.18);
+
+  background:
+    rgba(20, 17, 37, 0.68);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+:host-context(body.dark-theme) .form-tip strong {
+  color: #d1c2e5;
+}
+
+
+:host-context(body.dark-theme) .form-tip span {
+  color: #9689a6;
+}
+
+
+/* =========================================================
+   DARK SCROLLBAR
+   ========================================================= */
+
+:host-context(body.dark-theme) .category-form-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+:host-context(body.dark-theme) .category-form-page::-webkit-scrollbar-track {
+  background: #090817;
+}
+
+
+:host-context(body.dark-theme) .category-form-page::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      180deg,
+      #8b5cf6,
+      #06b6d4
+    );
+
+  border-radius: 20px;
 }
 
 
@@ -1458,7 +2080,6 @@ form {
   form {
     padding: 26px 24px;
   }
-
 }
 
 
@@ -1472,24 +2093,20 @@ form {
     padding: 20px 14px;
   }
 
-
   .breadcrumb {
     gap: 7px;
     font-size: 11px;
   }
-
 
   .back-btn {
     width: 34px;
     height: 34px;
   }
 
-
   .title-section {
     align-items: flex-start;
     gap: 12px;
   }
-
 
   .title-icon {
     width: 48px;
@@ -1502,35 +2119,28 @@ form {
     font-size: 19px;
   }
 
-
   .title-section h1 {
     font-size: 22px;
   }
-
 
   .title-section p {
     font-size: 12px;
     line-height: 1.5;
   }
 
-
   .form-card {
     border-radius: 20px;
   }
-
 
   .form-card::before {
     border-radius: 22px;
   }
 
-
   .form-card::after {
     border-radius: 23px;
   }
 
-
   .form-card-header {
-
     align-items: flex-start;
 
     flex-direction: column;
@@ -1540,34 +2150,27 @@ form {
     padding: 22px 18px;
   }
 
-
   .required-note {
     align-self: flex-start;
   }
-
 
   form {
     padding: 23px 18px;
   }
 
-
   .form-grid {
-
     grid-template-columns: 1fr;
 
     gap: 18px;
   }
 
-
   .full-width {
     grid-column: auto;
   }
 
-
   .section-heading {
     align-items: flex-start;
   }
-
 
   .section-icon {
     width: 36px;
@@ -1578,32 +2181,25 @@ form {
     font-size: 13px;
   }
 
-
   .section-heading h3 {
     font-size: 14px;
   }
-
 
   .section-heading span {
     font-size: 11px;
   }
 
-
   .form-footer {
-
     align-items: stretch;
 
     flex-direction: column;
   }
 
-
   .footer-note {
     justify-content: center;
   }
 
-
   .footer-actions {
-
     width: 100%;
 
     display: grid;
@@ -1611,11 +2207,9 @@ form {
     grid-template-columns: 1fr 1fr;
   }
 
-
   .submit-btn {
     grid-column: 1 / -1;
   }
-
 
   .cancel-btn,
   .reset-btn,
@@ -1623,16 +2217,13 @@ form {
     width: 100%;
   }
 
-
   .form-tip {
-
     align-items: flex-start;
 
     margin-top: 14px;
 
     padding: 13px 14px;
   }
-
 }
 
 
@@ -1646,59 +2237,48 @@ form {
     padding: 16px 10px;
   }
 
-
   .breadcrumb span:not(.current-page),
   .breadcrumb .separator {
     display: none;
   }
 
-
   .title-section h1 {
     font-size: 19px;
   }
-
 
   .title-section p {
     font-size: 11px;
   }
 
-
   .form-card-header h2 {
     font-size: 17px;
   }
-
 
   .form-card-header p {
     font-size: 11px;
     line-height: 1.5;
   }
 
-
   form {
     padding: 20px 14px;
   }
-
 
   .input-wrapper input,
   .input-wrapper select {
     height: 47px;
   }
 
-
   .input-wrapper input {
     padding-left: 42px;
   }
-
 
   .textarea-wrapper textarea {
     min-height: 110px;
   }
 
-
   .form-tip span {
     font-size: 10px;
   }
-
 }
 
 
@@ -1711,12 +2291,8 @@ form {
   *,
   *::before,
   *::after {
-
     animation-duration: 0.01ms !important;
-
     animation-iteration-count: 1 !important;
-
     transition-duration: 0.01ms !important;
   }
-
 }

@@ -1,8 +1,8 @@
 {
-  "name": "LeadPilot_crm_frontend",
-  "short_name": "LeadPilot_crm_frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "LeadPilot CRM",
+  "short_name": "LeadPilot",
+  "theme_color": "#7c3aed",
+  "background_color": "#0f0b1a",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

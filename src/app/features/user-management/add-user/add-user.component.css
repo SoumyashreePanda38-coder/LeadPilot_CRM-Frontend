@@ -2,454 +2,708 @@
    ADD USER PAGE
    LeadPilot CRM
    Theme: Navy Blue + White + Cyan
+   Global Theme: Navbar Toggle
    ========================================================== */
 
 :host {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .add-user-page {
-  min-height: 100%;
-  padding: 28px 32px 40px;
-  background: #f5f8fc;
-  color: #172033;
+    min-height: 100%;
+    padding: 28px 32px 40px;
+    background: #f5f8fc;
+    color: #172033;
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
 }
-
 
 /* ==========================================================
    PAGE HEADER
    ========================================================== */
 
 .page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
 }
 
 .header-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .header-icon {
-  width: 52px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background: #071a33;
-  color: #22d3ee;
-  box-shadow: 0 8px 20px rgba(7, 26, 51, 0.15);
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #071a33;
+    color: #22d3ee;
+    box-shadow: 0 8px 20px rgba(7, 26, 51, 0.15);
+    transition:
+        background 0.35s ease,
+        color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .header-icon .material-icons {
-  font-size: 27px;
+    font-size: 27px;
 }
 
 .header-content h1 {
-  margin: 0;
-  color: #071a33;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+    margin: 0;
+    color: #071a33;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    transition: color 0.35s ease;
 }
 
 .header-content p {
-  margin: 5px 0 0;
-  color: #68768a;
-  font-size: 14px;
+    margin: 5px 0 0;
+    color: #68768a;
+    font-size: 14px;
+    transition: color 0.35s ease;
 }
-
 
 /* ==========================================================
    BACK BUTTON
    ========================================================== */
 
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 0 16px;
-  border: 1px solid #d7e1ec;
-  border-radius: 9px;
-  background: #ffffff;
-  color: #17345b;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid #d7e1ec;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #17345b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .back-button:hover {
-  border-color: #22d3ee;
-  color: #071a33;
-  background: #ecfeff;
-  transform: translateY(-1px);
+    border-color: #22d3ee;
+    color: #071a33;
+    background: #ecfeff;
+    transform: translateY(-1px);
 }
 
 .back-button .material-icons {
-  font-size: 19px;
+    font-size: 19px;
 }
-
 
 /* ==========================================================
    ALERTS
    ========================================================== */
 
 .alert {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 16px;
-  margin-bottom: 20px;
-  border-radius: 9px;
-  font-size: 14px;
-  font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    margin-bottom: 20px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
 }
 
 .alert .material-icons {
-  font-size: 21px;
+    font-size: 21px;
 }
 
 .success-alert {
-  border: 1px solid #a7f3d0;
-  background: #ecfdf5;
-  color: #047857;
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
 }
 
 .error-alert {
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #b91c1c;
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #b91c1c;
 }
-
 
 /* ==========================================================
    FORM
    ========================================================== */
 
 .user-form {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
 }
-
 
 /* ==========================================================
    FORM CARD
    ========================================================== */
 
 .form-card {
-  margin-bottom: 22px;
-  padding: 25px;
-  border: 1px solid #e1e8f0;
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow:
-    0 4px 18px rgba(7, 26, 51, 0.06);
+    margin-bottom: 22px;
+    padding: 25px;
+    border: 1px solid #e1e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow:
+        0 4px 18px rgba(7, 26, 51, 0.06);
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .card-header {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding-bottom: 20px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid #edf1f6;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #edf1f6;
+    transition: border-color 0.35s ease;
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: #ecfeff;
-  color: #0891b2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #ecfeff;
+    color: #0891b2;
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
 }
 
 .card-icon .material-icons {
-  font-size: 21px;
+    font-size: 21px;
 }
 
 .card-header h2 {
-  margin: 0;
-  color: #071a33;
-  font-size: 17px;
-  font-weight: 700;
+    margin: 0;
+    color: #071a33;
+    font-size: 17px;
+    font-weight: 700;
+    transition: color 0.35s ease;
 }
 
 .card-header p {
-  margin: 4px 0 0;
-  color: #7a8798;
-  font-size: 13px;
+    margin: 4px 0 0;
+    color: #7a8798;
+    font-size: 13px;
+    transition: color 0.35s ease;
 }
-
 
 /* ==========================================================
    FORM GRID
    ========================================================== */
 
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 21px 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 21px 24px;
 }
 
 .form-group {
-  min-width: 0;
+    min-width: 0;
 }
 
 .full-width {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
-
 
 /* ==========================================================
    LABEL
    ========================================================== */
 
 .form-group label {
-  display: block;
-  margin-bottom: 7px;
-  color: #253650;
-  font-size: 13px;
-  font-weight: 600;
+    display: block;
+    margin-bottom: 7px;
+    color: #253650;
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 0.35s ease;
 }
 
 .required {
-  margin-left: 2px;
-  color: #0891b2;
+    margin-left: 2px;
+    color: #0891b2;
 }
-
 
 /* ==========================================================
    INPUT WRAPPER
    ========================================================== */
 
 .input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .input-icon {
-  position: absolute;
-  left: 13px;
-  z-index: 1;
-  color: #8291a5;
-  font-size: 19px;
-  pointer-events: none;
+    position: absolute;
+    left: 13px;
+    z-index: 1;
+    color: #8291a5;
+    font-size: 19px;
+    pointer-events: none;
+    transition: color 0.35s ease;
 }
 
 .input-wrapper input {
-  width: 100%;
-  height: 46px;
-  box-sizing: border-box;
-  padding: 0 14px 0 42px;
-  border: 1px solid #d7e0ea;
-  border-radius: 8px;
-  outline: none;
-  background: #ffffff;
-  color: #172033;
-  font-family: inherit;
-  font-size: 14px;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    padding: 0 14px 0 42px;
+    border: 1px solid #d7e0ea;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #172033;
+    font-family: inherit;
+    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .input-wrapper input::placeholder {
-  color: #a1acba;
+    color: #a1acba;
 }
 
 .input-wrapper input:hover {
-  border-color: #b9c8d9;
+    border-color: #b9c8d9;
 }
 
 .input-wrapper input:focus {
-  border-color: #06b6d4;
-  background: #ffffff;
-  box-shadow:
-    0 0 0 3px rgba(34, 211, 238, 0.12);
+    border-color: #06b6d4;
+    background: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.12);
 }
 
 .input-wrapper input.invalid {
-  border-color: #ef4444;
-  box-shadow:
-    0 0 0 2px rgba(239, 68, 68, 0.08);
+    border-color: #ef4444;
+    box-shadow:
+        0 0 0 2px rgba(239, 68, 68, 0.08);
 }
-
 
 /* ==========================================================
    PASSWORD TOGGLE
    ========================================================== */
 
 .password-toggle {
-  position: absolute;
-  right: 8px;
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 7px;
-  background: transparent;
-  color: #7b899a;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+    position: absolute;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #7b899a;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .password-toggle:hover {
-  background: #ecfeff;
-  color: #0891b2;
+    background: #ecfeff;
+    color: #0891b2;
 }
 
 .password-toggle .material-icons {
-  font-size: 19px;
+    font-size: 19px;
 }
-
 
 /* ==========================================================
    VALIDATION
    ========================================================== */
 
 .field-hint {
-  display: block;
-  margin-top: 5px;
-  color: #8a97a8;
-  font-size: 11px;
+    display: block;
+    margin-top: 5px;
+    color: #8a97a8;
+    font-size: 11px;
+    transition: color 0.35s ease;
 }
 
 .validation-message {
-  display: block;
-  margin-top: 5px;
-  color: #dc2626;
-  font-size: 11px;
-  line-height: 1.4;
+    display: block;
+    margin-top: 5px;
+    color: #dc2626;
+    font-size: 11px;
+    line-height: 1.4;
 }
-
 
 /* ==========================================================
    FORM ACTIONS
    ========================================================== */
 
 .form-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 4px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 4px 0 10px;
 }
-
 
 /* ==========================================================
    BUTTONS
    ========================================================== */
 
 .btn {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 20px;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
 .btn .material-icons {
-  font-size: 19px;
+    font-size: 19px;
 }
-
 
 /* ==========================================================
    SECONDARY BUTTON
    ========================================================== */
 
 .btn-secondary {
-  border: 1px solid #d5dfe9;
-  background: #ffffff;
-  color: #33445c;
+    border: 1px solid #d5dfe9;
+    background: #ffffff;
+    color: #33445c;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  border-color: #aebdcd;
-  background: #f8fafc;
-  transform: translateY(-1px);
+    border-color: #aebdcd;
+    background: #f8fafc;
+    transform: translateY(-1px);
 }
-
 
 /* ==========================================================
    PRIMARY BUTTON
    ========================================================== */
 
 .btn-primary {
-  border: 1px solid #0891b2;
-  background: #0891b2;
-  color: #ffffff;
-  box-shadow:
-    0 5px 14px rgba(8, 145, 178, 0.18);
+    border: 1px solid #0891b2;
+    background: #0891b2;
+    color: #ffffff;
+    box-shadow:
+        0 5px 14px rgba(8, 145, 178, 0.18);
 }
 
 .btn-primary:hover:not(:disabled) {
-  border-color: #0e7490;
-  background: #0e7490;
-  box-shadow:
-    0 7px 18px rgba(8, 145, 178, 0.25);
-  transform: translateY(-1px);
+    border-color: #0e7490;
+    background: #0e7490;
+    box-shadow:
+        0 7px 18px rgba(8, 145, 178, 0.25);
+    transform: translateY(-1px);
 }
 
 .btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
-
 
 /* ==========================================================
    LOADING SPINNER
    ========================================================== */
 
 .spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+/* ==========================================================
+   DARK THEME
+   Activated by Navbar toggle:
+   body.dark-theme
+   ========================================================== */
+
+:host-context(body.dark-theme) .add-user-page {
+    background:
+        linear-gradient(
+            180deg,
+            #061426 0%,
+            #071a2f 50%,
+            #061426 100%
+        );
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .header-icon {
+    background: linear-gradient(
+        135deg,
+        #0b2544,
+        #08233f
+    );
+    color: #00d9ff;
+    box-shadow:
+        0 8px 24px rgba(0, 217, 255, 0.12),
+        inset 0 0 0 1px rgba(0, 217, 255, 0.12);
+}
+
+:host-context(body.dark-theme) .header-content h1 {
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .header-content p {
+    color: #9db7cf;
+}
+
+/* ==========================================================
+   DARK - BACK BUTTON
+   ========================================================== */
+
+:host-context(body.dark-theme) .back-button {
+    border-color: rgba(0, 217, 255, 0.18);
+    background: #0b2544;
+    color: #c7d9eb;
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.18);
+}
+
+:host-context(body.dark-theme) .back-button:hover {
+    border-color: #00d9ff;
+    background: #0f3157;
+    color: #00d9ff;
+    box-shadow:
+        0 6px 20px rgba(0, 217, 255, 0.10);
+}
+
+/* ==========================================================
+   DARK - ALERTS
+   ========================================================== */
+
+:host-context(body.dark-theme) .success-alert {
+    border-color: rgba(16, 185, 129, 0.30);
+    background: rgba(16, 185, 129, 0.10);
+    color: #6ee7c8;
+}
+
+:host-context(body.dark-theme) .error-alert {
+    border-color: rgba(239, 68, 68, 0.30);
+    background: rgba(239, 68, 68, 0.10);
+    color: #fca5a5;
+}
+
+/* ==========================================================
+   DARK - FORM CARD
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-card {
+    border-color: rgba(0, 217, 255, 0.14);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11, 37, 68, 0.98),
+            rgba(7, 28, 54, 0.98)
+        );
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.28),
+        inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+:host-context(body.dark-theme) .card-header {
+    border-bottom-color: rgba(0, 217, 255, 0.12);
+}
+
+:host-context(body.dark-theme) .card-icon {
+    background: rgba(0, 217, 255, 0.10);
+    color: #22d3ee;
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 217, 255, 0.08);
+}
+
+:host-context(body.dark-theme) .card-header h2 {
+    color: #ffffff;
+}
+
+:host-context(body.dark-theme) .card-header p {
+    color: #8fa9c1;
+}
+
+/* ==========================================================
+   DARK - LABELS
+   ========================================================== */
+
+:host-context(body.dark-theme) .form-group label {
+    color: #c7d8e9;
+}
+
+:host-context(body.dark-theme) .required {
+    color: #22d3ee;
+}
+
+/* ==========================================================
+   DARK - INPUT ICON
+   ========================================================== */
+
+:host-context(body.dark-theme) .input-icon {
+    color: #7591aa;
+}
+
+/* ==========================================================
+   DARK - INPUTS
+   ========================================================== */
+
+:host-context(body.dark-theme) .input-wrapper input {
+    border-color: rgba(0, 217, 255, 0.16);
+    background: #081d35;
+    color: #ffffff;
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.015);
+}
+
+:host-context(body.dark-theme) .input-wrapper input::placeholder {
+    color: #718aa3;
+}
+
+:host-context(body.dark-theme) .input-wrapper input:hover {
+    border-color: rgba(0, 217, 255, 0.30);
+    background: #0a2340;
+}
+
+:host-context(body.dark-theme) .input-wrapper input:focus {
+    border-color: #00d9ff;
+    background: #081d35;
+    color: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(0, 217, 255, 0.10),
+        0 0 18px rgba(0, 217, 255, 0.06);
+}
+
+:host-context(body.dark-theme) .input-wrapper input.invalid {
+    border-color: #ef4444;
+    box-shadow:
+        0 0 0 2px rgba(239, 68, 68, 0.10);
+}
+
+/* ==========================================================
+   DARK - PASSWORD TOGGLE
+   ========================================================== */
+
+:host-context(body.dark-theme) .password-toggle {
+    color: #7893ac;
+}
+
+:host-context(body.dark-theme) .password-toggle:hover {
+    background: rgba(0, 217, 255, 0.10);
+    color: #00d9ff;
+}
+
+/* ==========================================================
+   DARK - VALIDATION
+   ========================================================== */
+
+:host-context(body.dark-theme) .field-hint {
+    color: #7893ac;
+}
+
+:host-context(body.dark-theme) .validation-message {
+    color: #fca5a5;
+}
+
+/* ==========================================================
+   DARK - SECONDARY BUTTON
+   ========================================================== */
+
+:host-context(body.dark-theme) .btn-secondary {
+    border-color: rgba(0, 217, 255, 0.18);
+    background: #0b2544;
+    color: #c6d8e9;
+}
+
+:host-context(body.dark-theme) .btn-secondary:hover:not(:disabled) {
+    border-color: rgba(0, 217, 255, 0.40);
+    background: #0f3157;
+    color: #ffffff;
+}
+
+/* ==========================================================
+   DARK - PRIMARY BUTTON
+   ========================================================== */
+
+:host-context(body.dark-theme) .btn-primary {
+    border-color: #00b8d9;
+    background: linear-gradient(
+        135deg,
+        #00b8d9,
+        #009bb8
+    );
+    color: #041525;
+    box-shadow:
+        0 6px 18px rgba(0, 217, 255, 0.16);
+}
+
+:host-context(body.dark-theme) .btn-primary:hover:not(:disabled) {
+    border-color: #22d3ee;
+    background: linear-gradient(
+        135deg,
+        #22d3ee,
+        #00a9c7
+    );
+    color: #031321;
+    box-shadow:
+        0 8px 24px rgba(0, 217, 255, 0.24);
+}
+
+/* ==========================================================
+   DARK - DISABLED BUTTON
+   ========================================================== */
+
+:host-context(body.dark-theme) .btn:disabled {
+    opacity: 0.45;
+}
 
 /* ==========================================================
    RESPONSIVE
@@ -457,63 +711,62 @@
 
 @media (max-width: 800px) {
 
-  .add-user-page {
-    padding: 22px 20px 32px;
-  }
+    .add-user-page {
+        padding: 22px 20px 32px;
+    }
 
-  .page-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 
-  .back-button {
-    width: 100%;
-    justify-content: center;
-  }
+    .back-button {
+        width: 100%;
+        justify-content: center;
+    }
 
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .full-width {
-    grid-column: auto;
-  }
+    .full-width {
+        grid-column: auto;
+    }
 
-  .form-card {
-    padding: 20px;
-  }
+    .form-card {
+        padding: 20px;
+    }
 
-  .form-actions {
-    flex-direction: column-reverse;
-  }
+    .form-actions {
+        flex-direction: column-reverse;
+    }
 
-  .btn {
-    width: 100%;
-  }
+    .btn {
+        width: 100%;
+    }
 }
-
 
 @media (max-width: 480px) {
 
-  .add-user-page {
-    padding: 18px 14px 28px;
-  }
+    .add-user-page {
+        padding: 18px 14px 28px;
+    }
 
-  .header-content h1 {
-    font-size: 22px;
-  }
+    .header-content h1 {
+        font-size: 22px;
+    }
 
-  .header-icon {
-    width: 46px;
-    height: 46px;
-  }
+    .header-icon {
+        width: 46px;
+        height: 46px;
+    }
 
-  .form-card {
-    padding: 17px;
-    border-radius: 11px;
-  }
+    .form-card {
+        padding: 17px;
+        border-radius: 11px;
+    }
 
-  .card-header {
-    margin-bottom: 18px;
-  }
+    .card-header {
+        margin-bottom: 18px;
+    }
 }

@@ -1,15 +1,17 @@
 /* ============================================================
    EDIT LEAD — VIOLET GOLD ELEGANCE
    Luxurious • Purple • Golden Shine • Modern CRM UI
+   Global Theme Controlled By Navbar ThemeService
    ============================================================ */
 
 :host {
   display: block;
+  width: 100%;
 }
 
 
 /* ============================================================
-   MAIN PAGE
+   MAIN PAGE — DARK IS THE BASE DESIGN
    ============================================================ */
 
 .edit-lead-page {
@@ -17,7 +19,6 @@
   min-height: 100vh;
   overflow: hidden;
   padding: 32px;
-
   font-family: "Poppins", sans-serif;
 
   background:
@@ -42,6 +43,10 @@
     );
 
   color: #f8efff;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -83,7 +88,6 @@
 .glow-one {
   width: 280px;
   height: 280px;
-
   top: -90px;
   right: 8%;
 
@@ -101,7 +105,6 @@
 .glow-two {
   width: 340px;
   height: 340px;
-
   bottom: -120px;
   left: -80px;
 
@@ -119,7 +122,6 @@
 .glow-three {
   width: 180px;
   height: 180px;
-
   top: 42%;
   left: 48%;
 
@@ -187,7 +189,6 @@
 .page-content {
   position: relative;
   z-index: 2;
-
   width: min(1250px, 100%);
   margin: 0 auto;
 }
@@ -233,7 +234,6 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 
   cursor: pointer;
-
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -242,12 +242,15 @@
     transform 0.25s ease,
     background 0.25s ease,
     box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .back-button i {
   color: #ffd36b;
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
 }
 
 .back-button:hover {
@@ -280,7 +283,6 @@
   display: flex;
   align-items: center;
   gap: 18px;
-
   margin-top: 24px;
 }
 
@@ -354,12 +356,15 @@
 
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 800;
-
   letter-spacing: -0.8px;
 
   text-shadow:
     0 3px 15px rgba(0, 0, 0, 0.3),
     0 0 25px rgba(255, 211, 105, 0.08);
+
+  transition:
+    color 0.35s ease,
+    text-shadow 0.35s ease;
 }
 
 .title-area p {
@@ -369,6 +374,9 @@
 
   font-size: 14px;
   line-height: 1.5;
+
+  transition:
+    color 0.35s ease;
 }
 
 
@@ -390,6 +398,12 @@
   -webkit-backdrop-filter: blur(14px);
 
   animation: alertIn 0.35s ease;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .alert i {
@@ -495,18 +509,20 @@
 
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 
-/* Top golden shine */
+/* ============================================================
+   TOP GOLDEN SHINE
+   ============================================================ */
 
 .form-section::before {
   content: "";
 
   position: absolute;
-
   top: 0;
   left: 7%;
   right: 7%;
@@ -528,13 +544,14 @@
 }
 
 
-/* Corner glow */
+/* ============================================================
+   CORNER GLOW
+   ============================================================ */
 
 .form-section::after {
   content: "";
 
   position: absolute;
-
   right: -85px;
   top: -85px;
 
@@ -643,6 +660,8 @@
 
   font-size: 18px;
   font-weight: 750;
+
+  transition: color 0.35s ease;
 }
 
 .section-heading p {
@@ -652,6 +671,8 @@
 
   font-size: 12px;
   line-height: 1.5;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -693,13 +714,13 @@
 
   font-size: 12px;
   font-weight: 700;
-
   letter-spacing: 0.2px;
+
+  transition: color 0.35s ease;
 }
 
 .form-group label span {
   color: #ffd56f;
-
   margin-left: 2px;
 }
 
@@ -752,13 +773,11 @@
 .select-wrapper select,
 .textarea-wrapper textarea {
   width: 100%;
-
   box-sizing: border-box;
 
   outline: none;
 
   border: 1px solid rgba(205, 173, 246, 0.2);
-
   border-radius: 15px;
 
   color: #f7efff;
@@ -782,12 +801,13 @@
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     transform 0.2s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 
 /* ============================================================
-   INPUT
+   INPUT / SELECT
    ============================================================ */
 
 .input-wrapper input,
@@ -814,7 +834,6 @@
     42px;
 
   resize: vertical;
-
   line-height: 1.5;
 }
 
@@ -826,6 +845,8 @@
 input::placeholder,
 textarea::placeholder {
   color: rgba(216, 195, 245, 0.48);
+
+  transition: color 0.35s ease;
 }
 
 
@@ -933,7 +954,6 @@ textarea::placeholder {
 
 .select-wrapper select:disabled {
   cursor: not-allowed;
-
   opacity: 0.55;
 
   background:
@@ -1024,7 +1044,8 @@ textarea::placeholder {
     transform 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .cancel-btn:hover,
@@ -1116,7 +1137,6 @@ textarea::placeholder {
   min-width: 175px;
 
   overflow: hidden;
-
   isolation: isolate;
 
   color: #321b39;
@@ -1212,7 +1232,6 @@ textarea::placeholder {
 
 .button-content {
   position: relative;
-
   z-index: 3;
 
   display: inline-flex;
@@ -1287,7 +1306,6 @@ textarea::placeholder {
   0% {
     width: 16px;
     height: 16px;
-
     opacity: 0.8;
 
     transform:
@@ -1331,6 +1349,736 @@ textarea::placeholder {
 
 
 /* ============================================================
+   ============================================================
+   LIGHT THEME
+   Activated by Navbar:
+   body.light-theme
+   ============================================================
+   ============================================================ */
+
+:host-context(body.light-theme) {
+
+  /* ----------------------------------------------------------
+     MAIN PAGE
+     ---------------------------------------------------------- */
+
+  .edit-lead-page {
+    background:
+      radial-gradient(
+        circle at 85% 8%,
+        rgba(255, 202, 82, 0.18),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 10% 90%,
+        rgba(145, 93, 235, 0.12),
+        transparent 28%
+      ),
+      linear-gradient(
+        135deg,
+        #f8f3ff 0%,
+        #f1eaff 20%,
+        #eee4fa 42%,
+        #f7f1ff 65%,
+        #eee8f8 82%,
+        #faf8ff 100%
+      );
+
+    color: #35244a;
+  }
+
+
+  /* ----------------------------------------------------------
+     BACKGROUND SHINE
+     ---------------------------------------------------------- */
+
+  .edit-lead-page::before {
+    background:
+      linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(255, 208, 100, 0.04) 35%,
+        rgba(255, 255, 255, 0.65) 50%,
+        rgba(255, 208, 100, 0.035) 65%,
+        transparent 100%
+      );
+  }
+
+
+  /* ----------------------------------------------------------
+     DECORATIVE GLOWS
+     ---------------------------------------------------------- */
+
+  .glow-one {
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 199, 76, 0.25),
+        rgba(255, 207, 100, 0.08),
+        transparent 70%
+      );
+  }
+
+  .glow-two {
+    background:
+      radial-gradient(
+        circle,
+        rgba(150, 87, 235, 0.20),
+        rgba(126, 62, 211, 0.06),
+        transparent 70%
+      );
+  }
+
+  .glow-three {
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 204, 94, 0.10),
+        transparent 70%
+      );
+  }
+
+
+  /* ----------------------------------------------------------
+     BACK BUTTON
+     ---------------------------------------------------------- */
+
+  .back-button {
+    color: #624c78;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.90),
+        rgba(246, 239, 255, 0.78)
+      );
+
+    border-color: rgba(117, 82, 150, 0.18);
+
+    box-shadow:
+      0 10px 25px rgba(76, 49, 105, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  .back-button i {
+    color: #9a68d7;
+  }
+
+  .back-button:hover {
+    color: #49325f;
+
+    border-color: rgba(164, 110, 224, 0.35);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 213, 108, 0.20),
+        rgba(255, 255, 255, 0.92)
+      );
+
+    box-shadow:
+      0 14px 30px rgba(76, 49, 105, 0.15),
+      0 0 25px rgba(190, 135, 255, 0.12);
+  }
+
+
+  /* ----------------------------------------------------------
+     TITLE
+     ---------------------------------------------------------- */
+
+  .title-area h1 {
+    color: #342044;
+
+    text-shadow:
+      0 3px 15px rgba(73, 45, 99, 0.10),
+      0 0 25px rgba(255, 195, 70, 0.08);
+  }
+
+  .title-area p {
+    color: #77678a;
+  }
+
+
+  /* ----------------------------------------------------------
+     TITLE ICON
+     ---------------------------------------------------------- */
+
+  .title-icon {
+    box-shadow:
+      0 18px 35px rgba(255, 190, 63, 0.22),
+      0 0 30px rgba(255, 204, 91, 0.10),
+      inset 0 2px 4px rgba(255, 255, 255, 0.92),
+      inset 0 -2px 5px rgba(111, 59, 0, 0.10);
+  }
+
+
+  /* ----------------------------------------------------------
+     ALERTS
+     ---------------------------------------------------------- */
+
+  .success-alert {
+    color: #17624e;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(221, 255, 244, 0.88),
+        rgba(237, 255, 249, 0.72)
+      );
+
+    border-color: rgba(39, 172, 135, 0.25);
+
+    box-shadow:
+      0 12px 28px rgba(0, 160, 120, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .success-alert i {
+    color: #159875;
+  }
+
+  .error-alert {
+    color: #8c3150;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 237, 242, 0.90),
+        rgba(255, 247, 249, 0.76)
+      );
+
+    border-color: rgba(224, 91, 125, 0.25);
+
+    box-shadow:
+      0 12px 28px rgba(220, 70, 110, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.90);
+  }
+
+  .error-alert i {
+    color: #d94c75;
+  }
+
+
+  /* ----------------------------------------------------------
+     FORM SECTION
+     ---------------------------------------------------------- */
+
+  .form-section {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(248, 243, 255, 0.92) 55%,
+        rgba(241, 233, 251, 0.94)
+      );
+
+    border-color: rgba(133, 93, 171, 0.16);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow:
+      0 25px 55px rgba(73, 46, 105, 0.13),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(255, 199, 79, 0.04);
+  }
+
+  .form-section::before {
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 205, 99, 0.16),
+        rgba(255, 222, 146, 0.60),
+        rgba(255, 205, 99, 0.16),
+        transparent
+      );
+
+    box-shadow:
+      0 0 12px rgba(255, 199, 91, 0.14);
+  }
+
+  .form-section::after {
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 207, 100, 0.12),
+        rgba(172, 108, 255, 0.06),
+        transparent 70%
+      );
+  }
+
+  .form-section:hover {
+    border-color: rgba(157, 105, 209, 0.25);
+
+    box-shadow:
+      0 30px 65px rgba(73, 46, 105, 0.17),
+      0 0 30px rgba(163, 87, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.98);
+  }
+
+
+  /* ----------------------------------------------------------
+     SECTION HEADINGS
+     ---------------------------------------------------------- */
+
+  .section-heading h2 {
+    color: #63417f;
+  }
+
+  .section-heading p {
+    color: #857493;
+  }
+
+
+  /* ----------------------------------------------------------
+     SECTION ICONS
+     ---------------------------------------------------------- */
+
+  .personal-icon,
+  .location-icon,
+  .classification-icon {
+    box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.58),
+      inset 0 -2px 5px rgba(74, 40, 100, 0.10),
+      0 10px 20px rgba(77, 46, 104, 0.14);
+  }
+
+
+  /* ----------------------------------------------------------
+     FORM LABELS
+     ---------------------------------------------------------- */
+
+  .form-group label {
+    color: #59446c;
+  }
+
+  .form-group label span {
+    color: #b87913;
+  }
+
+
+  /* ----------------------------------------------------------
+     INPUT / SELECT / TEXTAREA
+     ---------------------------------------------------------- */
+
+  .input-wrapper input,
+  .select-wrapper select,
+  .textarea-wrapper textarea {
+    color: #3e3150;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(248, 243, 255, 0.94)
+      );
+
+    border-color: rgba(128, 94, 157, 0.20);
+
+    box-shadow:
+      inset 0 1px 3px rgba(89, 55, 118, 0.04),
+      inset 0 -1px 2px rgba(255, 255, 255, 0.90),
+      0 8px 20px rgba(81, 52, 108, 0.07);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(112, 91, 128, 0.52);
+  }
+
+
+  /* ----------------------------------------------------------
+     INPUT FOCUS
+     ---------------------------------------------------------- */
+
+  .input-wrapper input:focus,
+  .select-wrapper select:focus,
+  .textarea-wrapper textarea:focus {
+    border-color: rgba(196, 145, 42, 0.58);
+
+    background:
+      linear-gradient(
+        135deg,
+        #ffffff,
+        #fbf7ff
+      );
+
+    box-shadow:
+      0 0 0 3px rgba(255, 205, 92, 0.10),
+      0 0 20px rgba(255, 205, 92, 0.06),
+      0 12px 25px rgba(81, 52, 108, 0.09);
+  }
+
+
+  /* ----------------------------------------------------------
+     FORM ICONS
+     ---------------------------------------------------------- */
+
+  .input-wrapper > i:first-child,
+  .textarea-wrapper > i:first-child,
+  .select-wrapper > i:first-child {
+    color: #aa7b25;
+  }
+
+  .input-wrapper:focus-within > i:first-child,
+  .textarea-wrapper:focus-within > i:first-child,
+  .select-wrapper:focus-within > i:first-child {
+    color: #c28a1d;
+  }
+
+
+  /* ----------------------------------------------------------
+     SELECT
+     ---------------------------------------------------------- */
+
+  .select-wrapper select {
+    color: #3e3150;
+    color-scheme: light;
+  }
+
+  .select-wrapper select option {
+    color: #3e3150;
+    background: #ffffff;
+  }
+
+  .select-wrapper select option:checked {
+    background: #eee2ff;
+    color: #51356c;
+  }
+
+  .select-wrapper .select-arrow {
+    color: #aa7b25;
+  }
+
+  .select-wrapper:focus-within .select-arrow {
+    color: #c28a1d;
+  }
+
+
+  /* ----------------------------------------------------------
+     DISABLED SELECT
+     ---------------------------------------------------------- */
+
+  .select-wrapper select:disabled {
+    opacity: 0.58;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(236, 230, 243, 0.80),
+        rgba(244, 239, 249, 0.78)
+      );
+  }
+
+
+  /* ----------------------------------------------------------
+     FIELD ERROR
+     ---------------------------------------------------------- */
+
+  .field-error {
+    color: #d04d70;
+  }
+
+
+  /* ----------------------------------------------------------
+     CANCEL BUTTON
+     ---------------------------------------------------------- */
+
+  .cancel-btn {
+    color: #685877;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.92),
+        rgba(245, 238, 252, 0.82)
+      );
+
+    border-color: rgba(117, 82, 150, 0.18);
+
+    box-shadow:
+      0 8px 20px rgba(76, 49, 105, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  .cancel-btn:hover {
+    color: #574265;
+
+    border-color: rgba(192, 145, 61, 0.28);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 214, 111, 0.18),
+        rgba(255, 255, 255, 0.95)
+      );
+
+    box-shadow:
+      0 12px 25px rgba(76, 49, 105, 0.13);
+  }
+
+
+  /* ----------------------------------------------------------
+     RESET BUTTON
+     ---------------------------------------------------------- */
+
+  .reset-btn {
+    color: #6d4b91;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(182, 137, 245, 0.18),
+        rgba(224, 206, 249, 0.22)
+      );
+
+    border-color: rgba(147, 104, 195, 0.22);
+
+    box-shadow:
+      0 8px 22px rgba(101, 58, 157, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  .reset-btn:hover {
+    color: #5b397d;
+
+    border-color: rgba(144, 96, 196, 0.35);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(190, 142, 252, 0.27),
+        rgba(224, 207, 250, 0.30)
+      );
+
+    box-shadow:
+      0 14px 28px rgba(101, 58, 157, 0.16);
+  }
+
+
+  /* ----------------------------------------------------------
+     SAVE BUTTON
+     ---------------------------------------------------------- */
+
+  .save-btn {
+    color: #432b25;
+
+    border-color: rgba(218, 166, 63, 0.60);
+
+    box-shadow:
+      0 14px 32px rgba(255, 180, 43, 0.20),
+      0 0 25px rgba(255, 194, 67, 0.06),
+      inset 0 2px 4px rgba(255, 255, 255, 0.86),
+      inset 0 -2px 4px rgba(117, 61, 0, 0.10);
+  }
+
+  .save-btn:not(:disabled):hover {
+    box-shadow:
+      0 18px 38px rgba(255, 180, 43, 0.30),
+      0 0 28px rgba(255, 204, 92, 0.10),
+      inset 0 2px 4px rgba(255, 255, 255, 0.92);
+  }
+
+
+  /* ----------------------------------------------------------
+     SPINNER
+     ---------------------------------------------------------- */
+
+  .fa-spinner {
+    color: #6a405a;
+  }
+
+
+  /* ----------------------------------------------------------
+     RIPPLE
+     ---------------------------------------------------------- */
+
+  .button-water {
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 237, 174, 0.68) 35%,
+        rgba(255, 193, 71, 0.22) 55%,
+        transparent 72%
+      );
+
+    box-shadow:
+      0 0 20px rgba(255, 221, 134, 0.65);
+  }
+
+
+  /* ----------------------------------------------------------
+     LIGHT SCROLLBAR
+     ---------------------------------------------------------- */
+
+  .edit-lead-page::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .edit-lead-page::-webkit-scrollbar-track {
+    background: #eee8f5;
+  }
+
+  .edit-lead-page::-webkit-scrollbar-thumb {
+    background:
+      linear-gradient(
+        180deg,
+        #d7a93f,
+        #a45be8
+      );
+
+    border-radius: 20px;
+  }
+
+  .edit-lead-page::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(
+        180deg,
+        #e7c263,
+        #bd79ff
+      );
+  }
+
+
+  /* ----------------------------------------------------------
+     LIGHT FORM CONTROL COLOR SCHEME
+     ---------------------------------------------------------- */
+
+  input,
+  textarea,
+  select {
+    color-scheme: light;
+  }
+
+  select option {
+    background: #ffffff;
+    color: #3e3150;
+  }
+}
+
+
+/* ============================================================
+   DARK THEME
+   Explicitly keeps the original dark appearance
+   ============================================================ */
+
+:host-context(body.dark-theme) {
+
+  .edit-lead-page {
+    color: #f8efff;
+  }
+
+  .title-area h1 {
+    color: #fffaf0;
+  }
+
+  .title-area p {
+    color: rgba(241, 224, 255, 0.75);
+  }
+
+  .form-section {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(24, 13, 40, 0.88),
+        rgba(55, 26, 76, 0.82) 55%,
+        rgba(38, 18, 57, 0.9)
+      );
+
+    border-color: rgba(221, 186, 255, 0.14);
+  }
+
+  .form-group label {
+    color: #efd8ff;
+  }
+
+  .section-heading h2 {
+    color: #ffe7a5;
+  }
+
+  .section-heading p {
+    color: rgba(228, 211, 249, 0.68);
+  }
+
+  .input-wrapper input,
+  .select-wrapper select,
+  .textarea-wrapper textarea {
+    color: #f7efff;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(37, 21, 57, 0.95),
+        rgba(61, 34, 81, 0.9)
+      );
+
+    border-color: rgba(205, 173, 246, 0.2);
+  }
+
+  .input-wrapper input:focus,
+  .select-wrapper select:focus,
+  .textarea-wrapper textarea:focus {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(48, 27, 68, 0.98),
+        rgba(72, 40, 96, 0.94)
+      );
+  }
+
+  .select-wrapper select {
+    color: #f9f3ff;
+    color-scheme: dark;
+  }
+
+  .select-wrapper select option {
+    color: #ffffff;
+    background: #27163c;
+  }
+
+  .select-wrapper select option:checked {
+    background: #65409a;
+    color: #ffffff;
+  }
+
+  input,
+  textarea,
+  select {
+    color-scheme: dark;
+  }
+
+  select option {
+    background: #27163c;
+    color: #ffffff;
+  }
+
+  .edit-lead-page::-webkit-scrollbar-track {
+    background: #10071b;
+  }
+
+  .edit-lead-page::-webkit-scrollbar-thumb {
+    background:
+      linear-gradient(
+        180deg,
+        #ffd86d,
+        #a45be8
+      );
+  }
+
+  .edit-lead-page::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(
+        180deg,
+        #ffe59a,
+        #bd79ff
+      );
+  }
+}
+
+
+/* ============================================================
    TABLET
    ============================================================ */
 
@@ -1347,7 +2095,6 @@ textarea::placeholder {
   .form-grid {
     gap: 16px;
   }
-
 }
 
 
@@ -1361,106 +2108,80 @@ textarea::placeholder {
     padding: 18px 14px 24px;
   }
 
-
   .page-header {
     margin-bottom: 22px;
   }
 
-
   .title-area {
     align-items: flex-start;
     gap: 13px;
-
     margin-top: 20px;
   }
-
 
   .title-icon {
     width: 56px;
     height: 56px;
-
     border-radius: 17px;
   }
-
 
   .title-icon i {
     font-size: 23px;
   }
 
-
   .title-area h1 {
     font-size: 26px;
   }
-
 
   .title-area p {
     font-size: 12px;
   }
 
-
   .form-section {
     padding: 21px 17px;
-
     border-radius: 21px;
   }
 
-
   .section-heading {
     align-items: flex-start;
-
     gap: 12px;
-
     margin-bottom: 20px;
   }
-
 
   .section-icon {
     width: 42px;
     height: 42px;
-
     border-radius: 13px;
   }
-
 
   .section-heading h2 {
     font-size: 16px;
   }
 
-
   .section-heading p {
     font-size: 11px;
   }
 
-
   .form-grid {
     grid-template-columns: 1fr;
-
     gap: 16px;
   }
-
 
   .full-width {
     grid-column: auto;
   }
 
-
   .form-actions {
     flex-wrap: wrap;
-
     justify-content: stretch;
-
     padding-bottom: 10px;
   }
-
 
   .cancel-btn,
   .reset-btn,
   .save-btn {
     flex: 1 1 100%;
-
     width: 100%;
   }
-
 }
 
 
@@ -1474,79 +2195,88 @@ textarea::placeholder {
     padding: 14px 10px 20px;
   }
 
-
   .back-button {
     padding: 10px 14px;
-
     border-radius: 14px;
-
     font-size: 12px;
   }
-
 
   .title-area {
     gap: 11px;
   }
 
-
   .title-icon {
     width: 50px;
     height: 50px;
-
     border-radius: 15px;
   }
-
 
   .title-icon i {
     font-size: 20px;
   }
 
-
   .title-area h1 {
     font-size: 23px;
-
     letter-spacing: -0.4px;
   }
 
-
   .title-area p {
     margin-top: 4px;
-
     font-size: 11px;
   }
 
-
   .form-section {
     padding: 18px 14px;
-
     border-radius: 19px;
   }
-
 
   .input-wrapper input,
   .select-wrapper select {
     height: 46px;
-
     font-size: 12px;
   }
-
 
   .textarea-wrapper textarea {
     font-size: 12px;
   }
 
-
   .form-group label {
     font-size: 11px;
   }
 
-
   .alert {
     padding: 12px 14px;
-
     font-size: 12px;
   }
+}
 
+
+/* ============================================================
+   SMOOTH THEME TRANSITION
+   ============================================================ */
+
+.edit-lead-page,
+.form-section,
+.input-wrapper input,
+.select-wrapper select,
+.textarea-wrapper textarea,
+.back-button,
+.cancel-btn,
+.reset-btn,
+.save-btn,
+.alert,
+.title-area h1,
+.title-area p,
+.section-heading h2,
+.section-heading p,
+.form-group label {
+  transition:
+    background 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
 }
 
 
@@ -1561,8 +2291,6 @@ textarea::placeholder {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-
     transition-duration: 0.01ms !important;
   }
-
 }

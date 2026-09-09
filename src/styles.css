@@ -1,4 +1,628 @@
-/* You can add global styles to this file, and also import other style files */
+/* =========================================================
+   LEADPILOT CRM
+   GLOBAL STYLES + GLOBAL THEME
+   ========================================================= */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   GLOBAL BODY
+   ========================================================= */
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Roboto,
+        "Helvetica Neue",
+        sans-serif;
+
+    background:
+        var(--bg-primary);
+
+    color:
+        var(--text-primary);
+
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease;
+}
+
+
+/* =========================================================
+   DEFAULT THEME
+   ---------------------------------------------------------
+   Application starts in LIGHT mode.
+   ThemeService can change this to DARK.
+   ========================================================= */
+
+body:not(.dark-theme):not(.light-theme) {
+
+    --bg-primary: #f4f7fb;
+
+    --bg-secondary: #ffffff;
+
+    --bg-card: #ffffff;
+
+    --bg-card-hover: #f1f6fc;
+
+    --text-primary: #172033;
+
+    --text-secondary: #52627a;
+
+    --text-muted: #7d899b;
+
+    --border-color:
+        rgba(70, 90, 120, 0.18);
+
+    --primary-color: #009ec4;
+
+    --primary-dark: #007d9c;
+
+    --accent-color: #6751d8;
+
+    --shadow-color:
+        rgba(35, 70, 110, 0.12);
+
+    --app-overlay:
+        rgba(20, 35, 55, 0.35);
+
+    --scrollbar-track:
+        #eef2f7;
+
+    --scrollbar-thumb:
+        #00a9ce;
+
+    --scrollbar-thumb-hover:
+        #007d9c;
+}
+
+
+/* =========================================================
+   GLOBAL LIGHT THEME
+   ========================================================= */
+
+body.light-theme {
+
+    /* -----------------------------------------------------
+       General Application
+       ----------------------------------------------------- */
+
+    --bg-primary: #f4f7fb;
+
+    --bg-secondary: #ffffff;
+
+    --bg-card: #ffffff;
+
+    --bg-card-hover: #f1f6fc;
+
+
+    /* -----------------------------------------------------
+       Text
+       ----------------------------------------------------- */
+
+    --text-primary: #172033;
+
+    --text-secondary: #52627a;
+
+    --text-muted: #7d899b;
+
+
+    /* -----------------------------------------------------
+       Borders
+       ----------------------------------------------------- */
+
+    --border-color:
+        rgba(70, 90, 120, 0.18);
+
+
+    /* -----------------------------------------------------
+       Brand Colors
+       ----------------------------------------------------- */
+
+    --primary-color: #009ec4;
+
+    --primary-dark: #007d9c;
+
+    --accent-color: #6751d8;
+
+
+    /* -----------------------------------------------------
+       Shadows
+       ----------------------------------------------------- */
+
+    --shadow-color:
+        rgba(35, 70, 110, 0.12);
+
+
+    /* -----------------------------------------------------
+       Overlay
+       ----------------------------------------------------- */
+
+    --app-overlay:
+        rgba(20, 35, 55, 0.35);
+
+
+    /* -----------------------------------------------------
+       Scrollbar
+       ----------------------------------------------------- */
+
+    --scrollbar-track:
+        #eef2f7;
+
+    --scrollbar-thumb:
+        #00a9ce;
+
+    --scrollbar-thumb-hover:
+        #007d9c;
+}
+
+
+/* =========================================================
+   GLOBAL DARK THEME
+   ========================================================= */
+
+body.dark-theme {
+
+    /* -----------------------------------------------------
+       General Application
+       ----------------------------------------------------- */
+
+    --bg-primary: #061426;
+
+    --bg-secondary: #081d35;
+
+    --bg-card: #0b2544;
+
+    --bg-card-hover: #0f3157;
+
+
+    /* -----------------------------------------------------
+       Text
+       ----------------------------------------------------- */
+
+    --text-primary: #ffffff;
+
+    --text-secondary: #a9c4dc;
+
+    --text-muted: #7f9bb5;
+
+
+    /* -----------------------------------------------------
+       Borders
+       ----------------------------------------------------- */
+
+    --border-color:
+        rgba(0, 220, 255, 0.18);
+
+
+    /* -----------------------------------------------------
+       Brand Colors
+       ----------------------------------------------------- */
+
+    --primary-color: #00d9ff;
+
+    --primary-dark: #009bb8;
+
+    --accent-color: #7c5cff;
+
+
+    /* -----------------------------------------------------
+       Shadows
+       ----------------------------------------------------- */
+
+    --shadow-color:
+        rgba(0, 217, 255, 0.15);
+
+
+    /* -----------------------------------------------------
+       Overlay
+       ----------------------------------------------------- */
+
+    --app-overlay:
+        rgba(0, 0, 0, 0.60);
+
+
+    /* -----------------------------------------------------
+       Scrollbar
+       ----------------------------------------------------- */
+
+    --scrollbar-track:
+        #061426;
+
+    --scrollbar-thumb:
+        #00d9ff;
+
+    --scrollbar-thumb-hover:
+        #6751d8;
+}
+
+
+/* =========================================================
+   ADMIN LAYOUT - GLOBAL THEME VARIABLES
+   ---------------------------------------------------------
+   These are used by admin-layout.component.css.
+   ========================================================= */
+
+
+/* =========================================================
+   ADMIN LAYOUT - LIGHT
+   ========================================================= */
+
+body.light-theme {
+
+    --admin-page-bg:
+        #F4F8FC;
+
+    --admin-content-bg:
+        linear-gradient(
+            180deg,
+            #F8FBFE,
+            #EEF5FC
+        );
+
+    --admin-sidebar-bg:
+        #FFFFFF;
+
+    --admin-footer-bg:
+        #FFFFFF;
+
+    --admin-text:
+        #172033;
+
+    --admin-border:
+        #E4ECF3;
+
+    --admin-primary:
+        #00A9D4;
+
+    --admin-scrollbar:
+        #00A9D4;
+
+    --admin-scrollbar-track:
+        #EAF4FC;
+
+    --admin-overlay:
+        rgba(20, 35, 55, 0.35);
+
+    --admin-content-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.70);
+
+    --admin-sidebar-shadow:
+        14px 0 35px rgba(35, 70, 110, 0.18);
+}
+
+
+/* =========================================================
+   ADMIN LAYOUT - DARK
+   ========================================================= */
+
+body.dark-theme {
+
+    --admin-page-bg:
+        #061426;
+
+    --admin-content-bg:
+        linear-gradient(
+            180deg,
+            #081d35,
+            #061426
+        );
+
+    --admin-sidebar-bg:
+        #071C36;
+
+    --admin-footer-bg:
+        #081d35;
+
+    --admin-text:
+        #ffffff;
+
+    --admin-border:
+        rgba(0, 212, 255, 0.18);
+
+    --admin-primary:
+        #00D4FF;
+
+    --admin-scrollbar:
+        #00D4FF;
+
+    --admin-scrollbar-track:
+        #081d35;
+
+    --admin-overlay:
+        rgba(0, 0, 0, 0.60);
+
+    --admin-content-shadow:
+        inset 0 1px rgba(0, 212, 255, 0.08);
+
+    --admin-sidebar-shadow:
+        14px 0 35px rgba(0, 0, 0, 0.50);
+}
+
+
+/* =========================================================
+   GLOBAL THEME TRANSITION
+   ---------------------------------------------------------
+   This makes the whole application transition smoothly
+   when Navbar changes the theme.
+   ========================================================= */
+
+body,
+.admin-layout,
+.admin-navbar,
+.admin-sidebar,
+.admin-content,
+.main-section,
+.sidebar-container,
+.content-container,
+.breadcrumb-container,
+.footer-container,
+.card,
+.dashboard-card,
+.search-box,
+.table-container,
+.modal-content,
+input,
+select,
+textarea,
+button {
+
+    transition:
+        background-color 0.35s ease,
+        background 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* =========================================================
+   GLOBAL FORM ELEMENTS - LIGHT
+   ========================================================= */
+
+body.light-theme input,
+body.light-theme select,
+body.light-theme textarea {
+
+    background:
+        #ffffff;
+
+    color:
+        #172033;
+
+    border-color:
+        rgba(70, 90, 120, 0.20);
+}
+
+
+/* =========================================================
+   GLOBAL FORM ELEMENTS - DARK
+   ========================================================= */
+
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+
+    background:
+        #081d35;
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(0, 217, 255, 0.20);
+}
+
+
+/* =========================================================
+   INPUT FOCUS - LIGHT
+   ========================================================= */
+
+body.light-theme input:focus,
+body.light-theme select:focus,
+body.light-theme textarea:focus {
+
+    outline: none;
+
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 158, 196, 0.10);
+}
+
+
+/* =========================================================
+   INPUT FOCUS - DARK
+   ========================================================= */
+
+body.dark-theme input:focus,
+body.dark-theme select:focus,
+body.dark-theme textarea:focus {
+
+    outline: none;
+
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 217, 255, 0.10);
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+body.light-theme input::placeholder,
+body.light-theme textarea::placeholder {
+
+    color:
+        #8b96a8;
+
+    opacity: 1;
+}
+
+
+body.dark-theme input::placeholder,
+body.dark-theme textarea::placeholder {
+
+    color:
+        #7892aa;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+button {
+
+    font-family:
+        inherit;
+
+    cursor:
+        pointer;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+body.light-theme a {
+
+    color:
+        #008caf;
+}
+
+
+body.dark-theme a {
+
+    color:
+        #00d9ff;
+}
+
+
+/* =========================================================
+   TEXT SELECTION - LIGHT
+   ========================================================= */
+
+body.light-theme ::selection {
+
+    background:
+        rgba(0, 158, 196, 0.20);
+
+    color:
+        #172033;
+}
+
+
+/* =========================================================
+   TEXT SELECTION - DARK
+   ========================================================= */
+
+body.dark-theme ::selection {
+
+    background:
+        rgba(0, 217, 255, 0.30);
+
+    color:
+        #ffffff;
+}
+
+
+/* =========================================================
+   GLOBAL SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+
+    width:
+        8px;
+
+    height:
+        8px;
+}
+
+
+/* =========================================================
+   SCROLLBAR TRACK
+   ========================================================= */
+
+::-webkit-scrollbar-track {
+
+    background:
+        var(--scrollbar-track);
+}
+
+
+/* =========================================================
+   SCROLLBAR THUMB
+   ========================================================= */
+
+::-webkit-scrollbar-thumb {
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--scrollbar-thumb),
+            var(--accent-color)
+        );
+
+    border-radius:
+        10px;
+}
+
+
+/* =========================================================
+   SCROLLBAR HOVER
+   ========================================================= */
+
+::-webkit-scrollbar-thumb:hover {
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--scrollbar-thumb-hover),
+            var(--accent-color)
+        );
+}
+
+
+/* =========================================================
+   ANGULAR ROOT
+   ========================================================= */
+
+app-root {
+
+    display:
+        block;
+
+    min-height:
+        100vh;
+}

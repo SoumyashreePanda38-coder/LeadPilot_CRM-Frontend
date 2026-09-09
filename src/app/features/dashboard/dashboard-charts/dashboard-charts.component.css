@@ -1,9 +1,21 @@
 /* ==========================================================
+   LEADPILOT CRM
+   ADMIN DASHBOARD - CHARTS
+   GLOBAL LIGHT / DARK THEME
+========================================================== */
+
+
+/* ==========================================================
    MAIN WRAPPER
 ========================================================== */
 
 .charts-wrapper {
   width: 100%;
+
+  color: var(--chart-text);
+
+  transition:
+    color 0.35s ease;
 }
 
 
@@ -36,27 +48,26 @@
 
   border-radius: 24px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #fafbff
-    );
+  background: var(--chart-card-bg);
 
-  border: 1px solid
-    rgba(94, 74, 180, 0.11);
+  border: 1px solid var(--chart-card-border);
 
   box-shadow:
-    0 12px 35px
-      rgba(39, 34, 85, 0.08);
+    0 12px 35px var(--chart-card-shadow);
 
   overflow: hidden;
 
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
+
+/* ==========================================================
+   TOP GRADIENT LINE
+========================================================== */
 
 .chart-card::before {
   content: '';
@@ -78,14 +89,17 @@
 }
 
 
+/* ==========================================================
+   CHART CARD HOVER
+========================================================== */
+
 .chart-card:hover {
 
   transform:
     translateY(-4px);
 
   box-shadow:
-    0 20px 45px
-      rgba(43, 36, 97, 0.13);
+    0 20px 45px var(--chart-card-hover-shadow);
 }
 
 
@@ -108,6 +122,10 @@
 }
 
 
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
 .chart-eyebrow {
 
   display: block;
@@ -118,24 +136,35 @@
 
   letter-spacing: 1.4px;
 
-  color: #315cff;
+  color: var(--chart-eyebrow);
 
   margin-bottom: 7px;
 }
 
+
+/* ==========================================================
+   TITLES
+========================================================== */
 
 .chart-card h3,
 .monthly-card h3 {
 
   margin: 0;
 
-  color: #10182d;
+  color: var(--chart-title);
 
   font-size: 19px;
 
   font-weight: 800;
+
+  transition:
+    color 0.35s ease;
 }
 
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
 
 .chart-card p,
 .monthly-card p {
@@ -145,7 +174,10 @@
 
   font-size: 12px;
 
-  color: #7b879d;
+  color: var(--chart-description);
+
+  transition:
+    color 0.35s ease;
 }
 
 
@@ -173,30 +205,45 @@
 }
 
 
+/* ==========================================================
+   STATUS ICON
+========================================================== */
+
 .status-icon {
 
   background:
-    rgba(101, 70, 215, 0.11);
+    var(--status-icon-bg);
 
-  color: #6546d7;
+  color:
+    #6546d7;
 }
 
+
+/* ==========================================================
+   PRIORITY ICON
+========================================================== */
 
 .priority-icon {
 
   background:
-    rgba(239, 91, 103, 0.11);
+    var(--priority-icon-bg);
 
-  color: #ef5b67;
+  color:
+    #ef5b67;
 }
 
+
+/* ==========================================================
+   SOURCE ICON
+========================================================== */
 
 .source-icon {
 
   background:
-    rgba(22, 184, 212, 0.11);
+    var(--source-icon-bg);
 
-  color: #16a9c5;
+  color:
+    #16a9c5;
 }
 
 
@@ -241,23 +288,33 @@
 
   box-shadow:
     0 10px 30px
-      rgba(50, 40, 100, 0.12);
+      var(--donut-shadow);
 
   animation:
     donutAppear 0.7s ease;
 }
 
 
+/* ==========================================================
+   DONUT ANIMATION
+========================================================== */
+
 @keyframes donutAppear {
 
   from {
+
     opacity: 0;
-    transform: scale(0.7);
+
+    transform:
+      scale(0.7);
   }
 
   to {
+
     opacity: 1;
-    transform: scale(1);
+
+    transform:
+      scale(1);
   }
 
 }
@@ -274,7 +331,8 @@
 
   border-radius: 50%;
 
-  background: #ffffff;
+  background:
+    var(--donut-hole-bg);
 
   display: flex;
 
@@ -286,9 +344,17 @@
 
   box-shadow:
     inset 0 0 0 1px
-      rgba(50, 40, 100, 0.06);
+      var(--donut-hole-border);
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
+
+/* ==========================================================
+   DONUT NUMBER
+========================================================== */
 
 .donut-hole strong {
 
@@ -296,11 +362,16 @@
 
   font-weight: 800;
 
-  color: #11182b;
+  color:
+    var(--donut-number);
 
   line-height: 1.1;
 }
 
+
+/* ==========================================================
+   DONUT LABEL
+========================================================== */
 
 .donut-hole span {
 
@@ -310,11 +381,13 @@
 
   font-weight: 700;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
   letter-spacing: 1px;
 
-  color: #8993a8;
+  color:
+    var(--donut-label);
 }
 
 
@@ -336,6 +409,10 @@
 }
 
 
+/* ==========================================================
+   LEGEND SCROLLBAR
+========================================================== */
+
 .legend::-webkit-scrollbar {
 
   width: 4px;
@@ -345,11 +422,15 @@
 .legend::-webkit-scrollbar-thumb {
 
   background:
-    rgba(85, 64, 200, 0.2);
+    var(--legend-scrollbar);
 
   border-radius: 10px;
 }
 
+
+/* ==========================================================
+   LEGEND ITEM
+========================================================== */
 
 .legend-item {
 
@@ -366,9 +447,16 @@
 
   border-bottom:
     1px solid
-      rgba(30, 35, 70, 0.06);
+      var(--legend-divider);
+
+  transition:
+    border-color 0.35s ease;
 }
 
+
+/* ==========================================================
+   LEGEND DOT
+========================================================== */
 
 .legend-dot {
 
@@ -379,37 +467,54 @@
 }
 
 
+/* ==========================================================
+   LEGEND NAME
+========================================================== */
+
 .legend-name {
 
   min-width: 0;
 
   overflow: hidden;
 
-  text-overflow: ellipsis;
+  text-overflow:
+    ellipsis;
 
-  white-space: nowrap;
+  white-space:
+    nowrap;
 
   font-size: 11px;
 
-  color: #526079;
+  color:
+    var(--legend-name);
 
   font-weight: 600;
 }
 
 
+/* ==========================================================
+   LEGEND VALUE
+========================================================== */
+
 .legend-item strong {
 
   font-size: 11px;
 
-  color: #192039;
+  color:
+    var(--legend-value);
 }
 
+
+/* ==========================================================
+   LEGEND PERCENTAGE
+========================================================== */
 
 .legend-item small {
 
   font-size: 10px;
 
-  color: #8b95a9;
+  color:
+    var(--legend-percentage);
 
   min-width: 31px;
 
@@ -418,7 +523,7 @@
 
 
 /* ==========================================================
-   EMPTY
+   EMPTY STATE
 ========================================================== */
 
 .chart-empty {
@@ -435,9 +540,14 @@
 
   text-align: center;
 
-  color: #8993a8;
+  color:
+    var(--chart-empty);
 }
 
+
+/* ==========================================================
+   EMPTY ICON
+========================================================== */
 
 .chart-empty i {
 
@@ -449,15 +559,24 @@
 }
 
 
+/* ==========================================================
+   EMPTY TITLE
+========================================================== */
+
 .chart-empty strong {
 
-  color: #4c5870;
+  color:
+    var(--chart-empty-title);
 
   font-size: 14px;
 
   margin-bottom: 5px;
 }
 
+
+/* ==========================================================
+   EMPTY DESCRIPTION
+========================================================== */
 
 .chart-empty span {
 
@@ -480,24 +599,30 @@
   border-radius: 24px;
 
   background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #fafbff
-    );
+    var(--monthly-card-bg);
 
-  border: 1px solid
-    rgba(94, 74, 180, 0.11);
+  border:
+    1px solid
+      var(--monthly-card-border);
 
   box-shadow:
     0 12px 35px
-      rgba(39, 34, 85, 0.08);
+      var(--monthly-card-shadow);
 
   position: relative;
 
   overflow: hidden;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
+
+/* ==========================================================
+   MONTHLY TOP LINE
+========================================================== */
 
 .monthly-card::before {
 
@@ -520,12 +645,17 @@
 }
 
 
+/* ==========================================================
+   MONTHLY ICON
+========================================================== */
+
 .monthly-icon {
 
   background:
-    rgba(21, 156, 100, 0.11);
+    var(--monthly-icon-bg);
 
-  color: #159c64;
+  color:
+    #159c64;
 }
 
 
@@ -553,9 +683,16 @@
 
   border-bottom:
     1px solid
-      rgba(40, 45, 80, 0.1);
+      var(--monthly-chart-border);
+
+  transition:
+    border-color 0.35s ease;
 }
 
+
+/* ==========================================================
+   BAR COLUMN
+========================================================== */
 
 .bar-column {
 
@@ -577,17 +714,26 @@
 }
 
 
+/* ==========================================================
+   BAR VALUE
+========================================================== */
+
 .bar-value {
 
   font-size: 11px;
 
   font-weight: 800;
 
-  color: #273352;
+  color:
+    var(--bar-value);
 
   margin-bottom: 8px;
 }
 
+
+/* ==========================================================
+   BAR WRAPPER
+========================================================== */
 
 .bar-wrapper {
 
@@ -602,6 +748,10 @@
   justify-content: center;
 }
 
+
+/* ==========================================================
+   MONTHLY BAR
+========================================================== */
 
 .monthly-bar {
 
@@ -621,21 +771,30 @@
 
   box-shadow:
     0 8px 20px
-      rgba(101, 70, 215, 0.18);
+      var(--monthly-bar-shadow);
 
   animation:
     barGrow 0.8s ease;
 }
 
 
+/* ==========================================================
+   BAR ANIMATION
+========================================================== */
+
 @keyframes barGrow {
 
   from {
+
     height: 0;
   }
 
 }
 
+
+/* ==========================================================
+   BAR LABEL
+========================================================== */
 
 .bar-label {
 
@@ -645,9 +804,248 @@
 
   font-weight: 700;
 
-  color: #748097;
+  color:
+    var(--bar-label);
 
-  white-space: nowrap;
+  white-space:
+    nowrap;
+}
+
+
+/* ==========================================================
+   LIGHT THEME
+   GLOBAL THEME SERVICE
+========================================================== */
+
+:host-context(body.light-theme) {
+
+  --chart-text: #172033;
+
+  --chart-card-bg:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fafbff
+    );
+
+  --chart-card-border:
+    rgba(94, 74, 180, 0.11);
+
+  --chart-card-shadow:
+    rgba(39, 34, 85, 0.08);
+
+  --chart-card-hover-shadow:
+    rgba(43, 36, 97, 0.13);
+
+  --chart-card-highlight:
+    rgba(255, 255, 255, 0.5);
+
+  --chart-eyebrow:
+    #315cff;
+
+  --chart-title:
+    #10182d;
+
+  --chart-description:
+    #7b879d;
+
+  --status-icon-bg:
+    rgba(101, 70, 215, 0.11);
+
+  --priority-icon-bg:
+    rgba(239, 91, 103, 0.11);
+
+  --source-icon-bg:
+    rgba(22, 184, 212, 0.11);
+
+  --donut-shadow:
+    rgba(50, 40, 100, 0.12);
+
+  --donut-hole-bg:
+    #ffffff;
+
+  --donut-hole-border:
+    rgba(50, 40, 100, 0.06);
+
+  --donut-number:
+    #11182b;
+
+  --donut-label:
+    #8993a8;
+
+  --legend-scrollbar:
+    rgba(85, 64, 200, 0.20);
+
+  --legend-divider:
+    rgba(30, 35, 70, 0.06);
+
+  --legend-name:
+    #526079;
+
+  --legend-value:
+    #192039;
+
+  --legend-percentage:
+    #8b95a9;
+
+  --chart-empty:
+    #8993a8;
+
+  --chart-empty-title:
+    #4c5870;
+
+  --monthly-card-bg:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fafbff
+    );
+
+  --monthly-card-border:
+    rgba(94, 74, 180, 0.11);
+
+  --monthly-card-shadow:
+    rgba(39, 34, 85, 0.08);
+
+  --monthly-icon-bg:
+    rgba(21, 156, 100, 0.11);
+
+  --monthly-chart-border:
+    rgba(40, 45, 80, 0.10);
+
+  --bar-value:
+    #273352;
+
+  --bar-label:
+    #748097;
+
+  --monthly-bar-shadow:
+    rgba(101, 70, 215, 0.18);
+}
+
+
+/* ==========================================================
+   DARK THEME
+   GLOBAL THEME SERVICE
+========================================================== */
+
+:host-context(body.dark-theme) {
+
+  --chart-text:
+    #ffffff;
+
+  --chart-card-bg:
+    linear-gradient(
+      145deg,
+      #0b2544,
+      #101d3b
+    );
+
+  --chart-card-border:
+    rgba(0, 217, 255, 0.16);
+
+  --chart-card-shadow:
+    rgba(0, 0, 0, 0.30);
+
+  --chart-card-hover-shadow:
+    rgba(0, 217, 255, 0.16);
+
+  --chart-card-highlight:
+    rgba(255, 255, 255, 0.04);
+
+  --chart-eyebrow:
+    #67e8f9;
+
+  --chart-title:
+    #ffffff;
+
+  --chart-description:
+    #9db6cc;
+
+  --status-icon-bg:
+    rgba(124, 92, 255, 0.16);
+
+  --priority-icon-bg:
+    rgba(239, 91, 103, 0.15);
+
+  --source-icon-bg:
+    rgba(22, 184, 212, 0.15);
+
+  --donut-shadow:
+    rgba(0, 0, 0, 0.35);
+
+  --donut-hole-bg:
+    #081d35;
+
+  --donut-hole-border:
+    rgba(0, 217, 255, 0.15);
+
+  --donut-number:
+    #ffffff;
+
+  --donut-label:
+    #91acc3;
+
+  --legend-scrollbar:
+    rgba(0, 217, 255, 0.22);
+
+  --legend-divider:
+    rgba(169, 196, 220, 0.13);
+
+  --legend-name:
+    #b4c9dc;
+
+  --legend-value:
+    #ffffff;
+
+  --legend-percentage:
+    #829db5;
+
+  --chart-empty:
+    #819bb2;
+
+  --chart-empty-title:
+    #d6e5f2;
+
+  --monthly-card-bg:
+    linear-gradient(
+      145deg,
+      #0b2544,
+      #101d3b
+    );
+
+  --monthly-card-border:
+    rgba(0, 217, 255, 0.16);
+
+  --monthly-card-shadow:
+    rgba(0, 0, 0, 0.30);
+
+  --monthly-icon-bg:
+    rgba(21, 156, 100, 0.15);
+
+  --monthly-chart-border:
+    rgba(169, 196, 220, 0.15);
+
+  --bar-value:
+    #dcecff;
+
+  --bar-label:
+    #91abc1;
+
+  --monthly-bar-shadow:
+    rgba(0, 217, 255, 0.18);
+}
+
+
+/* ==========================================================
+   DARK MODE - CARD HOVER
+========================================================== */
+
+:host-context(body.dark-theme) .chart-card:hover,
+:host-context(body.dark-theme) .monthly-card:hover {
+
+  border-color:
+    rgba(0, 217, 255, 0.28);
 }
 
 
@@ -661,25 +1059,26 @@
 
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
-
   }
 
 }
 
+
+/* ==========================================================
+   TABLET
+========================================================== */
 
 @media (max-width: 800px) {
 
   .donut-grid {
 
     grid-template-columns: 1fr;
-
   }
 
 
   .chart-card {
 
     min-height: auto;
-
   }
 
 
@@ -687,18 +1086,20 @@
 
     justify-content:
       space-around;
-
   }
 
 }
 
+
+/* ==========================================================
+   MOBILE
+========================================================== */
 
 @media (max-width: 600px) {
 
   .donut-area {
 
     flex-direction: column;
-
   }
 
 
@@ -708,7 +1109,6 @@
     height: 170px;
 
     min-width: 170px;
-
   }
 
 
@@ -716,7 +1116,6 @@
 
     width: 104px;
     height: 104px;
-
   }
 
 
@@ -725,14 +1124,12 @@
     width: 100%;
 
     max-height: none;
-
   }
 
 
   .monthly-card {
 
     padding: 18px;
-
   }
 
 
@@ -740,10 +1137,72 @@
 
     overflow-x: auto;
 
-    justify-content: flex-start;
+    justify-content:
+      flex-start;
 
     min-width: 600px;
+  }
 
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 380px) {
+
+  .chart-card,
+  .monthly-card {
+
+    border-radius: 20px;
+  }
+
+
+  .donut-chart {
+
+    width: 155px;
+    height: 155px;
+
+    min-width: 155px;
+  }
+
+
+  .donut-hole {
+
+    width: 96px;
+    height: 96px;
+  }
+
+
+  .donut-hole strong {
+
+    font-size: 22px;
+  }
+
+}
+
+
+/* ==========================================================
+   REDUCE MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .chart-card,
+  .monthly-card,
+  .donut-chart,
+  .monthly-bar {
+
+    animation: none;
+
+    transition: none;
+  }
+
+
+  .chart-card:hover {
+
+    transform: none;
   }
 
 }

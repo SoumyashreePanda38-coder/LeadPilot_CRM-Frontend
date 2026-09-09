@@ -1,12 +1,25 @@
-
 /* ==========================================================
    LEAD ACTIVITY
    PREMIUM PURPLE • LAVENDER • NEON GLOW
+
+   Global Theme:
+   Navbar -> ThemeService
+
+   IMPORTANT:
+   - Navbar controls the theme
+   - ThemeService controls body.light-theme / body.dark-theme
+   - No local theme toggle is required here
+   ========================================================== */
+
+
+/* ==========================================================
+   HOST
    ========================================================== */
 
 :host {
   display: block;
   width: 100%;
+  min-width: 0;
 }
 
 
@@ -16,9 +29,12 @@
 
 .activity-container {
   position: relative;
+  display: block;
   width: 100%;
   min-height: 500px;
+
   padding: 30px;
+
   overflow: hidden;
 
   background:
@@ -47,6 +63,12 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
   color: #f5f3ff;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -56,6 +78,7 @@
 
 .activity-container::before {
   content: "";
+
   position: absolute;
 
   width: 280px;
@@ -71,6 +94,8 @@
   border-radius: 50%;
 
   pointer-events: none;
+
+  z-index: 0;
 }
 
 
@@ -92,6 +117,8 @@
   border-radius: 50%;
 
   pointer-events: none;
+
+  z-index: 0;
 }
 
 
@@ -120,6 +147,8 @@
   align-items: center;
   justify-content: center;
 
+  flex-shrink: 0;
+
   border-radius: 16px;
 
   background:
@@ -140,11 +169,18 @@
     inset 0 0 15px rgba(168, 85, 247, 0.08);
 
   animation: iconPulse 3s ease-in-out infinite;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
 .header-content {
   flex: 1;
+  min-width: 0;
 }
 
 
@@ -157,6 +193,8 @@
   letter-spacing: -0.3px;
 
   color: #faf5ff;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -166,6 +204,8 @@
   font-size: 13px;
 
   color: #a9a0bc;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -176,6 +216,8 @@
 .refresh-button {
   width: 42px;
   height: 42px;
+
+  flex-shrink: 0;
 
   border: 1px solid rgba(196, 181, 253, 0.2);
 
@@ -190,7 +232,9 @@
   transition:
     transform 0.3s ease,
     background 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 
@@ -211,9 +255,13 @@
 .activity-timeline {
   position: relative;
 
+  display: block;
+
   width: 100%;
 
   padding: 10px 0 20px;
+
+  z-index: 2;
 }
 
 
@@ -249,11 +297,19 @@
     0 0 25px rgba(139, 92, 246, 0.4);
 
   animation: lineGlow 3s ease-in-out infinite;
+
+  pointer-events: none;
 }
 
 
 /* ==========================================================
    TIMELINE ITEM
+
+   IMPORTANT FIX:
+   opacity starts at 1.
+
+   This prevents the timeline from disappearing if Angular
+   loads the component before the animation is applied.
    ========================================================== */
 
 .timeline-item {
@@ -261,13 +317,18 @@
 
   display: flex;
 
+  width: 100%;
+
   gap: 22px;
 
   margin-bottom: 28px;
 
-  opacity: 0;
+  opacity: 1;
 
-  animation: timelineReveal 0.65s ease forwards;
+  visibility: visible;
+
+  animation:
+    timelineReveal 0.65s ease forwards;
 }
 
 
@@ -285,6 +346,7 @@
 
   flex: 0 0 56px;
 
+  width: 56px;
   height: 56px;
 
   display: flex;
@@ -308,7 +370,8 @@
 
   filter: blur(8px);
 
-  animation: markerGlow 2.5s ease-in-out infinite;
+  animation:
+    markerGlow 2.5s ease-in-out infinite;
 }
 
 
@@ -319,6 +382,7 @@
   height: 42px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -345,7 +409,10 @@
 
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -367,6 +434,10 @@
   position: relative;
 
   flex: 1;
+
+  min-width: 0;
+
+  display: block;
 
   padding: 22px 24px;
 
@@ -390,7 +461,8 @@
   transition:
     transform 0.35s ease,
     border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s ease,
+    background 0.35s ease;
 }
 
 
@@ -400,6 +472,7 @@
   position: absolute;
 
   left: 0;
+
   top: 18px;
   bottom: 18px;
 
@@ -456,6 +529,8 @@
   align-items: center;
 
   gap: 13px;
+
+  min-width: 0;
 }
 
 
@@ -464,8 +539,11 @@
   height: 42px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
+
+  flex-shrink: 0;
 
   border-radius: 12px;
 
@@ -482,6 +560,11 @@
 
   box-shadow:
     inset 0 0 12px rgba(168, 85, 247, 0.08);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -497,6 +580,8 @@
   letter-spacing: 1.5px;
 
   color: #8f82a8;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -508,6 +593,8 @@
   font-weight: 650;
 
   color: #f5edff;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -539,6 +626,8 @@
   font-size: 11px;
 
   color: #aaa0bb;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -559,12 +648,15 @@
 
   padding: 15px 17px;
 
-  background:
-    rgba(168, 85, 247, 0.045);
+  background: rgba(168, 85, 247, 0.045);
 
   border: 1px solid rgba(196, 181, 253, 0.08);
 
   border-radius: 12px;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
 
@@ -572,6 +664,7 @@
   position: absolute;
 
   left: 0;
+
   top: 12px;
   bottom: 12px;
 
@@ -596,6 +689,8 @@
   font-size: 13px;
 
   line-height: 1.7;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -607,7 +702,6 @@
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
   margin-top: 18px;
@@ -615,6 +709,8 @@
   padding-top: 15px;
 
   border-top: 1px solid rgba(196, 181, 253, 0.08);
+
+  transition: border-color 0.35s ease;
 }
 
 
@@ -632,6 +728,7 @@
   height: 30px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -649,6 +746,11 @@
   color: #c4b5fd;
 
   font-size: 11px;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -669,6 +771,8 @@
   letter-spacing: 1px;
 
   color: #80758e;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -678,6 +782,8 @@
   color: #ddd2eb;
 
   font-weight: 600;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -712,13 +818,13 @@
   margin: 0 auto 20px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 22px;
 
-  background:
-    rgba(168, 85, 247, 0.08);
+  background: rgba(168, 85, 247, 0.08);
 
   border: 1px solid rgba(192, 132, 252, 0.2);
 
@@ -728,6 +834,11 @@
 
   box-shadow:
     0 0 25px rgba(168, 85, 247, 0.16);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
 }
 
 
@@ -737,6 +848,8 @@
   color: #eee5f8;
 
   font-size: 18px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -746,6 +859,8 @@
   color: #8f849d;
 
   font-size: 13px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -754,6 +869,10 @@
    ========================================================== */
 
 .activity-loading {
+  position: relative;
+
+  z-index: 2;
+
   text-align: center;
 
   padding: 75px 20px;
@@ -771,7 +890,6 @@
   border: 2px solid rgba(168, 85, 247, 0.15);
 
   border-top-color: #c084fc;
-
   border-right-color: #a855f7;
 
   border-radius: 50%;
@@ -808,6 +926,8 @@
   margin: 0 0 7px;
 
   color: #eee5f8;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -817,6 +937,8 @@
   color: #887d96;
 
   font-size: 13px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -825,6 +947,10 @@
    ========================================================== */
 
 .activity-error {
+  position: relative;
+
+  z-index: 2;
+
   display: flex;
 
   align-items: center;
@@ -848,6 +974,7 @@
   flex-shrink: 0;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -865,6 +992,8 @@
   font-size: 14px;
 
   color: #f5e8ff;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -874,6 +1003,8 @@
   color: #968aa1;
 
   font-size: 12px;
+
+  transition: color 0.35s ease;
 }
 
 
@@ -892,7 +1023,11 @@
 
   cursor: pointer;
 
-  transition: all 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 
@@ -905,37 +1040,385 @@
 
 
 /* ==========================================================
+   LIGHT THEME
+   Navbar -> ThemeService
+   ========================================================== */
+
+:host-context(body.light-theme) {
+
+  .activity-container {
+    background:
+      radial-gradient(
+        circle at 12% 8%,
+        rgba(124, 58, 237, 0.07),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 90% 85%,
+        rgba(14, 165, 233, 0.06),
+        transparent 30%
+      ),
+      linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #faf8ff 48%,
+        #f4f7ff 100%
+      );
+
+    border-color: rgba(124, 58, 237, 0.14);
+
+    box-shadow:
+      0 20px 55px rgba(71, 55, 110, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+    color: #24163d;
+  }
+
+
+  .activity-container::before {
+    background: rgba(124, 58, 237, 0.08);
+  }
+
+
+  .activity-container::after {
+    background: rgba(14, 165, 233, 0.06);
+  }
+
+
+  .header-icon {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.13),
+        rgba(139, 92, 246, 0.06)
+      );
+
+    border-color: rgba(124, 58, 237, 0.18);
+
+    color: #6d28d9;
+
+    box-shadow:
+      0 8px 25px rgba(124, 58, 237, 0.10),
+      inset 0 0 12px rgba(124, 58, 237, 0.04);
+  }
+
+
+  .header-content h2 {
+    color: #281744;
+  }
+
+
+  .header-content p {
+    color: #756887;
+  }
+
+
+  .refresh-button {
+    background: rgba(124, 58, 237, 0.055);
+
+    border-color: rgba(124, 58, 237, 0.16);
+
+    color: #6d28d9;
+  }
+
+
+  .refresh-button:hover {
+    background: rgba(124, 58, 237, 0.11);
+
+    box-shadow:
+      0 8px 22px rgba(124, 58, 237, 0.14);
+  }
+
+
+  .activity-timeline::before {
+    background:
+      linear-gradient(
+        to bottom,
+        transparent,
+        #8b5cf6 8%,
+        #a78bfa 45%,
+        #7c3aed 75%,
+        transparent
+      );
+
+    box-shadow:
+      0 0 4px rgba(124, 58, 237, 0.35),
+      0 0 12px rgba(124, 58, 237, 0.18);
+  }
+
+
+  .marker-glow {
+    background: rgba(124, 58, 237, 0.13);
+  }
+
+
+  .marker-icon {
+    background:
+      linear-gradient(
+        145deg,
+        #ffffff,
+        #f3efff
+      );
+
+    border-color: #a78bfa;
+
+    color: #6d28d9;
+
+    box-shadow:
+      0 4px 12px rgba(124, 58, 237, 0.14),
+      0 0 18px rgba(124, 58, 237, 0.08);
+  }
+
+
+  .timeline-item:hover .marker-icon {
+    box-shadow:
+      0 5px 18px rgba(124, 58, 237, 0.18),
+      0 0 25px rgba(124, 58, 237, 0.16);
+  }
+
+
+  .activity-card {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(248, 246, 255, 0.96)
+      );
+
+    border-color: rgba(124, 58, 237, 0.13);
+
+    box-shadow:
+      0 10px 28px rgba(68, 52, 105, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+
+  .activity-card::before {
+    background:
+      linear-gradient(
+        to bottom,
+        #8b5cf6,
+        #7c3aed,
+        transparent
+      );
+
+    box-shadow:
+      0 0 8px rgba(124, 58, 237, 0.25);
+  }
+
+
+  .activity-card:hover {
+    transform: translateX(5px);
+
+    border-color: rgba(124, 58, 237, 0.24);
+
+    box-shadow:
+      0 15px 35px rgba(68, 52, 105, 0.11),
+      0 0 22px rgba(124, 58, 237, 0.05);
+  }
+
+
+  .activity-type-icon {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.10),
+        rgba(139, 92, 246, 0.04)
+      );
+
+    border-color: rgba(124, 58, 237, 0.13);
+
+    color: #7c3aed;
+  }
+
+
+  .activity-label {
+    color: #8b7b9f;
+  }
+
+
+  .activity-type h3 {
+    color: #302044;
+  }
+
+
+  .activity-date,
+  .activity-clock {
+    color: #756a84;
+  }
+
+
+  .activity-date i,
+  .activity-clock i {
+    color: #7c3aed;
+  }
+
+
+  .activity-description {
+    background: rgba(124, 58, 237, 0.035);
+
+    border-color: rgba(124, 58, 237, 0.09);
+  }
+
+
+  .description-line {
+    background: #7c3aed;
+
+    box-shadow:
+      0 0 8px rgba(124, 58, 237, 0.35);
+  }
+
+
+  .activity-description p {
+    color: #625672;
+  }
+
+
+  .activity-footer {
+    border-top-color: rgba(124, 58, 237, 0.09);
+  }
+
+
+  .user-avatar {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.11),
+        rgba(139, 92, 246, 0.05)
+      );
+
+    border-color: rgba(124, 58, 237, 0.14);
+
+    color: #6d28d9;
+  }
+
+
+  .user-info span {
+    color: #8e829e;
+  }
+
+
+  .user-info strong {
+    color: #4b3b5e;
+  }
+
+
+  .activity-id {
+    color: #9a8eaa;
+  }
+
+
+  .empty-icon {
+    background: rgba(124, 58, 237, 0.06);
+
+    border-color: rgba(124, 58, 237, 0.14);
+
+    color: #7c3aed;
+
+    box-shadow:
+      0 8px 25px rgba(124, 58, 237, 0.08);
+  }
+
+
+  .activity-empty h3 {
+    color: #342247;
+  }
+
+
+  .activity-empty p {
+    color: #877b95;
+  }
+
+
+  .loading-orbit {
+    border-color: rgba(124, 58, 237, 0.10);
+
+    border-top-color: #8b5cf6;
+    border-right-color: #7c3aed;
+
+    box-shadow:
+      0 0 18px rgba(124, 58, 237, 0.12);
+  }
+
+
+  .loading-orbit::after {
+    background: #a78bfa;
+
+    box-shadow:
+      0 0 8px #8b5cf6,
+      0 0 16px rgba(124, 58, 237, 0.35);
+  }
+
+
+  .activity-loading h3 {
+    color: #3a294b;
+  }
+
+
+  .activity-loading p {
+    color: #887c96;
+  }
+
+
+  .activity-error {
+    background: rgba(254, 242, 242, 0.85);
+
+    border-color: rgba(239, 68, 68, 0.16);
+  }
+
+
+  .error-icon {
+    color: #dc2626;
+
+    background: rgba(239, 68, 68, 0.08);
+  }
+
+
+  .activity-error h3 {
+    color: #991b1b;
+  }
+
+
+  .activity-error p {
+    color: #876f78;
+  }
+
+
+  .retry-button {
+    background: rgba(239, 68, 68, 0.06);
+
+    border-color: rgba(239, 68, 68, 0.16);
+
+    color: #b91c1c;
+  }
+
+
+  .retry-button:hover {
+    background: rgba(239, 68, 68, 0.11);
+
+    box-shadow:
+      0 7px 18px rgba(239, 68, 68, 0.10);
+  }
+}
+
+
+/* ==========================================================
    ANIMATIONS
+   IMPORTANT:
+   These were missing from your CSS.
    ========================================================== */
 
 @keyframes timelineReveal {
 
   from {
     opacity: 0;
-    transform: translateY(18px) translateX(-8px);
+    transform: translateY(18px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) translateX(0);
+    transform: translateY(0);
   }
-
-}
-
-
-@keyframes markerGlow {
-
-  0%,
-  100% {
-    transform: scale(0.9);
-    opacity: 0.55;
-  }
-
-  50% {
-    transform: scale(1.15);
-    opacity: 0.95;
-  }
-
 }
 
 
@@ -949,7 +1432,21 @@
   50% {
     opacity: 1;
   }
+}
 
+
+@keyframes markerGlow {
+
+  0%,
+  100% {
+    transform: scale(0.95);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
 }
 
 
@@ -957,17 +1454,12 @@
 
   0%,
   100% {
-    box-shadow:
-      0 0 15px rgba(168, 85, 247, 0.3),
-      inset 0 0 15px rgba(168, 85, 247, 0.08);
+    transform: scale(1);
   }
 
   50% {
-    box-shadow:
-      0 0 25px rgba(168, 85, 247, 0.55),
-      inset 0 0 18px rgba(168, 85, 247, 0.12);
+    transform: scale(1.04);
   }
-
 }
 
 
@@ -976,7 +1468,6 @@
   to {
     transform: rotate(360deg);
   }
-
 }
 
 
@@ -1023,6 +1514,8 @@
 
   .timeline-marker {
     flex-basis: 45px;
+
+    width: 45px;
   }
 
 
@@ -1062,9 +1555,12 @@
 
     gap: 12px;
   }
-
 }
 
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
 
 @media (max-width: 480px) {
 
@@ -1086,6 +1582,8 @@
 
   .timeline-marker {
     flex-basis: 38px;
+
+    width: 38px;
   }
 
 
@@ -1133,6 +1631,25 @@
   .activity-id {
     display: none;
   }
-
 }
 
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .activity-container *,
+  .activity-container *::before,
+  .activity-container *::after {
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
