@@ -1,0 +1,473 @@
+/* =========================================================
+   AUTH SHELL
+========================================================= */
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+
+/* =========================================================
+   MAIN AUTH PAGE
+========================================================= */
+
+.auth-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    /*
+     * IMPORTANT:
+     * No overflow-y here.
+     * Let the browser document handle the ONE scrollbar.
+     */
+    overflow-x: hidden;
+
+    font-family: 'Poppins', sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(0, 217, 255, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(103, 81, 216, 0.15),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #061426,
+            #081d35 50%,
+            #061426
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.background-glow {
+    position: fixed;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(80px);
+
+    z-index: 0;
+}
+
+
+.glow-one {
+    width: 350px;
+    height: 350px;
+
+    top: -160px;
+    left: -100px;
+
+    background: rgba(0, 217, 255, 0.14);
+}
+
+
+.glow-two {
+    width: 400px;
+    height: 400px;
+
+    right: -170px;
+    bottom: -180px;
+
+    background: rgba(103, 81, 216, 0.16);
+}
+
+
+/* =========================================================
+   AUTH CONTAINER
+========================================================= */
+
+.auth-container {
+    position: relative;
+
+    z-index: 10;
+
+    width: min(100%, 1250px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    /*
+     * Keep the top area comfortable without forcing
+     * the authentication section to be viewport height.
+     */
+    padding:
+        24px
+        20px
+        0;
+}
+
+
+/* =========================================================
+   AUTH TOGGLE
+========================================================= */
+
+.auth-toggle {
+    position: relative;
+
+    width: 440px;
+    max-width: 100%;
+
+    height: 56px;
+
+    padding: 5px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+
+    border-radius: 17px;
+
+    background: rgba(3, 18, 35, 0.82);
+
+    border: 1px solid rgba(0, 217, 255, 0.22);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(0, 217, 255, 0.025);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOGGLE BUTTON
+========================================================= */
+
+.auth-toggle button {
+    position: relative;
+
+    z-index: 3;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #718ba4;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.35s ease,
+        transform 0.2s ease;
+}
+
+
+.auth-toggle button:hover {
+    color: #dffaff;
+}
+
+
+.auth-toggle button:active {
+    transform: scale(0.97);
+}
+
+
+.auth-toggle button.active {
+    color: #ffffff;
+}
+
+
+.auth-toggle button i {
+    margin-right: 7px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   TOGGLE SLIDER
+========================================================= */
+
+.toggle-slider {
+    position: absolute;
+
+    z-index: 1;
+
+    top: 5px;
+    left: 5px;
+
+    width: calc(50% - 5px);
+    height: calc(100% - 10px);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #008fb4,
+            #007bc5,
+            #6751d8
+        );
+
+    box-shadow:
+        0 5px 22px rgba(0, 160, 210, 0.30);
+
+    transition:
+        transform 0.5s cubic-bezier(.65, 0, .35, 1);
+}
+
+
+.toggle-slider.register-active {
+    transform: translateX(100%);
+}
+
+
+/* =========================================================
+   FORMS AREA
+========================================================= */
+
+.auth-forms {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    display: grid;
+
+    /*
+     * IMPORTANT:
+     * Height is NOT fixed.
+     * The form content determines the height.
+     */
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   AUTH PANELS
+========================================================= */
+
+.auth-panel {
+    grid-area: 1 / 1;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.6s cubic-bezier(.65, 0, .35, 1),
+        opacity 0.4s ease;
+}
+
+
+/* =========================================================
+   LOGIN PANEL
+========================================================= */
+
+.login-panel {
+    transform: translateX(0);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   REGISTER PANEL
+========================================================= */
+
+.register-panel {
+    transform: translateX(100%);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   REGISTER MODE
+========================================================= */
+
+.auth-forms.register-mode .login-panel {
+    transform: translateX(-100%);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+.auth-forms.register-mode .register-panel {
+    transform: translateX(0);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+app-footer {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    flex-shrink: 0;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .auth-container {
+        width: 100%;
+
+        padding:
+            18px
+            12px
+            0;
+    }
+
+    .auth-toggle {
+        width: 100%;
+
+        max-width: 430px;
+
+        height: 52px;
+    }
+
+    .auth-toggle button {
+        font-size: 11px;
+    }
+
+    .auth-toggle button i {
+        margin-right: 4px;
+    }
+
+    .auth-forms {
+        margin-top: 14px;
+    }
+
+    app-footer {
+        margin-top: 20px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .auth-page {
+        min-height: 100svh;
+    }
+
+    .auth-container {
+        width: 100%;
+
+        padding:
+            12px
+            7px
+            0;
+    }
+
+    .auth-toggle {
+        width: 100%;
+
+        max-width: 430px;
+
+        height: 52px;
+    }
+
+    .auth-toggle button {
+        font-size: 11px;
+    }
+
+    .auth-forms {
+        width: 100%;
+
+        margin-top: 12px;
+    }
+
+    app-footer {
+        margin-top: 15px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .auth-container {
+        padding:
+            10px
+            5px
+            0;
+    }
+
+    .auth-toggle {
+        height: 50px;
+    }
+
+    .auth-toggle button {
+        font-size: 10px;
+    }
+
+    .auth-toggle button i {
+        margin-right: 3px;
+    }
+}

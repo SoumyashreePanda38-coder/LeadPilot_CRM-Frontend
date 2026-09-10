@@ -1,0 +1,91 @@
+<div class="auth-page">
+
+    <!-- Background -->
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+
+    <!-- Main Container -->
+
+    <div class="auth-container">
+
+
+        <!-- =================================================
+             LOGIN / REGISTER TOGGLE
+        ================================================== -->
+
+        <div class="auth-toggle">
+
+            <button
+                type="button"
+                [class.active]="!showRegister"
+                (click)="showLogin()">
+
+                <i class="bi bi-box-arrow-in-right"></i>
+
+                <span>
+                    Sign In
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                [class.active]="showRegister"
+                (click)="showRegisterPanel()">
+
+                <i class="bi bi-building-add"></i>
+
+                <span>
+                    Create Workspace
+                </span>
+
+            </button>
+
+
+            <div
+                class="toggle-slider"
+                [class.register-active]="showRegister">
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             AUTH FORMS
+        ================================================== -->
+
+        <div
+            class="auth-forms"
+            [class.register-mode]="showRegister">
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-panel login-panel">
+
+                <app-login
+                    (registerRequested)="showRegisterPanel()">
+                </app-login>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div class="auth-panel register-panel">
+
+                <app-register
+                    (loginRequested)="showLogin()">
+                </app-register>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

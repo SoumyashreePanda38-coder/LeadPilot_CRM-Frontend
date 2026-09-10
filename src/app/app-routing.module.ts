@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
-import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { ExecutiveLayoutComponent } from './layout/executive-layout/executive-layout.component';
+import {
+  AuthLayoutComponent
+} from './layout/auth-layout/auth-layout.component';
+
+import {
+  AdminLayoutComponent
+} from './layout/admin-layout/admin-layout.component';
+
+import {
+  ExecutiveLayoutComponent
+} from './layout/executive-layout/executive-layout.component';
 
 
 const routes: Routes = [
@@ -28,7 +39,9 @@ const routes: Routes = [
 
   {
     path: 'auth',
+
     component: AuthLayoutComponent,
+
     loadChildren: () =>
       import('./features/auth/auth.module')
         .then(m => m.AuthModule)
@@ -41,6 +54,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
+
     component: AdminLayoutComponent,
 
     canActivate: [
@@ -60,6 +74,7 @@ const routes: Routes = [
 
       {
         path: 'dashboard',
+
         loadChildren: () =>
           import('./features/dashboard/dashboard.module')
             .then(m => m.DashboardModule)
@@ -67,11 +82,12 @@ const routes: Routes = [
 
 
       // --------------------------------------------------------
-      // USER MANAGEMENT
+      // USER / EXECUTIVE MANAGEMENT
       // --------------------------------------------------------
 
       {
         path: 'users',
+
         loadChildren: () =>
           import('./features/user-management/user-management.module')
             .then(m => m.UserManagementModule)
@@ -84,6 +100,7 @@ const routes: Routes = [
 
       {
         path: 'leads',
+
         loadChildren: () =>
           import('./features/customer-leads/customer-leads.module')
             .then(m => m.CustomerLeadsModule)
@@ -96,6 +113,7 @@ const routes: Routes = [
 
       {
         path: 'lead-configuration',
+
         loadChildren: () =>
           import('./features/lead-configuration/lead-configuration.module')
             .then(m => m.LeadConfigurationModule)
@@ -108,6 +126,7 @@ const routes: Routes = [
 
       {
         path: 'followups',
+
         loadChildren: () =>
           import('./features/follow-ups/follow-ups.module')
             .then(m => m.FollowUpsModule)
@@ -120,17 +139,11 @@ const routes: Routes = [
 
       {
         path: 'reminders',
+
         loadChildren: () =>
           import('./features/reminders/reminders.module')
             .then(m => m.RemindersModule)
       },
-
-
-      // --------------------------------------------------------
-      // REPORTS
-      // --------------------------------------------------------
-
-     
 
 
       // --------------------------------------------------------
@@ -139,6 +152,7 @@ const routes: Routes = [
 
       {
         path: 'profile',
+
         loadChildren: () =>
           import('./features/profile/profile.module')
             .then(m => m.ProfileModule)
@@ -151,6 +165,7 @@ const routes: Routes = [
 
       {
         path: 'settings',
+
         loadChildren: () =>
           import('./features/settings/settings.module')
             .then(m => m.SettingsModule)
@@ -166,6 +181,7 @@ const routes: Routes = [
 
   {
     path: 'executive',
+
     component: ExecutiveLayoutComponent,
 
     canActivate: [
@@ -185,6 +201,7 @@ const routes: Routes = [
 
       {
         path: 'dashboard',
+
         loadChildren: () =>
           import('./features/dashboard/dashboard.module')
             .then(m => m.DashboardModule)
@@ -197,6 +214,7 @@ const routes: Routes = [
 
       {
         path: 'leads',
+
         loadChildren: () =>
           import('./features/customer-leads/customer-leads.module')
             .then(m => m.CustomerLeadsModule)
@@ -209,6 +227,7 @@ const routes: Routes = [
 
       {
         path: 'followups',
+
         loadChildren: () =>
           import('./features/follow-ups/follow-ups.module')
             .then(m => m.FollowUpsModule)
@@ -221,17 +240,11 @@ const routes: Routes = [
 
       {
         path: 'reminders',
+
         loadChildren: () =>
           import('./features/reminders/reminders.module')
             .then(m => m.RemindersModule)
       },
-
-
-      // --------------------------------------------------------
-      // REPORTS
-      // --------------------------------------------------------
-
-      
 
 
       // --------------------------------------------------------
@@ -240,6 +253,7 @@ const routes: Routes = [
 
       {
         path: 'profile',
+
         loadChildren: () =>
           import('./features/profile/profile.module')
             .then(m => m.ProfileModule)
@@ -264,13 +278,18 @@ const routes: Routes = [
 @NgModule({
 
   imports: [
+
     RouterModule.forRoot(routes)
+
   ],
 
   exports: [
+
     RouterModule
+
   ]
 
 })
+
 
 export class AppRoutingModule { }

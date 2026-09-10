@@ -11,6 +11,9 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RegisterComponent } from './register/register.component';
+
+import { AuthShellComponent } from './auth-shell/auth-shell.component';
 
 @NgModule({
 
@@ -18,7 +21,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    RegisterComponent,
+    AuthShellComponent
 
   ],
 

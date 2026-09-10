@@ -1,248 +1,525 @@
-<div class="login-container">
+<div class="login-page">
 
-    <!-- ================= Left Panel ================= -->
+    <!-- =====================================================
+         BACKGROUND DECORATION
+    ====================================================== -->
 
-    <div class="left-panel">
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-        <div class="overlay"></div>
 
-        <div class="left-content">
+    <!-- =====================================================
+         BOTTOM WAVES
+    ====================================================== -->
 
-            <div class="brand">
+    <div class="bottom-waves">
 
-                <div class="logo">
-                    <i class="bi bi-graph-up-arrow"></i>
-                </div>
-
-                <h1>LeadPilot CRM</h1>
-
-                <p>
-                    Smart Customer Lead Management System
-                </p>
-
-            </div>
-
-            <div class="features">
-
-                <div class="feature">
-
-                    <i class="bi bi-person-check-fill"></i>
-
-                    <div>
-
-                        <h4>Lead Management</h4>
-
-                        <p>
-                            Organize and manage customer leads efficiently.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="feature">
-
-                    <i class="bi bi-calendar2-check-fill"></i>
-
-                    <div>
-
-                        <h4>Follow-Ups</h4>
-
-                        <p>
-                            Schedule reminders and never miss a follow-up.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="feature">
-
-                    <i class="bi bi-bar-chart-fill"></i>
-
-                    <div>
-
-                        <h4>Sales Analytics</h4>
-
-                        <p>
-                            Monitor sales performance through real-time reports.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="copyright">
-
-                © 2026 LeadPilot CRM
-
-            </div>
-
-        </div>
+        <div class="wave wave-one"></div>
+        <div class="wave wave-two"></div>
+        <div class="wave wave-three"></div>
 
     </div>
 
-    <!-- ================= Right Panel ================= -->
 
-    <div class="right-panel">
+    <!-- =====================================================
+         MAIN LOGIN CONTENT
+    ====================================================== -->
 
-        <form
-            class="login-card"
-            [formGroup]="loginForm"
-            (ngSubmit)="login()">
+    <div class="login-wrapper">
 
-            <div class="welcome">
 
-                <h2>Welcome Back 👋</h2>
+        <!-- ===================================================
+             BRANDING SECTION
+        ==================================================== -->
 
-                <p>
-                    Login to continue to your CRM Dashboard
+        <section class="branding-section">
+
+            <div class="branding-content">
+
+
+                <!-- LeadPilot Logo -->
+
+                <div class="brand-logo-wrapper">
+
+                    <img
+                        src="assets/images/leadpilot-logo.png"
+                        alt="LeadPilot CRM"
+                        class="brand-logo">
+
+                </div>
+
+
+                <!-- Brand Name -->
+
+                <h1 class="brand-title">
+
+                    LeadPilot <span>CRM</span>
+
+                </h1>
+
+
+                <!-- Tagline -->
+
+                <p class="brand-tagline">
+
+                    Manage Leads
+
+                    <span>•</span>
+
+                    Build Relationships
+
+                    <span>•</span>
+
+                    Grow Your Business
+
                 </p>
 
-            </div>
 
-            <!-- Username -->
+                <!-- Supporting Text -->
 
-            <div class="form-group">
+                <p class="brand-description">
 
-                <label>Username</label>
+                    A smarter way to manage customer leads,
+                    follow-ups and business relationships.
 
-                <div class="input-box">
+                </p>
 
-                    <i class="bi bi-person"></i>
 
-                    <input
-                        type="text"
-                        formControlName="username"
-                        placeholder="Enter Username">
+                <!-- Small Brand Features -->
+
+                <div class="brand-highlights">
+
+
+                    <!-- Highlight 1 -->
+
+                    <div class="highlight-item">
+
+                        <div class="highlight-icon">
+
+                            <i class="bi bi-people-fill"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Smart Lead Management
+                            </strong>
+
+                            <span>
+                                Organize your customer pipeline
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Highlight 2 -->
+
+                    <div class="highlight-item">
+
+                        <div class="highlight-icon">
+
+                            <i class="bi bi-calendar-check-fill"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Follow-Up Tracking
+                            </strong>
+
+                            <span>
+                                Stay on top of every opportunity
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Highlight 3 -->
+
+                    <div class="highlight-item">
+
+                        <div class="highlight-icon">
+
+                            <i class="bi bi-graph-up-arrow"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Business Insights
+                            </strong>
+
+                            <span>
+                                Make better decisions with your data
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <small
-                    class="text-danger"
-                    *ngIf="submitted && f['username'].errors">
-
-                    Username is required.
-
-                </small>
-
             </div>
 
-            <!-- Password -->
+        </section>
 
-            <div class="form-group">
 
-                <label>Password</label>
 
-                <div class="input-box">
+        <!-- ===================================================
+             LOGIN SECTION
+        ==================================================== -->
 
-                    <i class="bi bi-lock"></i>
+        <section class="login-section">
 
-                    <input
-                        [type]="hidePassword ? 'password' : 'text'"
-                        formControlName="password"
-                        placeholder="Enter Password">
 
-                    <button
-                        type="button"
-                        class="password-toggle"
-                        (click)="togglePassword()">
+            <form
+                class="login-card"
+                [formGroup]="loginForm"
+                (ngSubmit)="login()">
 
-                        <i
-                            class="bi"
-                            [ngClass]="hidePassword ? 'bi-eye-fill' : 'bi-eye-slash-fill'">
-                        </i>
 
-                    </button>
+                <!-- =================================================
+                     CARD HEADER
+                ================================================== -->
+
+                <div class="login-header">
+
+                    <div class="welcome-icon">
+
+                        <i class="bi bi-person-circle"></i>
+
+                    </div>
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                    <p>
+                        Sign in to your LeadPilot CRM account
+                    </p>
 
                 </div>
 
-                <small
-                    class="text-danger"
-                    *ngIf="submitted && f['password'].errors">
 
-                    Password is required.
 
-                </small>
+                <!-- =================================================
+                     USERNAME
+                ================================================== -->
 
-            </div>
+                <div class="form-group">
 
-            <!-- Error Message -->
+                    <label for="username">
+                        Username
+                    </label>
 
-            <div
-                class="alert alert-danger"
-                *ngIf="errorMessage">
 
-                {{ errorMessage }}
+                    <div
+                        class="input-box"
+                        [class.input-error]="submitted && f['username'].errors">
 
-            </div>
 
-            <!-- Remember Me -->
+                        <i class="bi bi-person"></i>
 
-            <div class="options">
 
-                <label class="remember">
+                        <input
+                            id="username"
+                            type="text"
+                            formControlName="username"
+                            placeholder="Enter your username"
+                            autocomplete="username">
 
-                    <input type="checkbox">
 
-                    Remember Me
+                    </div>
 
-                </label>
 
-                <a routerLink="/auth/forgot-password">
+                    <small
+                        class="validation-message"
+                        *ngIf="submitted && f['username'].errors">
 
-                    Forgot Password?
+                        Username is required.
 
-                </a>
+                    </small>
 
-            </div>
+                </div>
 
-            <!-- Login Button -->
 
-            <button
-                class="login-btn"
-                type="submit"
-                [disabled]="loading">
 
-                <span *ngIf="!loading">
+                <!-- =================================================
+                     PASSWORD
+                ================================================== -->
 
-                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                <div class="form-group">
 
-                    Login
+                    <label for="password">
+                        Password
+                    </label>
 
-                </span>
 
-                <span *ngIf="loading">
+                    <div
+                        class="input-box"
+                        [class.input-error]="submitted && f['password'].errors">
 
-                    <span
-                        class="spinner-border spinner-border-sm me-2">
+
+                        <i class="bi bi-lock-fill"></i>
+
+
+                        <input
+                            id="password"
+                            [type]="hidePassword ? 'password' : 'text'"
+                            formControlName="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password">
+
+
+                        <!-- Password Visibility -->
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            (click)="togglePassword()"
+                            [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'">
+
+                            <i
+                                class="bi"
+                                [ngClass]="hidePassword
+                                    ? 'bi-eye-fill'
+                                    : 'bi-eye-slash-fill'">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+
+                    <small
+                        class="validation-message"
+                        *ngIf="submitted && f['password'].errors">
+
+                        Password is required.
+
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ERROR MESSAGE
+                ================================================== -->
+
+                <div
+                    class="login-error"
+                    *ngIf="errorMessage">
+
+                    <i class="bi bi-exclamation-circle-fill"></i>
+
+                    <span>
+                        {{ errorMessage }}
                     </span>
 
-                    Signing In...
+                </div>
 
-                </span>
 
-            </button>
 
-            <div class="divider">
+                <!-- =================================================
+                     LOGIN OPTIONS
+                ================================================== -->
 
-                <span>LeadPilot CRM</span>
+                <div class="login-options">
 
-            </div>
 
-            <div class="footer-links">
+                    <!-- Remember Me -->
 
-                <a href="#">Privacy Policy</a>
+                    <label class="remember-me">
 
-                <span>|</span>
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="rememberMe"
+                            [ngModelOptions]="{ standalone: true }">
 
-                <a href="#">Terms of Service</a>
+                        <span class="custom-checkbox"></span>
 
-            </div>
+                        <span class="remember-text">
+                            Remember me
+                        </span>
 
-        </form>
+                    </label>
+
+
+                    <!-- Forgot Password -->
+
+                    <a
+                        routerLink="/auth/forgot-password"
+                        class="forgot-password">
+
+                        Forgot password?
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LOGIN BUTTON
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    [disabled]="loading">
+
+
+                    <!-- Normal -->
+
+                    <span
+                        *ngIf="!loading"
+                        class="button-content">
+
+                        <span>
+                            Sign In
+                        </span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </span>
+
+
+                    <!-- Loading -->
+
+                    <span
+                        *ngIf="loading"
+                        class="button-content">
+
+                        <span
+                            class="spinner-border spinner-border-sm">
+                        </span>
+
+                        <span>
+                            Signing In...
+                        </span>
+
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     DIVIDER
+                ================================================== -->
+
+                <div class="divider">
+
+                    <span></span>
+
+                    <strong>
+                        OR
+                    </strong>
+
+                    <span></span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CREATE WORKSPACE
+                ================================================== -->
+
+                <!-- IMPORTANT:
+                     This does NOT navigate to /auth/register.
+                     It tells AuthShellComponent to display
+                     RegisterComponent.
+                -->
+
+                <button
+                    type="button"
+                    class="workspace-btn"
+                    (click)="openRegister()">
+
+
+                    <i class="bi bi-person-plus-fill"></i>
+
+
+                    <span>
+                        Create Your Workspace
+                    </span>
+
+
+                    <i class="bi bi-arrow-right workspace-arrow"></i>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     REGISTER INFORMATION
+                ================================================== -->
+
+                <div class="register-info">
+
+                    <strong>
+                        New to LeadPilot CRM?
+                    </strong>
+
+                    <span>
+                        Set up your organization and get started today.
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="login-footer">
+
+
+                    <span>
+                        © 2026 LeadPilot CRM
+                    </span>
+
+
+                    <div class="footer-links">
+
+                        <a
+                            href="javascript:void(0)">
+
+                            Privacy Policy
+
+                        </a>
+
+
+                        <span>
+                            •
+                        </span>
+
+
+                        <a
+                            href="javascript:void(0)">
+
+                            Terms of Service
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </section>
 
     </div>
 

@@ -1,0 +1,954 @@
+<div class="register-page">
+
+  <!-- =====================================================
+       BACKGROUND EFFECTS
+  ====================================================== -->
+
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+
+  <!-- =====================================================
+       BOTTOM WAVES
+  ====================================================== -->
+
+  <div class="bottom-wave wave-one"></div>
+  <div class="bottom-wave wave-two"></div>
+
+
+  <div class="register-wrapper">
+
+
+    <!-- ===================================================
+         BRANDING SECTION
+    ==================================================== -->
+
+    <section class="register-branding">
+
+      <div class="brand-logo">
+        <img
+          src="assets/images/leadpilot-logo.png"
+          alt="LeadPilot CRM Logo"
+        >
+      </div>
+
+      <span class="brand-label">
+        LEADPILOT CRM
+      </span>
+
+      <h1>
+        Build Your
+        <span>Workspace</span>
+      </h1>
+
+      <p>
+        Create your LeadPilot CRM workspace and start
+        managing customer leads with your team.
+      </p>
+
+
+      <div class="brand-features">
+
+        <div class="feature-item">
+          <i class="bi bi-building"></i>
+          <span>Dedicated CRM Workspace</span>
+        </div>
+
+        <div class="feature-item">
+          <i class="bi bi-people"></i>
+          <span>Manage Your Team</span>
+        </div>
+
+        <div class="feature-item">
+          <i class="bi bi-graph-up-arrow"></i>
+          <span>Track Customer Leads</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         REGISTRATION CARD
+    ==================================================== -->
+
+    <section class="register-card">
+
+
+      <!-- CARD HEADER -->
+
+      <div class="card-header">
+
+        <span class="eyebrow">
+          GET STARTED
+        </span>
+
+        <h2>
+          Create Your Workspace
+        </h2>
+
+        <p>
+          Set up your organization and administrator account.
+        </p>
+
+      </div>
+
+
+
+      <!-- =================================================
+           SUCCESS MESSAGE
+      ================================================== -->
+
+      <div
+        class="message success-message"
+        *ngIf="successMessage"
+      >
+
+        <i class="bi bi-check-circle-fill"></i>
+
+        <span>
+          {{ successMessage }}
+        </span>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ERROR MESSAGE
+      ================================================== -->
+
+      <div
+        class="message error-message"
+        *ngIf="errorMessage"
+      >
+
+        <i class="bi bi-exclamation-circle-fill"></i>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+
+      </div>
+
+
+
+      <!-- =================================================
+           FORM
+      ================================================== -->
+
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="register()"
+        novalidate
+      >
+
+
+
+        <!-- =================================================
+             WORKSPACE INFORMATION
+        ================================================== -->
+
+        <div class="section-heading">
+
+          <div class="section-icon">
+            <i class="bi bi-building"></i>
+          </div>
+
+          <div>
+            <h3>Workspace Information</h3>
+            <span>Tell us about your organization</span>
+          </div>
+
+        </div>
+
+
+
+        <!-- ORGANIZATION NAME -->
+
+        <div class="form-group">
+
+          <label for="organizationName">
+            Organization Name
+            <span>*</span>
+          </label>
+
+          <div
+            class="input-wrapper"
+            [class.input-invalid]="
+              f['organizationName'].touched &&
+              f['organizationName'].invalid
+            "
+            [class.input-valid]="
+              f['organizationName'].touched &&
+              f['organizationName'].valid
+            "
+          >
+
+            <i class="bi bi-building"></i>
+
+            <input
+              id="organizationName"
+              type="text"
+              formControlName="organizationName"
+              placeholder="Enter organization name"
+              autocomplete="organization"
+            >
+
+          </div>
+
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['organizationName'].touched &&
+              f['organizationName'].errors
+            "
+          >
+            Organization name is required.
+          </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADMINISTRATOR DETAILS
+        ================================================== -->
+
+        <div class="section-heading admin-heading">
+
+          <div class="section-icon">
+            <i class="bi bi-person-badge"></i>
+          </div>
+
+          <div>
+            <h3>Administrator Details</h3>
+            <span>Create your administrator account</span>
+          </div>
+
+        </div>
+
+
+
+        <!-- FULL NAME -->
+
+        <div class="form-group">
+
+          <label for="fullName">
+            Full Name
+            <span>*</span>
+          </label>
+
+          <div
+            class="input-wrapper"
+            [class.input-invalid]="
+              f['fullName'].touched &&
+              f['fullName'].invalid
+            "
+            [class.input-valid]="
+              f['fullName'].touched &&
+              f['fullName'].valid
+            "
+          >
+
+            <i class="bi bi-person"></i>
+
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              placeholder="Enter your full name"
+              autocomplete="name"
+            >
+
+          </div>
+
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['fullName'].touched &&
+              f['fullName'].errors
+            "
+          >
+            Full name is required.
+          </small>
+
+        </div>
+
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+          <label for="username">
+            Username
+            <span>*</span>
+          </label>
+
+          <div
+            class="input-wrapper"
+            [class.input-invalid]="
+              f['username'].touched &&
+              f['username'].invalid
+            "
+            [class.input-valid]="
+              f['username'].touched &&
+              f['username'].valid
+            "
+          >
+
+            <i class="bi bi-at"></i>
+
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              placeholder="Choose your username"
+              autocomplete="username"
+            >
+
+          </div>
+
+
+          <small class="field-hint">
+            This username will be used to sign in.
+          </small>
+
+
+          <small
+            class="field-error"
+            *ngIf="
+              f['username'].touched &&
+              f['username'].errors
+            "
+          >
+
+            <span
+              *ngIf="f['username'].errors['required']"
+            >
+              Username is required.
+            </span>
+
+            <span
+              *ngIf="f['username'].errors['minlength']"
+            >
+              Username must be at least 3 characters.
+            </span>
+
+          </small>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMAIL + PHONE
+        ================================================== -->
+
+        <div class="two-column">
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label for="email">
+              Email
+              <span>*</span>
+            </label>
+
+            <div
+              class="input-wrapper"
+              [class.input-invalid]="
+                f['email'].touched &&
+                f['email'].invalid
+              "
+              [class.input-valid]="
+                f['email'].touched &&
+                f['email'].valid
+              "
+            >
+
+              <i class="bi bi-envelope"></i>
+
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="Email address"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+            <small
+              class="field-error"
+              *ngIf="
+                f['email'].touched &&
+                f['email'].errors
+              "
+            >
+
+              <span
+                *ngIf="f['email'].errors['required']"
+              >
+                Email is required.
+              </span>
+
+              <span
+                *ngIf="f['email'].errors['email']"
+              >
+                Enter a valid email address.
+              </span>
+
+            </small>
+
+          </div>
+
+
+
+          <!-- PHONE -->
+
+          <div class="form-group">
+
+            <label for="phoneNumber">
+              Phone Number
+              <span>*</span>
+            </label>
+
+            <div
+              class="input-wrapper"
+              [class.input-invalid]="
+                f['phoneNumber'].touched &&
+                f['phoneNumber'].invalid
+              "
+              [class.input-valid]="
+                f['phoneNumber'].touched &&
+                f['phoneNumber'].valid
+              "
+            >
+
+              <i class="bi bi-telephone"></i>
+
+              <input
+                id="phoneNumber"
+                type="tel"
+                formControlName="phoneNumber"
+                placeholder="10-digit phone number"
+                autocomplete="tel"
+                inputmode="numeric"
+                maxlength="10"
+                (keypress)="allowOnlyNumbers($event)"
+              >
+
+            </div>
+
+
+            <!-- PHONE VALIDATION -->
+
+            <div
+              class="phone-validation"
+              *ngIf="f['phoneNumber'].value"
+            >
+
+              <div
+                class="phone-status"
+                [class.valid]="
+                  isPhoneValid()
+                "
+                [class.invalid]="
+                  !isPhoneValid()
+                "
+              >
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    isPhoneValid()
+                      ? 'bi-check-circle-fill'
+                      : 'bi-info-circle'
+                  "
+                ></i>
+
+                <span>
+                  {{
+                    isPhoneValid()
+                      ? 'Valid 10-digit phone number'
+                      : getPhoneMessage()
+                  }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <small
+              class="field-error"
+              *ngIf="
+                f['phoneNumber'].touched &&
+                f['phoneNumber'].errors?.['required']
+              "
+            >
+              Phone number is required.
+            </small>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DESIGNATION
+        ================================================== -->
+
+        <div class="form-group">
+
+          <label for="designation">
+
+            Designation
+
+            <span class="optional">
+              Optional
+            </span>
+
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-briefcase"></i>
+
+            <input
+              id="designation"
+              type="text"
+              formControlName="designation"
+              placeholder="e.g. Administrator"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SECURITY
+        ================================================== -->
+
+        <div class="section-heading password-heading">
+
+          <div class="section-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+
+          <div>
+            <h3>Security</h3>
+            <span>Protect your administrator account</span>
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PASSWORD
+        ================================================== -->
+
+        <div class="form-group">
+
+          <label for="password">
+
+            Password
+
+            <span>*</span>
+
+          </label>
+
+
+          <div
+            class="input-wrapper"
+            [class.input-invalid]="
+              f['password'].touched &&
+              f['password'].invalid
+            "
+            [class.input-valid]="
+              f['password'].value &&
+              isPasswordValid()
+            "
+          >
+
+            <i class="bi bi-lock"></i>
+
+
+            <input
+              id="password"
+              [type]="
+                showPassword
+                  ? 'text'
+                  : 'password'
+              "
+              formControlName="password"
+              placeholder="Create a strong password"
+              autocomplete="new-password"
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+
+              <i
+                class="bi"
+                [ngClass]="
+                  showPassword
+                    ? 'bi-eye-slash'
+                    : 'bi-eye'
+                "
+              ></i>
+
+            </button>
+
+          </div>
+
+
+
+          <!-- =================================================
+               SMART PASSWORD CHECKER
+          ================================================== -->
+
+          <div
+            class="password-check"
+            *ngIf="f['password'].value"
+          >
+
+
+            <!-- CHECKER HEADER -->
+
+            <div class="password-check-header">
+
+              <div class="password-check-title">
+
+                <i class="bi bi-shield-check"></i>
+
+                <span>
+                  Password requirements
+                </span>
+
+              </div>
+
+
+              <span
+                class="password-strength"
+                [ngClass]="
+                  getPasswordStrengthClass()
+                "
+              >
+                {{ getPasswordStrength() }}
+              </span>
+
+            </div>
+
+
+
+            <!-- STRENGTH BAR -->
+
+            <div class="strength-bar">
+
+              <div
+                class="strength-fill"
+                [ngClass]="
+                  getPasswordStrengthClass()
+                "
+              ></div>
+
+            </div>
+
+
+
+            <!-- PASSWORD RULES -->
+
+            <div class="password-rules">
+
+
+              <!-- 8 CHARACTERS -->
+
+              <div
+                class="password-rule"
+                [class.valid]="
+                  hasMinLength()
+                "
+              >
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    hasMinLength()
+                      ? 'bi-check-circle-fill'
+                      : 'bi-circle'
+                  "
+                ></i>
+
+                <span>
+                  At least 8 characters
+                </span>
+
+              </div>
+
+
+
+              <!-- LOWERCASE -->
+
+              <div
+                class="password-rule"
+                [class.valid]="
+                  hasLowercase()
+                "
+              >
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    hasLowercase()
+                      ? 'bi-check-circle-fill'
+                      : 'bi-circle'
+                  "
+                ></i>
+
+                <span>
+                  One lowercase letter
+                </span>
+
+              </div>
+
+
+
+              <!-- UPPERCASE -->
+
+              <div
+                class="password-rule"
+                [class.valid]="
+                  hasUppercase()
+                "
+              >
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    hasUppercase()
+                      ? 'bi-check-circle-fill'
+                      : 'bi-circle'
+                  "
+                ></i>
+
+                <span>
+                  One uppercase letter
+                </span>
+
+              </div>
+
+
+
+              <!-- DIGIT -->
+
+              <div
+                class="password-rule"
+                [class.valid]="
+                  hasDigit()
+                "
+              >
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    hasDigit()
+                      ? 'bi-check-circle-fill'
+                      : 'bi-circle'
+                  "
+                ></i>
+
+                <span>
+                  One number
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CONFIRM PASSWORD
+        ================================================== -->
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+
+            Confirm Password
+
+            <span>*</span>
+
+          </label>
+
+
+          <div
+            class="input-wrapper"
+            [class.input-invalid]="
+              f['confirmPassword'].touched &&
+              f['confirmPassword'].invalid
+            "
+            [class.input-valid]="
+              f['confirmPassword'].value &&
+              passwordsMatch()
+            "
+          >
+
+            <i class="bi bi-lock-fill"></i>
+
+
+            <input
+              id="confirmPassword"
+              [type]="
+                showConfirmPassword
+                  ? 'text'
+                  : 'password'
+              "
+              formControlName="confirmPassword"
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="toggleConfirmPassword()"
+            >
+
+              <i
+                class="bi"
+                [ngClass]="
+                  showConfirmPassword
+                    ? 'bi-eye-slash'
+                    : 'bi-eye'
+                "
+              ></i>
+
+            </button>
+
+          </div>
+
+
+
+          <!-- MATCH STATUS -->
+
+          <div
+            class="confirm-status"
+            *ngIf="f['confirmPassword'].value"
+            [class.valid]="passwordsMatch()"
+            [class.invalid]="!passwordsMatch()"
+          >
+
+            <i
+              class="bi"
+              [ngClass]="
+                passwordsMatch()
+                  ? 'bi-check-circle-fill'
+                  : 'bi-exclamation-circle-fill'
+              "
+            ></i>
+
+            <span>
+              {{
+                passwordsMatch()
+                  ? 'Passwords match'
+                  : 'Passwords do not match'
+              }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             REGISTER BUTTON
+        ================================================== -->
+
+        <button
+          type="submit"
+          class="register-btn"
+          [disabled]="
+            isSubmitting ||
+            registerForm.invalid
+          "
+        >
+
+          <span *ngIf="!isSubmitting">
+
+            Create Workspace
+
+            <i class="bi bi-arrow-right"></i>
+
+          </span>
+
+
+          <span *ngIf="isSubmitting">
+
+            <i
+              class="bi bi-arrow-repeat spinning"
+            ></i>
+
+            Creating Workspace...
+
+          </span>
+
+        </button>
+
+
+
+        <!-- =================================================
+             LOGIN LINK
+        ================================================== -->
+
+        <div class="login-link">
+
+          <span>
+            Already have a workspace?
+          </span>
+
+          <button
+            type="button"
+            (click)="backToLogin()"
+          >
+
+            Sign In
+
+            <i class="bi bi-arrow-left"></i>
+
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </section>
+
+  </div>
+
+</div>

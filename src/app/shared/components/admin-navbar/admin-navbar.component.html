@@ -18,10 +18,16 @@
         </button>
 
 
-        <!-- Logo -->
+        <!-- =================================================
+             LEADPILOT LOGO
+        ================================================== -->
+
         <div class="logo">
 
-            <i class="bi bi-graph-up-arrow"></i>
+            <img
+                src="assets/images/leadpilot-logo.png"
+                alt="LeadPilot CRM"
+                class="leadpilot-logo">
 
         </div>
 
@@ -88,7 +94,7 @@
             type="button"
             class="icon-btn"
             (click)="toggleTheme()"
-            title="Toggle Theme">
+            [title]="isDarkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'">
 
             <i
                 class="bi"

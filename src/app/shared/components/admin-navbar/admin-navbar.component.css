@@ -178,66 +178,101 @@
 
     border-radius: 14px;
 
-    background: linear-gradient(
-        135deg,
-        #00D4FF,
-        #009BFF
-    );
-
-    color: #ffffff;
-
-    font-size: 24px;
-
     overflow: hidden;
 
+    background: transparent;
+
     animation: logoGlow 3s infinite;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 
-.logo i {
+/* =========================================================
+                  ACTUAL LEADPILOT LOGO
+========================================================= */
+
+.leadpilot-logo {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 14px;
 
     position: relative;
     z-index: 2;
 
+    filter:
+        drop-shadow(
+            0 4px 10px
+            rgba(0, 212, 255, 0.25)
+        );
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
 }
 
 
-.logo::after {
+/* =========================================================
+                    LOGO HOVER
+========================================================= */
 
-    content: "";
+.logo:hover {
 
-    position: absolute;
+    transform: translateY(-2px) scale(1.03);
 
-    top: -120%;
-    left: -80%;
-
-    width: 40%;
-    height: 300%;
-
-    background: rgba(255, 255, 255, 0.30);
-
-    transform: rotate(25deg);
-
-    animation: buttonShine 5s linear infinite;
-
+    box-shadow:
+        0 0 22px rgba(0, 212, 255, 0.45);
 }
 
+
+.logo:hover .leadpilot-logo {
+
+    transform: scale(1.05);
+
+    filter:
+        drop-shadow(
+            0 6px 15px
+            rgba(0, 212, 255, 0.45)
+        );
+}
+
+
+/* =========================================================
+                    LOGO GLOW
+========================================================= */
 
 @keyframes logoGlow {
 
     0% {
+
         box-shadow:
-            0 0 10px rgba(0, 212, 255, 0.35);
+            0 0 8px
+            rgba(0, 212, 255, 0.20);
+
     }
 
     50% {
+
         box-shadow:
-            0 0 24px rgba(0, 212, 255, 0.70);
+            0 0 20px
+            rgba(0, 212, 255, 0.40);
+
     }
 
     100% {
+
         box-shadow:
-            0 0 10px rgba(0, 212, 255, 0.35);
+            0 0 8px
+            rgba(0, 212, 255, 0.20);
+
     }
 
 }
@@ -641,7 +676,6 @@
     transform: rotate(25deg);
 
     animation: buttonShine 5s linear infinite;
-
 }
 
 
@@ -804,14 +838,20 @@
     }
 
 
+    /* Mobile Logo */
+
     .logo {
 
         width: 42px;
         height: 42px;
 
         border-radius: 12px;
+    }
 
-        font-size: 20px;
+
+    .leadpilot-logo {
+
+        border-radius: 12px;
     }
 
 
@@ -941,14 +981,20 @@
     }
 
 
+    /* Extra Small Logo */
+
     .logo {
 
         width: 38px;
         height: 38px;
 
         border-radius: 10px;
+    }
 
-        font-size: 18px;
+
+    .leadpilot-logo {
+
+        border-radius: 10px;
     }
 
 
@@ -1031,12 +1077,20 @@
     }
 
 
+    /* Very Small Logo */
+
     .logo {
 
         width: 36px;
         height: 36px;
 
-        font-size: 17px;
+        border-radius: 9px;
+    }
+
+
+    .leadpilot-logo {
+
+        border-radius: 9px;
     }
 
 
@@ -1076,7 +1130,7 @@
 
     .search-box input::placeholder {
 
-        content: "Search...";
+        font-size: 9px;
     }
 
 }
