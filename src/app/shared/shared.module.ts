@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { FooterComponent } from './components/footer/footer.component';
-import { LoaderComponent } from './components/loader/loader.component';
+
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -21,12 +21,12 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { ExecutiveNavbarComponent } from './components/executive-navbar/executive-navbar.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { ExecutiveSidebarComponent } from './components/executive-sidebar/executive-sidebar.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
 
     FooterComponent,
-    LoaderComponent,
     PageNotFoundComponent,
     AccessDeniedComponent,
     ConfirmDialogComponent,
@@ -40,7 +40,9 @@ import { ExecutiveSidebarComponent } from './components/executive-sidebar/execut
     AdminNavbarComponent,
     ExecutiveNavbarComponent,
     AdminSidebarComponent,
-    ExecutiveSidebarComponent
+    ExecutiveSidebarComponent,
+    LoaderComponent
+  
   ],
 
   imports: [
@@ -56,7 +58,6 @@ import { ExecutiveSidebarComponent } from './components/executive-sidebar/execut
     RouterModule,
 
     FooterComponent,
-    LoaderComponent,
     PageNotFoundComponent,
     AccessDeniedComponent,
     ConfirmDialogComponent,
@@ -66,6 +67,7 @@ import { ExecutiveSidebarComponent } from './components/executive-sidebar/execut
     ExecutiveNavbarComponent,
     AdminSidebarComponent,
     ExecutiveSidebarComponent,
+    LoaderComponent,
 
     OnlyNumberDirective,
     HasRoleDirective,
