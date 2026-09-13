@@ -11,6 +11,8 @@ import { AuthService } from '../../../core/services/auth.service';
 
 import { ThemeService } from '../../../core/services/theme.service';
 
+import { ReminderService } from '../../../core/services/reminder.service';
+
 
 @Component({
   selector: 'app-admin-navbar',
@@ -53,6 +55,13 @@ export class AdminNavbarComponent implements OnInit {
 
 
   // =========================================================
+  // Logged-in User ID
+  // =========================================================
+
+  userId: number | null = null;
+
+
+  // =========================================================
   // Greeting
   // =========================================================
 
@@ -67,10 +76,16 @@ export class AdminNavbarComponent implements OnInit {
 
 
   // =========================================================
-  // Notifications
+  // Notifications / Reminders
   // =========================================================
 
-  notificationCount: number = 3;
+  /*
+   * This is now loaded from the backend.
+   *
+   * It represents the number of unread reminders
+   * assigned to the currently logged-in user.
+   */
+  notificationCount: number = 0;
 
 
   // =========================================================
@@ -80,7 +95,8 @@ export class AdminNavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private reminderService: ReminderService
   ) {}
 
 
@@ -103,6 +119,7 @@ export class AdminNavbarComponent implements OnInit {
     this.loadUser();
 
     this.setGreeting();
+
   }
 
 
@@ -126,6 +143,7 @@ export class AdminNavbarComponent implements OnInit {
      */
     this.isDarkTheme =
       this.themeService.isDarkTheme();
+
   }
 
 
@@ -151,6 +169,19 @@ export class AdminNavbarComponent implements OnInit {
         JSON.parse(user);
 
 
+      /*
+       * User ID
+       *
+       * Supports both possible response field names:
+       * id
+       * userId
+       */
+      this.userId =
+        data.id ??
+        data.userId ??
+        null;
+
+
       this.userName =
         data.fullName ?? '';
 
@@ -163,6 +194,13 @@ export class AdminNavbarComponent implements OnInit {
         data.profileImage ?? '';
 
 
+      /*
+       * Load the actual unread reminder count
+       * after identifying the logged-in user.
+       */
+      this.loadNotificationCount();
+
+
     } catch (error) {
 
       console.error(
@@ -171,6 +209,64 @@ export class AdminNavbarComponent implements OnInit {
       );
 
     }
+
+  }
+
+
+  // =========================================================
+  // LOAD LIVE NOTIFICATION COUNT
+  // =========================================================
+
+  loadNotificationCount(): void {
+
+    /*
+     * No logged-in user ID means there is
+     * nothing to count.
+     */
+    if (!this.userId) {
+
+      this.notificationCount = 0;
+
+      return;
+    }
+
+
+    /*
+     * Get the number of unread reminders
+     * assigned to the logged-in user.
+     *
+     * Backend:
+     *
+     * GET
+     * /api/reminders/user/{userId}/unread/count
+     */
+    this.reminderService
+      .getUnreadReminderCountByUser(this.userId)
+      .subscribe({
+
+        next: (count: number) => {
+
+          this.notificationCount =
+            count ?? 0;
+
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Unable to load reminder notification count:',
+            error
+          );
+
+          /*
+           * Do not show a fake number if the API fails.
+           */
+          this.notificationCount = 0;
+
+        }
+
+      });
+
   }
 
 
@@ -198,7 +294,9 @@ export class AdminNavbarComponent implements OnInit {
 
       this.greeting =
         'Good Evening';
+
     }
+
   }
 
 
@@ -209,6 +307,7 @@ export class AdminNavbarComponent implements OnInit {
   toggleSidebar(): void {
 
     this.sidebarToggle.emit();
+
   }
 
 
@@ -452,6 +551,7 @@ export class AdminNavbarComponent implements OnInit {
         }
       }
     );
+
   }
 
 
@@ -484,6 +584,7 @@ export class AdminNavbarComponent implements OnInit {
       }
 
     });
+
   }
 
 }

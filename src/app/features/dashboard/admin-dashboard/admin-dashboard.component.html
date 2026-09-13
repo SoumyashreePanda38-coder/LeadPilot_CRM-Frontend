@@ -1,8 +1,10 @@
 <div class="admin-dashboard">
 
+
   <!-- =========================================================
        HEADER
   ========================================================== -->
+
   <header class="dashboard-header">
 
     <div class="header-left">
@@ -43,7 +45,9 @@
           [class.spin]="isLoading">
         </i>
 
-        <span>Refresh</span>
+        <span>
+          Refresh
+        </span>
 
       </button>
 
@@ -53,36 +57,17 @@
 
 
   <!-- =========================================================
-       LOADING
-  ========================================================== -->
-  <section
-    class="loading-state"
-    *ngIf="isLoading">
-
-    <div class="loading-spinner">
-      <i class="fas fa-chart-line"></i>
-    </div>
-
-    <h3>
-      Loading dashboard
-    </h3>
-
-    <p>
-      Gathering your CRM analytics...
-    </p>
-
-  </section>
-
-
-  <!-- =========================================================
        ERROR
   ========================================================== -->
+
   <section
     class="error-state"
     *ngIf="errorMessage && !isLoading">
 
     <div class="error-icon">
+
       <i class="fas fa-exclamation-triangle"></i>
+
     </div>
 
     <div class="error-text">
@@ -114,6 +99,7 @@
   <!-- =========================================================
        DASHBOARD
   ========================================================== -->
+
   <main
     class="dashboard-content"
     *ngIf="!isLoading && dashboard">
@@ -122,6 +108,7 @@
     <!-- =======================================================
          DASHBOARD SUMMARY CARDS
     ======================================================== -->
+
     <section class="dashboard-section">
 
       <div class="section-heading">
@@ -145,19 +132,6 @@
       </div>
 
 
-      <!--
-        IMPORTANT:
-
-        We pass SUMMARY to dashboard-card.
-
-        Do NOT use:
-
-        [dashboard]="dashboard"
-
-        because your DashboardCardComponent does not currently
-        have a dashboard input.
-      -->
-
       <app-dashboard-card
         [summary]="summary">
       </app-dashboard-card>
@@ -169,6 +143,7 @@
     <!-- =======================================================
          FOLLOW-UP OVERVIEW
     ======================================================== -->
+
     <section class="followup-overview">
 
       <div class="followup-heading">
@@ -197,6 +172,7 @@
 
 
       <!-- TOTAL -->
+
       <div class="followup-stat">
 
         <span>
@@ -211,6 +187,7 @@
 
 
       <!-- TODAY -->
+
       <div class="followup-stat today">
 
         <span>
@@ -225,6 +202,7 @@
 
 
       <!-- OVERDUE -->
+
       <div class="followup-stat overdue">
 
         <span>
@@ -239,6 +217,7 @@
 
 
       <!-- COMPLETED -->
+
       <div class="followup-stat completed">
 
         <span>
@@ -272,6 +251,7 @@
     <!-- =======================================================
          ANALYTICS / CHARTS
     ======================================================== -->
+
     <section class="dashboard-section charts-section">
 
       <div class="section-heading">
@@ -295,11 +275,6 @@
       </div>
 
 
-      <!--
-        DashboardChartsComponent receives the four chart datasets
-        from AdminDashboardComponent.
-      -->
-
       <app-dashboard-charts
 
         [leadStatus]="leadStatus"
@@ -319,12 +294,14 @@
     <!-- =======================================================
          RECENT LEADS + TODAY FOLLOW UPS
     ======================================================== -->
+
     <section class="dashboard-two-column">
 
 
       <!-- =====================================================
            RECENT LEADS
       ====================================================== -->
+
       <article class="dashboard-panel">
 
         <div class="panel-header">
@@ -357,6 +334,7 @@
 
 
         <!-- LEAD LIST -->
+
         <div
           class="lead-list"
           *ngIf="recentLeads.length > 0">
@@ -371,6 +349,7 @@
 
 
             <!-- AVATAR -->
+
             <div class="lead-avatar">
 
               {{ getLeadInitials(lead.leadName) }}
@@ -379,6 +358,7 @@
 
 
             <!-- INFORMATION -->
+
             <div class="lead-information">
 
               <strong>
@@ -393,6 +373,7 @@
 
 
             <!-- STATUS -->
+
             <div class="lead-status-area">
 
               <span
@@ -427,6 +408,7 @@
 
 
         <!-- EMPTY -->
+
         <div
           class="empty-state"
           *ngIf="recentLeads.length === 0">
@@ -450,6 +432,7 @@
       <!-- =====================================================
            TODAY FOLLOW UPS
       ====================================================== -->
+
       <article class="dashboard-panel">
 
         <div class="panel-header">
@@ -482,6 +465,7 @@
 
 
         <!-- FOLLOW-UP LIST -->
+
         <div
           class="followup-list"
           *ngIf="todayFollowUps.length > 0">
@@ -548,6 +532,7 @@
 
 
         <!-- EMPTY -->
+
         <div
           class="empty-state"
           *ngIf="todayFollowUps.length === 0">
@@ -573,12 +558,14 @@
     <!-- =======================================================
          NOTES + UPCOMING VISITS
     ======================================================== -->
+
     <section class="dashboard-two-column">
 
 
       <!-- =====================================================
            RECENT NOTES
       ====================================================== -->
+
       <article class="dashboard-panel">
 
         <div class="panel-header">
@@ -611,6 +598,7 @@
 
 
         <!-- NOTES -->
+
         <div
           class="notes-list"
           *ngIf="recentNotes.length > 0">
@@ -666,6 +654,7 @@
 
 
         <!-- EMPTY -->
+
         <div
           class="empty-state"
           *ngIf="recentNotes.length === 0">
@@ -689,6 +678,7 @@
       <!-- =====================================================
            UPCOMING VISITS
       ====================================================== -->
+
       <article class="dashboard-panel">
 
         <div class="panel-header">
@@ -709,6 +699,7 @@
 
 
         <!-- VISITS -->
+
         <div
           class="visit-list"
           *ngIf="upcomingVisits.length > 0">
@@ -770,6 +761,7 @@
 
 
         <!-- EMPTY -->
+
         <div
           class="empty-state"
           *ngIf="upcomingVisits.length === 0">

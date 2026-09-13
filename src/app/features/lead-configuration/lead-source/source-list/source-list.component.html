@@ -22,9 +22,7 @@
     </div>
 
     <!-- ADD SOURCE -->
-    <button
-      class="add-source-btn"
-      routerLink="../source/add">
+    <button class="add-source-btn" routerLink="../source/add">
 
       <i class="fas fa-plus"></i>
       <span>Add Lead Source</span>
@@ -38,17 +36,13 @@
   <!-- SUCCESS MESSAGE -->
   <!-- ====================================================== -->
 
-  <div
-    class="alert success-alert"
-    *ngIf="successMessage">
+  <div class="alert success-alert" *ngIf="successMessage">
 
     <i class="fas fa-check-circle"></i>
 
     <span>{{ successMessage }}</span>
 
-    <button
-      type="button"
-      (click)="successMessage = ''">
+    <button type="button" (click)="successMessage = ''">
 
       <i class="fas fa-times"></i>
 
@@ -61,17 +55,13 @@
   <!-- ERROR MESSAGE -->
   <!-- ====================================================== -->
 
-  <div
-    class="alert error-alert"
-    *ngIf="errorMessage">
+  <div class="alert error-alert" *ngIf="errorMessage">
 
     <i class="fas fa-exclamation-circle"></i>
 
     <span>{{ errorMessage }}</span>
 
-    <button
-      type="button"
-      (click)="errorMessage = ''">
+    <button type="button" (click)="errorMessage = ''">
 
       <i class="fas fa-times"></i>
 
@@ -167,18 +157,9 @@
 
       <i class="fas fa-search"></i>
 
-      <input
-        type="text"
-        [(ngModel)]="searchKeyword"
-        (input)="onSearch()"
-        placeholder="Search lead sources..."
-      />
+      <input type="text" [(ngModel)]="searchKeyword" (input)="onSearch()" placeholder="Search lead sources..." />
 
-      <button
-        *ngIf="searchKeyword"
-        type="button"
-        class="clear-search"
-        (click)="clearSearch()">
+      <button *ngIf="searchKeyword" type="button" class="clear-search" (click)="clearSearch()">
 
         <i class="fas fa-times"></i>
 
@@ -196,10 +177,7 @@
 
       </label>
 
-      <select
-        [(ngModel)]="selectedStatus"
-        (change)="onStatusChange()"
-        title="Filter lead sources by status">
+      <select [(ngModel)]="selectedStatus" (change)="onStatusChange()" title="Filter lead sources by status">
 
         <option value="ALL">
           All Sources
@@ -224,9 +202,7 @@
   <!-- LOADING -->
   <!-- ====================================================== -->
 
-  <div
-    class="loading-container"
-    *ngIf="isLoading">
+  <div class="loading-container" *ngIf="isLoading">
 
     <div class="loading-spinner"></div>
 
@@ -241,9 +217,7 @@
   <!-- EMPTY STATE -->
   <!-- ====================================================== -->
 
-  <div
-    class="empty-state"
-    *ngIf="!isLoading && filteredSources.length === 0">
+  <div class="empty-state" *ngIf="!isLoading && filteredSources.length === 0">
 
     <div class="empty-icon">
       <i class="fas fa-bullseye"></i>
@@ -262,9 +236,7 @@
     </p>
 
     <!-- CREATE SOURCE -->
-    <button
-      class="empty-add-btn"
-      routerLink="../source/add">
+    <button class="empty-add-btn" routerLink="../source/add">
 
       <i class="fas fa-plus"></i>
       Create Lead Source
@@ -278,9 +250,7 @@
   <!-- SOURCE TABLE -->
   <!-- ====================================================== -->
 
-  <div
-    class="table-card"
-    *ngIf="!isLoading && filteredSources.length > 0">
+  <div class="table-card" *ngIf="!isLoading && filteredSources.length > 0">
 
     <!-- TABLE HEADER -->
 
@@ -299,10 +269,7 @@
 
       </div>
 
-      <button
-        class="refresh-btn"
-        type="button"
-        (click)="loadLeadSources()">
+      <button class="refresh-btn" type="button" (click)="loadLeadSources()">
 
         <i class="fas fa-sync-alt"></i>
         Refresh
@@ -363,8 +330,7 @@
 
         <tbody>
 
-          <tr
-            *ngFor="let source of filteredSources; let i = index">
+          <tr *ngFor="let source of filteredSources; let i = index">
 
             <!-- NUMBER -->
 
@@ -408,9 +374,7 @@
 
             <td>
 
-              <div
-                class="description-cell"
-                [title]="source.description || 'No description'">
+              <div class="description-cell" [title]="source.description || 'No description'">
 
                 {{ source.description || 'No description provided' }}
 
@@ -434,10 +398,7 @@
 
             <td>
 
-              <span
-                class="status-badge"
-                [class.active]="isActive(source)"
-                [class.inactive]="isInactive(source)">
+              <span class="status-badge" [class.active]="isActive(source)" [class.inactive]="isInactive(source)">
 
                 <span class="status-dot"></span>
 
@@ -474,8 +435,8 @@
               <span class="date-text">
 
                 {{ source.createdAt
-                  ? (source.createdAt | date:'dd MMM yyyy')
-                  : '-' }}
+                ? (source.createdAt | date:'dd MMM yyyy')
+                : '-' }}
 
               </span>
 
@@ -492,10 +453,8 @@
 
                 <!-- EDIT -->
 
-                <button
-                  class="action-btn edit-btn"
-                  title="Edit Source"
-                  [routerLink]="['../edit', source.leadSourceId]">
+                <button class="action-btn edit-btn" title="Edit Source" type="button"
+                  (click)="editSource(source.leadSourceId)">
 
                   <i class="fas fa-edit"></i>
 
@@ -504,11 +463,7 @@
 
                 <!-- ACTIVATE -->
 
-                <button
-                  *ngIf="isInactive(source)"
-                  class="action-btn activate-btn"
-                  title="Activate Source"
-                  type="button"
+                <button *ngIf="isInactive(source)" class="action-btn activate-btn" title="Activate Source" type="button"
                   (click)="activateSource(source)">
 
                   <i class="fas fa-check"></i>
@@ -518,12 +473,8 @@
 
                 <!-- DEACTIVATE -->
 
-                <button
-                  *ngIf="isActive(source)"
-                  class="action-btn deactivate-btn"
-                  title="Deactivate Source"
-                  type="button"
-                  (click)="deactivateSource(source)">
+                <button *ngIf="isActive(source)" class="action-btn deactivate-btn" title="Deactivate Source"
+                  type="button" (click)="deactivateSource(source)">
 
                   <i class="fas fa-ban"></i>
 
@@ -532,10 +483,7 @@
 
                 <!-- DELETE -->
 
-                <button
-                  class="action-btn delete-btn"
-                  title="Delete Source"
-                  type="button"
+                <button class="action-btn delete-btn" title="Delete Source" type="button"
                   (click)="deleteSource(source)">
 
                   <i class="fas fa-trash-alt"></i>

@@ -320,8 +320,10 @@
       <div class="filter-control">
 
         <label for="categoryFilter">
+
           <i class="fas fa-folder-tree"></i>
           Category
+
         </label>
 
         <div class="select-wrapper">
@@ -358,8 +360,10 @@
       <div class="filter-control">
 
         <label for="statusFilter">
+
           <i class="fas fa-signal"></i>
           Status
+
         </label>
 
         <div class="select-wrapper">
@@ -483,6 +487,7 @@
           (click)="clearFilters()">
 
           <i class="fas fa-filter-circle-xmark"></i>
+
           Clear Filters
 
         </button>
@@ -494,6 +499,7 @@
           (click)="addSubCategory()">
 
           <i class="fas fa-plus"></i>
+
           Add Subcategory
 
         </button>
@@ -612,10 +618,12 @@
                 <i class="fas fa-folder"></i>
 
                 <span>
+
                   {{
                     subCategory.categoryName ||
                     getCategoryName(subCategory.categoryId)
                   }}
+
                 </span>
 
               </div>
@@ -699,25 +707,6 @@
             <td>
 
               <div class="action-buttons">
-
-
-                <!-- VIEW -->
-
-                <button
-                  type="button"
-                  class="action-btn view-btn"
-                  (click)="
-                    viewSubCategory(
-                      subCategory.subCategoryId
-                    )
-                  "
-                  title="View subcategory"
-                  aria-label="View subcategory">
-
-                  <i class="fas fa-eye"></i>
-
-                </button>
-
 
                 <!-- EDIT -->
 
@@ -845,15 +834,20 @@
         <div class="mobile-detail">
 
           <span>
+
             <i class="fas fa-folder"></i>
+
             Parent Category
+
           </span>
 
           <strong>
+
             {{
               subCategory.categoryName ||
               getCategoryName(subCategory.categoryId)
             }}
+
           </strong>
 
         </div>
@@ -869,10 +863,12 @@
           </span>
 
           <p>
+
             {{
               subCategory.description ||
               'No description available.'
             }}
+
           </p>
 
         </div>
@@ -884,12 +880,17 @@
         <div class="mobile-detail">
 
           <span>
+
             <i class="fas fa-sort"></i>
+
             Display Order
+
           </span>
 
           <strong>
+
             {{ subCategory.displayOrder || '—' }}
+
           </strong>
 
         </div>
@@ -900,20 +901,7 @@
 
         <div class="mobile-actions">
 
-          <button
-            type="button"
-            class="mobile-action view-btn"
-            (click)="
-              viewSubCategory(
-                subCategory.subCategoryId
-              )
-            ">
-
-            <i class="fas fa-eye"></i>
-            View
-
-          </button>
-
+          <!-- EDIT -->
 
           <button
             type="button"
@@ -925,10 +913,13 @@
             ">
 
             <i class="fas fa-pen"></i>
+
             Edit
 
           </button>
 
+
+          <!-- DELETE -->
 
           <button
             type="button"
@@ -938,6 +929,7 @@
             ">
 
             <i class="fas fa-trash"></i>
+
             Delete
 
           </button>
@@ -960,20 +952,31 @@
   <div class="page-footer">
 
     <div>
+
       <i class="fas fa-circle-info"></i>
 
       <span>
+
         Showing
+
         <strong>{{ filteredSubCategoryCount }}</strong>
+
         of
+
         <strong>{{ totalSubCategoryCount }}</strong>
+
         subcategories
+
       </span>
+
     </div>
 
     <span class="secure-label">
+
       <i class="fas fa-shield-halved"></i>
+
       LeadPilot CRM
+
     </span>
 
   </div>

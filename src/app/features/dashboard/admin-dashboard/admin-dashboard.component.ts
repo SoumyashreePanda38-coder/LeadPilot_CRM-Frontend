@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
+import { finalize } from 'rxjs/operators';
 import {
   Router
 } from '@angular/router';
@@ -10,6 +10,7 @@ import {
 import {
   DashboardService
 } from 'src/app/core/services/dashboard.service';
+
 
 import {
   AdminDashboardResponse
@@ -52,86 +53,54 @@ import {
 } from '../../../core/models/upcoming-visit-response';
 
 
-/**
- * ==========================================================
- * COMPONENT : AdminDashboardComponent
- *
- * Description :
- * Organization-wide CRM dashboard for ADMIN users.
- *
- * Displays:
- *
- * - Dashboard summary
- * - Lead status distribution
- * - Lead priority distribution
- * - Lead source distribution
- * - Monthly lead generation
- * - Recent leads
- * - Today's follow-ups
- * - Recent notes
- * - Upcoming visits
- *
- * ==========================================================
- */
-
 @Component({
   selector: 'app-admin-dashboard',
-
-  templateUrl:
-    './admin-dashboard.component.html',
-
-  styleUrls: [
-    './admin-dashboard.component.css'
-  ]
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent
-  implements OnInit {
+export class AdminDashboardComponent implements OnInit {
 
 
   // ==========================================================
   // COMPLETE DASHBOARD RESPONSE
   // ==========================================================
 
-  dashboard:
-    AdminDashboardResponse | null = null;
+  dashboard: AdminDashboardResponse | null = null;
 
 
   // ==========================================================
   // DASHBOARD SECTIONS
   // ==========================================================
 
-  summary:
-    DashboardSummaryResponse | null = null;
+  summary: DashboardSummaryResponse | null = null;
 
-  leadStatus:
-    LeadStatusChartResponse[] = [];
+  leadStatus: LeadStatusChartResponse[] = [];
 
-  leadPriority:
-    LeadPriorityChartResponse[] = [];
+  leadPriority: LeadPriorityChartResponse[] = [];
 
-  leadSource:
-    LeadSourceChartResponse[] = [];
+  leadSource: LeadSourceChartResponse[] = [];
 
-  monthlyLeads:
-    MonthlyLeadChartResponse[] = [];
+  monthlyLeads: MonthlyLeadChartResponse[] = [];
 
-  recentLeads:
-    RecentLeadResponse[] = [];
+  recentLeads: RecentLeadResponse[] = [];
 
-  todayFollowUps:
-    TodayFollowUpResponse[] = [];
+  todayFollowUps: TodayFollowUpResponse[] = [];
 
-  recentNotes:
-    RecentNoteResponse[] = [];
+  recentNotes: RecentNoteResponse[] = [];
 
-  upcomingVisits:
-    UpcomingVisitResponse[] = [];
+  upcomingVisits: UpcomingVisitResponse[] = [];
 
 
   // ==========================================================
   // UI STATE
   // ==========================================================
 
+  /**
+   * Controls the dashboard content state.
+   *
+   * The actual visual loader is handled globally by
+   * LoadingService + <app-loader> in app.component.html.
+   */
   isLoading = false;
 
   errorMessage = '';
@@ -156,55 +125,31 @@ export class AdminDashboardComponent
   // ==========================================================
 
   constructor(
-
-    private dashboardService:
-      DashboardService,
-
-    private router:
-      Router
-
-  ) {}
+    private dashboardService: DashboardService,
+    private router: Router
+  ) { }
 
 
   // ==========================================================
   // ON INIT
   // ==========================================================
 
-  ngOnInit(): void {
 
+
+  ngOnInit(): void {
     this.loadAdminUserId();
 
     if (this.adminUserId) {
-
       this.loadDashboard();
-
     } else {
-
       this.errorMessage =
         'Unable to identify the logged-in Admin user.';
-
     }
-
   }
 
 
   // ==========================================================
   // LOAD ADMIN USER ID
-  // ==========================================================
-  //
-  // LoginResponse contains:
-  //
-  // id
-  // employeeId
-  // fullName
-  // username
-  // email
-  // role
-  // token
-  //
-  // We support the common localStorage structures used
-  // by the existing authentication implementation.
-  //
   // ==========================================================
 
   loadAdminUserId(): void {
@@ -217,13 +162,10 @@ export class AdminDashboardComponent
     ];
 
 
-    for (
-      const key of possibleKeys
-    ) {
+    for (const key of possibleKeys) {
 
       const storedUser =
         localStorage.getItem(key);
-
 
       if (!storedUser) {
         continue;
@@ -234,7 +176,6 @@ export class AdminDashboardComponent
 
         const parsedUser =
           JSON.parse(storedUser);
-
 
         const id =
           Number(
@@ -256,14 +197,16 @@ export class AdminDashboardComponent
 
       } catch {
 
-        // Ignore invalid JSON and continue
+        // Ignore invalid JSON
+        // and continue checking other keys.
+
       }
 
     }
 
 
     // --------------------------------------------------------
-    // Optional direct user ID storage
+    // OPTIONAL DIRECT USER ID STORAGE
     // --------------------------------------------------------
 
     const directId =
@@ -297,136 +240,81 @@ export class AdminDashboardComponent
   loadDashboard(): void {
 
     if (!this.adminUserId) {
-
       return;
-
     }
 
-
     this.isLoading = true;
-
     this.errorMessage = '';
 
-
     this.dashboardService
-      .getAdminDashboard(
-        this.adminUserId
+      .getAdminDashboard(this.adminUserId)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
       )
       .subscribe({
 
-        // ====================================================
-        // SUCCESS
-        // ====================================================
+        next: (response: AdminDashboardResponse) => {
 
-        next: (
-          response:
-            AdminDashboardResponse
-        ) => {
+          console.log('✅ DASHBOARD LOADED:', response);
 
-          this.dashboard =
-            response;
+          this.dashboard = response;
 
-
-          // --------------------------------------------------
-          // Summary
-          // --------------------------------------------------
-
-          this.summary =
-            response?.summary || null;
-
-
-          // --------------------------------------------------
-          // Charts
-          // --------------------------------------------------
+          this.summary = response?.summary || null;
 
           this.leadStatus =
             response?.leadStatus || [];
 
-
           this.leadPriority =
             response?.leadPriority || [];
-
 
           this.leadSource =
             response?.leadSource || [];
 
-
           this.monthlyLeads =
             response?.monthlyLeads || [];
-
-
-          // --------------------------------------------------
-          // Lists
-          // --------------------------------------------------
 
           this.recentLeads =
             response?.recentLeads || [];
 
-
           this.todayFollowUps =
             response?.todayFollowUps || [];
-
 
           this.recentNotes =
             response?.recentNotes || [];
 
-
           this.upcomingVisits =
             response?.upcomingVisits || [];
-
-
-          this.isLoading = false;
-
         },
-
-
-        // ====================================================
-        // ERROR
-        // ====================================================
 
         error: (error) => {
 
           console.error(
-            'Failed to load Admin Dashboard:',
+            '❌ Failed to load Admin Dashboard:',
             error
           );
 
-
-          this.isLoading = false;
-
-
           this.dashboard = null;
-
           this.summary = null;
 
           this.leadStatus = [];
-
           this.leadPriority = [];
-
           this.leadSource = [];
-
           this.monthlyLeads = [];
 
           this.recentLeads = [];
-
           this.todayFollowUps = [];
-
           this.recentNotes = [];
-
           this.upcomingVisits = [];
-
 
           this.errorMessage =
             error?.error?.message ||
             'Unable to load Admin Dashboard. Please try again.';
-
         }
 
       });
-
   }
-
-
   // ==========================================================
   // RETRY
   // ==========================================================
@@ -465,18 +353,11 @@ export class AdminDashboardComponent
 
 
     return String(value)
-
-      .replace(
-        /_/g,
-        ' '
-      )
-
+      .replace(/_/g, ' ')
       .toLowerCase()
-
       .replace(
         /\b\w/g,
-        char =>
-          char.toUpperCase()
+        char => char.toUpperCase()
       );
 
   }
@@ -764,7 +645,7 @@ export class AdminDashboardComponent
   ): string {
 
     switch (
-      String(priority || '').toUpperCase()
+    String(priority || '').toUpperCase()
     ) {
 
       case 'HOT':
@@ -793,7 +674,7 @@ export class AdminDashboardComponent
   ): string {
 
     switch (
-      String(type || '').toUpperCase()
+    String(type || '').toUpperCase()
     ) {
 
       case 'CALL':

@@ -28,6 +28,7 @@ import { ReminderResponse } from '../models/reminder-response';
  * - Get reminders by user
  * - Get pending reminders
  * - Get unread reminders
+ * - Get unread reminder count
  * - Get completed reminders
  * - Get dismissed reminders
  * - Get reminders by lead
@@ -183,6 +184,34 @@ export class ReminderService {
 
     return this.http.get<ReminderResponse[]>(
       `${this.apiUrl}/user/${userId}/unread`
+    );
+
+  }
+
+
+  // ==========================================================
+  // ⭐ GET UNREAD REMINDER COUNT BY USER
+  // ==========================================================
+  //
+  // Used by the Admin Navbar notification badge.
+  //
+  // Backend:
+  // GET /api/reminders/user/{userId}/unread/count
+  //
+  // Example:
+  // GET /api/reminders/user/1/unread/count
+  //
+  // Response:
+  // 3
+  //
+  // ==========================================================
+
+  getUnreadReminderCountByUser(
+    userId: number
+  ): Observable<number> {
+
+    return this.http.get<number>(
+      `${this.apiUrl}/user/${userId}/unread/count`
     );
 
   }

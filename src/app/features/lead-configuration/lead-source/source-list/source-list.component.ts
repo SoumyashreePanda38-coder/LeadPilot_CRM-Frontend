@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { LeadSourceService } from '../../../../core/services/lead-source.service';
 import { LeadSourceResponse } from '../../../../core/models/lead-source-response';
 import { LeadCategoryStatus } from '../../../../core/models/lead-category-status.enum';
@@ -38,7 +38,8 @@ export class SourceListComponent implements OnInit {
   // ==========================================================
 
   constructor(
-    private leadSourceService: LeadSourceService
+    private leadSourceService: LeadSourceService,
+    private router: Router
   ) {}
 
   // ==========================================================
@@ -312,7 +313,19 @@ export class SourceListComponent implements OnInit {
       this.applyFilters();
     }
   }
+//edit
+editSource(sourceId: number): void {
 
+  if (!sourceId) {
+    return;
+  }
+
+  this.router.navigate([
+    '/admin/lead-configuration/source/edit',
+    sourceId
+  ]);
+
+}
   // ==========================================================
   // STATUS CHECK
   // ==========================================================
